@@ -1,0 +1,5 @@
+export {default as Footer} from './Footer'
+export {default as Navbar} from './Navbar'
+export {default as AnimateText} from './Sections/AnimateText'
+export {default as AnimateProcessText} from './Sections/AnimateProcessText'
+export {default as Testymonial} from './Sections/Testymonial'
