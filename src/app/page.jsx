@@ -47,8 +47,8 @@ export default function Home() {
       <div className="container-fluid my-10" style={{ backgroundColor: '#5bb5a2' }} >
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-3 col-sm-12 my-3">
-              <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
+            <div className="col-lg-3 col-md-3 col-sm-12 my-3 ">
+              <div className="card my-sm-5" style={{ height: 284, width: '100%' }} >
                 <div className="p-5">
                   <div className="mb-4" >
                     <RiSafe2Fill size={40} color="#5BB5A2" style={{ backgroundColor: '#E8F2EE', padding: 10, borderRadius: 50 }} />
@@ -60,7 +60,7 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-12 my-3">
-              <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
+              <div className="card my-sm-5" style={{ height: 284, width: '100%' }} >
                 <div className="p-5">
                   <div className="mb-4" >
                     <RiSafe2Fill size={40} color="#5BB5A2" style={{ backgroundColor: '#E8F2EE', padding: 10, borderRadius: 50 }} />
@@ -72,7 +72,7 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-12 my-3">
-              <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
+              <div className="card my-sm-5" style={{ height: 284, width: '100%' }} >
                 <div className="p-5">
                   <div className="mb-4" >
                     <RiSafe2Fill size={40} color="#5BB5A2" style={{ backgroundColor: '#E8F2EE', padding: 10, borderRadius: 50 }} />
@@ -84,7 +84,7 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-12 my-3">
-              <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
+              <div className="card my-sm-5" style={{ height: 284, width: '100%' }} >
                 <div className="p-5">
                   <div className="mb-4" >
                     <RiSafe2Fill size={40} color="#5BB5A2" style={{ backgroundColor: '#E8F2EE', padding: 10, borderRadius: 50 }} />
