@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { appRoutes } from '@/constants'
-import { AnimateText, AnimateProcessText, Testymonial } from "@/components";
+import { AnimateText, ProductScroll, Testymonial } from "@/components";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { RiSafe2Fill } from "react-icons/ri";
-import { IoIosCall,IoMdMailUnread } from "react-icons/io";
+import { IoIosCall, IoMdMailUnread } from "react-icons/io";
 // Import Swiper styles
 
 export default function Home() {
@@ -21,20 +21,16 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12 order-1 order-sm-2 heroimgparrent">
+          <div className="col-lg-6 col-md-6 col-sm-12 order-1 order-sm-2 heroimgparrent m-0 p-0">
             <img src="./assets/img/graphics/heroimage.png" className="heroimg" />
           </div>
         </div>
       </div>
-      <div className="container p-5 mt-5">
-        <div className="d-none d-lg-block d-md-block">
+      <div className="p-5 mt-5">
           <div className="row">
-            <center><h2>- Some of our artistic projects -</h2></center>
+            <center><h2>Some of our artistic projects</h2></center>
             <div className="d-flex justify-content-center">
-              <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-              <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-              <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-              <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+             <ProductScroll />
             </div>
             <center>
               <div className="d-flex justify-content-center">
@@ -48,14 +44,10 @@ export default function Home() {
             </center>
           </div>
         </div>
-        <div className="d-lg-none d-md-none">
-          small screen
-        </div>
-      </div>
       <div className="container-fluid my-10" style={{ backgroundColor: '#5bb5a2' }} >
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-3 col-sm-12">
+            <div className="col-lg-3 col-md-3 col-sm-12 my-3">
               <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
                 <div className="p-5">
                   <div className="mb-4" >
@@ -67,7 +59,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 col-sm-12">
+            <div className="col-lg-3 col-md-3 col-sm-12 my-3">
               <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
                 <div className="p-5">
                   <div className="mb-4" >
@@ -79,7 +71,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 col-sm-12">
+            <div className="col-lg-3 col-md-3 col-sm-12 my-3">
               <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
                 <div className="p-5">
                   <div className="mb-4" >
@@ -91,7 +83,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 col-sm-12">
+            <div className="col-lg-3 col-md-3 col-sm-12 my-3">
               <div className="card my-sm-5" style={{ height: 284, width: 280 }} >
                 <div className="p-5">
                   <div className="mb-4" >
@@ -210,7 +202,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <center><AnimateProcessText /></center>
       </div>
 
       <Testymonial />

@@ -7,11 +7,11 @@ function page() {
         <>
           <main class="page-wrapper" style={{backgroundColor: '#80d0c7', backgroundImage: 'linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)' }}>
         {/* <!-- Page content--> */}
-        <div class="d-flex flex-column position-relative h-100 p-5">
+        <div class="d-flex flex-column position-relative h-100 signin-signup-card">
           {/* <!-- Home button--> */}
-          <div class="container mt-auto">
+          <div class="container-fluid mt-auto">
             <div class="row align-items-center justify-content-center">
-              <div class="col-md-4 col-xl-4 col-sm-12 card p-5">
+              <div class="col-md-5 col-xl-5 col-sm-12 card signin-signup-card-padding">
                 <div class="ps-md-3 ps-lg-5 ps-xl-0 ps-sm-0">
                   <h4 class="h4">Sign in to photokrafft.com</h4>
 
@@ -29,7 +29,7 @@ function page() {
                         </div>
                       </div>
                     </div>
-                    <button class="btn btn-md btn-primary w-100 my-4" style={{ borderRadius:'5px !important' }} type="submit">Sign up</button>
+                    <button class="btn btn-md btn-primary w-100 my-4" style={{ borderRadius:'5px !important' }}>Sign up</button>
                     <h6 className='m-0 p-0' >Don't have an account yet?  </h6><Link href={appRoutes.CreateAccount} className='' > Register here!</Link>
 
                   </form>

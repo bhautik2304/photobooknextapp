@@ -22,7 +22,7 @@ function Navbar() {
                     <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse1">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <nav className="collapse navbar-collapse bg-success" id="navbarCollapse1">
+                    <nav className="collapse navbar-collapse" id="navbarCollapse1">
                         <ul className="navbar-nav me-auto" >
                             <li className={`nav-item ${(pathname == appRoutes.Home) && 'active' }`}>
                                 <Link href={appRoutes.Home} className="nav-link">Home</Link>

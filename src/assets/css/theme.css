@@ -63,7 +63,7 @@
   --ar-border-style: solid;
   --ar-border-color: #e3e9ef;
   --ar-border-color-translucent: rgba(0, 0, 0, 0.175);
-  --ar-border-radius: 1rem;
+  --ar-border-radius: 5px;
   --ar-border-radius-sm: 5px;
   --ar-border-radius-lg: 5px;
   --ar-border-radius-xl: 5px;
@@ -20676,8 +20676,26 @@ img-comparison-slider:focus {
     width: 100% !important;
   }
 
+
 }
 
+.signin-signup-card {
+  padding: 3rem;
+}
+.signin-signup-card-padding {
+  padding: 3rem;
+}
+
+@media (max-width: 425px) {
+  .signin-signup-card{
+    padding: 0rem !important;
+    border-radius:0px !important;
+  }
+
+  .signin-signup-card-padding {
+    padding: 1.5rem;
+  }
+}
 .heroimgparrent {
   display: flex;
   justify-content: end;
@@ -20691,4 +20709,8 @@ img-comparison-slider:focus {
 .my-10{
   margin-top: 100px;
   margin-bottom: 50px;
+}
+
+.nav-link{
+  font-weight: 500;
 }

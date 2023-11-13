@@ -15,9 +15,10 @@ function ProfilePage() {
                     <div class="row pt-sm-2 pt-lg-0">
                         {/* <!-- Sidebar (offcanvas on sreens < 992px)--> */}
                         <aside class="col-lg-3 p-5 bg-body">
-                            <img src="./assets/img/logo.png" alt="" />
-                            <div class="position-lg-sticky top-0">
-                                <div class="d-none d-lg-block" style={{ paddingTop: '50px' }}></div>
+                            <div class="position-lg-sticky top-1">
+                                <div class="d-none d-lg-block">
+                                    <img src="./assets/img/logo.png" alt="" />
+                                </div>
                                 <div class="offcanvas-lg offcanvas-start" id="sidebarAccount">
                                     <button class="btn-close position-absolute top-0 end-0 me-3 d-lg-none" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarAccount"></button>
                                     <div class="offcanvas-body">
@@ -33,9 +34,6 @@ function ProfilePage() {
                                             <a class="nav-link fw-semibold py-2 px-0" href="#">
                                                 <i class="ai-wallet fs-5 opacity-60 me-2"></i>Your orders
                                             </a>
-                                            <a class="nav-link fw-semibold py-2 px-0" href="#">
-                                                <i class="ai-cart fs-5 opacity-60 me-2"></i>Order new product
-                                            </a>
                                         </nav>
                                         <nav class="nav flex-column"><a class="nav-link fw-semibold py-2 px-0" href="account-signin.html"><i class="ai-logout fs-5 opacity-60 me-2"></i>Sign out</a></nav>
                                     </div>
@@ -43,13 +41,15 @@ function ProfilePage() {
                             </div>
                         </aside>
                         {/* <!-- Page content--> */}
-                        <div class="col-lg-9 px-5 pb-2 pb-sm-4">
+                        <div class="col-lg-9">
                             {/* <h1 class="h3 mb-4">Your Profile</h1> */}
                             {/* <!-- Basic info--> */}
                             <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
                                 <div class="card-body">
-                                    <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3"><i class="ai-user text-primary lead pe-1 me-2"></i>
-                                        <h2 class="h4 mb-0">Basic info</h2><a class="btn btn-sm btn-secondary ms-auto" href="account-settings.html"><i class="ai-edit ms-n1 me-2"></i>Edit info</a>
+                                    <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                                        <i class="ai-user text-primary lead pe-1 me-2"></i>
+                                        <h2 class="h4 mb-0">Basic info</h2>
+                                        <a class="btn btn-sm btn-secondary ms-auto" href="account-settings.html"><i class="ai-edit ms-n1 me-2"></i>Edit info</a>
                                     </div>
                                     <div class="d-md-flex align-items-center">
                                         <div class="d-sm-flex align-items-center">
@@ -474,6 +474,7 @@ function ProfilePage() {
                         </div>
                     </div>
                 </div>
+                <button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarAccount"><i class="ai-menu me-2"></i>Account menu</button>
             </main>
         </>
     )
