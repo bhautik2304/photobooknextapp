@@ -141,7 +141,7 @@ export default function Home() {
                 <div>
                   <div class="position-relative" style={{ maxWidth: '416px' }}>
                     <img class="d-block position-relative zindex-2" src="/assets/img/logo.png" alt="Nicolas Black" />
-                    <div class="bg-primary position-absolute start-0 bottom-0 w-100" style={{ height: '85.4%', borderRadius: '2.25rem 8rem 2.25rem 2.25rem' }}></div>
+                    <div class="position-absolute start-0 bottom-0 w-100" style={{ height: '85.4%', borderRadius: '2.25rem 8rem 2.25rem 2.25rem' }}></div>
                   </div>
                   <div class="text-center text-md-start pt-3 mt-3">
                     <h2 class="mb-2">Parth Shah</h2>

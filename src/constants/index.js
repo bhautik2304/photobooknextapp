@@ -1,9 +1,26 @@
+const userProfile = '/profile';
+
 export const appRoutes ={
     Home:'/',
-    Products:'Products',
-    AboutUS:'About-US',
-    Support:'Support',
-    StartPrinting:'Start-Printing',
-    Login:'Login',
-    CreateAccount:'Create-Account',
+    Products:'/products',
+    AboutUS:'/about-us',
+    Support:'/support',
+    StartPrinting:'/start-printing',
+    Login:'/login',
+    CreateAccount:'/create-account',
+
+    // users Profiles Routes
+    userProfile:userProfile,
+    userProfileOrders:`${userProfile}/orders`
+}
+
+export const localstorageKey={
+    authKey:'authKey',
+    authStatus:'authStatus',
+    user:'user',
+    zone:'zone'
+}
+
+export const errorText={
+
 }

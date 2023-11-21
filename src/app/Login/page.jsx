@@ -1,8 +1,10 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
-import { appRoutes } from '@/constants'
+import { appRoutes, localstorageKey } from '@/constants'
 
 function page() {
+  
     return (
         <>
           <main class="page-wrapper" style={{backgroundColor: '#80d0c7', backgroundImage: 'linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)' }}>

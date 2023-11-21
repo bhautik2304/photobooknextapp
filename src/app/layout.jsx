@@ -1,7 +1,9 @@
+// 'use client'
 import { Poppins } from 'next/font/google'
-import '../assets/css/theme.css'
+import '@/assets/css/theme.css'
 import Script from 'next/script'
 import { Footer, Navbar } from '@/components'
+import { Providers } from '@/Redux/provider'
 
 const poppins = Poppins({
   weight: '400',
@@ -16,21 +18,27 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={poppins.className} >
-        <Navbar />
-        {children}
-        <Footer />
-        {/* <!-- Vendor scripts: js libraries and plugins--> */}
-        <Script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></Script>
-        <Script src="./assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></Script>
-        <Script src="./assets/vendor/parallax-js/dist/parallax.min.js"></Script>
-        <Script src="./assets/vendor/aos/dist/aos.js"></Script>
-        <Script src="./assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js"></Script>
-        <Script src="./assets/vendor/img-comparison-slider/dist/index.js"></Script>
-        <Script src="assets/vendor/swiper/swiper-bundle.min.js"></Script>
-        <Script src='./assets/js/theme.js' ></Script>
-      </body>
-    </html>
+    <>
+      <html lang='en'>
+        <body className={poppins.className} >
+          {/* <Providers> */}
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
+          {/* </Providers> */}
+          {/* <!-- Vendor scripts: js libraries and plugins--> */}
+          <Script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></Script>
+          <Script src="./assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></Script>
+          <Script src="./assets/vendor/parallax-js/dist/parallax.min.js"></Script>
+          <Script src="./assets/vendor/aos/dist/aos.js"></Script>
+          <Script src="./assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js"></Script>
+          <Script src="./assets/vendor/img-comparison-slider/dist/index.js"></Script>
+          <Script src="assets/vendor/swiper/swiper-bundle.min.js"></Script>
+          <Script src='./assets/js/theme.js' ></Script>
+        </body>
+      </html>
+    </>
   )
 }

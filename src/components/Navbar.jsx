@@ -8,9 +8,7 @@ import Link from 'next/link'
 function Navbar() {
 
     const pathname = usePathname()
-
-    
-
+    // const 
     return (
         <div>
             <header className="navbar navbar-expand-lg bg-light">
