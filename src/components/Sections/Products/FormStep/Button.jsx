@@ -45,7 +45,7 @@ function NextBtn({ next }) {
     } else {
         return (
             <>
-                <button className='mx-2 btn btn-primary btn-sm ' style={{ cursor: 'pointer' }} onClick={() => next()} >Plase Order</button>
+                <button className='mx-2 btn btn-primary btn-sm ' style={{ cursor: 'pointer' }} >Plase Order</button>
             </>
         )
     }

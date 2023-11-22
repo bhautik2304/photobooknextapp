@@ -18,9 +18,9 @@ function ProductCover() {
             {productcover.map(data => {
               return (
                 <div className="col-lg-4 col-md-4 col-sm-12">
-                  <div className={`size card p-2 my-2 pro ${orderData.productcover == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeCover({ cover: data }))} >
+                  <div className={`size card my-2 pro ${orderData.productcover == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeCover({ cover: data }))} >
                     <div className="d-flex justify-content-between align-items-center">
-                      <img src={data.img} style={{ height: 70, width: 70 }} alt="" srcset="" />
+                      <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
                       <div>
                         {data.name}
                         <div  >
@@ -45,7 +45,7 @@ function ProductCover() {
                   <>
                     <div className='col-2'>
                       <div onClick={() => disapatch(selectCoverOption({ coveroption: data }))} >
-                        <img src={data.img} style={{ height: 120 }} className={`pro ${orderData.productcoveroption == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
+                        <img src={data.img} style={{ width:120 }} className={`pro ${orderData.productcoveroption == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
                       </div>
                       <div className="my-2" >
                         {data.coverOption}

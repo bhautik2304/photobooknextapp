@@ -18,9 +18,9 @@ function ProductSize() {
           <div className="row">
             {productSize.map(data => (
               <div className="col-lg-4 col-md-4 col-sm-12">
-                <div className={`size card p-2 my-2 pro ${orderData.productSize == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
+                <div className={`size card  my-2 pro ${orderData.productSize == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
                   <div className="d-flex justify-content-between align-items-center">
-                    <img src={data.img} style={{ height: 70, width: 70 }} alt="" srcset="" />
+                    <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
                     {data.size}
                     <div></div>
                   </div>
@@ -38,9 +38,9 @@ function ProductSize() {
               <div className="row">
                 {productSheet.map(data => <>
                   <div className="col-lg-4 col-md-4 col-sm-12">
-                    <div className={`size card p-2 my-2 pro ${orderData.productSheet == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
+                    <div className={`size card my-2 pro ${orderData.productSheet == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
                       <div className="d-flex justify-content-between align-items-center">
-                        <img src={data.img} style={{ height: 70, width: 70 }} alt="" srcset="" />
+                        <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
                         <div  >
                           {data.papper}
                           <div  >
@@ -61,9 +61,9 @@ function ProductSize() {
               <div className="row">
                 {productpaperType.map(data => <>
                   <div className="col-lg-4 col-md-4 col-sm-12">
-                    <div className={`size card p-2 my-2 pro ${orderData.paperType == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
+                    <div className={`size card my-2 pro ${orderData.paperType == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
                       <div className="d-flex justify-content-between align-items-center">
-                        <img src={data.img} style={{ height: 70, width: 70 }} alt="" srcset="" />
+                        <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
                         <div>
                           {data.papertype}
                           <div  >
