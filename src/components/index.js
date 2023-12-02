@@ -9,3 +9,5 @@ export {default as Sidebar} from './Sidebar'
 
 export {default as ShowProduct} from './Sections/Products/ShowProduct'
 export {default as TotalCard} from './Sections/Products/TotalCard'
+
+export {default as Checkout} from './Sections/Checkout/Checkout'

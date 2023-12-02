@@ -11,7 +11,10 @@ export const appRoutes ={
 
     // users Profiles Routes
     userProfile:userProfile,
-    userProfileOrders:`${userProfile}/orders`
+    userProfileOrders:`${userProfile}/orders`,
+    
+    // checkout routes
+    checkout:'check-out'
 }
 
 export const localstorageKey={
