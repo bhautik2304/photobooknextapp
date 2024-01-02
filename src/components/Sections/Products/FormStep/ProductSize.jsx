@@ -18,10 +18,10 @@ function ProductSize() {
           <div className="row">
             {productSize.map(data => (
               <div className="col-lg-4 col-md-4 col-sm-12">
-                <div className={`size card  my-2 pro ${orderData.productSize == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
+                <div className={`size card  my-2 pro ${orderData.productSize == data.size_id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
                   <div className="d-flex justify-content-between align-items-center">
-                    <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
-                    {data.size}
+                    <img src={data?.size?.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
+                    {data?.size?.name}
                     <div></div>
                   </div>
                 </div>
@@ -36,23 +36,27 @@ function ProductSize() {
               <span className='text-danger' >{formError?.product_sheet}</span>
               <><h6>Select your sheet</h6></>
               <div className="row">
-                {productSheet.map(data => <>
-                  <div className="col-lg-4 col-md-4 col-sm-12">
-                    <div className={`size card my-2 pro ${orderData.productSheet == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
-                        <div  >
-                          {data.papper}
-                          <div  >
-                            {localStorage.getItem(localstorageKey.zone) == 'IND' ? `${zonePrice(data.price)?.price || 0} ₹` : `${zonePrice(data.price)?.price || 0} $`}
-                            {/* {`${zonePrice(data.price)?.price} ₹`} */}
+                {productSheet.map(data => {
+                  return (
+                    <>
+                      <div className="col-lg-4 col-md-4 col-sm-12">
+                        <div className={`size card my-2 pro ${orderData.productSheet == data.sheet_id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
+                          <div className="d-flex justify-content-between align-items-center">
+                            <img src={data?.sheet?.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
+                            <div  >
+                              {data?.sheet?.name}
+                              <div  >
+                                {zonePrice(data.sheetprice)?.priceSrring}
+                                {/* {`${zonePrice(data.price)?.price} ₹`} */}
+                              </div>
+                            </div>
+                            <div></div>
                           </div>
                         </div>
-                        <div></div>
                       </div>
-                    </div>
-                  </div>
-                </>) || <><h1>Select Size</h1></>}
+                    </>
+                  )
+                }) || <><h1>Select Size</h1></>}
               </div>
             </div>
             <div className="col-12 my-3">
@@ -61,13 +65,13 @@ function ProductSize() {
               <div className="row">
                 {productpaperType.map(data => <>
                   <div className="col-lg-4 col-md-4 col-sm-12">
-                    <div className={`size card my-2 pro ${orderData.paperType == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
+                    <div className={`size card my-2 pro ${orderData.paperType == data.paper.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
                       <div className="d-flex justify-content-between align-items-center">
-                        <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
+                        <img src={data.paper.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                         <div>
-                          {data.papertype}
+                          {data.paper.name}
                           <div  >
-                            {`${data.value} %`}
+                            {`${data.paper.value} %`}
                           </div>
                         </div>
                         <div></div>
@@ -99,8 +103,8 @@ function ProductSize() {
           disapatch(fcm({ key: 'product_size', error: 'Please select one sheet' }))
           return 0
         }
-        if ((orderData.page_qty <= product?.minPage)) {
-          disapatch(fcm({ key: 'product_page', error: `Minimum page ${product?.minPage}+` }))
+        if ((orderData.page_qty < product?.min_page)) {
+          disapatch(fcm({ key: 'product_page', error: `Minimum page ${product?.min_page}+` }))
           return 0
         }
         disapatch(formNext())

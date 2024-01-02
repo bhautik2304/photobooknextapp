@@ -1,16 +1,17 @@
 "use client";
 import React, { useEffect } from 'react'
-import { LoginForm } from '@/components'
+import { ForgetPassword } from '@/components'
 import { appRoutes, localstorageKey } from '@/constants'
 import { redirect } from 'next/navigation'
 function page() {
   const authStatus = localStorage.getItem(localstorageKey.authStatus)
 
   useEffect(() => {
-    if (authStatus == "true") {
+    if (authStatus) {
       redirect(appRoutes.Home)
     }
   }, [authStatus])
+
   return (
     <>
       <main class="page-wrapper" style={{ backgroundColor: '#80d0c7', backgroundImage: 'linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)' }}>
@@ -23,7 +24,7 @@ function page() {
                 <div class="ps-md-3 ps-lg-5 ps-xl-0 ps-sm-0">
                   <h4 class="h4">Sign in to photokrafft.com</h4>
 
-                  <LoginForm />
+                  <ForgetPassword />
                 </div>
               </div>
             </div>

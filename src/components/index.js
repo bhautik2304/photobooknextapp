@@ -11,3 +11,6 @@ export {default as ShowProduct} from './Sections/Products/ShowProduct'
 export {default as TotalCard} from './Sections/Products/TotalCard'
 
 export {default as Checkout} from './Sections/Checkout/Checkout'
+export { default as RegisterForm } from './Auth/RegisterForm'
+export { default as LoginForm } from './Auth/LoginForm'
+export { default as ForgetPassword } from './Auth/ForgetPassword'

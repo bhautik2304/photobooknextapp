@@ -45,7 +45,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <p class="fs-sm mb-0"><span class="opacity-70">&copy; All rights reserved. by </span><a class="nav-link d-inline fw-normal p-0" href="/" target="_blank" rel="noopener">Photokrafft</a></p>
+          <p class="fs-sm mb-0"><span class="opacity-70">&copy; All rights reserved. by </span><a class="nav-link d-inline fw-normal p-0" href="/" target="_blank" rel="noopener"> Photokrafft Worldwide LLP.</a></p>
         </div>
       </footer>
     </>

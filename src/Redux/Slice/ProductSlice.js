@@ -1,6 +1,9 @@
 'use client'
 
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { apiRoutes } from '@/Constants'
+
 
 const product = [
   {
@@ -8,11 +11,11 @@ const product = [
     name: 'Flushmount',
     img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
     minPage: 20,
-    paperType:[
-      {id:1,papertype:'Glossy',img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',value:0},
-      {id:2,papertype:'Luster',img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',value:0},
-      {id:3,papertype:'Silk',img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',value:15},
-      {id:4,papertype:'Metalic',img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',value:25},
+    paperType: [
+      { id: 1, papertype: 'Glossy', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', value: 0 },
+      { id: 2, papertype: 'Luster', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', value: 0 },
+      { id: 3, papertype: 'Silk', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', value: 15 },
+      { id: 4, papertype: 'Metalic', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', value: 25 },
     ],
     Orientation: [
       { id: 1, orientation: 'Square', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', },
@@ -21,7 +24,8 @@ const product = [
     ],
     size: [
       {
-        id: 1, product_id: 1, orientation_id: 1, size: '8x8', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', SheetType: [
+        id: 1, product_id: 1, orientation_id: 1, size: '8x8', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
+        SheetType: [
           {
             id: 1, product_id: 1, size_id: 1, papper: 'Thermal Sheet', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', price: [
               { id: 1, productsheetid: 1, zone_id: 1, price: 145, cur: "IND" },
@@ -45,7 +49,8 @@ const product = [
       {
         id: 2, product_id: 1, orientation_id: 1, size: '10x10', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', SheetType: [
           {
-            id: 1, product_id: 1, size_id: 2, papper: 'Thermal Sheet', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', price: [
+            id: 1, product_id: 1, size_id: 2, papper: 'Thermal Sheet', img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
+            price: [
               { id: 1, productsheetid: 1, zone_id: 1, price: 145, cur: "IND" },
               { id: 2, productsheetid: 1, zone_id: 2, price: 2.5, cur: 'USD' }
             ]
@@ -323,11 +328,15 @@ const product = [
     ],
     cover: [
       {
-        id: 1, img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', size_id: 1, name: 'Image Wrap', coverOption: [
+        id: 1, img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', size_id: 1, name: 'Image Wrap',
+        coverType: '',
+        coverOption: [
           {
             id: 1,
-            coverOption: 'option 1',
+            name: 'option 1',
             img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
+            coverOptionType: 'img',
+            coverOptin: []
           },
           {
             id: 2,
@@ -343,12 +352,26 @@ const product = [
         id: 2, img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg', size_id: 1, name: 'Leather', coverOption: [
           {
             id: 1,
-            coverOption: 'Full Lether ',
+            coverOption: 'faux leather ',
+            color: ['red', 'yellwo', 'green', 'black'],
             img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
           },
           {
             id: 2,
-            coverOption: 'Linen',
+            coverOption: 'napa leather',
+            color: ['red', 'yellwo', 'green', 'black'],
+            img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
+          },
+          {
+            id: 3,
+            coverOption: 'viber leather',
+            color: ['red', 'yellwo', 'green', 'black'],
+            img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
+          },
+          {
+            id: 4,
+            coverOption: 'suede leather',
+            color: ['red', 'yellwo', 'green', 'black'],
             img: 'https://photokrafft.netlify.app/assets/img/graphics/card-green.svg',
           },
         ], price: [
@@ -831,14 +854,25 @@ const product = [
   },
 ]
 
+export const fetchProduct = createAsyncThunk('Product', async () => {
+  const response = await axios(apiRoutes.products).then(res => res.data)
+  return response.data
+  // return response.data
+})
+
 const initialState = {
-  product: product
+  product: []
 }
 
 const ProductSlice = createSlice({
   name: 'Product',
   initialState,
-  reducers: {}
+  reducers: {},
+  extraReducers: {
+    [fetchProduct.fulfilled]: (state, action) => {
+      state.product = action.payload || []
+    },
+  }
 });
 
 export const { } = ProductSlice.actions

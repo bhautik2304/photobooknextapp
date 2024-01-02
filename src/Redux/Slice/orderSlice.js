@@ -3,6 +3,8 @@
 import { zonePrice } from '@/utils'
 import { createSlice } from '@reduxjs/toolkit'
 
+
+
 const orderDataScemma = {
   // costomer Detaild
   costomer_id: null,
@@ -12,24 +14,23 @@ const orderDataScemma = {
   // product detaild
   product_id: null,
   sheet_id: null,
-  page_qty: 0,
   productSize: null,
   productOrientation: null,
   productSheet: null,
   paperType: null,
   productcover: null,
+  coverType: null,
   productcoveroption: null,
   productprintOption: null,
   productboxSleev: null,
   productcolor: null,
 
-  // order value
-  sheetTotale: 0,
-  paperTypeTotalevalue: 0,
-  paperTypeTotale: 0,
-  coverTotale: 0,
-  printoptionTotale: 0,
-  boxSleevTotale: 0,
+  // product cost
+  page_qty: 0,
+  sheetValue: 0,
+  paperValue: 0,
+  coverValue: 0,
+  boxSleeveValue: 0,
   orderTotale: 0,
   shippingcost: 0,
 }
@@ -70,52 +71,60 @@ const orderSlice = createSlice({
     selectProduct: (state, action) => {
       state.product = action.payload.product
       state.orderData.product_id = action.payload.product.id
-      state.orderData.page_qty = action.payload.product.minPage
+      state.orderData.page_qty = action.payload.product.min_page
       state.productpaperType = action.payload.product.paperType
     },
     changeOrientation: (state, action) => {
-      state.orderData.productOrientation = action.payload.product.id
-      const sizeData = state.product.size.filter(e => e.orientation_id == state.orderData.productOrientation)
+      state.orderData.productOrientation = action.payload.product.orientation_id
+      const sizeData = state.product.orientation.filter(data => data.orientation_id == state.orderData.productOrientation)[0].size
       state.productSize = sizeData
     },
     changeOrientationSize: (state, action) => {
-      state.orderData.productSize = action.payload.size.id
-      state.productSheet = action.payload.size.SheetType
-      state.productcover = state.product.cover.filter(data => data.size_id == state.orderData.productSize)
-      state.productboxSleev = state.product.boxSleev.filter(data => data.size_id == state.orderData.productSize)
+      state.orderData.productSize = action.payload.size.size_id
+      state.productSheet = action.payload.size.sheet
+      state.productcover = action.payload.size.cover
+      state.productboxSleev = action.payload.size.boxsleeve
+      state.productpaperType = action.payload.size.papers
     },
     changeSheet: (state, action) => {
-      state.orderData.productSheet = action.payload.sheet.id
-      state.orderData.sheetTotale = ((zonePrice(action.payload.sheet.price).price * 0) / 100 + zonePrice(action.payload.sheet.price).price);
+      state.orderData.productSheet = action.payload.sheet.sheet.id
+      state.orderData.sheetValue = zonePrice(action.payload.sheet.sheetprice).price
       // state.orderData.paperTypeTotale=
-      state.orderData.orderTotale = state.orderData.sheetTotale * state.orderData.page_qty
+      // state.orderData.orderTotale = state.orderData.sheetTotale * state.orderData.page_qty
     },
     changePageCount: (state, action) => {
       state.orderData.page_qty = action.payload
-      state.orderData.orderTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * state.orderData.paperTypeTotalevalue) / 100 + (state.orderData.sheetTotale * state.orderData.page_qty))
+      // state.orderData.orderTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * state.orderData.paperTypeTotalevalue) / 100 + (state.orderData.sheetTotale * state.orderData.page_qty))
     },
     changeCover: (state, action) => {
-      state.orderData.productcover = action.payload.cover.id
-      state.productcoveroption = action.payload.cover.coverOption
-      state.orderData.coverTotale = zonePrice(action.payload.cover.price).price
-      state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.coverTotale
+      state.orderData.productcover = action.payload.cover.cover.id
+      state.productcoveroption = action.payload.cover.cover.coverupgrades
+      state.orderData.coverValue = zonePrice(action.payload.cover.coverprice).price
+      state.orderData.coverType = action.payload.cover.cover.type
     },
     selectCoverOption: (state, action) => {
       state.orderData.productcoveroption = action.payload.coveroption.id
+      state.productcolor = action.payload.coveroption.coversupgradecolors
     },
     changePapertypeOption: (state, action) => {
-      state.orderData.paperType=action.payload.papertype.id
-      state.orderData.paperTypeTotalevalue=action.payload.papertype.value
-      state.orderData.paperTypeTotale=(((state.orderData.sheetTotale * state.orderData.page_qty) * action.payload.papertype.value) / 100 + (state.orderData.page_qty * state.orderData.sheetTotale))
-      state.orderData.orderTotale=state.orderData.paperTypeTotale
+      state.orderData.paperType = action.payload.papertype.paper.id
+      state.orderData.paperValue = action.payload.papertype.paper.value
+      // state.orderData.paperTypeTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * action.payload.papertype.value) / 100 + (state.orderData.page_qty * state.orderData.sheetTotale))
+      // state.orderData.orderTotale = state.orderData.paperTypeTotale
     },
     changeBoxSleev: (state, action) => {
-      state.orderData.productboxSleev = action.payload.boxSleev.id
-      state.orderData.boxSleevTotale = zonePrice(action.payload.boxSleev.price).price
-      state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.boxSleevTotale
+      state.orderData.productboxSleev = action.payload.boxSleev.boxsleeve.id
+      state.orderData.boxSleeveValue = zonePrice(action.payload.boxSleev.boxsleeveprice).price
+      // state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.boxSleevTotale
+    },
+    setTotale: (state, action) => {
+      let paperTotale = ((state.orderData.sheetValue * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty
+      let coverTotale = state.orderData.coverValue
+      let boxSleevTotale = state.orderData.boxSleeveValue
+      state.orderData.orderTotale = paperTotale + coverTotale + boxSleevTotale
     },
     changeColor: (state, action) => {
-
+      state.orderData.productcolor = action.payload.color.id
     },
     formBack: (state, action) => {
       if (state.formStep != 0) {
@@ -131,10 +140,13 @@ const orderSlice = createSlice({
     formError: (state, action) => {
       state.formError[action.payload.key] = action.payload.error
     },
+    addOrderDetail: (state, action) => {
+      state.orderData.orderDetaild = action.payload
+    },
   }
 });
 
-export const { changePageCount, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const { addOrderDetail, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 

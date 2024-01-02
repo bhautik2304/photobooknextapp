@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {RegisterForm} from '@/components'
 function page() {
   return (
     <>
@@ -15,69 +15,7 @@ function page() {
                 <div className="ps-md-3 ps-lg-5 ps-xl-0 ps-sm-0">
                   <h3 className="h3 pb-2 pb-lg-3">Sign up to photokrafft.com</h3>
 
-                  <form className="needs-validation" novalidate>
-                    <div classNameName="row">
-                      <div classNameName="col-lg-6 col-md-6 col-sm-12">
-                        <h6>Personal Information</h6>
-                        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
-                          <div className="col mb-2">
-                            <input className="form-control form-control-lg" type="text" placeholder="Your name *" required />
-                          </div>
-                          <div className="col mb-2">
-                            <input className="form-control form-control-lg" type="email" placeholder="Email address *" required />
-                          </div>
-                        </div>
-                        <div className="password-toggle mb-2">
-                          <input className="form-control form-control-lg" type="password" placeholder="Password *" required />
-                          <label className="password-toggle-btn" aria-label="Show/hide password">
-                            <input className="password-toggle-check" type="checkbox" /><span className="password-toggle-indicator"></span>
-                          </label>
-                        </div>
-                        <h6>Company’s Information</h6>
-                        <div className="col-12 password-toggle mb-2">
-                          <input className="form-control form-control-lg" type="password" placeholder="Your Company’s Name *" required />
-                        </div>
-                        <div className="password-toggle mb-2">
-                          <input className="form-control form-control-lg" type="file" placeholder="Your Company’s Logo *" required />
-                        </div>
-                        <span classNameName='' style={{ fontSize: '14px !important' }} >Your Company’s Logo <span classNameName='text-danger' >*</span> </span>
-
-                      </div>
-
-                      {/* </div> */}
-                      <div classNameName="col-lg-6 col-md-6 col-sm-12">
-
-                        <h6>Address Details</h6>
-                        <div className="password-toggle mb-2">
-                          <textarea className="form-control form-control-lg" rows={1} placeholder="Address *" required>
-
-                          </textarea>
-                        </div>
-                        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
-                          <div className="col mb-2">
-                            <input className="form-control form-control-lg" type="text" placeholder="State / Province *" required />
-                          </div>
-                          <div className="col mb-2">
-                            <input className="form-control form-control-lg" type="text" placeholder="Country *" required />
-                          </div>
-                        </div>
-
-                        <h6 classNameName='' >Social Information</h6>
-                        <div className="password-toggle mb-2">
-                          <input className="form-control form-control-lg" type="text" placeholder="Social Profile Link *" required />
-                        </div>
-                        <div className="password-toggle mb-2">
-                          <input className="form-control form-control-lg" type="text" placeholder="Social Profile Link *" required />
-                        </div>
-                      </div>
-                    </div>
-                    <button className="btn btn-md btn-primary w-100 my-4" style={{ borderRadius: '5px !important' }} type="submit">Sign up</button>
-                    {/* <h2 className="h6 text-center pt-3 pt-lg-4 mb-2">Or sign in with your social account</h2> */}
-                    {/* <div className="row row-cols-1 row-cols-sm-2 gy-3">
-                    <div className="col"><a className="btn btn-icon btn-outline-secondary btn-google btn-lg w-100" href="#"><i className="ai-google fs-xl me-2"></i>Google</a></div>
-                    <div className="col"><a className="btn btn-icon btn-outline-secondary btn-facebook btn-lg w-100" href="#"><i className="ai-facebook fs-xl me-2"></i>Facebook</a></div>
-                  </div> */}
-                  </form>
+                  <RegisterForm/>
                 </div>
               </div>
             </div>

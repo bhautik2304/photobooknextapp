@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
     <>
       <main className="page-wrapper" style={{ backgroundColor: '#E8F2EE' }} >
         <div className="container mt-4 mt-lg-5 mb-lg-4 my-xl-5">
-          <ProfileSectionNavbar />
+          {/* <ProfileSectionNavbar /> */}
           <div className="row pt-sm-2 pt-lg-0">
             <Sidebar />
             {children}

@@ -1,0 +1,14 @@
+{
+    "folders": [
+		{
+			"path": "../../../../admin_app"
+		},
+		{
+			"path": "../../../../photostudio-api-server"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+    "settings": {}
+}

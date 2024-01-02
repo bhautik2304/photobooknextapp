@@ -18,13 +18,13 @@ function ProductBox() {
                         {productboxSleev.map(data => {
                             return (
                                 <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className={`size card my-2 pro ${orderData.productboxSleev == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeBoxSleev({ boxSleev: data }))} >
+                                    <div className={`size card my-2 pro ${orderData.productboxSleev == data.boxsleeve.id && 'selected_prod_size'}`} onClick={() => disapatch(changeBoxSleev({ boxSleev: data }))} >
                                         <div className="d-flex justify-content-between align-items-center">
-                                            <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
+                                            <img src={data.boxsleeve.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                                             <div>
-                                                {data.boxsleev}
+                                                {data.boxsleeve.name}
                                                 <div  >
-                                                    {localStorage.getItem(localstorageKey.zone) == 'IND' ? `${zonePrice(data.price)?.price || 0} ₹` : `${zonePrice(data.price)?.price || 0} $`}
+                                                    {zonePrice(data.boxsleeveprice)?.priceSrring}
                                                 </div>
                                             </div>
                                             <div></div>
@@ -36,7 +36,7 @@ function ProductBox() {
                     </div>
                 </div>
                 <div className="col-12 my-4">
-                    <span className='text-danger' >{formError?.product_cover_option}</span>
+                    {/* <span className='text-danger' >{formError?.product_cover_option}</span>
                     <><h6>Select option</h6></>
                     <div className="row">
                         {productcoveroption.map(data =>
@@ -45,7 +45,7 @@ function ProductBox() {
 
                                     <div className={`size card my-2 pro ${orderData.productcoveroption == data.id && 'selected_prod_size'}`} onClick={() => disapatch(selectCoverOption({ coveroption: data }))} >
                                         <div className="d-flex justify-content-between align-items-center">
-                                            <img src={data.img} style={{ height: 70, width: 70 ,padding:'5px' }} alt="" srcset="" />
+                                            <img src={data.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                                             <div></div>
                                             {data.coverOption}
                                             <div></div>
@@ -56,7 +56,7 @@ function ProductBox() {
                         ) || <><h1>Select Size</h1></>}
                     </div>
                 </div>
-                <div className="col-md-4 col-sm-12 col-lg-4">
+                <div className="col-md-4 col-sm-12 col-lg-4"> */}
 
                 </div>
             </div>

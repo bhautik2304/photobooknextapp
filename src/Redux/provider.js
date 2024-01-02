@@ -1,10 +1,11 @@
 'use client'
 /* Core */
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 
 /* Instruments */
 import { store } from './index'
+import { useEffect } from 'react'
 
-export const Providers = ({children}) => {
+export const Providers = ({ children }) => {
   return <Provider store={store}>{children}</Provider>
 }

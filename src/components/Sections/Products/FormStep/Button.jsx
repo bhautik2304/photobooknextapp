@@ -37,7 +37,7 @@ function BackBtn() {
 function NextBtn({ next }) {
     const { order } = useSelector(state => state)
     const dispatch = useDispatch()
-    if (!(Number(order.formStep) == 4)) {
+    if (!(Number(order.formStep) == 5)) {
         return (
             <>
                 <button className='mx-2 btn btn-dark btn-sm' style={{ cursor: 'pointer', backgroundColor: '#222221' }} onClick={() => next()} >Next</button>
@@ -46,7 +46,7 @@ function NextBtn({ next }) {
     } else {
         return (
             <>
-                <Link href={appRoutes.checkout} className='mx-2 btn btn-primary btn-sm ' style={{ cursor: 'pointer' }} >Plase Order</Link>
+                <Link href={appRoutes.checkout} className='mx-2 btn btn-primary btn-sm ' style={{ cursor: 'pointer' }} onClick={() => next()} >Plase Order</Link>
             </>
         )
     }
