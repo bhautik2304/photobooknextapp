@@ -26,7 +26,7 @@ function LoginForm() {
                 router.replace(appRoutes.userProfile)
                 return
             }
-            setError(res.data.message)
+            setError(res.data.msg)
         }).catch(err => console.log(err))
     }
     return (
@@ -46,7 +46,7 @@ function LoginForm() {
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-md btn-primary w-100 my-4" onClick={() => submitData()} style={{ borderRadius: '5px !important' }}>Sign up</button>
+                <button class="btn btn-md btn-primary w-100 my-4" onClick={() => submitData()} style={{ borderRadius: '5px !important' }}>Sign in</button>
                 <div className="row">
                     <div className='col-6' >
                         <h6 className='m-0 p-0' >Don't have an account yet?  </h6>

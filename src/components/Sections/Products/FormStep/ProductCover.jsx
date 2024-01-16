@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeCover, changeColor, formError as fcm, formNext, selectCoverOption } from '@/Redux/Slice/orderSlice'
+import { changeCover, changeColor, formError as fcm, formNext, selectCoverOption, addCoverphoto } from '@/Redux/Slice/orderSlice'
 import { zonePrice } from '@/utils'
 import { localstorageKey } from '@/constants'
 function ProductCover() {
@@ -18,7 +18,7 @@ function ProductCover() {
             {productcover.map(data => {
               return (
                 <div className="col-lg-4 col-md-4 col-sm-12">
-                  <div className={`size card my-2 pro ${orderData.productcover == data.cover.id && 'selected_prod_size'}`} onClick={() => disapatch(changeCover({ cover: data }))} >
+                  <div className={`size card my-2 pro ${orderData.productcover == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeCover({ cover: data }))} >
                     <div className="d-flex justify-content-between align-items-center">
                       <img src={data.cover.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                       <div>
@@ -39,8 +39,11 @@ function ProductCover() {
           {orderData.coverType == "img" &&
             (
               <>
-              <label>Upload your frontside photo *</label>
-                <input className='form-control form-control-sm my-2' type="file" onChange={(e) => disapatch(changeColor({ color: e.target.files[0] }))} />
+                <label>Upload your frontside photo *</label>
+                <input className='form-control form-control-sm my-2' type="file" onChange={(e) => {
+                  disapatch(addCoverphoto({ coverphoto: e.target.files[0] }))
+                localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+                }} />
               </>
             )}
         </div>

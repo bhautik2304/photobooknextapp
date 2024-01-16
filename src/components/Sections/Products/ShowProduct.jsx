@@ -10,7 +10,7 @@ import { fetchProduct } from '@/Redux/Slice/productSlice'
 
 
 function ShowProduct() {
-    const { auth: { authStatus }, product: { product }, order: { formStep, orderData: { page_qty, sheetValue, paperValue, coverValue, boxSleeveValue, orderTotale } } } = useSelector(state => state)
+    const { auth: { authStatus,user }, product: { product }, order: { formStep, orderData: { page_qty, sheetValue, paperValue, coverValue, boxSleeveValue, orderTotale } } } = useSelector(state => state)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -20,6 +20,7 @@ function ShowProduct() {
     useEffect(() => {
         dispatch(setTotale())
     }, [page_qty, sheetValue, paperValue, coverValue, boxSleeveValue, orderTotale,])
+
     return (
         <>
 
@@ -40,7 +41,7 @@ function ShowProduct() {
 
                             }
                             {
-                                (formStep == 1) ? (
+                            (formStep == 1) ? (
                                     <>
                                         <h2>Select your orientation.</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -56,7 +57,7 @@ function ShowProduct() {
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
                                             <h2>Select your sizes & Pappers.</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale}`}</span>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
                                         </div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                         <div className='row mt-2 mb-2' >
@@ -71,7 +72,7 @@ function ShowProduct() {
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
                                             <h2>Select your sizes & Pappers.</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale}`}</span>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
                                         </div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                         <div className='row mt-2 mb-2' >
@@ -86,7 +87,7 @@ function ShowProduct() {
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
                                             <h2>Select your box & sleeve.</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale}`}</span>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
                                         </div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                         <div className='row mt-2 mb-2' >
@@ -100,8 +101,8 @@ function ShowProduct() {
                                 (formStep == 5) ? (
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
-                                            <h2>Order Detaild.</h2>
-                                            {/* <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale}`}</span> */}
+                                            <h2>Order Details</h2>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
                                         </div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                         <div className='row mt-2 mb-2' >

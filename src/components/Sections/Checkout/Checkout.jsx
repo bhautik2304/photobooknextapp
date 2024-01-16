@@ -9,12 +9,12 @@ function Checkout() {
 
   return (
     <>
-      <main class="page-wrapper">
+  <main class="page-wrapper bg-primary">
         {/* <!-- Page content--> */}
         {/* <div class="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style={{ width:"52.5%" }}></div> */}
-        <form class="needs-validation container position-relative zindex-2 pt-0 pb-lg-5 pb-md-4 pb-2" novalidate>
+        <div class="container position-relative zindex-2 pt-0 pb-lg-5 pb-md-4 pb-2">
           <div class="row">
-            <div class="col-lg-6 mt-5">
+        <div class="col-lg-6 mt-5 card p-5">
               {/* <!-- Breadcrumb--> */}
               <h1 class="h2 pb-3">Checkout</h1>
               {/* <!-- Checkout form fields--> */}
@@ -59,7 +59,7 @@ function Checkout() {
               </div>
               <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">2.<span class="text-decoration-underline ms-1">Shipping method</span></h3>
               <div class="form-check mb-4">
-                <input class="form-check-input checked" type="checkbox" value={"true"} name="shipping" id="standard" />
+                {/* <input class="form-check-input checked" type="checkbox" value={"true"} name="shipping" id="standard" /> */}
                 <label class="form-check-label d-flex justify-content-between" for="standard"><span><span class="d-block fs-base text-dark fw-medium mb-1">Standard Delivery</span><span class="text-body">Delivery in 5 - 8 working days</span></span><span class="fs-base text-dark fw-semibold">{user?.zone?.currency_sign} {user?.zone?.shipingcharge} </span></label>
               </div>
               {/* <!-- Place an order button visible on screens > 991px--> */}
@@ -79,7 +79,7 @@ function Checkout() {
               <label class="form-check-label" for="save-info2"><span class="text-muted">Your personal information will be used to process your order, to support your experience on this site and for other purposes described in the </span><a class="fw-medium" href="#">privacy policy</a></label>
             </div>
           </div>
-        </form>
+        </div>
       </main>
     </>
   )

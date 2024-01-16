@@ -18,7 +18,7 @@ function ProductBox() {
                         {productboxSleev.map(data => {
                             return (
                                 <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className={`size card my-2 pro ${orderData.productboxSleev == data.boxsleeve.id && 'selected_prod_size'}`} onClick={() => disapatch(changeBoxSleev({ boxSleev: data }))} >
+                                    <div className={`size card my-2 pro ${orderData.productboxSleev == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeBoxSleev({ boxSleev: data }))} >
                                         <div className="d-flex justify-content-between align-items-center">
                                             <img src={data.boxsleeve.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                                             <div>

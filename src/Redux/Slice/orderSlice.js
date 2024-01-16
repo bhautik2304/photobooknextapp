@@ -3,7 +3,13 @@
 import { zonePrice } from '@/utils'
 import { createSlice } from '@reduxjs/toolkit'
 
-
+const orderDetaild = {
+  eventType: "",
+  eventDate: "",
+  eventName: "",
+  printing: "",
+  customizeMessage: "",
+}
 
 const orderDataScemma = {
   // costomer Detaild
@@ -33,6 +39,17 @@ const orderDataScemma = {
   boxSleeveValue: 0,
   orderTotale: 0,
   shippingcost: 0,
+  discount: 0,
+  orderDiscountAmount: 0,
+  orderAfterDiscount: 0,
+
+  isSample: false,
+  isPhotoBookCopy: false,
+  photoBookCopy: 0,
+
+  // order detaild
+  orderDetaild: orderDetaild,
+
 }
 
 const errorSchima = {
@@ -47,6 +64,8 @@ const errorSchima = {
   product_color: null,
   product_paper_type: null,
 }
+
+
 
 const initialState = {
   orderData: orderDataScemma,
@@ -75,19 +94,18 @@ const orderSlice = createSlice({
       state.productpaperType = action.payload.product.paperType
     },
     changeOrientation: (state, action) => {
-      state.orderData.productOrientation = action.payload.product.orientation_id
-      const sizeData = state.product.orientation.filter(data => data.orientation_id == state.orderData.productOrientation)[0].size
-      state.productSize = sizeData
+      state.orderData.productOrientation = action.payload.product.id
+      state.productSize = action.payload.product.size
     },
     changeOrientationSize: (state, action) => {
-      state.orderData.productSize = action.payload.size.size_id
+      state.orderData.productSize = action.payload.size.id
       state.productSheet = action.payload.size.sheet
       state.productcover = action.payload.size.cover
       state.productboxSleev = action.payload.size.boxsleeve
       state.productpaperType = action.payload.size.papers
     },
     changeSheet: (state, action) => {
-      state.orderData.productSheet = action.payload.sheet.sheet.id
+      state.orderData.productSheet = action.payload.sheet.id
       state.orderData.sheetValue = zonePrice(action.payload.sheet.sheetprice).price
       // state.orderData.paperTypeTotale=
       // state.orderData.orderTotale = state.orderData.sheetTotale * state.orderData.page_qty
@@ -97,7 +115,7 @@ const orderSlice = createSlice({
       // state.orderData.orderTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * state.orderData.paperTypeTotalevalue) / 100 + (state.orderData.sheetTotale * state.orderData.page_qty))
     },
     changeCover: (state, action) => {
-      state.orderData.productcover = action.payload.cover.cover.id
+      state.orderData.productcover = action.payload.cover.id
       state.productcoveroption = action.payload.cover.cover.coverupgrades
       state.orderData.coverValue = zonePrice(action.payload.cover.coverprice).price
       state.orderData.coverType = action.payload.cover.cover.type
@@ -107,13 +125,13 @@ const orderSlice = createSlice({
       state.productcolor = action.payload.coveroption.coversupgradecolors
     },
     changePapertypeOption: (state, action) => {
-      state.orderData.paperType = action.payload.papertype.paper.id
+      state.orderData.paperType = action.payload.papertype.id
       state.orderData.paperValue = action.payload.papertype.paper.value
       // state.orderData.paperTypeTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * action.payload.papertype.value) / 100 + (state.orderData.page_qty * state.orderData.sheetTotale))
       // state.orderData.orderTotale = state.orderData.paperTypeTotale
     },
     changeBoxSleev: (state, action) => {
-      state.orderData.productboxSleev = action.payload.boxSleev.boxsleeve.id
+      state.orderData.productboxSleev = action.payload.boxSleev.id
       state.orderData.boxSleeveValue = zonePrice(action.payload.boxSleev.boxsleeveprice).price
       // state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.boxSleevTotale
     },
@@ -143,10 +161,22 @@ const orderSlice = createSlice({
     addOrderDetail: (state, action) => {
       state.orderData.orderDetaild = action.payload
     },
+    addCoverphoto: (state, action) => {
+      state.orderData.coverphoto = action.payload.coverphoto
+    },
+    addphotoszip: (state, action) => {
+      state.orderData.photoszip = action.payload.photoszip
+    },
+    changeOrderDetaildData: (state, action) => {
+      state.orderData.orderDetaild[action.payload.key] = action.payload.value
+    },
+    changeOrderData: (state, action) => {
+      state.orderData[action.payload.key] = action.payload.value
+    },
   }
 });
 
-export const { addOrderDetail, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const { addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 

@@ -113,7 +113,7 @@ function Navbar() {
                                 <Link href={appRoutes.Support} className="nav-link">Support</Link>
                             </li>
                             <li className={`nav-item ${(pathname == appRoutes.StartPrinting) && 'active'}`}>
-                                <Link href={appRoutes.StartPrinting} className="nav-link">Start Printing</Link>
+                                <Link href={appRoutes.StartPrinting} className="nav-link">Order Now</Link>
                             </li>
                         </ul>
                         <div>

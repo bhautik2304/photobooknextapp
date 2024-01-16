@@ -39,7 +39,8 @@ export const localstorageKey = {
     authKey: 'authKey',
     authStatus: 'authStatus',
     user: 'user',
-    zone: 'zone'
+    zone: 'zone',
+    coverphoto: 'coverphoto',
 }
 
 export const errorText = {

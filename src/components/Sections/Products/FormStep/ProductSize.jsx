@@ -18,7 +18,7 @@ function ProductSize() {
           <div className="row">
             {productSize.map(data => (
               <div className="col-lg-4 col-md-4 col-sm-12">
-                <div className={`size card  my-2 pro ${orderData.productSize == data.size_id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
+                <div className={`size card  my-2 pro ${orderData.productSize == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
                   <div className="d-flex justify-content-between align-items-center">
                     <img src={data?.size?.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                     {data?.size?.name}
@@ -40,7 +40,7 @@ function ProductSize() {
                   return (
                     <>
                       <div className="col-lg-4 col-md-4 col-sm-12">
-                        <div className={`size card my-2 pro ${orderData.productSheet == data.sheet_id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
+                        <div className={`size card my-2 pro ${orderData.productSheet == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
                           <div className="d-flex justify-content-between align-items-center">
                             <img src={data?.sheet?.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                             <div  >
@@ -65,7 +65,7 @@ function ProductSize() {
               <div className="row">
                 {productpaperType.map(data => <>
                   <div className="col-lg-4 col-md-4 col-sm-12">
-                    <div className={`size card my-2 pro ${orderData.paperType == data.paper.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
+                    <div className={`size card my-2 pro ${orderData.paperType == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
                       <div className="d-flex justify-content-between align-items-center">
                         <img src={data.paper.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                         <div>

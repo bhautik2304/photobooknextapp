@@ -1,0 +1,17 @@
+{
+    "folders": [
+		{
+			"path": "../../../../../tifam/Minimal_JavaScript_v4.3.0-chtjsb/Minimal_JavaScript_v4.3.0/cra_JS"
+		},
+		{
+			"path": "../../../../photostudio-api-server"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+    "settings": {
+        "javascript.validate.enable": false,
+        "typescript.validate.enable": false
+    }
+}
