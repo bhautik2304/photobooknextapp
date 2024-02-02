@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { redirect } from 'next/navigation'
 import { isLocalStorageAvailable } from '@/utils'
-import { Profile } from '@/components'
+import { Order } from '@/components'
 
 function page() {
     const authStatus = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authStatus) : null
@@ -30,7 +30,7 @@ function page() {
 
     return (
         <>
-            <Profile />
+            <Order />
         </>
     )
 }

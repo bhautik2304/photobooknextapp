@@ -46,6 +46,7 @@ const orderDataScemma = {
   isSample: false,
   isPhotoBookCopy: false,
   photoBookCopy: 0,
+  delivery_address: 0,
 
   // order detaild
   orderDetaild: orderDetaild,

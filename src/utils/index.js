@@ -13,3 +13,14 @@ export const zonePrice = (price) => {
         return {}
     }
 }
+
+export const isLocalStorageAvailable = () => {
+    try {
+        const testKey = '__test_key__';
+        localStorage.setItem(testKey, testKey);
+        localStorage.removeItem(testKey);
+        return true;
+    } catch (error) {
+        return false;
+    }
+};

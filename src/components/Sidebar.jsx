@@ -7,10 +7,12 @@ import axios from 'axios';
 import Avatar from 'react-avatar';
 import { useDropzone } from 'react-dropzone'
 import { usePathname } from 'next/navigation';
+import Link from 'next/link'
 
 function Sidebar() {
     const { user } = useSelector(state => state.auth)
     const path = usePathname()
+    console.log(path);
     return (
         <>
             <aside className="col-lg-3 p-5">
@@ -27,12 +29,34 @@ function Sidebar() {
                                 <p className="fs-sm text-muted mb-0">{user?.email}</p>
                             </div>
                             <nav className="nav flex-column pb-2 pb-lg-4 mb-3">
-                                <a className="nav-link py-2 px-0" href="#" style={{ color: "#64748b" }} >
-                                    <i className="ai-user-check fs-5 opacity-60 me-2"></i>Your Profile
-                                </a>
-                                <a className="nav-link py-2 px-0" href="#order-data" style={{ color: "#64748b" }} >
-                                    <i className="ai-wallet fs-5 opacity-60 me-2"></i>Your orders
-                                </a>
+                                {
+                                    path == appRoutes.userProfile ?
+                                    <>
+                                            <a className="nav-link py-2 px-0" style={{ color: "#64748b" }} >
+                                                <i className="ai-user-check fs-5 opacity-60 me-2"></i>Your Profile
+                                            </a>
+                                    </> 
+                                    :
+                                    <>
+                                            <Link href={appRoutes.userProfile} className="nav-link py-2 px-0" style={{ color: "#64748b" }} >
+                                                <i className="ai-user-check fs-5 opacity-60 me-2"></i>Your Profile
+                                            </Link>
+                                    </>
+                                }
+                                {
+                                    path == appRoutes.userProfileOrders ?
+                                    <>
+                                            <a className="nav-link py-2 px-0" style={{ color: "#64748b" }} >
+                                                <i className="ai-wallet fs-5 opacity-60 me-2"></i>Your orders
+                                            </a>
+                                    </> 
+                                    :
+                                    <>
+                                            <Link href={appRoutes.userProfileOrders} className="nav-link py-2 px-0" style={{ color: "#64748b" }} >
+                                                <i className="ai-wallet fs-5 opacity-60 me-2"></i>Your orders
+                                            </Link>
+                                    </>
+                                }
                             </nav>
                             <nav className="nav flex-column"><a className="nav-link py-2 px-0" style={{ color: "#64748b" }} ><i className="ai-logout fs-5 opacity-60 me-2"></i>Sign out</a></nav>
                         </div>

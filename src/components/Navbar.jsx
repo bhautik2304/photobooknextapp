@@ -9,7 +9,7 @@ import axios from 'axios'
 import { authLogin,authLogout } from '@/Redux/Slice/authSlice'
 import { fetchUsers } from '@/Redux/Slice/userSlice'
 import Avatar from 'react-avatar';
-
+import { isLocalStorageAvailable } from '@/utils'
 function Navbar() {
 
     // const [authStatus, setAuthStatus] = useState(false)
@@ -20,7 +20,7 @@ function Navbar() {
 
     const { authStatus, user } = useSelector(state => state.auth)
 
-    const token = localStorage.getItem(localstorageKey.authKey)
+    const token = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authKey) : false
 
     useEffect(() => {
         if (token) {
@@ -41,54 +41,54 @@ function Navbar() {
         <div>
             <header className="navbar navbar-expand-lg bg-light">
                 <div className="container">
-                    <Link href="#" className="navbar-brand">
+                <Link href="/" className="navbar-brand">
                         <img src={'/assets/img/logo.png'} alt='Photokraft logo' width={220} height={100} />
                         {/* Around */}
                     </Link>
                     {authStatus &&
                         <>
-                            <div class="dropdown nav d-block order-lg-2 ms-auto">
-                                <a href="#" class="nav-link d-flex align-items-center p-0" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {/* <img src={user?.compunys_logo} class="border rounded-circle" width="48" alt="Isabella Bocouse" /> */}
+                            <div className="dropdown nav d-block order-lg-2 ms-auto">
+                                <Link href="#" className="nav-link d-flex align-items-center p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {/* <img src={user?.compunys_logo} className="border rounded-circle" width="48" alt="Isabella Bocouse" /> */}
                                 <Avatar name={user?.name} color={"#212121"} size={48} round={true} />
-                                    <div class="d-none d-sm-block ps-2">
-                                        <div class="fs-xs lh-1 opacity-60">Hello,</div>
-                                        <div class="fs-sm dropdown-toggle">{user?.name}</div>
+                                    <div className="d-none d-sm-block ps-2">
+                                        <div className="fs-xs lh-1 opacity-60">Hello,</div>
+                                        <div className="fs-sm dropdown-toggle">{user?.name}</div>
                                     </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end my-1">
-                                    <h6 class="dropdown-header fs-xs fw-medium text-body-secondary text-uppercase pb-1">Account</h6>
-                                    <Link href={appRoutes.userProfile} class="dropdown-item">
-                                        <i class="ai-user-check fs-lg opacity-70 me-2"></i>
+                                </Link>
+                                <div className="dropdown-menu dropdown-menu-end my-1">
+                                    <h6 className="dropdown-header fs-xs fw-medium text-body-secondary text-uppercase pb-1">Account</h6>
+                                    <Link href={appRoutes.userProfile} className="dropdown-item">
+                                        <i className="ai-user-check fs-lg opacity-70 me-2"></i>
                                         Overview
                                     </Link>
-                                    <Link href={appRoutes.userProfileOrders} class="dropdown-item">
-                                        <i class="ai-cart fs-lg opacity-70 me-2"></i>
+                                    <Link href={appRoutes.userProfileOrders} className="dropdown-item">
+                                        <i className="ai-cart fs-lg opacity-70 me-2"></i>
                                         Orders
                                     </Link>
-                                    {/* <a href="#" class="dropdown-item">
-                                        <i class="ai-wallet fs-base opacity-70 me-2 mt-n1"></i>
+                                    {/* <a href="#" className="dropdown-item">
+                                        <i className="ai-wallet fs-base opacity-70 me-2 mt-n1"></i>
                                         Billing
                                     </a>
-                                    <div class="dropdown-divider"></div>
-                                    <h6 class="dropdown-header fs-xs fw-medium text-body-secondary text-uppercase pb-1">Dashboard</h6>
+                                    <div className="dropdown-divider"></div>
+                                    <h6 className="dropdown-header fs-xs fw-medium text-body-secondary text-uppercase pb-1">Dashboard</h6>
 
-                                    <a href="#" class="dropdown-item">
-                                        <i class="ai-activity fs-lg opacity-70 me-2"></i>
+                                    <a href="#" className="dropdown-item">
+                                        <i className="ai-activity fs-lg opacity-70 me-2"></i>
                                         Earnings
                                     </a>
-                                    <a href="#" class="dropdown-item d-flex align-items-center">
-                                        <i class="ai-messages fs-lg opacity-70 me-2"></i>
+                                    <a href="#" className="dropdown-item d-flex align-items-center">
+                                        <i className="ai-messages fs-lg opacity-70 me-2"></i>
                                         Chat
-                                        <span class="badge bg-danger ms-auto">4</span>
+                                        <span className="badge bg-danger ms-auto">4</span>
                                     </a>
-                                    <a href="#" class="dropdown-item">
-                                        <i class="ai-heart fs-lg opacity-70 me-2"></i>
+                                    <a href="#" className="dropdown-item">
+                                        <i className="ai-heart fs-lg opacity-70 me-2"></i>
                                         Favorites
                                     </a> */}
-                                    <div class="dropdown-divider"></div>
-                                <button onClick={() => dispatch(authLogout())} class="dropdown-item">
-                                        <i class="ai-logout fs-lg opacity-70 me-2"></i>
+                                    <div className="dropdown-divider"></div>
+                                <button onClick={() => dispatch(authLogout())} className="dropdown-item">
+                                        <i className="ai-logout fs-lg opacity-70 me-2"></i>
                                         Sign out
                                     </button>
                                 </div>

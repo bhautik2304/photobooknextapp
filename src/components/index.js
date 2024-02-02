@@ -14,3 +14,7 @@ export {default as Checkout} from './Sections/Checkout/Checkout'
 export { default as RegisterForm } from './Auth/RegisterForm'
 export { default as LoginForm } from './Auth/LoginForm'
 export { default as ForgetPassword } from './Auth/ForgetPassword'
+export { default as NotsupportedScreen } from './NotsupportedScreen'
+
+export { default as Profile } from './Sections/Profile/Profile'
+export { default as Order } from './Sections/Profile/Order'

@@ -56,23 +56,23 @@ function ForgetPassword() {
             <div className="row">
                 <div className="col-12">
                     {error && <div className="alert alert-danger" role="alert">{error}</div>}
-                    <div class="col-12 mb-2">
+                    <div className="col-12 mb-2">
                         {step == 0 &&
                             <>
-                                <h6 class="mb-1">Enter your email address or mobile number</h6>
-                                <input class="form-control form-control-lg" onChange={(e) => setData({ ...data, email: e.target.value })} placeholder="mobile number / Email address *" required />
+                                <h6 className="mb-1">Enter your email address or mobile number</h6>
+                                <input className="form-control form-control-lg" onChange={(e) => setData({ ...data, email: e.target.value })} placeholder="mobile number / Email address *" required />
                             </>
                         }
                         {step == 1 &&
                             <>
-                                <h6 class="mb-1">Enter your OTP</h6>
-                                <input class="form-control form-control-lg" onChange={(e) => setData({ ...data, otp: e.target.value })} placeholder="OTP *" required />
+                                <h6 className="mb-1">Enter your OTP</h6>
+                                <input className="form-control form-control-lg" onChange={(e) => setData({ ...data, otp: e.target.value })} placeholder="OTP *" required />
                             </>
                         }
                         {step == 2 &&
                             <>
-                                <h6 class="mb-1">Enter your new password</h6>
-                                <input class="form-control form-control-lg" onChange={(e) => setData({ ...data, password: e.target.value })} placeholder="Password *" required />
+                                <h6 className="mb-1">Enter your new password</h6>
+                                <input className="form-control form-control-lg" onChange={(e) => setData({ ...data, password: e.target.value })} placeholder="Password *" required />
                             </>
                         }
                     </div>
@@ -80,15 +80,15 @@ function ForgetPassword() {
             </div>
             {step == 0 &&
                 <>
-                    <button class="btn btn-md btn-primary w-100 my-4" onClick={() => forgetReq(1)} style={{ borderRadius: '5px !important' }}>Send OTP</button>
+                    <button className="btn btn-md btn-primary w-100 my-4" onClick={() => forgetReq(1)} style={{ borderRadius: '5px !important' }}>Send OTP</button>
                     <Link href={appRoutes.Login} className='' > Back to Login!</Link>
                 </>}
             {step == 1 &&
                 <>
-                    <button class="btn btn-md btn-primary w-100 my-4" onClick={() => otpVerify(2)} style={{ borderRadius: '5px !important' }}>Verify OTP</button>
+                    <button className="btn btn-md btn-primary w-100 my-4" onClick={() => otpVerify(2)} style={{ borderRadius: '5px !important' }}>Verify OTP</button>
                     <Link href={"#"} onClick={() => setStep(0)} className='' > Change email address or mobile number!</Link>
                 </>}
-            {step == 2 && <button class="btn btn-md btn-primary w-100 my-4" onClick={() => changePassword(3)} style={{ borderRadius: '5px !important' }}>Change Password</button>}
+            {step == 2 && <button className="btn btn-md btn-primary w-100 my-4" onClick={() => changePassword(3)} style={{ borderRadius: '5px !important' }}>Change Password</button>}
 
         </>
     )
@@ -97,10 +97,10 @@ function ForgetPassword() {
 export default ForgetPassword
 
 /*
-<div class="password-toggle mb-2">
-                      <input class="form-control form-control-lg" type="password" onChange={(e) => setData({ ...data, password: e.target.value })} placeholder="Password *" required />
-                      <label class="password-toggle-btn" aria-label="Show/hide password">
-                          <input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
+<div className="password-toggle mb-2">
+                      <input className="form-control form-control-lg" type="password" onChange={(e) => setData({ ...data, password: e.target.value })} placeholder="Password *" required />
+                      <label className="password-toggle-btn" aria-label="Show/hide password">
+                          <input className="password-toggle-check" type="checkbox" /><span className="password-toggle-indicator"></span>
                       </label>
                   </div>
 */

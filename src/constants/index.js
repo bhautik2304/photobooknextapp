@@ -26,7 +26,7 @@ export const apiRoutes = {
     register: serverApiDomain + '/costomer',
     token: serverApiDomain + '/auth/costomer/token',
     products: serverApiDomain + '/product',
-    orders: serverApiDomain + '/orders',
+    orders: serverApiDomain + '/order',
     zones: serverApiDomain + '/zones',
     user: serverApiDomain + '/user',
     checkout: serverApiDomain + '/checkout',
