@@ -35,7 +35,10 @@
     },
     "proxy": {
         "/api": {
-            "target": "http://localhost:8000",
+            "target": [
+                "https://api.sascube.ltd/api",
+                "http://127.0.0.1:8000"
+            ],
             "pathRewrite": {
                 "^/api": ""
             }

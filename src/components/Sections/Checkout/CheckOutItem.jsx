@@ -144,7 +144,7 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                                     </div>
                                     <div className="text-end ms-auto">
                                         <div className="fs-5 mb-2">{
-                                            (((orderData?.sheetValue * orderData.paperValue) / 100) + orderData?.sheetValue) * orderData?.page_qty} {user?.zone?.currency_sign}</div>
+                                            (((orderData?.sheetValue * orderData.paperValue) / 100) + orderData?.sheetValue) * orderData?.page_qty - (orderData?.sheetValue * orderData.paperValue)} {user?.zone?.currency_sign}</div>
                                     </div>
                                 </div>
                                 {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
@@ -204,11 +204,11 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                             <ul className="list-unstyled py-3 mb-0">
                                 <li className="d-flex justify-content-between mb-2">Subtotal:<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {((orderData.boxSleeveValue + orderData.coverValue + (((orderData.sheetValue * orderData.page_qty) * orderData?.paperValue) / 100) + (orderData.sheetValue * orderData.page_qty)))}</span></li>
                                 {
-                                    user?.discount &&
+                                    Number(user?.discount) ?
                                     <>
                                         <li className="d-flex justify-content-between mb-2">Discount:<span className="fw-semibold ms-2 text-danger">-{user?.zone?.currency_sign} {orderData?.orderDiscountAmount}</span></li>
                                         <li className="d-flex justify-content-between mb-2">Subtotal ( after discount {user?.discount} % ):<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {Math.round(orderData?.orderTotale)}</span></li>
-                                    </>
+                                    </> : null
                                 }
                                 <li className="d-flex justify-content-between mb-2">Shipping cost:<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {user?.zone?.shipingcharge}</span></li>
                             </ul>

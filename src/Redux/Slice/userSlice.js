@@ -6,9 +6,9 @@ export const fetchUsers = createAsyncThunk('Product', async () => {
 
     const authStatus = localStorage.getItem(localstorageKey.authStatus)
     const userKey = localStorage.getItem(localstorageKey.authKey)
-if (authStatus == "true") {
+    if (authStatus == "true") {
         console.log("run user slice");
-        const response = await axios.post(apiRoutes.customer + 'fetch', {}, {
+        const response = await axios.post('https://api.sascube.ltd/api/costomer/' + 'fetch', {}, {
             headers: {
                 Authorization: `${JSON.parse(userKey)}`
             },

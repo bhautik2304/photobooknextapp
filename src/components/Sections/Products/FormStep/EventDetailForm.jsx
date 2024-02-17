@@ -101,12 +101,13 @@ function EventDetailForm() {
                             height: 50,
                             borderRadius: 5,
                             border: "2px solid #8ccec6",
+                            color: '#ffffff',
                             backgroundColor: (orderDetaild.printing == "Laser Imprinting") && '#8ccec6'
                         }} >
                             Laser Imprinting
                         </div>
                     </div>
-                    <div className="col-4  my-2">
+                    {/* <div className="col-4  my-2">
                         <div className="form-group">
                             <label htmlFor=""></label>
                         </div>
@@ -122,7 +123,7 @@ function EventDetailForm() {
                         }} >
                             Foil Imprinting
                         </div>
-                    </div>
+                    </div> */}
                     <span className='text-danger'>{error?.printing}</span>
                 </div>
             </div>

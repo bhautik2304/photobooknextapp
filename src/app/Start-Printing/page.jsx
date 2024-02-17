@@ -1,10 +1,22 @@
-import React from 'react'
+"use client";
+import React, { useEffect } from 'react'
 // import  from '@/components'
 import dynamic from 'next/dynamic'
+import { redirect } from 'next/navigation'
 const ShowProduct = dynamic(() => import('@/components/Sections/Products/ShowProduct'), { ssr: false })
 const NotsupportedScreen = dynamic(() => import('@/components/NotsupportedScreen'), { ssr: false })
+import { isLocalStorageAvailable } from '@/utils'
+import { appRoutes, localstorageKey } from '@/constants'
 
 function page() {
+
+    const authStatus = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authStatus) : null
+
+  useEffect(() => {
+     if (!authStatus) {
+            redirect(appRoutes.Login);   
+        }
+  }, [authStatus])
 
     return (
         <>

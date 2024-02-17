@@ -11,6 +11,7 @@ import back from '@/assets/img/back-svgrepo-com.svg'
 import axios from 'axios'
 import Link from 'next/link'
 import { appRoutes } from '@/constants'
+import { clearCart } from '@/Redux/Slice/orderSlice'
 const status = {
   proceed: "Proceed to order",
   placeOrder: "Place an order",
@@ -24,6 +25,7 @@ function Checkout() {
   const [sourceType, setSourceType] = useState(null);
 const [file, setFile] = useState(null);
 const [fileUploadStatus, setFileUploadStatus] = useState(false);
+const [fileerror, setError] = useState(false);
 
 const dispatch=useDispatch()
 
@@ -37,10 +39,11 @@ const dispatch=useDispatch()
     formData.append('coverfrontphoto', orderData.coverphoto);
     formData.append('photoszip', orderData.photoszip);
 
-    axios.post('http://localhost:8000/api/order', formData)
+    axios.post('https://api.sascube.ltd/api/order', formData)
       .then(res => {
         setOrderId(res.data.order_id)
         setChackOutStatus(status.successOrder)
+        dispatch(clearCart())
       })
       .catch(error => {
         setChackOutStatus(status.placeOrder)
@@ -49,6 +52,18 @@ const dispatch=useDispatch()
   }
 
   const fileUplode=()=>{
+
+    const error = {}
+if(file == null){
+      error.file = "Required *"
+    }
+
+    // Check if there are any errors
+    if (Object.keys(error).length > 0) {
+      setError(error);
+      return 0; // Validation failed
+    }
+
     const formData = new FormData();
     formData.append('orderNo', orderId);
     formData.append('sourceType', sourceType);
@@ -57,7 +72,7 @@ const dispatch=useDispatch()
     }else{
       formData.append('photos_url', file);
     }
-    axios.post('http://localhost:8000/api/order/uploadfile', formData)
+    axios.post('https://api.sascube.ltd/api/order/uploadfile', formData)
       .then(res => {
 
 if (res?.data?.code == 200) {
@@ -87,7 +102,7 @@ setFileUploadStatus({
         {/* <div className="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style={{ width:"52.5%" }}></div> */}
         <div className="container position-relative zindex-2 pt-0 pb-lg-5 pb-md-4 pb-2">
           <div className="row">
-                          <div className="col-lg-12 mt-5 card p-5">
+            <div className="col-lg-12 mt-5 card p-5">
         {chackOutStatus == status.proceed
           &&
           <>
@@ -205,9 +220,9 @@ setFileUploadStatus({
         {chackOutStatus == status.successOrder
           &&
           <>
-            <div className="col-lg-12 bg-white p-5">
+                <div className="col-lg-12 bg-white p-5 d-flex justify-content-center aligns-item-center">
+                    <div className="col-8">
               <center>
-                <div className='col-8 p-3' >
                   <Player
                         autoplay
                         speed={0}
@@ -216,14 +231,14 @@ setFileUploadStatus({
                     style={{ height: '250px', width: '250px' }}
                   >
                   </Player>
-
+                    </center>
                   <center>
                     <h5 className='text-primary' >We Received Your Order Successfully</h5>
                   </center>
                       {fileUploadStatus?.status ?
                       <>
               <div class={`alert alert-${fileUploadStatus?.class}`} role="alert">
-                        {fileUploadStatus?.msg}
+                          Url successfully received, pls contact us if you have any queries regarding you order
                           </div>
                           {
                             fileUploadStatus?.class=="danger" &&
@@ -233,7 +248,7 @@ setFileUploadStatus({
                           </div>
                           <div className="d-flex justify-content-center aligns-item-center">
                             <div className="card p-3 col-8">
-                              <h6>Select the source from above drop-down and add your photos which needs to be print. Please don’t refresh your page , while photos are uploading, if something went wrong please <Link href="https://wa.me/+919081770314?text=please%20help%20me%20with%20my%20order%20number%20:%20000000%20,%20something%20went%20wrong%20while%20uploading%20my%20photos" className='link text-primary' >contact us</Link>.</h6>
+                                  <h6>Select the source from above drop-down and add your photos which needs to be print. Please don’t refresh your page , while photos are uploading, if something went wrong please <Link href={`https://wa.me/+919081770314?text=please%20help%20me%20with%20my%20order%20number%20:%20${orderId}%20,%20something%20went%20wrong%20while%20uploading%20my%20photos`} className='link text-primary' >contact us</Link>.</h6>
                             </div>
                           </div>   
                             </> 
@@ -241,9 +256,16 @@ setFileUploadStatus({
                       </>
                       :
                     <>
+                    <center>
                           <h6 className='mt-2' >Upload Your Photos</h6>
+                    </center>
+                          <div class="bg-secondary rounded-1 p-4 my-2">
+                            <center>
+                            <img src="https://basira.in/assets/sharde link.jpg" style={{width: '400px'}} />
+                            </center><p class="my-2">Please submit your drive link which contains the photos which needs to be print in your order,  if something went wrong please contact us, also you can check your orders in your&nbsp;profile&nbsp;section</p>
+                            </div>
                           <div className="row mb-4">
-                            <div className="col-12 my-2">
+                            <div className="col-6 my-2">
                               <div className="form-group">
                                 <label htmlFor="">Source Type</label>
                                 <select className="form-control" value={sourceType} onChange={(e) => setSourceType(e.target.value)} name="" id="">
@@ -256,18 +278,20 @@ setFileUploadStatus({
                             {sourceType &&
                               <>
                                 {sourceType == "Zip File" ? (
-                                  <div className="col-12 my-2">
+                                  <div className="col-6 my-2">
                                     <div className="form-group">
-                                      <label htmlFor="">Source Type</label>
+                                      <label>Source Type</label>
                                       <input type="file" onChange={(e) => setFile(e.target.files[0])} className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
                                     </div>
+                                  <span className='text-danger' >{fileerror?.file}</span>
                                   </div>
                                 ) : (
-                                  <div className="col-12 my-2">
+                                  <div className="col-6 my-2">
                                     <div className="form-group">
                                       <label htmlFor="">Enter Url</label>
                                       <input type="text" value={orderDetaild.url} onChange={(e) => setFile(e.target.value)} className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
                                     </div>
+                                    <span className='text-danger' >{fileerror?.file}</span>
                                   </div>
                                 )
                                 }
@@ -280,9 +304,8 @@ setFileUploadStatus({
                     </>
                   }
                 </div>
-              </center>
-                  
-            </div>
+                </div>
+
           </>
         }
           </div>

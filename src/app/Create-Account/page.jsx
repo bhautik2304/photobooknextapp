@@ -13,8 +13,6 @@ function page() {
               {/* <!-- Sign in form--> */}
               <div className="col-md-8 col-xl-8 col-sm-12 card signin-signup-card-padding">
                 <div className="ps-md-3 ps-lg-5 ps-xl-0 ps-sm-0">
-                  <h3 className="h3 pb-2 pb-lg-3">Sign up to photokrafft.com</h3>
-
                   <RegisterForm/>
                 </div>
               </div>

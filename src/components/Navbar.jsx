@@ -25,7 +25,7 @@ function Navbar() {
     useEffect(() => {
         if (token) {
             console.log(JSON.parse(token))
-            axios.post(apiRoutes.token, { token: JSON.parse(token) }).then(res => {
+            axios.post('https://api.sascube.ltd/api/auth/costomer/token', { token: JSON.parse(token) }).then(res => {
                 if (res.data.code == 200) {
                     dispatch(authLogin(res.data))
                     dispatch(fetchUsers(res.data.user.id))
@@ -110,7 +110,7 @@ function Navbar() {
                                 <Link href={appRoutes.AboutUS} className="nav-link">About US</Link>
                             </li>
                             <li className={`nav-item ${(pathname == appRoutes.Support) && 'active'}`}>
-                                <Link href={appRoutes.Support} className="nav-link">Support</Link>
+                                <Link href={appRoutes.Support} className="nav-link">Faqs</Link>
                             </li>
                             <li className={`nav-item ${(pathname == appRoutes.StartPrinting) && 'active'}`}>
                                 <Link href={appRoutes.StartPrinting} className="nav-link">Order Now</Link>

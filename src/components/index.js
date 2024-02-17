@@ -1,6 +1,8 @@
 export {default as Footer} from './Footer'
 export {default as Navbar} from './Navbar'
 export {default as AnimateText} from './Sections/AnimateText'
+export { default as AboutApproach } from './Sections/AboutApproach'
+export { default as ProductCardSwiper } from './Sections/ProductPage/ProductCardSwiper'
 export {default as AnimateProcessText} from './Sections/AnimateProcessText'
 export {default as Testymonial} from './Sections/Testymonial'
 export {default as ProductScroll} from './Sections/ProductScroll'

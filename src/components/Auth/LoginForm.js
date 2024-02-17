@@ -19,8 +19,12 @@ function LoginForm() {
     const dispatch = useDispatch()
 
 
+    const [show, setHide] = useState(false)
+   
+   
+
     const submitData = () => {
-        axios.post(apiRoutes.login, data).then(res => {
+        axios.post('https://api.sascube.ltd/api/auth/costomer/login', data).then(res => {
             if (res.data.code == 200) {
                 dispatch(authLogin(res.data))
                 router.replace(appRoutes.userProfile)
@@ -39,9 +43,9 @@ function LoginForm() {
                             <input className="form-control form-control-lg" onChange={(e) => setData({ ...data, email: e.target.value })} placeholder="Email address *" required />
                         </div>
                         <div className="password-toggle mb-2">
-                            <input className="form-control form-control-lg" type="password" onChange={(e) => setData({ ...data, password: e.target.value })} placeholder="Password *" required />
+                            <input className="form-control form-control-lg" type={show ? "text" : "password"} onChange={(e) => setData({ ...data, password: e.target.value })} placeholder="Password *" required />
                             <label className="password-toggle-btn" aria-label="Show/hide password">
-                                <input className="password-toggle-check" type="checkbox" /><span className="password-toggle-indicator"></span>
+                                <input className="password-toggle-check" type="checkbox" onClick={() => setHide(!show)} /><span className="password-toggle-indicator"></span>
                             </label>
                         </div>
                     </div>

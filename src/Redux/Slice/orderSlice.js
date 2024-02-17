@@ -7,7 +7,7 @@ const orderDetaild = {
   eventType: "",
   eventDate: "",
   eventName: "",
-  printing: "",
+  printing: "Laser Imprinting",
   customizeMessage: "",
 }
 
@@ -174,10 +174,25 @@ const orderSlice = createSlice({
     changeOrderData: (state, action) => {
       state.orderData[action.payload.key] = action.payload.value
     },
+    clearCart: (state, action) => {
+      state.orderData = orderDataScemma;
+      state.formStep = 0;
+      state.formError = errorSchima;
+      state.product = {};
+      state.productSize = [];
+      state.productOrientation = [];
+      state.productSheet = [];
+      state.productcover = [];
+      state.productcoveroption = [];
+      state.productpaperType = [];
+      state.productprintOption = [];
+      state.productboxSleev = [];
+      state.productcolor = [];
+    }
   }
 });
 
-export const { addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const { clearCart, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 

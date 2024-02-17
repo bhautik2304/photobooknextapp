@@ -23,6 +23,7 @@ function Testymonial() {
                         <div class="pt-5">
                             <div class="d-none d-md-block">
                                 <Swiper
+                                    // swipeHandler={}
                                     spaceBetween={50}
                                     slidesPerView={2}
                                     autoplay={{
