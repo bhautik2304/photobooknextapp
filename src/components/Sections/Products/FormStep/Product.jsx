@@ -25,7 +25,7 @@ function Product() {
                     disapatch(formNext())
                     return
                 }
-                disapatch(formError({product_error:'Pls Select One Product'}))
+                disapatch(formError({key:'product',product_error:'Select minimum one option'}))
             }} />
         </>
     )

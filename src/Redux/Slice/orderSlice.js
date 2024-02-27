@@ -24,12 +24,18 @@ const orderDataScemma = {
   productOrientation: null,
   productSheet: null,
   paperType: null,
+  
+  productcoverType: null,
   productcover: null,
-  coverType: null,
+  productcovercolor: null,
   productcoveroption: null,
-  productprintOption: null,
+
+  productboxandsleevecolor: null,
   productboxSleev: null,
-  productcolor: null,
+  productboxandsleeveType: null,
+  productboxandsleeveoption: null,
+
+  productprintOption: null,
 
   // product cost
   page_qty: 0,
@@ -46,6 +52,7 @@ const orderDataScemma = {
   isSample: false,
   isPhotoBookCopy: false,
   photoBookCopy: 0,
+  photoBookCopyPrice: 0,
   delivery_address: 0,
 
   // order detaild
@@ -82,6 +89,8 @@ const initialState = {
   productprintOption: [],
   productboxSleev: [],
   productcolor: [],
+  productboxandsleeveoptions: [],
+  productboxandsleeveoptioncolor: [],
 }
 
 const orderSlice = createSlice({
@@ -89,10 +98,12 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     selectProduct: (state, action) => {
+      console.log(zonePrice(action.payload.product.album_copy_price));
       state.product = action.payload.product
       state.orderData.product_id = action.payload.product.id
       state.orderData.page_qty = action.payload.product.min_page
       state.productpaperType = action.payload.product.paperType
+      state.orderData.photoBookCopyPrice = zonePrice(action.payload.product.album_copy_price).price
     },
     changeOrientation: (state, action) => {
       state.orderData.productOrientation = action.payload.product.id
@@ -131,8 +142,16 @@ const orderSlice = createSlice({
       // state.orderData.paperTypeTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * action.payload.papertype.value) / 100 + (state.orderData.page_qty * state.orderData.sheetTotale))
       // state.orderData.orderTotale = state.orderData.paperTypeTotale
     },
+    selectBoxSleeveOption: (state, action) => {
+      
+      state.orderData.productboxandsleeveoption = action.payload.boxSleev.id
+      state.productboxandsleeveoptioncolor = action.payload.boxSleev.boxsleeveupgradecolor
+    },
     changeBoxSleev: (state, action) => {
+      
       state.orderData.productboxSleev = action.payload.boxSleev.id
+      state.orderData.productboxandsleeveType=action.payload.boxSleev.boxsleeve.type
+      state.productboxandsleeveoptions=action.payload.boxSleev.boxsleeve.boxsleeveupgrades
       state.orderData.boxSleeveValue = zonePrice(action.payload.boxSleev.boxsleeveprice).price
       // state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.boxSleevTotale
     },
@@ -140,10 +159,14 @@ const orderSlice = createSlice({
       let paperTotale = ((state.orderData.sheetValue * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty
       let coverTotale = state.orderData.coverValue
       let boxSleevTotale = state.orderData.boxSleeveValue
-      state.orderData.orderTotale = paperTotale + coverTotale + boxSleevTotale
+      // let photoBookCopy = state.orderData.photoBookCopyPrice * state.orderData.photoBookCopy;
+      state.orderData.orderTotale = paperTotale + coverTotale + boxSleevTotale 
     },
     changeColor: (state, action) => {
-      state.orderData.productcolor = action.payload.color.id
+      state.orderData.productcovercolor = action.payload.color.id
+    },
+    changeBoxColor: (state, action) => {
+      state.orderData.productboxandsleevecolor = action.payload.color.id
     },
     formBack: (state, action) => {
       if (state.formStep != 0) {
@@ -164,6 +187,9 @@ const orderSlice = createSlice({
     },
     addCoverphoto: (state, action) => {
       state.orderData.coverphoto = action.payload.coverphoto
+    },
+    addBoxphoto: (state, action) => {
+      state.orderData.boxphoto = action.payload.boxphoto
     },
     addphotoszip: (state, action) => {
       state.orderData.photoszip = action.payload.photoszip
@@ -192,7 +218,7 @@ const orderSlice = createSlice({
   }
 });
 
-export const { clearCart, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const { clearCart,changeBoxColor,selectBoxSleeveOption,addBoxphoto, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 

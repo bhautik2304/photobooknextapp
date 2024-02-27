@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { appRoutes } from '@/constants'
 import { selectProduct, setTotale } from '@/Redux/Slice/orderSlice'
@@ -10,16 +10,19 @@ import { fetchProduct } from '@/Redux/Slice/productSlice'
 
 
 function ShowProduct() {
-    const { auth: { authStatus,user }, product: { product }, order: { formStep, orderData: { page_qty, sheetValue, paperValue, coverValue, boxSleeveValue, orderTotale } } } = useSelector(state => state)
+    const { auth: { authStatus,user }, product: { product }, order: { formStep, orderData: { photoBookCopyPrice,page_qty, sheetValue, paperValue,photoBookCopy, coverValue, boxSleeveValue, orderTotale } } } = useSelector(state => state)
     const dispatch = useDispatch()
-
+    const [total,setTotal]=useState(0)
     useEffect(() => {
         dispatch(fetchProduct())
     }, [])
 
     useEffect(() => {
         dispatch(setTotale())
-    }, [page_qty, sheetValue, paperValue, coverValue, boxSleeveValue, orderTotale,])
+        setTotal(orderTotale + (photoBookCopy*photoBookCopyPrice));
+        
+    }, [page_qty, sheetValue, paperValue, coverValue, boxSleeveValue, orderTotale,photoBookCopy])
+
 
     return (
         <>
@@ -32,7 +35,7 @@ function ShowProduct() {
                                 (formStep == 0) ? (
                                     <>
                                         <h2>Select your product.</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Browse and select the ideal product for your need to deliver your memories & elevate your brand.</p>
                                         <div className='row mt-2 mb-2' >
                                             <Product />
                                         </div>
@@ -44,7 +47,7 @@ function ShowProduct() {
                             (formStep == 1) ? (
                                     <>
                                         <h2>Select your orientation.</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Select the orientation which is ideal for your product printing requirement.</p>
                                         <div className='row mt-2 mb-2' >
                                             <ProductOrientation />
                                         </div>
@@ -56,10 +59,10 @@ function ShowProduct() {
                                 (formStep == 2) ? (
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
-                                            <h2>Select your sizes & Pappers.</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
+                                            <h2>Select your sizes & paper.</h2>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${total} ${user.zone.currency_sign}`}</span>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Select the options mentioned below to rectify the printing quality and sizes for your product.</p>
                                         <div className='row mt-2 mb-2' >
                                             <ProductSize />
                                         </div>
@@ -71,10 +74,10 @@ function ShowProduct() {
                                 (formStep == 3) ? (
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
-                                            <h2>Select your sizes & Pappers.</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
+                                            <h2>Select your Album Cover.</h2>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${total} ${user.zone.currency_sign}`}</span>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Please select cover options from below mentioned section.</p>
                                         <div className='row mt-2 mb-2' >
                                             <ProductCover />
                                         </div>
@@ -87,9 +90,9 @@ function ShowProduct() {
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
                                             <h2>Select your box & sleeve.</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${total + (photoBookCopy*photoBookCopyPrice)} ${user.zone.currency_sign}`}</span>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Please select box & sleeve options from below mentioned section.</p>
                                         <div className='row mt-2 mb-2' >
                                             <ProductBox />
                                         </div>
@@ -102,9 +105,9 @@ function ShowProduct() {
                                     <>
                                         <div className="d-flex justify-content-between aligns-item-center">
                                             <h2>Order Details</h2>
-                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${orderTotale} ${user.zone.currency_sign}`}</span>
+                                            <span style={{ color: 'red', fontSize: 18, fontWeight: 'bold' }} >{`Total : ${total} ${user.zone.currency_sign}`}</span>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p>Please fill the below mentioned form which will help us to customise and print the content on your product.</p>
                                         <div className='row mt-2 mb-2' >
                                             <EventDetailForm />
                                         </div>

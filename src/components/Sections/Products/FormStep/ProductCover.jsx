@@ -7,7 +7,7 @@ import { localstorageKey } from '@/constants'
 function ProductCover() {
   const { productcover, orderData, productcoveroption, formError, productcolor } = useSelector(state => state.order)
   const disapatch = useDispatch()
-  console.log(productcover);
+  //console.log(productcover);
   return (
     <>
       <div className="row">
@@ -15,16 +15,17 @@ function ProductCover() {
           <span className='text-danger' >{formError?.product_cover}</span>
           <><h6>Select your album cover</h6></>
           <div className="row">
-            {productcover.map(data => {
+            {productcover.map(datas => {
+              //console.log(datas);
               return (
                 <div className="col-lg-4 col-md-4 col-sm-12">
-                  <div className={`size card my-2 pro ${orderData.productcover == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeCover({ cover: data }))} >
+                  <div className={`size card my-2 pro ${orderData.productcover == datas.id && 'selected_prod_size'}`} onClick={() => disapatch(changeCover({ cover: datas }))} >
                     <div className="d-flex justify-content-between align-items-center">
-                      <img src={data.cover.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
+                      <img src={datas.cover.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
                       <div>
-                        {data.cover.name}
+                        {datas.cover.name}
                         <div  >
-                          {zonePrice(data.coverprice).priceSrring}
+                          {zonePrice(datas.coverprice).priceSrring}
                         </div>
                       </div>
                       <div></div>
@@ -39,10 +40,11 @@ function ProductCover() {
           {orderData.coverType == "img" &&
             (
               <>
+              <span className='text-danger m-0 p-0' >{formError?.coverphoto}</span><br />
                 <label>Upload your frontside photo *</label>
                 <input className='form-control form-control-sm my-2' type="file" onChange={(e) => {
                   disapatch(addCoverphoto({ coverphoto: e.target.files[0] }))
-                localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+                // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
                 }} />
               </>
             )}
@@ -51,7 +53,7 @@ function ProductCover() {
           <span className='text-danger m-0 p-0' >{formError?.product_cover_option}</span>
           {(productcoveroption.length !== 0) &&
             <>
-              <><h6>Select Leather option</h6></>
+              <><h6>Select options</h6></>
               <div className="row">
                 {productcoveroption.map(data =>
                   <>
@@ -69,16 +71,16 @@ function ProductCover() {
           }
           {(productcolor.length !== 0) &&
             <>
-              <><h6>Select Lether Color option</h6></>
+              <><h6>Select color options</h6></>
               <div className="row">
                 {productcolor.map(data => {
-                  console.log("color")
+                  //console.log("color")
                   console.log(data)
                   return (
                     <>
                       <div className='col-2'>
                         <div onClick={() => disapatch(changeColor({ color: data }))} >
-                          <div style={{ width: 120, height: 120, backgroundColor: data.colorcode }} className={`pro ${orderData.productcolor == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
+                          <img src={data.colors.img} style={{ width: 120, height: 120, backgroundColor: data.colorcode }} className={`pro ${orderData.productcovercolor == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
                         </div>
                         <div className="my-2" >
                           {data.name}
@@ -95,12 +97,18 @@ function ProductCover() {
       </div>
       <Button next={() => {
         if (!orderData.productcover) {
-          disapatch(fcm({ key: 'product_cover', error: 'Select one cover' }))
+          disapatch(fcm({ key: 'product_cover', error: 'Select minimum one option' }))
           return
         }
         if (!orderData.productcoveroption) {
-          disapatch(fcm({ key: 'product_cover_option', error: 'select one cover option' }))
+          disapatch(fcm({ key: 'product_cover_option', error: 'Select minimum one option' }))
           return
+        }
+        if (orderData.coverType == "img") {
+          if (!orderData.coverphoto) {
+            disapatch(fcm({ key: 'coverphoto', error: 'Please upload a file' }))
+            return
+          }
         }
         disapatch(formNext())
       }

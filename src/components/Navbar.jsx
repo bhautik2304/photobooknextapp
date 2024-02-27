@@ -25,7 +25,7 @@ function Navbar() {
     useEffect(() => {
         if (token) {
             console.log(JSON.parse(token))
-            axios.post('https://api.sascube.ltd/api/auth/costomer/token', { token: JSON.parse(token) }).then(res => {
+            axios.post('http://localhost:8000/api/auth/costomer/token', { token: JSON.parse(token) }).then(res => {
                 if (res.data.code == 200) {
                     dispatch(authLogin(res.data))
                     dispatch(fetchUsers(res.data.user.id))
@@ -52,8 +52,7 @@ function Navbar() {
                                     {/* <img src={user?.compunys_logo} className="border rounded-circle" width="48" alt="Isabella Bocouse" /> */}
                                 <Avatar name={user?.name} color={"#212121"} size={48} round={true} />
                                     <div className="d-none d-sm-block ps-2">
-                                        <div className="fs-xs lh-1 opacity-60">Hello,</div>
-                                        <div className="fs-sm dropdown-toggle">{user?.name}</div>
+                                        <div className="fs-sm dropdown-toggle">Hello {user?.name}</div>
                                     </div>
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-end my-1">

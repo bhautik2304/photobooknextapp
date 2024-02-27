@@ -1,5 +1,5 @@
 const userProfile = '/Profiles';
-const serverDomain = 'http://localhost:8000';
+const serverDomain = 'http://localhost:8000/api';
 const serverApiDomain = 'https://api.sascube.ltd/api';
 
 export const appRoutes = {

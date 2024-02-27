@@ -34,7 +34,7 @@ function ProductSize() {
           <>
             <div className="col-12 my-3">
               <span className='text-danger' >{formError?.product_sheet}</span>
-              <><h6>Select your sheet</h6></>
+              <><h6>Select your paper sheet</h6></>
               <div className="row">
                 {productSheet.map(data => {
                   return (
@@ -96,11 +96,11 @@ function ProductSize() {
       </div>
       <Button next={() => {
         if (!orderData.productSize) {
-          disapatch(fcm({ key: 'product_sheet', error: 'Please select one size' }))
+          disapatch(fcm({ key: 'product_sheet', error: 'Select minimum one option' }))
           return 0
         }
         if (!orderData.productSheet) {
-          disapatch(fcm({ key: 'product_size', error: 'Please select one sheet' }))
+          disapatch(fcm({ key: 'product_size', error: 'Select minimum one option' }))
           return 0
         }
         if ((orderData.page_qty < product?.min_page)) {

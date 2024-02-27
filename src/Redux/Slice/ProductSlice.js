@@ -6,7 +6,7 @@ import { apiRoutes } from '@/Constants'
 
 
 export const fetchProduct = createAsyncThunk('Product', async () => {
-  const response = await axios('https://api.sascube.ltd/api/product').then(res => res.data)
+  const response = await axios(apiRoutes.products).then(res => res.data)
   return response.data
   // return response.data
 })

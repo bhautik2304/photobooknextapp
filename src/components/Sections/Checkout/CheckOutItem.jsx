@@ -30,7 +30,7 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
             const discount = user?.discount || 0;
             const paperValue = orderData?.paperValue || 0;
             const pageQty = orderData.page_qty || 0;
-
+            const photoBookCopy= zonePrice(product?.album_copy_price)?.price * orderData?.photoBookCopy;
             // Calculate the orderTotale without discount
             const orderTotaleWithoutDiscount =
                 orderData.boxSleeveValue +
@@ -46,7 +46,7 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
             dispatch(changeOrderData({ key: 'orderDiscountAmount', value: discountAmount }));
             dispatch(changeOrderData({
                 key: 'orderTotale',
-                value: Math.round(orderTotaleWithoutDiscount - discountAmount),
+                value: Math.round(orderTotaleWithoutDiscount - discountAmount) + photoBookCopy,
             }));
         }
     }, [orderData.page_qty, user?.discount, orderData.boxSleeveValue, orderData.coverValue, orderData.sheetValue, orderData.page_qty, orderData?.paperValue]);
@@ -199,21 +199,46 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className='card p-3 ' >
                             <div className="card-header">
-                                <center>Order Totale</center>
+                                <center>Order Summary</center>
                             </div>
+                            {
+                                orderData?.isPhotoBookCopy &&
+                                <>
+                                    <div className="d-sm-flex align-items-center border-top py-4">
+                                        <a className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0" href="shop-single.html">
+                                            <img src={product?.img} width="50" alt="Product" />
+                                        </a>
+                                        <div className="w-100 pt-1 ps-sm-4">
+                                            <div className="d-flex">
+                                                <div className="me-3">
+                                                    <h3 className="h5 mb-2">
+                                                        <a href="shop-single.html">
+                                                            Photo Book Copy
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                                <div className="text-end ms-auto">
+                                                    <div className="fs-5 mb-2">{user?.zone?.currency_sign} {zonePrice(product?.album_copy_price)?.price * orderData?.photoBookCopy} .</div>
+                                                </div>
+                                            </div>
+                                            {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
+                                        </div>
+                                    </div>
+                                </>
+                            }
                             <ul className="list-unstyled py-3 mb-0">
                                 <li className="d-flex justify-content-between mb-2">Subtotal:<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {((orderData.boxSleeveValue + orderData.coverValue + (((orderData.sheetValue * orderData.page_qty) * orderData?.paperValue) / 100) + (orderData.sheetValue * orderData.page_qty)))}</span></li>
                                 {
                                     Number(user?.discount) ?
-                                    <>
-                                        <li className="d-flex justify-content-between mb-2">Discount:<span className="fw-semibold ms-2 text-danger">-{user?.zone?.currency_sign} {orderData?.orderDiscountAmount}</span></li>
-                                        <li className="d-flex justify-content-between mb-2">Subtotal ( after discount {user?.discount} % ):<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {Math.round(orderData?.orderTotale)}</span></li>
-                                    </> : null
+                                        <>
+                                            <li className="d-flex justify-content-between mb-2">Discount:<span className="fw-semibold ms-2 text-danger">-{user?.zone?.currency_sign} {orderData?.orderDiscountAmount}</span></li>
+                                            <li className="d-flex justify-content-between mb-2">Subtotal ( after discount {user?.discount} % ):<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {Math.round(orderData?.orderTotale)}</span></li>
+                                        </> : null
                                 }
                                 <li className="d-flex justify-content-between mb-2">Shipping cost:<span className="fw-semibold ms-2">{user?.zone?.currency_sign} {user?.zone?.shipingcharge}</span></li>
                             </ul>
                             <div className="d-flex align-items-center justify-content-between border-top fs-xl pt-4">Total:<span className="fs-3 fw-semibold text-dark ms-2">{user?.zone?.currency_sign} {orderData?.orderTotale + user?.zone?.shipingcharge}</span></div>
-                            <div className="my-3 py-2 border-top"><span className="fw-semibold text-danger" >Taxes are included in this price, we will send a bifurcated invoice copy on your email</span></div>
+                            <div className="my-3 py-2 border-top"><span className="fw-semibold text-danger" >Taxes are included in this price, we will send a bifurcated invoice copy to your email</span></div>
                             <button className="btn btn-lg btn-primary w-100" onClick={() => submitOrder()} >Place an order</button>
                         </div>
                     </div>

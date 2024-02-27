@@ -37,13 +37,13 @@ const productTotalPrice = (page, sheet, paper, cover, boxsleev, shiping, discoun
 
 function Order() {
 
-const [data, setData] = useState(false);
+  const [data, setData] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
   const [dataCount, setDataCount] = useState(0);
   const userId = useSelector(state => state.auth.user);
 
-  console.log(`${ apiRoutes.orders } / user_order`);
+  console.log(`${apiRoutes.orders} / user_order`);
 
   useEffect(() => {
     axios.post(`${apiRoutes.orders}/user_order`, { user_id: userId.id })
@@ -89,8 +89,8 @@ const [data, setData] = useState(false);
                 <h2 className="h4 mb-0 mx-4">Orders</h2>
               </div>
               {
-                data ? 
-                <>
+                data ?
+                  <>
                     {currentItems?.map((datas, key) => {
                       const date = moment(datas?.created_at)
                       const {
@@ -278,6 +278,8 @@ const [data, setData] = useState(false);
                                               <h4 class="h6 mb-2">
                                                 <a href="shop-single.html">{datas?.productboxsleeve?.boxsleeve?.name}</a>
                                               </h4>
+                                              <div class="text-body-secondary fs-sm me-3">Box & Sleev Upgrade: <span class="text-dark fw-medium">{datas?.coversupgrade?.name}</span></div>
+                                              <div class="text-body-secondary fs-sm me-3">Box & Sleev Color: <span class="text-dark fw-medium">{datas?.coversupgradecolor?.name}</span></div>
                                               {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
                                             </div>
                                           </div>
@@ -295,6 +297,38 @@ const [data, setData] = useState(false);
                                           <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.boxSleeveValue}`}</div>
                                         </td>
                                       </tr>
+                                      {
+                                        Number(datas.is_album_book_copy) != 0 &&
+                                        <tr>
+                                          <td class="border-0 py-1 px-0">
+                                            <div class="d-flex align-items-center">
+                                              <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3" href="shop-single.html">
+                                                <img src={datas?.product?.img} width="110" alt="Product" />
+                                              </a>
+                                              <div class="ps-3 ps-sm-4">
+                                                <h4 class="h6 mb-2">
+                                                  <a href="shop-single.html">Pocket book copy</a>
+                                                </h4>
+                                                <div class="text-body-secondary fs-sm me-3">Box & Sleev Upgrade: <span class="text-dark fw-medium">{datas?.coversupgrade?.name}</span></div>
+                                                <div class="text-body-secondary fs-sm me-3">Box & Sleev Color: <span class="text-dark fw-medium">{datas?.coversupgradecolor?.name}</span></div>
+                                                {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
+                                              </div>
+                                            </div>
+                                          </td>
+                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm text-body-secondary mb-2">Quantity</div>
+                                            <div class="fs-sm fw-medium text-dark">{datas?.album_book_copy_qty}</div>
+                                          </td>
+                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm text-body-secondary mb-2">Price</div>
+                                            <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.album_book_copy_price}`}</div>
+                                          </td>
+                                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm text-body-secondary mb-2">Total</div>
+                                            <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.album_book_copy_price * datas?.album_book_copy_qty}`}</div>
+                                          </td>
+                                        </tr>
+                                      }
 
                                       {/* product box & sleev detaild*/}
                                       <tr>
@@ -336,6 +370,21 @@ const [data, setData] = useState(false);
                                             </td>
                                           </tr>
                                         </>}
+                                        {
+                                          Number(datas.is_album_book_copy) &&
+                                          <tr>
+                                          <td class="border-0 py-1 px-0">
+                                          </td>
+                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                                          </td>
+                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm text-body-secondary mb-2">Pocket book Copy</div>
+                                          </td>
+                                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm fw-medium ">{`${datas?.countryzone?.currency_sign} ${datas?.album_book_copy_price * datas?.album_book_copy_qty}`}</div>
+                                          </td>
+                                        </tr>
+                                        }
                                       <tr>
                                         <td class="border-0 py-1 px-0">
                                         </td>
@@ -357,7 +406,7 @@ const [data, setData] = useState(false);
                                           <div class="fs-sm text-body-secondary mb-2">Subtotal</div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                          <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${subTotal}`}</div>
+                                          <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${subTotal + datas?.album_book_copy_price * datas?.album_book_copy_qty}`}</div>
                                         </td>
                                       </tr>
 
@@ -406,8 +455,8 @@ const [data, setData] = useState(false);
                         fullWidth={true}
                       />
                     </Stack>
-                </> : 
-                <>
+                  </> :
+                  <>
                     <Player
                       autoplay
                       speed={0}
@@ -418,13 +467,13 @@ const [data, setData] = useState(false);
                     </Player>
                     <center>
                       <div class="alert alert-danger" role="alert">
-                        No Orders Found 
+                        No Orders Found
                       </div>
                     </center>
-                </>
+                  </>
               }
               {/* <!-- Orders accordion--> */}
-             
+
             </div>
             {/* <!-- Order --> */}
           </section>

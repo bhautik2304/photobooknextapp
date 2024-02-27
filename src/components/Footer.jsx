@@ -11,7 +11,8 @@ function Footer() {
               <a className="navbar-brand text-nav py-0 mb-3 mb-md-4" href="/">
                 <img src='/assets/img/logo.png'/>
               </a>
-              <p className="fs-sm pb-2 pb-md-3 mb-3">Tellus non diam morbi quam vel venenatis proin sed. Dolor elementum nunc dictum.</p>
+              <p className="fs-sm pb-2 pb-md-3 mb-3">Photokrafft has been at the forefront of graphic design and album manufacturing,
+shaping visual narratives that captivate and inspire.</p>
               <div className="d-flex"><a className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3" href="#"><i className="ai-facebook"></i></a><a className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3" href="#"><i className="ai-instagram"></i></a><a className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle" href="#"><i className="ai-linkedin"></i></a></div>
             </div>
             <div className="col-md-8 col-lg-7 col-xl-6 offset-lg-2 offset-xl-3">
@@ -21,22 +22,14 @@ function Footer() {
                     <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Home}>Home</a></li>
                     <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Products}>Products</a></li>
                     <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.AboutUS}>About US</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Support}>Support</a></li>
+                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Support}>Faqs</a></li>
+                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.StartPrinting}>Order Now</a></li>
                   </ul>
                 </div>
                 <div className="col mb-4 mb-md-0">
                   <ul className="nav flex-column">
                     <li><a className="nav-link fw-normal py-1 px-0" href="#">Help center</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Terms of service</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Legal</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Privacy policy</a></li>
-                  </ul>
-                </div>
-                <div className="col mb-4 mb-md-0">
-                  <ul className="nav flex-column">
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Help center</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Terms of service</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Legal</a></li>
+                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Terms & conditions</a></li>
                     <li><a className="nav-link fw-normal py-1 px-0" href="#">Privacy policy</a></li>
                   </ul>
                 </div>

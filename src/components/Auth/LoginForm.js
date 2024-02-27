@@ -24,7 +24,7 @@ function LoginForm() {
    
 
     const submitData = () => {
-        axios.post('https://api.sascube.ltd/api/auth/costomer/login', data).then(res => {
+        axios.post('http://localhost:8000/api/auth/costomer/login', data).then(res => {
             if (res.data.code == 200) {
                 dispatch(authLogin(res.data))
                 router.replace(appRoutes.userProfile)
