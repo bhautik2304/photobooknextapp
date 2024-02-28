@@ -2,7 +2,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { apiRoutes } from '@/Constants'
+import { apiRoutes } from '@/constants'
 
 
 export const fetchProduct = createAsyncThunk('Product', async () => {

@@ -5,7 +5,7 @@ import { zonePrice } from '@/utils'
 import { changePageCount, changeOrderData } from '@/Redux/Slice/orderSlice'
 import axios from 'axios'
 
-import { localstorageKey } from '@/Constants'
+import { localstorageKey } from '@/constants'
 
 function roundToDecimalPlaces(number, decimalPlaces) {
     const factor = Math.pow(10, decimalPlaces);

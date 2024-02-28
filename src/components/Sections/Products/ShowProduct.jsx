@@ -6,7 +6,7 @@ import { selectProduct, setTotale } from '@/Redux/Slice/orderSlice'
 import Link from 'next/link'
 import { Product, ProductOrientation, ProductSize, EventDetailForm, ProductCover, ProductBox, ProductColor, OrderDetaild } from './FormStep'
 import { FaArrowRightLong } from "react-icons/fa6";
-import { fetchProduct } from '@/Redux/Slice/productSlice'
+import { fetchProduct } from '@/Redux/Slice/ProductSlice'
 
 
 function ShowProduct() {
