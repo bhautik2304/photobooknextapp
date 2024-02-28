@@ -36,8 +36,7 @@
     "proxy": {
         "/api": {
             "target": [
-                "https://api.sascube.ltd/api",
-                "http://127.0.0.1:8000"
+                "https://api.photokrafft.com"
             ],
             "pathRewrite": {
                 "^/api": ""

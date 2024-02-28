@@ -10,8 +10,15 @@ import {
 import { RiSafe2Fill } from "react-icons/ri";
 import { IoIosCall, IoMdMailUnread } from "react-icons/io";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
+import axios from "axios";
+// import { useEffect } from "react";
 
 export default function Home() {
+
+  // useEffect(()=>{
+  // },[])
+  axios("https://api.photokrafft.com/api/product").then(res => console.log(res.data))
+
   return (
     <>
       <div className="container-fluid">

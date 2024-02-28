@@ -24,10 +24,12 @@ function LoginForm() {
    
 
     const submitData = () => {
-        axios.post('http://localhost:8000/api/auth/costomer/login', data).then(res => {
+        axios.post(apiRoutes.login, data).then(res => {
             if (res.data.code == 200) {
+                // alert("logd in")
                 dispatch(authLogin(res.data))
                 router.replace(appRoutes.userProfile)
+                
                 return
             }
             setError(res.data.msg)

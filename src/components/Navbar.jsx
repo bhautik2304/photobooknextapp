@@ -25,7 +25,8 @@ function Navbar() {
     useEffect(() => {
         if (token) {
             console.log(JSON.parse(token))
-            axios.post('http://localhost:8000/api/auth/costomer/token', { token: JSON.parse(token) }).then(res => {
+            //'http://localhost:8000/api/auth/costomer/token'
+            axios.post(apiRoutes.token, { token: JSON.parse(token) }).then(res => {
                 if (res.data.code == 200) {
                     dispatch(authLogin(res.data))
                     dispatch(fetchUsers(res.data.user.id))

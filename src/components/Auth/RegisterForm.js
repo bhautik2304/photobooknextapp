@@ -99,7 +99,7 @@ function RegisterForm() {
     formData.append("compunys_logo", data.logo);
     formData.append("social_link_1", data.social1);
     formData.append("social_link_2", data.social2);
-    axios.post('http://127.0.0.1:8000/api/costomer/', formData).then(res => {
+    axios.post(apiRoutes.register, formData).then(res => {
         if (Number(res.data.code) === 444) {
             newError.apiError = res.data.msg
             setError(newError);

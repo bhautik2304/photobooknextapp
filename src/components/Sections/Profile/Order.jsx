@@ -507,7 +507,8 @@ const FileUpload = ({ orderId, }) => {
     } else {
       formData.append('photos_url', file);
     }
-    axios.post('http://localhost:8000/api/order/uploadfile', formData,
+    //'http://localhost:8000/api/order/uploadfile'
+    axios.post(apiRoutes.orders+'/uploadfile', formData,
       {
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);

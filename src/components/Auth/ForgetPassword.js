@@ -20,7 +20,7 @@ function ForgetPassword() {
 
 
     const forgetReq = () => {
-        axios.post('https://api.sascube.ltd/api/auth/costomer/forget-password/', data).then(res => {
+        axios.post(apiRoutes.forgetPassword, data).then(res => {
             if (res.data.code == 200) {
                 setStep(1)
                 return
@@ -31,7 +31,7 @@ function ForgetPassword() {
 
     const otpVerify = () => {
         setError(false)
-        axios.post('https://api.sascube.ltd/api/auth/costomer/forget-password/' + 'check-otp', data).then(res => {
+        axios.post(apiRoutes.forgetPassword + '/check-otp', data).then(res => {
             if (res.data.code == 200) {
                 setStep(2)
                 return
@@ -42,7 +42,7 @@ function ForgetPassword() {
 
     const changePassword = () => {
         setError(false)
-        axios.post('https://api.sascube.ltd/api/auth/costomer/forget-password/' + 'set-password', data).then(res => {
+        axios.post(apiRoutes.forgetPassword + '/set-password', data).then(res => {
             if (res.data.code == 200) {
                 router.replace(appRoutes.Login)
                 return

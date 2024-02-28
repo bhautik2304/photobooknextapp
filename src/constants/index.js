@@ -1,6 +1,6 @@
 const userProfile = '/Profiles';
-const serverDomain = 'http://localhost:8000/api';
-const serverApiDomain = 'https://api.sascube.ltd/api';
+const dsefrverDomain = 'http://localhost:8000/api';
+const serverApiDomain = 'https://api.photokrafft.com/api';
 
 export const appRoutes = {
     Home: '/',
@@ -22,17 +22,17 @@ export const appRoutes = {
 
 export const apiRoutes = {
     // auth routes
-    login: serverDomain + '/auth/costomer/login',
-    register: serverDomain + '/costomer',
-    token: serverDomain + '/auth/costomer/token',
-    products: serverDomain + '/product',
-    orders: serverDomain + '/order',
-    zones: serverDomain + '/zones',
-    user: serverDomain + '/user',
-    checkout: serverDomain + '/checkout',
-    updateAvtar: serverDomain + 'costomer/change-avtar/',
-    customer: serverDomain + '/costomer/',
-    forgetPassword: serverDomain + '/auth/costomer/forget-password/',
+    login: serverApiDomain + '/auth/costomer/login',
+    register: serverApiDomain + '/costomer',
+    token: serverApiDomain + '/auth/costomer/token',
+    products: serverApiDomain + '/product',
+    orders: serverApiDomain + '/order',
+    zones: serverApiDomain + '/zones',
+    user: serverApiDomain + '/user',
+    checkout: serverApiDomain + '/checkout',
+    updateAvtar: serverApiDomain + 'costomer/change-avtar/',
+    customer: serverApiDomain + '/costomer/',
+    forgetPassword: serverApiDomain + '/auth/costomer/forget-password/',
 }
 
 export const localstorageKey = {
