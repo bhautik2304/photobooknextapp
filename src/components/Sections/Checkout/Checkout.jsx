@@ -242,7 +242,7 @@ function Checkout() {
                                 className="form-label fs-base"
                                 for="c-address"
                               >
-                                Address
+                                Default Address
                               </label>
                               <textarea
                                 className="form-control form-control-sm"
@@ -253,40 +253,29 @@ function Checkout() {
                               />
                             </div>
                             <div className="col-12">
-                              <Button
-                                variant="contained"
-                                color="error"
-                                className="mb-4"
-                                onClick={() => setAnother(!another)}
+                              <label
+                                className="form-label fs-base"
+                                for="c-notes"
+                                onChange={(e) =>
+                                  dispatch(
+                                    changeOrderData({
+                                      key: "delivery_address",
+                                      value: e.target.value,
+                                    })
+                                  )
+                                }
                               >
-                                Deliver to another address
-                              </Button>
-                              {another && (
-                                <>
-                                  <label
-                                    className="form-label fs-base"
-                                    for="c-notes"
-                                    onChange={(e) =>
-                                      dispatch(
-                                        changeOrderData({
-                                          key: "delivery_address",
-                                          value: e.target.value,
-                                        })
-                                      )
-                                    }
-                                  >
-                                    Delivery Address{" "}
-                                    <span className="text-muted">
-                                      (optional)
-                                    </span>
-                                  </label>
-                                  <textarea
-                                    className="form-control form-control-sm"
-                                    rows="5"
-                                    id="c-notes"
-                                  ></textarea>
-                                </>
-                              )}
+                                 Deliver to alternate address{" "}
+                                <span className="text-muted">
+                                  (optional)
+                                </span>
+                              </label>
+                              <textarea
+                                className="form-control form-control-sm"
+                                rows="5"
+                                id="c-notes"
+                              ></textarea>
+                              <span className="text-muted">You can deliver this product directly to your customer address</span>
                             </div>
                           </div>
                         </div>

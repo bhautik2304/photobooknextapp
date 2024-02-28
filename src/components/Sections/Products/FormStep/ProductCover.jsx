@@ -83,7 +83,7 @@ function ProductCover() {
                           <img src={data.colors.img} style={{ width: 120, height: 120, backgroundColor: data.colorcode }} className={`pro ${orderData.productcovercolor == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
                         </div>
                         <div className="my-2" >
-                          {data.name}
+                          {data.colors.color}
                         </div>
                       </div>
                     </>

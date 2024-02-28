@@ -127,12 +127,14 @@ const orderSlice = createSlice({
       // state.orderData.orderTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * state.orderData.paperTypeTotalevalue) / 100 + (state.orderData.sheetTotale * state.orderData.page_qty))
     },
     changeCover: (state, action) => {
+      state.productcolor = []
       state.orderData.productcover = action.payload.cover.id
       state.productcoveroption = action.payload.cover.cover.coverupgrades
       state.orderData.coverValue = zonePrice(action.payload.cover.coverprice).price
       state.orderData.coverType = action.payload.cover.cover.type
     },
     selectCoverOption: (state, action) => {
+      state.productcolor = []
       state.orderData.productcoveroption = action.payload.coveroption.id
       state.productcolor = action.payload.coveroption.coversupgradecolors
     },

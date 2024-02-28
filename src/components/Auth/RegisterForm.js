@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
 import { Button } from "@mui/material";
-import "react-phone-number-input/style.css";
+// import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
 const errorMsg = {
@@ -99,14 +99,14 @@ function RegisterForm() {
     formData.append("compunys_logo", data.logo);
     formData.append("social_link_1", data.social1);
     formData.append("social_link_2", data.social2);
-    // axios.post('http://127.0.0.1:8000/api/costomer/', formData).then(res => {
-    //     if (Number(res.data.code) === 444) {
-    //         newError.apiError = res.data.msg
-    //         setError(newError);
-    //         return 0;
-    //     }
-    //     setStatus(true)
-    // }).catch(err => console.log(err))
+    axios.post('http://127.0.0.1:8000/api/costomer/', formData).then(res => {
+        if (Number(res.data.code) === 444) {
+            newError.apiError = res.data.msg
+            setError(newError);
+            return 0;
+        }
+        setStatus(true)
+    }).catch(err => console.log(err))
   };
 
   return (

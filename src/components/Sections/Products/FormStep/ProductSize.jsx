@@ -71,7 +71,7 @@ function ProductSize() {
                         <div>
                           {data.paper.name}
                           <div  >
-                            {`${data.paper.value} %`}
+                            {data.paper.value > 0 && `+ ${data.paper.value} % Extra`}
                           </div>
                         </div>
                         <div></div>

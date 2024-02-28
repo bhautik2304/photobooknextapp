@@ -401,7 +401,7 @@ export default function Home() {
         </section>
       </div>
 
-      <Testymonial />
+      {/* <Testymonial /> */}
 
       {/* <!-- FAQ (Accordion)--> */}
       <section className="bg-body py-5">

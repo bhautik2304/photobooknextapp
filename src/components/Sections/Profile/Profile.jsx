@@ -113,8 +113,7 @@ function Profile() {
                                         </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <Image src={"http://localhost:8000/brand/logo/Group%20130.png"} alt="Brand logo" height={250} width={300} />
-                                        {/* <img src={user?.compunys_logo} alt="Brand logo" height={250} width={300}  /> */}
+                                        <img src={user?.compunys_logo} alt="Brand logo" height={250} width={300} />
                                     </div>
                                 </div>
 
