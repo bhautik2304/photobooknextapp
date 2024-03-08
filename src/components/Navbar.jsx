@@ -106,6 +106,9 @@ function Navbar() {
                             <li className={`nav-item ${(pathname == appRoutes.Products) && 'active'}`}>
                                 <Link href={appRoutes.Products} className="nav-link">Products</Link>
                             </li>
+                            <li className={`nav-item ${(pathname == appRoutes.services) && 'active'}`}>
+                                <Link href={appRoutes.services} className="nav-link">Services</Link>
+                            </li>
                             <li className={`nav-item ${(pathname == appRoutes.AboutUS) && 'active'}`}>
                                 <Link href={appRoutes.AboutUS} className="nav-link">About US</Link>
                             </li>

@@ -36,6 +36,26 @@ function ProductCover() {
             })}
           </div>
         </div>
+        {
+          orderData.coverType == "both_side_image_no_leather_option" && (
+            <>
+            <span className='text-danger m-0 p-0' >{formError?.coverphoto}</span><br />
+              <label>Upload your front cover photo *</label>
+              <input className='form-control form-control-sm my-2' type="file" onChange={(e) => {
+                disapatch(addCoverphoto({ coverphoto: e.target.files[0] }))
+              // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+              }} />
+            <span className='text-danger m-0 p-0' >{formError?.coverphoto}</span><br />
+              <label>Upload your back cover photo ( optional )</label>
+              <input className='form-control form-control-sm my-2' type="file" onChange={(e) => {
+                disapatch(addCoverphoto({ coverphoto: e.target.files[0] }))
+              // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+              }} />
+            
+            </>
+          )
+
+        }
         <div className="col-7 my-3">
           {orderData.coverType == "img" &&
             (

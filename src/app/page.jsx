@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { appRoutes } from "@/constants";
 import { AnimateText, ProductScroll, Testymonial } from "@/components";
 import {
@@ -11,17 +12,13 @@ import { RiSafe2Fill } from "react-icons/ri";
 import { IoIosCall, IoMdMailUnread } from "react-icons/io";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
 import axios from "axios";
-// import { useEffect } from "react";
+import { landscape, portrait, square } from "@/assets/img";
+import LoginButton from "./LoginButton";
 
 export default function Home() {
-
-  // useEffect(()=>{
-  // },[])
-  axios("https://api.photokrafft.com/api/product").then(res => console.log(res.data))
-
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid"  style={{backgroundColor:'aliceblue'}} >
         <div className="row">
           <div
             className="col-lg-6 col-md-6 col-sm-12 center-all-text order-2 order-sm-1"
@@ -32,19 +29,20 @@ export default function Home() {
               justifyContent: "center",
             }}
           >
-            <div className="p-2">
+            <div style={{ padding: "15%",marginTop:'10%' }}>
               <AnimateText />
               <p style={{ fontSize: "18px" }} className=" mb-4">
                 Photokrafft has been at the forefront of graphic design and
-                album manufacturing, <br /> shaping visual narratives that
-                captivate and inspire.
+                album manufacturing, shaping visual narratives that captivate
+                and inspire.
               </p>
-              <Link
+              {/* <Link
                 href={appRoutes.CreateAccount}
                 className="btn btn-primary btn-sm fs-sm mb-4"
               >
-                Start Printing
-              </Link>
+               Register - Login
+              </Link> */}
+              <LoginButton />
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12 order-1 order-sm-2 heroimgparrent m-0 p-0">
@@ -213,41 +211,37 @@ export default function Home() {
               product range you can choose one of the product to start with
             </p>
             <div className="row my-5">
-              <div className="col-lg-3 col-md-3 col-sm-12">
-                <Link href={appRoutes.Login} style={{ textDecoration: "none" }}>
-                  <img
-                    src="./assets/img/graphics/card-green.svg"
-                    alt=""
-                    srcset=""
-                  />
-                  <h6 className="my-3">Flushmount</h6>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image width={400} src={square} alt="" srcset="" />
+                  <h6 className="my-3">Square</h6>
                 </Link>
               </div>
-              <div className="col-lg-3 col-md-3 col-sm-12">
-                <Link href={appRoutes.Login} style={{ textDecoration: "none" }}>
-                  <img
-                    src="./assets/img/graphics/card-green.svg"
-                    alt=""
-                    srcset=""
-                  />
-                  <h6 className="my-3">Photobooks</h6>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image width={400} src={landscape} alt="" srcset="" />
+                  <h6 className="my-3">Landscape</h6>
                 </Link>
               </div>
-              <div className="col-lg-3 col-md-3 col-sm-12">
-                <Link href={appRoutes.Login} style={{ textDecoration: "none" }}>
-                  <img
-                    src="./assets/img/graphics/card-green.svg"
-                    alt=""
-                    srcset=""
-                  />
-                  <h6 className="my-3">Photo Frames</h6>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image width={400} src={portrait} alt="" srcset="" />
+                  <h6 className="my-3">Portrait</h6>
                 </Link>
               </div>
-              <div className="col-lg-3 col-md-3 col-sm-12"></div>
             </div>
 
             <Link
-              href={appRoutes.Login}
+              href={appRoutes.StartPrinting}
               className="nav-link text-success mb-4 mt-5 d-flex align-center"
               style={{ fontSize: 18 }}
             >

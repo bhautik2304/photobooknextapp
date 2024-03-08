@@ -16,6 +16,7 @@ const orderDataScemma = {
   costomer_id: null,
   shipping_address: null,
   customText: null,
+  pritnigPriceType: null,
 
   // product detaild
   product_id: null,
@@ -24,7 +25,7 @@ const orderDataScemma = {
   productOrientation: null,
   productSheet: null,
   paperType: null,
-  
+
   productcoverType: null,
   productcover: null,
   productcovercolor: null,
@@ -40,6 +41,8 @@ const orderDataScemma = {
   // product cost
   page_qty: 0,
   sheetValue: 0,
+  pritnigPriceValue: 0,
+  pritnigPriceTotalPageValue: 0,
   paperValue: 0,
   coverValue: 0,
   boxSleeveValue: 0,
@@ -91,6 +94,7 @@ const initialState = {
   productcolor: [],
   productboxandsleeveoptions: [],
   productboxandsleeveoptioncolor: [],
+  pritnig_price: [],
 }
 
 const orderSlice = createSlice({
@@ -104,6 +108,7 @@ const orderSlice = createSlice({
       state.orderData.page_qty = action.payload.product.min_page
       state.productpaperType = action.payload.product.paperType
       state.orderData.photoBookCopyPrice = zonePrice(action.payload.product.album_copy_price).price
+      state.pritnig_price = action.payload.product.pritnig_price
     },
     changeOrientation: (state, action) => {
       state.orderData.productOrientation = action.payload.product.id
@@ -145,24 +150,31 @@ const orderSlice = createSlice({
       // state.orderData.orderTotale = state.orderData.paperTypeTotale
     },
     selectBoxSleeveOption: (state, action) => {
-      
+
       state.orderData.productboxandsleeveoption = action.payload.boxSleev.id
       state.productboxandsleeveoptioncolor = action.payload.boxSleev.boxsleeveupgradecolor
     },
     changeBoxSleev: (state, action) => {
-      
+
       state.orderData.productboxSleev = action.payload.boxSleev.id
-      state.orderData.productboxandsleeveType=action.payload.boxSleev.boxsleeve.type
-      state.productboxandsleeveoptions=action.payload.boxSleev.boxsleeve.boxsleeveupgrades
+      state.orderData.productboxandsleeveType = action.payload.boxSleev.boxsleeve.type
+      state.productboxandsleeveoptions = action.payload.boxSleev.boxsleeve.boxsleeveupgrades
       state.orderData.boxSleeveValue = zonePrice(action.payload.boxSleev.boxsleeveprice).price
       // state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.boxSleevTotale
     },
     setTotale: (state, action) => {
-      let paperTotale = ((state.orderData.sheetValue * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty
+      // console.log("total", (((state.orderData.sheetValue + state.orderData.pritnigPriceValue) * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty);
+      // console.log("total", (state.orderData.sheetValue + state.orderData.pritnigPriceValue));
+      // let paperTotalWithPrinting=(state.orderData.sheetValue + state.orderData.pritnigPriceValue)
+      let paperTotale = (( state.orderData.sheetValue * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty
       let coverTotale = state.orderData.coverValue
       let boxSleevTotale = state.orderData.boxSleeveValue
       // let photoBookCopy = state.orderData.photoBookCopyPrice * state.orderData.photoBookCopy;
-      state.orderData.orderTotale = paperTotale + coverTotale + boxSleevTotale 
+      state.orderData.orderTotale = paperTotale + coverTotale + boxSleevTotale
+    },
+    setPrintingTotale: (state, action) => {
+      // let photoBookCopy = state.orderData.photoBookCopyPrice * state.orderData.photoBookCopy;
+      state.orderData.pritnigPriceTotalPageValue = state.orderData.page_qty * state.orderData.pritnigPriceValue
     },
     changeColor: (state, action) => {
       state.orderData.productcovercolor = action.payload.color.id
@@ -220,7 +232,7 @@ const orderSlice = createSlice({
   }
 });
 
-export const { clearCart,changeBoxColor,selectBoxSleeveOption,addBoxphoto, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const { setPrintingTotale,clearCart, changeBoxColor, selectBoxSleeveOption, addBoxphoto, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 

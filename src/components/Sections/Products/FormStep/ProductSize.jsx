@@ -1,26 +1,55 @@
-import React from 'react'
-import Button from './Button'
-import { useSelector, useDispatch } from 'react-redux'
-import { changeOrientationSize, changePageCount, changeSheet, formError as fcm, formNext, changePapertypeOption } from '@/Redux/Slice/orderSlice'
-import { zonePrice } from '@/utils'
-import { localstorageKey } from '@/constants'
+import React from "react";
+import Button from "./Button";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeOrientationSize,
+  changePageCount,
+  changeSheet,
+  formError as fcm,
+  formNext,
+  changePapertypeOption,
+  changeOrderData,
+} from "@/Redux/Slice/orderSlice";
+import { zonePrice } from "@/utils";
+import { localstorageKey } from "@/constants";
 
 function ProductSize() {
-  const { productSize, orderData, productSheet, product, formError, productpaperType } = useSelector(state => state.order)
-  const disapatch = useDispatch()
+  const {
+    productSize,
+    orderData,
+    productSheet,
+    product,
+    formError,
+    productpaperType,
+    pritnig_price,
+  } = useSelector((state) => state.order);
+  const disapatch = useDispatch();
   return (
     <>
-
       <div className="row">
         <div className="col-md-12 col-sm-12 col-lg-12">
-          <span className='text-danger' >{formError?.product_size}</span>
-          <><h6>Select size</h6></>
+          <span className="text-danger">{formError?.product_size}</span>
+          <>
+            <h6>Select size</h6>
+          </>
           <div className="row">
-            {productSize.map(data => (
+            {productSize.map((data) => (
               <div className="col-lg-4 col-md-4 col-sm-12">
-                <div className={`size card  my-2 pro ${orderData.productSize == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeOrientationSize({ size: data }))} >
+                <div
+                  className={`size card  my-2 pro ${
+                    orderData.productSize == data.id && "selected_prod_size"
+                  }`}
+                  onClick={() =>
+                    disapatch(changeOrientationSize({ size: data }))
+                  }
+                >
                   <div className="d-flex justify-content-between align-items-center">
-                    <img src={data?.size?.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
+                    <img
+                      src={data?.size?.img}
+                      style={{ height: 70, width: 70, padding: "5px" }}
+                      alt=""
+                      srcset=""
+                    />
                     {data?.size?.name}
                     <div></div>
                   </div>
@@ -29,89 +58,274 @@ function ProductSize() {
             ))}
           </div>
         </div>
-        {
-          orderData.productSize &&
+        {orderData.productSize && (
           <>
             <div className="col-12 my-3">
-              <span className='text-danger' >{formError?.product_sheet}</span>
-              <><h6>Select your paper sheet</h6></>
+              <span className="text-danger">{formError?.product_sheet}</span>
+              <>
+                <h6>What do you want us to process ?</h6>
+              </>
               <div className="row">
-                {productSheet.map(data => {
-                  return (
-                    <>
-                      <div className="col-lg-4 col-md-4 col-sm-12">
-                        <div className={`size card my-2 pro ${orderData.productSheet == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeSheet({ sheet: data }))} >
-                          <div className="d-flex justify-content-between align-items-center">
-                            <img src={data?.sheet?.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
-                            <div  >
-                              {data?.sheet?.name}
-                              <div  >
-                                {zonePrice(data.sheetprice)?.priceSrring}
-                                {/* {`${zonePrice(data.price)?.price} ₹`} */}
-                              </div>
-                            </div>
-                            <div></div>
-                          </div>
-                        </div>
+                <div className="col-lg-4 col-md-4 col-sm-12">
+                  <div
+                    className={`size card my-2 pro ${
+                      orderData.pritnigPriceType == "PrintBind" &&
+                      "selected_prod_size"
+                    }`}
+                    onClick={() => {
+                      disapatch(
+                        changeOrderData({
+                          key: "pritnigPriceType",
+                          value: "PrintBind",
+                        })
+                      );
+                      disapatch(
+                        changeOrderData({
+                          key: "pritnigPriceValue",
+                          value: 0,
+                        })
+                      );
+                      disapatch(
+                        changeOrderData({
+                          key: "pritnigPriceTotalPageValue",
+                          value: product?.min_page * 0,
+                        })
+                      );
+                    }}
+                  >
+                    <div className="d-flex justify-content-between align-items-center">
+                      <img
+                        src="https://api.photokrafft.com/img/size/img.png"
+                        style={{ height: 70, width: 70, padding: "5px" }}
+                        alt=""
+                        srcset=""
+                      />
+                      <div>
+                        Print + Bind
+                        <center>
+                          {/* 0 */}
+                          {/* {`${zonePrice(data.price)?.price} ₹`} */}
+                        </center>
                       </div>
-                    </>
-                  )
-                }) || <><h1>Select Size</h1></>}
-              </div>
-            </div>
-            <div className="col-12 my-3">
-              <span className='text-danger' >{formError?.product_sheet}</span>
-              <><h6>Select your paper type</h6></>
-              <div className="row">
-                {productpaperType.map(data => <>
-                  <div className="col-lg-4 col-md-4 col-sm-12">
-                    <div className={`size card my-2 pro ${orderData.paperType == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changePapertypeOption({ papertype: data }))} >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <img src={data.paper.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
-                        <div>
-                          {data.paper.name}
-                          <div  >
-                            {data.paper.value > 0 && `+ ${data.paper.value} % Extra`}
-                          </div>
-                        </div>
-                        <div></div>
-                      </div>
+                      <div></div>
                     </div>
                   </div>
-                </>) || <><h1>Select Size</h1></>}
-              </div>
-            </div>
-            <div className='my-5' >
-              <div className="row">
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <h6>Total pages to print</h6>
-                  <span className='text-danger' >{formError?.product_page}</span>
-                  <input className='form-control form-control-lg my-2' onChange={(e) => disapatch(changePageCount(e.target.value))} type="number" value={orderData.page_qty} />
-                  <p>Enter your total pages to print for the album</p>
+                </div>
+                <div className="col-lg-4 col-md-4 col-sm-12">
+                  <div
+                    className={`size card my-2 pro ${
+                      orderData.pritnigPriceType == "DesignPrintBind" &&
+                      "selected_prod_size"
+                    }`}
+                    onClick={() => {
+                      disapatch(
+                        changeOrderData({
+                          key: "pritnigPriceType",
+                          value: "DesignPrintBind",
+                        })
+                      );
+                      disapatch(
+                        changeOrderData({
+                          key: "pritnigPriceValue",
+                          value: zonePrice(pritnig_price)?.price,
+                        })
+                      );
+                      disapatch(
+                        changeOrderData({
+                          key: "pritnigPriceTotalPageValue",
+                          value:
+                            product?.min_page * zonePrice(pritnig_price)?.price,
+                        })
+                      );
+                    }}
+                  >
+                    <div className="d-flex justify-content-between align-items-center">
+                      <img
+                        src="https://api.photokrafft.com/img/size/img.png"
+                        style={{ height: 70, width: 70, padding: "5px" }}
+                        alt=""
+                        srcset=""
+                      />
+                      <div>
+                        Design + Print + Bind
+                        <div>
+                          {zonePrice(pritnig_price)?.priceSrring} + per page
+                          {/* {`${zonePrice(data.price)?.price} ₹`} */}
+                        </div>
+                      </div>
+                      <div></div>
+                    </div>
+                  </div>
+                  {orderData.pritnigPriceType == "DesignPrintBind" && (
+                    <span className="text-success">
+                      Designing cost is added{" "}
+                      {orderData.pritnigPriceTotalPageValue}{" "}
+                      {zonePrice(pritnig_price)?.currency}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
+
+            {(orderData.pritnigPriceType == "PrintBind" || orderData.pritnigPriceType == "DesignPrintBind") && (
+              <>
+                <div className="col-12 my-3">
+                  <span className="text-danger">
+                    {formError?.product_sheet}
+                  </span>
+                  <>
+                    <h6>Select your paper sheet</h6>
+                  </>
+                  <div className="row">
+                    {productSheet.map((data) => {
+                      return (
+                        <>
+                          <div className="col-lg-4 col-md-4 col-sm-12">
+                            <div
+                              className={`size card my-2 pro ${
+                                orderData.productSheet == data.id &&
+                                "selected_prod_size"
+                              }`}
+                              onClick={() =>
+                                disapatch(changeSheet({ sheet: data }))
+                              }
+                            >
+                              <div className="d-flex justify-content-between align-items-center">
+                                <img
+                                  src={data?.sheet?.img}
+                                  style={{
+                                    height: 70,
+                                    width: 70,
+                                    padding: "5px",
+                                  }}
+                                  alt=""
+                                  srcset=""
+                                />
+                                <div>
+                                  {data?.sheet?.name}
+                                  <div>
+                                    {zonePrice(data.sheetprice)?.priceSrring}
+                                    {/* {`${zonePrice(data.price)?.price} ₹`} */}
+                                  </div>
+                                </div>
+                                <div></div>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    }) || (
+                      <>
+                        <h1>Select Size</h1>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div className="col-12 my-3">
+                  <span className="text-danger">
+                    {formError?.product_sheet}
+                  </span>
+                  <>
+                    <h6>Select your paper type</h6>
+                  </>
+                  <div className="row">
+                    {productpaperType.map((data) => (
+                      <>
+                        <div className="col-lg-4 col-md-4 col-sm-12">
+                          <div
+                            className={`size card my-2 pro ${
+                              orderData.paperType == data.id &&
+                              "selected_prod_size"
+                            }`}
+                            onClick={() =>
+                              disapatch(
+                                changePapertypeOption({ papertype: data })
+                              )
+                            }
+                          >
+                            <div className="d-flex justify-content-between align-items-center">
+                              <img
+                                src={data.paper.img}
+                                style={{
+                                  height: 70,
+                                  width: 70,
+                                  padding: "5px",
+                                }}
+                                alt=""
+                                srcset=""
+                              />
+                              <div>
+                                {data.paper.name}
+                                <div>
+                                  {data.paper.value > 0 &&
+                                    `+ ${data.paper.value} % Extra`}
+                                </div>
+                              </div>
+                              <div></div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    )) || (
+                      <>
+                        <h1>Select Size</h1>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="my-5">
+                  <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-12">
+                      <h6>Total pages to print</h6>
+                      <span className="text-danger">
+                        {formError?.product_page}
+                      </span>
+                      <input
+                        className="form-control form-control-lg my-2"
+                        onChange={(e) =>
+                          disapatch(changePageCount(e.target.value))
+                        }
+                        type="number"
+                        value={orderData.page_qty}
+                      />
+                      <p>Enter your total pages to print for the album</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </>
-        }
+        )}
       </div>
-      <Button next={() => {
-        if (!orderData.productSize) {
-          disapatch(fcm({ key: 'product_sheet', error: 'Select minimum one option' }))
-          return 0
-        }
-        if (!orderData.productSheet) {
-          disapatch(fcm({ key: 'product_size', error: 'Select minimum one option' }))
-          return 0
-        }
-        if ((orderData.page_qty < product?.min_page)) {
-          disapatch(fcm({ key: 'product_page', error: `Minimum page ${product?.min_page}+` }))
-          return 0
-        }
-        disapatch(formNext())
-      }} />
+      <Button
+        next={() => {
+          if (!orderData.productSize) {
+            disapatch(
+              fcm({ key: "product_sheet", error: "Select minimum one option" })
+            );
+            return 0;
+          }
+          if (!orderData.productSheet) {
+            disapatch(
+              fcm({ key: "product_size", error: "Select minimum one option" })
+            );
+            return 0;
+          }
+          if (orderData.page_qty < product?.min_page) {
+            disapatch(
+              fcm({
+                key: "product_page",
+                error: `Minimum page ${product?.min_page}+`,
+              })
+            );
+            return 0;
+          }
+          disapatch(formNext());
+        }}
+      />
     </>
-  )
+  );
 }
 
-export default ProductSize
-
+export default ProductSize;

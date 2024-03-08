@@ -1,5 +1,5 @@
 const userProfile = '/Profiles';
-const dsefrverDomain = 'http://localhost:8000/api';
+const dserverDomain = 'http://localhost:8000/api';
 const serverApiDomain = 'https://api.photokrafft.com/api';
 
 export const appRoutes = {
@@ -11,6 +11,7 @@ export const appRoutes = {
     CreateAccount: '/Create-Account',
     Login: '/Login',
     forgetPassword: '/Forget-password',
+    services: '/Services',
 
     // users Profiles Routes
     userProfile: userProfile,
@@ -22,17 +23,17 @@ export const appRoutes = {
 
 export const apiRoutes = {
     // auth routes
-    login: serverApiDomain + '/auth/costomer/login',
-    register: serverApiDomain + '/costomer',
-    token: serverApiDomain + '/auth/costomer/token',
-    products: serverApiDomain + '/product',
-    orders: serverApiDomain + '/order',
-    zones: serverApiDomain + '/zones',
-    user: serverApiDomain + '/user',
-    checkout: serverApiDomain + '/checkout',
-    updateAvtar: serverApiDomain + 'costomer/change-avtar/',
-    customer: serverApiDomain + '/costomer/',
-    forgetPassword: serverApiDomain + '/auth/costomer/forget-password/',
+    login: dserverDomain + '/auth/costomer/login',
+    register: dserverDomain + '/costomer',
+    token: dserverDomain + '/auth/costomer/token',
+    products: dserverDomain + '/product',
+    orders: dserverDomain + '/order',
+    zones: dserverDomain + '/zones',
+    user: dserverDomain + '/user',
+    checkout: dserverDomain + '/checkout',
+    updateAvtar: dserverDomain + 'costomer/change-avtar/',
+    customer: dserverDomain + '/costomer/',
+    forgetPassword: dserverDomain + '/auth/costomer/forget-password/',
 }
 
 export const localstorageKey = {

@@ -389,15 +389,15 @@ function Checkout() {
                       justifyContent: "flex-end",
                     }}
                   >
+                  </div>
+                  <CheckOutItem submitOrder={submitOrder} />
                     <button
-                      className="pro btn btn-dark"
+                      className="pro btn btn-dark my-4"
                       style={{ width: 250 }}
                       onClick={() => setChackOutStatus(status.proceed)}
                     >
                       back
                     </button>
-                  </div>
-                  <CheckOutItem submitOrder={submitOrder} />
                 </>
               )}
               {chackOutStatus == status.processingOrder && (
