@@ -69,19 +69,19 @@ function ProductSize() {
                 <div className="col-lg-4 col-md-4 col-sm-12">
                   <div
                     className={`size card my-2 pro ${
-                      orderData.pritnigPriceType == "PrintBind" &&
+                      orderData.pritnig_price_type == "print_bind" &&
                       "selected_prod_size"
                     }`}
                     onClick={() => {
                       disapatch(
                         changeOrderData({
-                          key: "pritnigPriceType",
-                          value: "PrintBind",
+                          key: "pritnig_price_type",
+                          value: "print_bind",
                         })
                       );
                       disapatch(
                         changeOrderData({
-                          key: "pritnigPriceValue",
+                          key: "pritnig_price_value",
                           value: 0,
                         })
                       );
@@ -114,19 +114,19 @@ function ProductSize() {
                 <div className="col-lg-4 col-md-4 col-sm-12">
                   <div
                     className={`size card my-2 pro ${
-                      orderData.pritnigPriceType == "DesignPrintBind" &&
+                      orderData.pritnig_price_type == "print_bind" &&
                       "selected_prod_size"
                     }`}
                     onClick={() => {
                       disapatch(
                         changeOrderData({
-                          key: "pritnigPriceType",
-                          value: "DesignPrintBind",
+                          key: "pritnig_price_type",
+                          value: "print_bind",
                         })
                       );
                       disapatch(
                         changeOrderData({
-                          key: "pritnigPriceValue",
+                          key: "pritnig_price_value",
                           value: zonePrice(pritnig_price)?.price,
                         })
                       );
@@ -156,7 +156,7 @@ function ProductSize() {
                       <div></div>
                     </div>
                   </div>
-                  {orderData.pritnigPriceType == "DesignPrintBind" && (
+                  {orderData.pritnig_price_type == "design_print_bind" && (
                     <span className="text-success">
                       Designing cost is added{" "}
                       {orderData.pritnigPriceTotalPageValue}{" "}
@@ -167,7 +167,7 @@ function ProductSize() {
               </div>
             </div>
 
-            {(orderData.pritnigPriceType == "PrintBind" || orderData.pritnigPriceType == "DesignPrintBind") && (
+            {(orderData.pritnig_price_type == "print_bind" || orderData.pritnig_price_type == "design_print_bind") && (
               <>
                 <div className="col-12 my-3">
                   <span className="text-danger">

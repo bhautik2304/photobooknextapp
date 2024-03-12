@@ -16,7 +16,7 @@ const orderDataScemma = {
   costomer_id: null,
   shipping_address: null,
   customText: null,
-  pritnigPriceType: null,
+  pritnig_price_type: null,
 
   // product detaild
   product_id: null,
@@ -41,7 +41,7 @@ const orderDataScemma = {
   // product cost
   page_qty: 0,
   sheetValue: 0,
-  pritnigPriceValue: 0,
+  pritnig_price_value: 0,
   pritnigPriceTotalPageValue: 0,
   paperValue: 0,
   coverValue: 0,

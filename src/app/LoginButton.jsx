@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { localstorageKey, appRoutes } from "@/constants";
 function LoginButton() {
-  const authStatus = window.localStorage.getItem(localstorageKey.authStatus);
+  const authStatus = window ? window.localStorage.getItem(localstorageKey.authStatus) : null
   return authStatus ? (
     <Link
       href={appRoutes.StartPrinting}
