@@ -18,7 +18,7 @@ import LoginButton from "./LoginButton";
 export default function Home() {
   return (
     <>
-      <div className="container-fluid"  style={{backgroundColor:'aliceblue'}} >
+      <div className="container-fluid" style={{ backgroundColor: "aliceblue" }}>
         <div className="row">
           <div
             className="col-lg-6 col-md-6 col-sm-12 center-all-text order-2 order-sm-1"
@@ -29,7 +29,7 @@ export default function Home() {
               justifyContent: "center",
             }}
           >
-            <div style={{ padding: "15%",marginTop:'10%' }}>
+            <div style={{ padding: "15%", marginTop: "10%" }}>
               <AnimateText />
               <p style={{ fontSize: "18px" }} className=" mb-4">
                 Photokrafft has been at the forefront of graphic design and
@@ -53,14 +53,71 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="p-5 mt-5">
-        <div className="row">
-          <center>
-            <h2>Some of our artistic projects</h2>
-          </center>
-          <div className="d-flex justify-content-center">
-            <ProductScroll />
+      <div className="container">
+        <div className="d-flex justify-content-center aligns-item-center">
+          <div className="p-5">
+            <h1 className="text-center" >
+            The Ultimate Store for Exquisite Photo Albums
+            </h1>
+            <div className="row my-5">
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_AcrylicCoverBrown.jpg"} alt="" srcset="" />
+                  {/* <h6 className="my-3">Square</h6> */}
+                </Link>
+              </div>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Album_1.jpg"} alt="" srcset="" />
+                  {/* <h6 className="my-3">Landscape</h6> */}
+                </Link>
+              </div>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Linen Cover_1.jpg"} alt="" srcset="" />
+                  {/* <h6 className="my-3">Portrait</h6> */}
+                </Link>
+              </div>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Album_5.jpg"} alt="" srcset="" />
+                  {/* <h6 className="my-3">Square</h6> */}
+                </Link>
+              </div>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Krafftbook_3.jpg"} alt="" srcset="" />
+                  {/* <h6 className="my-3">Landscape</h6> */}
+                </Link>
+              </div>
+              <div className="col-lg-4 col-md-3 col-sm-12">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Album_3.jpg"} alt="" srcset="" />
+                  {/* <h6 className="my-3">Portrait</h6> */}
+                </Link>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
           <center>
             <div className="d-flex justify-content-center">
               <Link
@@ -79,8 +136,6 @@ export default function Home() {
               </Link>
             </div>
           </center>
-        </div>
-      </div>
       <div
         className="container-fluid my-10"
         style={{ backgroundColor: "#5bb5a2" }}

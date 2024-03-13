@@ -28,7 +28,7 @@ function LoginForm() {
             if (res.data.code == 200) {
                 // alert("logd in")
                 dispatch(authLogin(res.data))
-                router.replace(appRoutes.userProfile)
+                router.replace(appRoutes.userProfileOrders)
                 
                 return
             }

@@ -28,6 +28,7 @@ export const apiRoutes = {
     token: dserverDomain + '/auth/costomer/token',
     products: dserverDomain + '/product',
     orders: dserverDomain + '/order',
+    uploadfile: dserverDomain + '/order/uploadfile',
     zones: dserverDomain + '/zones',
     user: dserverDomain + '/user',
     checkout: dserverDomain + '/checkout',

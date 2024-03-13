@@ -1,5 +1,5 @@
 "use client"
-
+import Image from 'next/image'
 import React from 'react'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -12,14 +12,14 @@ function ProductScroll() {
     return (
         <>
             {/* Testyminial */}
-            <div className="container">
+            <div className="container-fluid">
                 <section class="">
                     <div class="">
                         <div class="pt-5">
                             <div class="d-none d-md-block">
                                 <Swiper
-                                    spaceBetween={50}
-                                    slidesPerView={6}
+                                    spaceBetween={0}
+                                    slidesPerView={2}
                                     autoplay={{
                                         delay: 2500,
                                         disableOnInteraction: false,
@@ -30,31 +30,11 @@ function ProductScroll() {
                                 >
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="http://localhost:3000/assets/img/albumSwiper/3D_AcrylicCoverBrown.jpg" />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="http://localhost:3000/assets/img/albumSwiper/3D_Album_1.jpg" />
                                     </SwiperSlide>
                                 </Swiper>
                             </div>
@@ -73,31 +53,31 @@ function ProductScroll() {
                                 >
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         {/* <!-- Item--> */}
-                                        <img src="./assets/img/graphics/card.png" className="m-5" width={150} />
+                                        <img src="./assets/img/graphics/card.png" width={500} />
                                     </SwiperSlide>
                                 </Swiper>
                             </div>

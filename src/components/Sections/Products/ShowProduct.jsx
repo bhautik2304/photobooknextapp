@@ -36,7 +36,7 @@ function ShowProduct() {
         coverValue,
         boxSleeveValue,
         orderTotale,
-        pritnigPriceTotalPageValue,
+        pritnig_price_value
       },
     },
   } = useSelector((state) => state);
@@ -47,7 +47,7 @@ function ShowProduct() {
   }, []);
 
   useEffect(() => {
-    dispatch(setPrintingTotale());
+    // dispatch(setPrintingTotale());
     dispatch(setTotale());
     setTotal(orderTotale + photoBookCopy * photoBookCopyPrice);
   }, [
@@ -97,7 +97,7 @@ function ShowProduct() {
                     <span
                       style={{ fontSize: 18, fontWeight: "bold" }}
                       className="text-success"
-                    >{`Design cost : ${pritnigPriceTotalPageValue} ${user?.zone?.currency_sign}`}</span><br/>
+                    >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}`}</span><br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span
                       style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
@@ -122,7 +122,7 @@ function ShowProduct() {
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
-                  >{`Design cost : ${pritnigPriceTotalPageValue} ${user?.zone?.currency_sign}   `}</span><br/>
+                  >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}   `}</span><br/>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
@@ -143,7 +143,7 @@ function ShowProduct() {
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
-                  >{`Design cost : ${pritnigPriceTotalPageValue} ${user?.zone?.currency_sign}   `}</span><br/>
+                  >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}   `}</span><br/>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
@@ -168,7 +168,7 @@ function ShowProduct() {
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
-                  >{`Design cost : ${pritnigPriceTotalPageValue} ${user?.zone?.currency_sign}   `}</span><br/>
+                  >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}   `}</span><br/>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}

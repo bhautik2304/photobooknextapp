@@ -1,122 +1,242 @@
-import React from 'react'
-import Button from './Button'
-import { useSelector, useDispatch } from 'react-redux'
-import { changeBoxSleev, selectBoxSleeveOption, changeBoxColor, addBoxphoto, changePageCount, changeSheet, formError as fcm, formNext, selectCoverOption } from '@/Redux/Slice/orderSlice'
-import { zonePrice } from '@/utils'
-import { localstorageKey } from '@/constants'
+import React from "react";
+import Button from "./Button";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeBoxSleev,
+  selectBoxSleeveOption,
+  changeBoxColor,
+  addFrontBoxphoto,
+addBackBoxphoto,
+  changePageCount,
+  changeSheet,
+  formError as fcm,
+  formNext,
+  selectCoverOption,
+} from "@/Redux/Slice/orderSlice";
+import { zonePrice } from "@/utils";
+import { localstorageKey } from "@/constants";
 
 function ProductBox() {
-    const { productboxSleev, orderData, productboxandsleeveoptions,productboxandsleeveoptioncolor, formError } = useSelector(state => state.order)
-    const disapatch = useDispatch()
-    return (
-        <>
-            <div className="row">
-                <div className="col-md-12 col-sm-12 col-lg-12">
-                    <span className='text-danger' >{formError?.product_cover}</span>
-                    <><h6>Box & sleeve</h6></>
-                    <div className="row">
-                        {productboxSleev.map(data => {
-                            return (
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className={`size card my-2 pro ${orderData.productboxSleev == data.id && 'selected_prod_size'}`} onClick={() => disapatch(changeBoxSleev({ boxSleev: data }))} >
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <img src={data.boxsleeve.img} style={{ height: 70, width: 70, padding: '5px' }} alt="" srcset="" />
-                                            <div>
-                                                {data.boxsleeve.name}
-                                                <div  >
-                                                    {zonePrice(data.boxsleeveprice)?.priceSrring}
-                                                </div>
-                                            </div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
+  const {
+    productboxSleev,
+    orderData,
+    productboxandsleeveoptions,
+    productboxandsleeveoptioncolor,
+    formError,
+  } = useSelector((state) => state.order);
+  const disapatch = useDispatch();
+  return (
+    <>
+      <div className="row">
+        <div className="col-md-12 col-sm-12 col-lg-12">
+          <span className="text-danger">{formError?.product_cover}</span>
+          <>
+            <h6>Box & sleeve</h6>
+          </>
+          <div className="row">
+            {productboxSleev.map((data) => {
+              return (
+                <div className="col-lg-4 col-md-4 col-sm-12">
+                  <div
+                    className={`size card my-2 pro ${
+                      orderData.productboxSleev == data.id &&
+                      "selected_prod_size"
+                    }`}
+                    onClick={() =>
+                      disapatch(changeBoxSleev({ boxSleev: data }))
+                    }
+                  >
+                    <div className="d-flex justify-content-between align-items-center">
+                      <img
+                        src={data.boxsleeve.img}
+                        style={{ height: 70, width: 70, padding: "5px" }}
+                        alt=""
+                        srcset=""
+                      />
+                      <div>
+                        {data.boxsleeve.name}
+                        <div>{zonePrice(data.boxsleeveprice)?.priceSrring}</div>
+                      </div>
+                      <div></div>
                     </div>
+                  </div>
                 </div>
-                <div className="col-12 my-4">
-                    <div className="col-7 my-3">
-                        {orderData.productboxandsleeveType == "img" &&
-                            (
-                                <>
-                                <span className='text-danger m-0 p-0' >{formError?.boxphoto}</span><br />
-                                    <label>Upload your frontside photo *</label>
-                                    <input className='form-control form-control-sm my-2' type="file" onChange={(e) => {
-                                        disapatch(addBoxphoto({ boxphoto: e.target.files[0] }))
-                                        // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
-                                    }} />
-                                </>
-                            )}
-                    </div>
-                    <div className="col-12 my-3">
-                        <span className='text-danger m-0 p-0' >{formError?.product_cover_option}</span><br/>
-                        {(productboxandsleeveoptions.length !== 0) &&
-                            <>
-                                <><h6>Select options</h6></>
-                                <div className="row">
-                                    {productboxandsleeveoptions.map(data =>
-                                        <>
-                                            <div className='col-2'>
-                                                <div onClick={() => disapatch(selectBoxSleeveOption({ boxSleev: data }))} >
-                                                    <img src={data.img} style={{ width: 120 }} className={`pro ${orderData.productboxandsleeveoption == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
-                                                </div>
-                                                <div className="my-2" >
-                                                    {data.name}
-                                                </div>
-                                            </div>
-                                        </>) || <><h1>Select Size</h1></>}
-                                </div>
-                            </>
-                        }
-                        {(productboxandsleeveoptioncolor.length !== 0) &&
-                            <>
-                                <><h6>Select color options</h6></>
-                                <div className="row">
-                                    {productboxandsleeveoptioncolor.map(data => {
-                                        //console.log("color")
-                                        console.log(data.colors[0])
-                                        return (
-                                            <>
-                                                <div className='col-2'>
-                                                    <div onClick={() => disapatch(changeBoxColor({ color: data }))} >
-                                                        <img src={data.colors[0].img} style={{ width: 120, height: 120, backgroundColor: data.colorcode }} className={`pro ${orderData.productboxandsleevecolor == data.id && 'selected_prod_cover_option'}`} alt="" srcset="" />
-                                                    </div>
-                                                    <div className="my-2" >
-                                                        {data.colors[0].color}
-                                                    </div>
-                                                </div>
-                                            </>
-                                        )
-                                    })
-                                    }
-                                </div>
-                            </>
-                        }
-                    </div>
-                </div>
-            </div>
-            <Button next={() => {
-                if (!orderData.productcover) {
-                    disapatch(fcm({ key: 'product_cover', error: 'Select minimum one option' }))
-                    return
-                }
-                if (!orderData.productcoveroption) {
-                    disapatch(fcm({ key: 'product_cover_option', error: 'Select minimum one option' }))
-                    return
-                }
-                if (orderData.productboxandsleeveType == "img") {
-                    if (!orderData.boxphoto) {
-                        disapatch(fcm({ key: 'boxphoto', error: 'Please upload a file' }))
-                        return
-                      }
-                }
-                disapatch(formNext())
-            }
-            } />
-        </>
+              );
+            })}
+          </div>
+        </div>
 
-    )
+        <div className="col-12 my-4">
+          <div className="col-7 my-3">
+            {orderData.productboxandsleeveType == "both_img" && (
+              <>
+                <span className="text-danger m-0 p-0">
+                  {formError?.boxphoto}
+                </span>
+                <br />
+                <label>Upload your frontside photo *</label>
+                <input
+                  className="form-control form-control-sm my-2"
+                  type="file"
+                  onChange={(e) => {
+                    disapatch(addFrontBoxphoto({ boxphoto: e.target.files[0] }));
+                    // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+                  }}
+                />
+                <span className="text-danger m-0 p-0">
+                  {formError?.boxphoto}
+                </span>
+                <br />
+                <label>Upload your frontside photo *</label>
+                <input
+                  className="form-control form-control-sm my-2"
+                  type="file"
+                  onChange={(e) => {
+                    disapatch(addBackBoxphoto({ boxphoto: e.target.files[0] }));
+                    // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+                  }}
+                />
+              </>
+            )}
+            {orderData.productboxandsleeveType == "img_option_colors" && (
+              <>
+                <span className="text-danger m-0 p-0">
+                  {formError?.boxphoto}
+                </span>
+                <br />
+                <label>Upload your frontside photo *</label>
+                <input
+                  className="form-control form-control-sm my-2"
+                  type="file"
+                  onChange={(e) => {
+                    disapatch(addFrontBoxphoto({ boxphoto: e.target.files[0] }));
+                    // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
+                  }}
+                />
+              </>
+            )}
+          </div>
+
+          {orderData.productboxandsleeveType != "both_img" && (
+            <>
+              <div className="col-12 my-3">
+                <span className="text-danger m-0 p-0">
+                  {formError?.product_cover_option}
+                </span>
+                <br />
+                {productboxandsleeveoptions.length !== 0 && (
+                  <>
+                    <>
+                      <h6>Select options</h6>
+                    </>
+                    <div className="row">
+                      {productboxandsleeveoptions.map((data) => (
+                        <>
+                          <div className="col-2">
+                            <div
+                              onClick={() =>
+                                disapatch(
+                                  selectBoxSleeveOption({ boxSleev: data })
+                                )
+                              }
+                            >
+                              <img
+                                src={data.img}
+                                style={{ width: 120 }}
+                                className={`pro ${
+                                  orderData.productboxandsleeveoption ==
+                                    data.id && "selected_prod_cover_option"
+                                }`}
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div className="my-2">{data.name}</div>
+                          </div>
+                        </>
+                      )) || (
+                        <>
+                          <h1>Select Size</h1>
+                        </>
+                      )}
+                    </div>
+                  </>
+                )}
+                {productboxandsleeveoptioncolor.length !== 0 && (
+                  <>
+                    <>
+                      <h6>Select color options</h6>
+                    </>
+                    <div className="row">
+                      {productboxandsleeveoptioncolor.map((data) => {
+                        //console.log("color")
+                        console.log(data.colors[0]);
+                        return (
+                          <>
+                            <div className="col-2">
+                              <div
+                                onClick={() =>
+                                  disapatch(changeBoxColor({ color: data }))
+                                }
+                              >
+                                <img
+                                  src={data.colors[0].img}
+                                  style={{
+                                    width: 120,
+                                    height: 120,
+                                    backgroundColor: data.colorcode,
+                                  }}
+                                  className={`pro ${
+                                    orderData.productboxandsleevecolor ==
+                                      data.id && "selected_prod_cover_option"
+                                  }`}
+                                  alt=""
+                                  srcset=""
+                                />
+                              </div>
+                              <div className="my-2">{data.colors[0].color}</div>
+                            </div>
+                          </>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      <Button
+        next={() => {
+        //   if (!orderData.productcover) {
+        //     disapatch(
+        //       fcm({ key: "product_cover", error: "Select minimum one option" })
+        //     );
+        //     return;
+        //   }
+        //   if (!orderData.productcoveroption) {
+        //     disapatch(
+        //       fcm({
+        //         key: "product_cover_option",
+        //         error: "Select minimum one option",
+        //       })
+        //     );
+        //     return;
+        //   }
+        //   if (orderData.productboxandsleeveType == "img") {
+        //     if (!orderData.boxphoto) {
+        //       disapatch(
+        //         fcm({ key: "boxphoto", error: "Please upload a file" })
+        //       );
+        //       return;
+        //     }
+        //   }
+          disapatch(formNext());
+        }}
+      />
+    </>
+  );
 }
 
-export default ProductBox
+export default ProductBox;

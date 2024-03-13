@@ -13,7 +13,7 @@ import Link from "next/link";
 import { Box, Button } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import { appRoutes } from "@/constants";
+import { apiRoutes, appRoutes } from "@/constants";
 import { clearCart } from "@/Redux/Slice/orderSlice";
 const status = {
   proceed: "Proceed to order",
@@ -31,6 +31,7 @@ function Checkout() {
   const [file, setFile] = useState(null);
   const [fileUploadStatus, setFileUploadStatus] = useState(false);
   const [fileerror, setError] = useState(false);
+  const [zipFileError, setZipFileError] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -51,12 +52,14 @@ function Checkout() {
       "orderData",
       JSON.stringify({ ...orderData, user: user, zone: user.zone })
     );
-    formData.append("boxsleevefrontimg", orderData.boxphoto);
-    formData.append("coverfrontphoto", orderData.coverphoto);
-    formData.append("photoszip", orderData.photoszip);
+    formData.append("boxsleevefrontimg", orderData.coverphotofront);
+    formData.append("boxsleevebackimg", orderData.coverphotoback);
+    formData.append("coverfrontphoto", orderData.boxphotofront);
+    formData.append("coverbackphoto", orderData.boxphotoback);
+    // formData.append("photoszip", orderData.photoszip);
 
     axios
-      .post("http://127.0.0.1:8000/api/order", formData)
+      .post(apiRoutes.orders, formData)
       .then((res) => {
         setOrderId(res.data.order_id);
         setChackOutStatus(status.successOrder);
@@ -85,48 +88,52 @@ function Checkout() {
       return 0; // Validation failed
     }
 
-    const formData = new FormData();
-    formData.append("orderNo", orderId);
-    formData.append("sourceType", sourceType);
-    if (sourceType == "Zip File") {
-      formData.append("photos_file", file);
-    } else {
-      formData.append("photos_url", file);
-    }
-    axios
-      .post("http://127.0.0.1:8000/api/order/uploadfile", formData, {
-        signal: controller.signal,
-        cancelToken: source.token,
-        onUploadProgress: (progressEvent) => {
-          console.log(controller.signal);
-          console.log(progressEvent);
-          if (progressEvent.bytes) {
-            console.log(
-              Math.round((progressEvent.loaded / progressEvent.total) * 100)
-            );
-            setPersent(
-              Math.round((progressEvent.loaded / progressEvent.total) * 100)
-            );
+    if (file.type == "application/x-zip-compressed") {
+      const formData = new FormData();
+      formData.append("orderNo", orderId);
+      formData.append("sourceType", sourceType);
+      if (sourceType == "Zip File") {
+        formData.append("photos_file", file);
+      } else {
+        formData.append("photos_url", file);
+      }
+      axios
+        .post(apiRoutes.uploadfile, formData, {
+          signal: controller.signal,
+          cancelToken: source.token,
+          onUploadProgress: (progressEvent) => {
+            console.log(controller.signal);
+            console.log(progressEvent);
+            if (progressEvent.bytes) {
+              console.log(
+                Math.round((progressEvent.loaded / progressEvent.total) * 100)
+              );
+              setPersent(
+                Math.round((progressEvent.loaded / progressEvent.total) * 100)
+              );
+            }
+          },
+        })
+        .then((res) => {
+          if (res?.data?.code == 200) {
+            setFileUploadStatus({
+              status: true,
+              class: "success",
+              msg: res.data.msg,
+            });
           }
-        },
-      })
-      .then((res) => {
-        if (res?.data?.code == 200) {
+        })
+        .catch((error) => {
           setFileUploadStatus({
             status: true,
-            class: "success",
-            msg: res.data.msg,
+            class: "danger",
+            msg: "Something wrong pls contact us",
           });
-        }
-      })
-      .catch((error) => {
-        setFileUploadStatus({
-          status: true,
-          class: "danger",
-          msg: "Something wrong pls contact us",
+          console.error("Error uploading file:", error);
         });
-        console.error("Error uploading file:", error);
-      });
+    } else {
+      setZipFileError("Select Only Zip File");
+    }
   };
 
   const cancelFileUpload = () => {
@@ -265,17 +272,18 @@ function Checkout() {
                                   )
                                 }
                               >
-                                 Deliver to alternate address{" "}
-                                <span className="text-muted">
-                                  (optional)
-                                </span>
+                                Deliver to alternate address{" "}
+                                <span className="text-muted">(optional)</span>
                               </label>
                               <textarea
                                 className="form-control form-control-sm"
                                 rows="5"
                                 id="c-notes"
                               ></textarea>
-                              <span className="text-muted">You can deliver this product directly to your customer address</span>
+                              <span className="text-muted">
+                                You can deliver this product directly to your
+                                customer address
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -388,16 +396,15 @@ function Checkout() {
                       alignItems: "center",
                       justifyContent: "flex-end",
                     }}
-                  >
-                  </div>
+                  ></div>
                   <CheckOutItem submitOrder={submitOrder} />
-                    <button
-                      className="pro btn btn-dark my-4"
-                      style={{ width: 250 }}
-                      onClick={() => setChackOutStatus(status.proceed)}
-                    >
-                      back
-                    </button>
+                  <button
+                    className="pro btn btn-dark my-4"
+                    style={{ width: 250 }}
+                    onClick={() => setChackOutStatus(status.proceed)}
+                  >
+                    back
+                  </button>
                 </>
               )}
               {chackOutStatus == status.processingOrder && (
@@ -488,8 +495,8 @@ function Checkout() {
                               Please select one of the source options to upload
                               your photos which needs to be print in your order.
                               If something went wrong please contact us, also
-                                you can check your orders in your order section
-                                from customer dashbord.
+                              you can check your orders in your order section
+                              from customer dashbord.
                               {/* If something went wrong please contact us, also you can check your orders in your profile section */}
                             </p>
                             <div className="row mb-4 p-3">
@@ -557,10 +564,16 @@ function Checkout() {
                                     <>
                                       {sourceType == "Zip File" ? (
                                         <div className="col-6 my-2">
+                                          {zipFileError && (
+                                            <span className="text-danger">
+                                              {zipFileError}
+                                            </span>
+                                          )}
                                           <div className="form-group">
                                             <label>Source Type</label>
                                             <input
                                               type="file"
+                                              accept=".zip"
                                               onChange={(e) =>
                                                 setFile(e.target.files[0])
                                               }
@@ -581,7 +594,6 @@ function Checkout() {
                                             <label htmlFor="">Enter Url</label>
                                             <input
                                               type="text"
-                                              accept=".zip"
                                               value={orderDetaild.url}
                                               onChange={(e) =>
                                                 setFile(e.target.value)

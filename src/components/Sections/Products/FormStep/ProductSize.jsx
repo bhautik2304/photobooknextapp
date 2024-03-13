@@ -114,14 +114,14 @@ function ProductSize() {
                 <div className="col-lg-4 col-md-4 col-sm-12">
                   <div
                     className={`size card my-2 pro ${
-                      orderData.pritnig_price_type == "print_bind" &&
+                      orderData.pritnig_price_type == "design_print_bind" &&
                       "selected_prod_size"
                     }`}
                     onClick={() => {
                       disapatch(
                         changeOrderData({
                           key: "pritnig_price_type",
-                          value: "print_bind",
+                          value: "design_print_bind",
                         })
                       );
                       disapatch(
@@ -159,7 +159,7 @@ function ProductSize() {
                   {orderData.pritnig_price_type == "design_print_bind" && (
                     <span className="text-success">
                       Designing cost is added{" "}
-                      {orderData.pritnigPriceTotalPageValue}{" "}
+                      {orderData.pritnig_price_value * orderData.page_qty}{" "}
                       {zonePrice(pritnig_price)?.currency}
                     </span>
                   )}

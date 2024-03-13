@@ -199,11 +199,17 @@ const orderSlice = createSlice({
     addOrderDetail: (state, action) => {
       state.orderData.orderDetaild = action.payload
     },
-    addCoverphoto: (state, action) => {
-      state.orderData.coverphoto = action.payload.coverphoto
+    addFrontCoverphoto: (state, action) => {
+      state.orderData.coverphotofront = action.payload.coverphoto
     },
-    addBoxphoto: (state, action) => {
-      state.orderData.boxphoto = action.payload.boxphoto
+    addBackCoverphoto: (state, action) => {
+      state.orderData.coverphotoback = action.payload.coverphoto
+    },
+    addFrontBoxphoto: (state, action) => {
+      state.orderData.boxphotofront = action.payload.boxphoto
+    },
+    addBackBoxphoto: (state, action) => {
+      state.orderData.boxphotoback = action.payload.boxphoto
     },
     addphotoszip: (state, action) => {
       state.orderData.photoszip = action.payload.photoszip
@@ -232,7 +238,7 @@ const orderSlice = createSlice({
   }
 });
 
-export const { setPrintingTotale,clearCart, changeBoxColor, selectBoxSleeveOption, addBoxphoto, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, selectCoverOption, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const {addFrontCoverphoto,selectCoverOption ,addBackCoverphoto ,addFrontBoxphoto ,addBackBoxphoto , setPrintingTotale,clearCart, changeBoxColor, selectBoxSleeveOption, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 

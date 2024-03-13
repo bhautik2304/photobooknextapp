@@ -224,16 +224,16 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                   </div>
                   <div className="text-end ms-auto">
                     <div className="fs-5 mb-2">
-                      {((orderData?.sheetValue * orderData.paperValue) / 100 +
+                      {(  (orderData?.sheetValue * orderData.paperValue) / 100 +
                         orderData?.sheetValue) *
-                        orderData?.page_qty -
-                        orderData?.sheetValue * orderData.paperValue}{" "}
+                        orderData?.page_qty - orderData?.sheetValue * orderData?.page_qty}{" "}
                       {user?.zone?.currency_sign}
                     </div>
                   </div>
                 </div>
                 {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
               </div>
+            
             </div>
             {/* <!-- Item--> */}
             <div className="d-sm-flex align-items-center border-top py-2">
@@ -260,29 +260,7 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
               </div>
             </div>
             {/* <!-- Item--> */}
-            <div className="d-sm-flex align-items-center border-top py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={box?.boxsleeve.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 mb-2">
-                      <a href="#">{box?.boxsleeve?.name}</a>
-                    </h3>
-                  </div>
-                  <div className="text-end ms-auto">
-                    <div className="fs-5 mb-2">
-                      {zonePrice(box?.boxsleeveprice)?.priceSrring}
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            </div>
+           
             {/* <!-- Item--> */}
             <div className="d-sm-flex align-items-center border-top py-2">
               <a
@@ -310,16 +288,10 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                 {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
               </div>
             </div>
-            {/* <div className="border-top pt-4 mb-3"></div> */}
-          </div>
-          <div className="col-lg-6 col-md-6 col-sm-12">
-            <div className="card p-3 ">
-              <div className="card-header">
-                <center>Order Summary</center>
-              </div>
-              {orderData?.isPhotoBookCopy && (
+
+            {orderData?.isPhotoBookCopy && (
                 <>
-                  <div className="d-sm-flex align-items-center border-top py-2">
+                  <div className="d-sm-flex align-items-center border-bottom py-2">
                     <a
                       className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
                       href="#"
@@ -347,6 +319,14 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                   </div>
                 </>
               )}
+            {/* <div className="border-top pt-4 mb-3"></div> */}
+          </div>
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <div className="card p-3 ">
+              <div className="card-header">
+                <center>Order Summary</center>
+              </div>
+             
               <ul className="list-unstyled py-3 mb-0">
                 <li className="d-flex justify-content-between mb-2">
                   Subtotal:
