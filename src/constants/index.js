@@ -18,7 +18,7 @@ export const appRoutes = {
     userProfileOrders: `${userProfile}/orders`,
 
     // checkout routes
-    checkout: 'Check-out'
+    checkout: 'check-out'
 }
 
 export const apiRoutes = {
