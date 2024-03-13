@@ -98,7 +98,6 @@ function ShowProduct() {
                       style={{ fontSize: 18, fontWeight: "bold" }}
                       className="text-success"
                     >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}`}</span><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span
                       style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
                     >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</span>
@@ -123,7 +122,7 @@ function ShowProduct() {
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
                   >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}   `}</span><br/>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
                   >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</span>
@@ -144,7 +143,7 @@ function ShowProduct() {
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
                   >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}   `}</span><br/>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
                   >{`Product cost : ${
@@ -169,7 +168,7 @@ function ShowProduct() {
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
                   >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}   `}</span><br/>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
                   >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</span>

@@ -65,7 +65,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_AcrylicCoverBrown.jpg"} alt="" srcset="" />
+                  <Image style={{borderRadius:10}} className="my-3" height={300} width={300} src={"/assets/img/albumSwiper/3D_AcrylicCoverBrown.jpg"} alt="" srcset="" />
                   {/* <h6 className="my-3">Square</h6> */}
                 </Link>
               </div>
@@ -74,7 +74,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Album_1.jpg"} alt="" srcset="" />
+                  <Image style={{borderRadius:10}} className="my-3" height={300} width={300} src={"/assets/img/albumSwiper/3D_Album_1.jpg"} alt="" srcset="" />
                   {/* <h6 className="my-3">Landscape</h6> */}
                 </Link>
               </div>
@@ -83,7 +83,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Linen Cover_1.jpg"} alt="" srcset="" />
+                  <Image style={{borderRadius:10}} className="my-3" height={300} width={300} src={"/assets/img/albumSwiper/3D_Linen Cover_1.jpg"} alt="" srcset="" />
                   {/* <h6 className="my-3">Portrait</h6> */}
                 </Link>
               </div>
@@ -92,7 +92,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Album_5.jpg"} alt="" srcset="" />
+                  <Image style={{borderRadius:10}} className="my-3" height={300} width={300} src={"/assets/img/albumSwiper/3D_Album_5.jpg"} alt="" srcset="" />
                   {/* <h6 className="my-3">Square</h6> */}
                 </Link>
               </div>
@@ -101,7 +101,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Krafftbook_3.jpg"} alt="" srcset="" />
+                  <Image style={{borderRadius:10}} className="my-3" height={300} width={300} src={"/assets/img/albumSwiper/3D_Krafftbook_3.jpg"} alt="" srcset="" />
                   {/* <h6 className="my-3">Landscape</h6> */}
                 </Link>
               </div>
@@ -110,7 +110,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image style={{borderRadius:10}} className="my-3" height={400} width={400} src={"/assets/img/albumSwiper/3D_Album_3.jpg"} alt="" srcset="" />
+                  <Image style={{borderRadius:10}} className="my-3" height={300} width={300} src={"/assets/img/albumSwiper/3D_Album_3.jpg"} alt="" srcset="" />
                   {/* <h6 className="my-3">Portrait</h6> */}
                 </Link>
               </div>
@@ -271,7 +271,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image width={400} src={square} alt="" srcset="" />
+                  <Image width={300} src={square} alt="" srcset="" />
                   <h6 className="my-3">Square</h6>
                 </Link>
               </div>
@@ -280,7 +280,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image width={400} src={landscape} alt="" srcset="" />
+                  <Image width={300} src={landscape} alt="" srcset="" />
                   <h6 className="my-3">Landscape</h6>
                 </Link>
               </div>
@@ -289,7 +289,7 @@ export default function Home() {
                   href={appRoutes.StartPrinting}
                   style={{ textDecoration: "none" }}
                 >
-                  <Image width={400} src={portrait} alt="" srcset="" />
+                  <Image width={300} src={portrait} alt="" srcset="" />
                   <h6 className="my-3">Portrait</h6>
                 </Link>
               </div>
