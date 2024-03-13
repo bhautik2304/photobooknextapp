@@ -470,10 +470,10 @@ function Checkout() {
                                     </Link>
                                     .
                                   </h6>
-                                  <LinearProgress
+                                  {/* <LinearProgress
                                     variant="determinate"
-                                    value={progress}
-                                  />
+                                    value={persent}
+                                  /> */}
                                 </div>
                               </div>
                             </>
