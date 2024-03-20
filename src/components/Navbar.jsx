@@ -30,7 +30,8 @@ function Navbar() {
                 if (res.data.code == 200) {
                     dispatch(authLogin(res.data))
                     dispatch(fetchUsers(res.data.user.id))
-                    return
+                }else{
+                    dispatch(authLogout())
                 }
             }).catch(err => console.log(err))
         } else {

@@ -639,7 +639,7 @@ function Order() {
                                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                         <div class="fs-sm text-body-secondary mb-2">
-                                          Total
+                                          Subtotal
                                         </div>
                                       </td>
                                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
@@ -734,7 +734,7 @@ function Order() {
                                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                         <div class="fs-sm text-body-secondary mb-2">
-                                          Subtotal
+                                          Total
                                         </div>
                                       </td>
                                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">

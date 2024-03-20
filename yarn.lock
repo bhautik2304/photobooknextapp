@@ -4511,6 +4511,11 @@ react-phone-number-input@^3.3.9:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
+react-select-country-list@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.npmjs.org/react-select-country-list/-/react-select-country-list-2.2.3.tgz"
+  integrity sha512-eRgXL613dVyJiE99yKDYLvSBKDxvIlhkmvO2DVIjdKVyUQq6kBqoMUV/2zuRIAsbRXgBGmKjeL1dxjf7zTfszg==
+
 react-select@^5.8.0:
   version "5.8.0"
   resolved "https://registry.npmjs.org/react-select/-/react-select-5.8.0.tgz"

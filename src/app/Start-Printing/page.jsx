@@ -21,10 +21,10 @@ function page() {
     return (
         <>
 
-            <div className="container-fluid py-5" style={{ backgroundColor: '#80d0c7', backgroundImage: 'linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)' }}>
+            <div className="container-fluid py-5" style={{ backgroundColor: '#f6f9fc' }}>
                 <div className="row">
                     <div className="d-flex justify-content-center aligns-item-center">
-                        <div className='col-7 noothing d-none d-lg-block'>
+                        <div className='col-md-8 noothing d-none d-lg-block'>
                             <div className="card shadw-sm p-5">
                                 <ShowProduct />
                             </div>

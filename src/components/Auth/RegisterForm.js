@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useMemo  } from "react";
 import axios from "axios";
 import { apiRoutes, appRoutes, localstorageKey } from "@/constants";
 import { useRouter } from "next/navigation";
@@ -7,11 +7,17 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
 import { Button } from "@mui/material";
 // import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import PhoneInputWithCountry, {
+  parsePhoneNumber,
+  getCountryCallingCode
+} from "react-phone-number-input";
+import countryList from 'react-select-country-list'
+
 
 const errorMsg = {
   name: "Please enter your name.",
   mobile: "Please enter a valid mobile number.",
+  country: "Please Select a country Code.",
   email: "Please enter a valid email address.",
   password: "Please enter a password with at least 8 characters.",
 
@@ -31,8 +37,9 @@ function RegisterForm() {
 
   const [data, setData] = useState({
     name: "",
-    mobaile: "",
     email: "",
+    mobaile: "",
+    mobaile_code: "",
     password: "",
 
     address: "",
@@ -47,18 +54,26 @@ function RegisterForm() {
   });
   const [status, setStatus] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [country, setCountry] = useState(false);
   const [error, setError] = useState(false);
   const [show, setHide] = useState(false);
 
+  const options = useMemo(() => countryList().getData(), [])
+
   // axios.post()
   const submitData = async () => {
+    console.log(parsePhoneNumber(String(mobile)))
+    console.log(getCountryCallingCode('IN'))
     const newError = {};
 
     if (!data?.name) {
       newError.name = errorMsg.name;
     }
-    if (!mobile) {
+    if (!data.mobaile) {
       newError.mobile = errorMsg.mobile;
+    }
+    if (!country) {
+      newError.country = errorMsg.mobile;
     }
     if (!data?.email) {
       newError.email = errorMsg.email;
@@ -86,7 +101,8 @@ function RegisterForm() {
     }
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("phone_no", mobile);
+    formData.append("country_code", getCountryCallingCode(country));
+    formData.append("phone_no", data.mobaile);
     formData.append("email", data.email);
     formData.append("password", data.password);
 
@@ -100,12 +116,12 @@ function RegisterForm() {
     formData.append("social_link_1", data.social1);
     formData.append("social_link_2", data.social2);
     axios.post(apiRoutes.register, formData).then(res => {
-        if (Number(res.data.code) === 444) {
-            newError.apiError = res.data.msg
-            setError(newError);
-            return 0;
-        }
-        setStatus(true)
+      if (Number(res.data.code) === 444) {
+        newError.apiError = res.data.msg
+        setError(newError);
+        return 0;
+      }
+      setStatus(true)
     }).catch(err => console.log(err))
   };
 
@@ -129,17 +145,34 @@ function RegisterForm() {
               </div>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
                 <div className="col mb-2">
-                  <span className="text-danger">{error?.mobile}</span>
-                  <PhoneInput
-                    className="form-control form-control-lg"
-                    onChange={setMobile}
-                    placeholder="Your Mobile No *"
-                    value={mobile}
-                    required
-                  />
+                  <div className="row" >
+                    <div className="col-3" >
+                      <PhoneInputWithCountry
+                        style={{ width: '100%' }}
+                        className="form-control form-control-lg"
+                        onCountryChange={(E) => setCountry(E)}
+                        placeholder="Your Mobile No *"
+                        value={mobile}
+                        onChange={setMobile}
+                        required
+                      />
+                      <span className="text-danger">{error?.country}</span>
+                    </div>
+                    <div className="col-9" >
+                      <input
+                        className="form-control form-control-lg"
+                        onChange={(e) =>
+                          setData({ ...data, mobaile: e.target.value })
+                        }
+                        type="number"
+                        placeholder="Enter Mobile No."
+                        required
+                      />
+                        <span className="text-danger">{error?.mobile}</span>
+                    </div>
+                  </div>
                 </div>
                 <div className="col mb-2">
-                  <span className="text-danger">{error?.email}</span>
                   <input
                     className="form-control form-control-lg"
                     onChange={(e) =>
@@ -149,6 +182,7 @@ function RegisterForm() {
                     placeholder="Email address *"
                     required
                   />
+                    <span className="text-danger">{error?.email}</span>
                 </div>
               </div>
               <span className="text-danger">{error?.password}</span>
@@ -248,7 +282,7 @@ function RegisterForm() {
                 </div>
                 <div className="col mb-2">
                   <span className="text-danger">{error?.country}</span>
-                  <input
+                  <select
                     className="form-control form-control-lg"
                     onChange={(e) =>
                       setData({ ...data, country: e.target.value })
@@ -256,7 +290,11 @@ function RegisterForm() {
                     type="text"
                     placeholder="Country *"
                     required
-                  />
+                  >
+                    {
+                      options.map((data,key)=><option value={data.label} key={key}>{data.label}</option>)
+                    }
+                  </select>
                 </div>
               </div>
 
