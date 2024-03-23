@@ -96,8 +96,7 @@ function Checkout() {
     if (file.type == "application/x-zip-compressed") {
       const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
       
-      /* Change hear dropbox tokken */
-      const ACCESS_TOKEN = "";
+      /* Change hear dropbox */
       
       
       const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
