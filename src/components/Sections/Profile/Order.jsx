@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ProfilePageLayout from "./ProfilePageLayout";
 import axios from "axios";
-import { apiRoutes, appRoutes } from "@/constants";
+import { apiRoutes, appRoutes, secretTokken } from "@/constants";
 import { useSelector } from "react-redux";
 import Accordion from "@mui/material/Accordion";
 import { AccordionDetails, Box, Typography } from "@mui/material";
@@ -18,7 +18,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import emputycart from "@/assets/img/emputycart.json";
 import Image from "next/image";
-
+import { Dropbox } from "dropbox";
 const productTotalPrice = (
   page,
   sheet,
@@ -98,7 +98,7 @@ function Order() {
                 </Badge>
                 <h2 className="h4 mb-0 mx-4">Orders</h2>
               </div>
-              {data ? (
+              {data.length ? (
                 <>
                   {currentItems?.map((datas, key) => {
                     const date = moment(datas?.created_at);
@@ -176,7 +176,12 @@ function Order() {
                                   <div class="fs-sm text-body-secondary mb-2">
                                     Total
                                   </div>
-                                  <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${subTotal + datas?.pritnig_price * datas?.page_qty}`}</div>
+                                  <div class="fs-sm fw-medium text-dark">{`${
+                                    datas?.countryzone?.currency_sign
+                                  } ${
+                                    subTotal +
+                                    datas?.pritnig_price * datas?.page_qty
+                                  }`}</div>
                                 </div>
                               </div>
                               {/* <div class="accordion-button d-none d-sm-flex">
@@ -529,9 +534,7 @@ function Order() {
                                             </a>
                                             <div class="ps-3 ps-sm-4">
                                               <h4 class="h6 mb-2">
-                                                <a href="#">
-                                                  Pocket book copy
-                                                </a>
+                                                <a href="#">Pocket book copy</a>
                                               </h4>
                                               <div class="text-body-secondary fs-sm me-3">
                                                 Box & Sleev Upgrade:{" "}
@@ -584,21 +587,22 @@ function Order() {
                                       <tr>
                                         <td class="border-0 py-1 my-2 px-0">
                                           <div class="d-flex align-items-center">
-                                          <a
+                                            <a
                                               class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
                                               href="#"
                                             >
                                               <img
-                                                src={"https://api.photokrafft.com/img/size/img.png"}
+                                                src={
+                                                  "https://api.photokrafft.com/img/size/img.png"
+                                                }
                                                 width="110"
                                                 alt="Product"
                                               />
                                             </a>
                                             <div class="ps-3 ps-sm-4">
-                                           
                                               <h4 class="h6 mb-2">
                                                 <a href="#">
-                                                Design + Print + Bind
+                                                  Design + Print + Bind
                                                 </a>
                                               </h4>
                                               {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
@@ -643,10 +647,15 @@ function Order() {
                                         </div>
                                       </td>
                                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                        <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${productTotal + datas?.pritnig_price * datas?.page_qty}`}</div>
+                                        <div class="fs-sm fw-medium text-dark">{`${
+                                          datas?.countryzone?.currency_sign
+                                        } ${
+                                          productTotal +
+                                          datas?.pritnig_price * datas?.page_qty
+                                        }`}</div>
                                       </td>
                                     </tr>
-                                    {Number(datas?.discount) !=0 ? (
+                                    {Number(datas?.discount) != 0 ? (
                                       <>
                                         <tr>
                                           <td class="border-0 py-1 px-0"></td>
@@ -978,7 +987,7 @@ const FileUpload = ({ orderId }) => {
   const source = CancelToken.source();
 
   console.log(orderId);
-  const fileUplode = () => {
+  const fileUplode = async () => {
     const error = {};
     if (file == null) {
       error.file = "Required *";
@@ -991,50 +1000,220 @@ const FileUpload = ({ orderId }) => {
     }
 
     if (file.type == "application/x-zip-compressed") {
-      const formData = new FormData();
-      formData.append("orderNo", orderId);
-      formData.append("sourceType", sourceType);
-      if (sourceType == "Zip File") {
-        formData.append("photos_file", file);
+      const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
+
+      /* Change hear */
+      const ACCESS_TOKEN = secretTokken.dropbox;
+      const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
+      if (file.size < UPLOAD_FILE_SIZE_LIMIT) {
+        // Upload smaller files directly using Dropbox API v2
+        const formData = new FormData();
+        formData.append("file", file);
+        axios
+          .post("https://content.dropboxapi.com/2/files/upload", file, {
+            headers: {
+              "Content-Type": "application/octet-stream",
+              Authorization: `Bearer ${ACCESS_TOKEN}`,
+              "Dropbox-API-Arg": JSON.stringify({
+                path: `/ORDER-ID-${orderId}.zip`,
+                mode: "add",
+                autorename: true,
+                mute: false,
+              }),
+            },
+            onUploadProgress: (progressEvent) => {
+              console.log(controller.signal);
+              console.log(progressEvent);
+              if (progressEvent.bytes) {
+                console.log(
+                  Math.round((progressEvent.loaded / progressEvent.total) * 100)
+                );
+                if (
+                  Math.round(
+                    (progressEvent.loaded / progressEvent.total) * 100
+                  ) <= 98
+                ) {
+                  setPersent(
+                    Math.round(
+                      (progressEvent.loaded / progressEvent.total) * 100
+                    )
+                  );
+                }
+              }
+            },
+          })
+          .then(async (response) => {
+            console.log(response);
+            const linkResponse = await dbx
+              .sharingCreateSharedLinkWithSettings({
+                path: response.data.path_display,
+              })
+              .then(async (linkResult) => {
+                axios
+                  .post(apiRoutes.uploadfile, {
+                    orderNo: orderId,
+                    source_link: linkResult.result.url,
+                  })
+                  .then((state) => {
+                    setPersent(100);
+                    setTimeout(function () {
+                      // Function to execute after the delay
+                      console.log("Executing function after 2-second delay...");
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                      // redirect(appRoutes.userProfileOrders);
+                      // console.log("Executing function after 5-second delay...");
+                      // Replace the console.log statement with your desired function call
+                    }, 2000);
+                  });
+              });
+            // Handle success
+          })
+          .catch((error) => {
+            console.error(error);
+            // Handle error
+          });
       } else {
-        formData.append("photos_url", file);
-      }
-      axios
-        .post(apiRoutes.uploadfile, formData, {
-          signal: controller.signal,
-          cancelToken: source.token,
-          onUploadProgress: (progressEvent) => {
-            console.log(controller.signal);
-            console.log(progressEvent);
-            if (progressEvent.bytes) {
-              console.log(
-                Math.round((progressEvent.loaded / progressEvent.total) * 100)
+        let progreShBar = 0;
+        const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
+        setPersent(1);
+        const maxBlob = 250 * 1024 * 1024; // 12MB
+        const workItems = [];
+        let offset = 0;
+
+        while (offset < file.size) {
+          const chunkSize = Math.min(maxBlob, file.size - offset);
+          workItems.push(file.slice(offset, offset + chunkSize));
+          offset += chunkSize;
+        }
+        const task = workItems.reduce((acc, blob, idx, items) => {
+          if (idx === 0) {
+            return acc.then(() => {
+              return dbx
+                .filesUploadSessionStart({ close: false, contents: blob })
+                .then((response) => response.result.session_id);
+            });
+          } else if (idx < items.length - 1) {
+            return acc.then(async (sessionId) => {
+              const cursor = { session_id: sessionId, offset: idx * maxBlob };
+              await dbx.filesUploadSessionAppendV2({
+                cursor: cursor,
+                close: false,
+                contents: blob,
+              });
+              const progress = Math.min(
+                100,
+                Math.floor((blob.size / file.size) * 100)
               );
-              setPersent(
-                Math.round((progressEvent.loaded / progressEvent.total) * 100)
+              console.log(Math.floor((blob / file.size) * 100));
+              progreShBar = progreShBar += progress;
+              setPersent(progreShBar);
+              setBuffer(progreShBar + 10);
+              console.log("progress = ", progress);
+              console.log("blob = ", blob);
+              console.log("file = ", file.size);
+              return sessionId;
+            });
+          } else {
+            return acc.then(async (sessionId) => {
+              const cursor = {
+                session_id: sessionId,
+                offset: file.size - blob.size,
+              };
+              const commit = {
+                path: `/ORDER-ID-${orderId}.zip`,
+                mode: "add",
+                autorename: true,
+                mute: false,
+              };
+              const result = await dbx.filesUploadSessionFinish({
+                cursor: cursor,
+                commit: commit,
+                contents: blob,
+              });
+
+              const progress = Math.min(
+                100,
+                Math.floor((blob.size / file.size) * 100)
               );
-            }
-          },
-        })
-        .then((res) => {
-          if (res?.data?.code == 200) {
-            setFileUploadStatus({
-              status: true,
-              class: "success",
-              msg: res.data.msg,
+              console.log(Math.floor((blob.size / file.size) * 100));
+              console.log("Finnish progress = ", progress);
+              console.log("Finnish blob = ", blob);
+              console.log("Finnish file = ", file.size);
+              progreShBar = progreShBar + progress;
+              // setPersent(100);
+              setPersent(progreShBar);
+              return result;
             });
           }
+        }, Promise.resolve());
+
+        task
+          .then(async (result) => {
+            console.log(result);
+            const linkResponse = await dbx
+              .sharingCreateSharedLinkWithSettings({
+                path: result.result.path_display,
+              })
+              .then(async (linkResult) => {
+                axios
+                  .post(apiRoutes.uploadfile, {
+                    orderNo: orderId,
+                    source_link: linkResult.result.url,
+                  })
+                  .then((state) => {
+                    setPersent(100);
+                    setTimeout(function () {
+                      // Function to execute after the delay
+                      console.log("Executing function after 2-second delay...");
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                      // redirect(appRoutes.userProfileOrders);
+                      // console.log("Executing function after 5-second delay...");
+                      // Replace the console.log statement with your desired function call
+                    }, 2000);
+                  });
+              });
+            // setPersent(100)
+          })
+          .catch((error) => {
+            setPersent(0);
+            setFileUploadStatus({
+              status: true,
+              class: "danger",
+              msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+            });
+            console.log(error);
+            // Handle error
+          });
+      }
+    } else {
+      axios
+        .post(apiRoutes.uploadfile, {
+          orderNo: orderId,
+          source_link: file,
         })
-        .catch((error) => {
+        .then((e) => {
+          setFileUploadStatus({
+            status: true,
+            class: "success",
+            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+          });
+        })
+        .catch((e) => {
+          console.log(e);
           setFileUploadStatus({
             status: true,
             class: "danger",
-            msg: "Something wrong pls contact us",
+            msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
           });
-          console.error("Error uploading file:", error);
         });
-    } else {
-      setZipFileError("Select Only Zip File");
     }
   };
 

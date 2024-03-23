@@ -139,7 +139,7 @@ function ShowProduct() {
             <>
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Select your box & sleeve.</h2>
-                <div>
+                {/* <div>
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
@@ -150,7 +150,7 @@ function ShowProduct() {
                   >{`Product cost : ${
                     total + photoBookCopy * photoBookCopyPrice
                   } ${user?.zone?.currency_sign}`}</span>
-                </div>
+                </div> */}
               </div>
               <p>
                 Please select box & sleeve options from below mentioned section.

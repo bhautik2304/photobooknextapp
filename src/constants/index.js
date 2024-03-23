@@ -48,3 +48,7 @@ export const localstorageKey = {
 export const errorText = {
 
 }
+
+export const secretTokken={
+    dropbox:"sl.Bx95O5ueuCDJcMB525mKKaV2IyahPTpVF8eIEthTXx3zKmFauGK73qXxNVzPtAFr9usdSb1-KrLhyageiScPsdkNmWZsr_iDPQRK4ZzhrY3nWLIEWdrNna3TWp0dh43MtKblkCZfpo25MphDAFFFuJw"
+}

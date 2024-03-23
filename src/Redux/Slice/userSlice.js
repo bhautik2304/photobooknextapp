@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { apiRoutes, localstorageKey } from '@/constants'
 import axios from 'axios'
 
-export const fetchUsers = createAsyncThunk('Product', async () => {
+export const fetchUsers = createAsyncThunk('User Slice', async () => {
 
     const authStatus = localStorage.getItem(localstorageKey.authStatus)
     const userKey = localStorage.getItem(localstorageKey.authKey)
@@ -13,11 +13,8 @@ export const fetchUsers = createAsyncThunk('Product', async () => {
                 Authorization: `${JSON.parse(userKey)}`
             },
         })
-            .then(res => {
-                console.log(res);
-                res.data
-            })
-        return response.costomer
+            .then(res => res.data)
+        return response.data
     }
     return {}
 

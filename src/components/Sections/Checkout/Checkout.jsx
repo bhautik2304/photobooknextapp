@@ -13,10 +13,12 @@ import Link from "next/link";
 import { Box, Button } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import { apiRoutes, appRoutes } from "@/constants";
+import { apiRoutes, appRoutes, secretTokken } from "@/constants";
 import { clearCart } from "@/Redux/Slice/orderSlice";
 import { Dropbox } from "dropbox";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { fetchUsers } from "@/Redux/Slice/userSlice";
+// import {  } from 'next/navigation'
 
 const status = {
   proceed: "Proceed to order",
@@ -39,6 +41,7 @@ function Checkout() {
   const [zipFileError, setZipFileError] = useState(false);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const {
     auth: { user },
@@ -97,129 +100,233 @@ function Checkout() {
       const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
 
       /* Change hear */
-      const ACCESS_TOKEN =
-        "sl.Bx9cda1ldnKjkJWfycWfAawTYJUs0sb4j2GT0DuclLQhpuh267C8aIR2uDTIuo6GleRpZ8ENdVy2Ei3hYheMlMPFBWiQu0ck6YXi-VV3gByiF_szAHkl-6uU0iVYtNBlyeDmYEEpyYVHVdnCLpVnltA";
-
+      const ACCESS_TOKEN = secretTokken.dropbox;
       const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
-      let progreShBar = 0;
-      const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
-      setPersent(1);
-      const maxBlob = 250 * 1024 * 1024; // 12MB
-      const workItems = [];
-      let offset = 0;
+      if (file.size < UPLOAD_FILE_SIZE_LIMIT) {
+        // Upload smaller files directly using Dropbox API v2
+        const formData = new FormData();
+        formData.append("file", file);
+        axios
+          .post("https://content.dropboxapi.com/2/files/upload", file, {
+            headers: {
+              "Content-Type": "application/octet-stream",
+              Authorization: `Bearer ${ACCESS_TOKEN}`,
+              "Dropbox-API-Arg": JSON.stringify({
+                path: `/ORDER-ID-${orderId}.zip`,
+                mode: "add",
+                autorename: true,
+                mute: false,
+              }),
+            },
+            onUploadProgress: (progressEvent) => {
+              console.log(controller.signal);
+              console.log(progressEvent);
+              if (progressEvent.bytes) {
+                console.log(
+                  Math.round((progressEvent.loaded / progressEvent.total) * 100)
+                );
+                if (
+                  Math.round(
+                    (progressEvent.loaded / progressEvent.total) * 100
+                  ) <= 98
+                ) {
+                  setPersent(
+                    Math.round(
+                      (progressEvent.loaded / progressEvent.total) * 100
+                    )
+                  );
+                }
+              }
+            },
+          })
+          .then(async (response) => {
+            console.log(response);
+            const linkResponse = await dbx
+              .sharingCreateSharedLinkWithSettings({
+                path: response.data.path_display,
+              })
+              .then(async (linkResult) => {
+                setDownload(linkResult.result.url);
+                axios
+                  .post(apiRoutes.uploadfile, {
+                    orderNo: orderId,
+                    source_link: linkResult.result.url,
+                  })
+                  .then((state) => {
+                    setPersent(100);
+                    setTimeout(function () {
+                      // Function to execute after the delay
+                      console.log("Executing function after 2-second delay...");
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                      // redirect(appRoutes.userProfileOrders);
+                      // console.log("Executing function after 5-second delay...");
+                      // Replace the console.log statement with your desired function call
+                    }, 2000);
+                    setTimeout(function () {
+                      dispatch(fetchUsers());
+                      router.push(appRoutes.userProfileOrders);
+                      return;
+                      // Function to execute after the delay
+                      // Replace the console.log statement with your desired function call
+                    }, 5000);
+                  });
+              });
+            // Handle success
+          })
+          .catch((error) => {
+            console.error(error);
+            // Handle error
+          });
+      } else {
+        let progreShBar = 0;
+        const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
+        setPersent(1);
+        const maxBlob = 250 * 1024 * 1024; // 12MB
+        const workItems = [];
+        let offset = 0;
 
-      while (offset < file.size) {
-        const chunkSize = Math.min(maxBlob, file.size - offset);
-        workItems.push(file.slice(offset, offset + chunkSize));
-        offset += chunkSize;
-      }
-      const task = workItems.reduce((acc, blob, idx, items) => {
-        if (idx === 0) {
-          return acc.then(() => {
-            return dbx
-              .filesUploadSessionStart({ close: false, contents: blob })
-              .then((response) => response.result.session_id);
-          });
-        } else if (idx < items.length - 1) {
-          return acc.then(async (sessionId) => {
-            const cursor = { session_id: sessionId, offset: idx * maxBlob };
-            await dbx.filesUploadSessionAppendV2({
-              cursor: cursor,
-              close: false,
-              contents: blob,
-            });
-            const progress = Math.min(
-              100,
-              Math.floor((blob.size / file.size) * 100)
-            );
-            console.log(Math.floor((blob / file.size) * 100));
-            progreShBar = progreShBar += progress;
-            setPersent(progreShBar);
-            setBuffer(progreShBar + 10);
-            console.log("progress = ", progress);
-            console.log("blob = ", blob);
-            console.log("file = ", file.size);
-            return sessionId;
-          });
-        } else {
-          return acc.then(async (sessionId) => {
-            const cursor = {
-              session_id: sessionId,
-              offset: file.size - blob.size,
-            };
-            const commit = {
-              path: `/ORDER-ID-${orderId}.zip`,
-              mode: "add",
-              autorename: true,
-              mute: false,
-            };
-            const result = await dbx.filesUploadSessionFinish({
-              cursor: cursor,
-              commit: commit,
-              contents: blob,
-            });
-
-            const progress = Math.min(
-              100,
-              Math.floor((blob.size / file.size) * 100)
-            );
-            console.log(Math.floor((blob.size / file.size) * 100));
-            console.log("Finnish progress = ", progress);
-            console.log("Finnish blob = ", blob);
-            console.log("Finnish file = ", file.size);
-            progreShBar = progreShBar + progress;
-            // setPersent(100);
-            setPersent(progreShBar);
-            return result;
-          });
+        while (offset < file.size) {
+          const chunkSize = Math.min(maxBlob, file.size - offset);
+          workItems.push(file.slice(offset, offset + chunkSize));
+          offset += chunkSize;
         }
-      }, Promise.resolve());
-
-      task
-        .then(async (result) => {
-          const linkResponse = await dbx
-            .sharingCreateSharedLinkWithSettings({
-              path: result.result.path_display,
-            })
-            .then(async (linkResult) => {
-              setDownload(linkResult.result.url);
-              axios
-                .post(apiRoutes.uploadfile, {
-                  orderNo: orderId,
-                  source_link: linkResult.result.url,
-                })
-                .then((state) => {
-                  setPersent(100);
-                  setTimeout(function () {
-                    // Function to execute after the delay
-                    console.log("Executing function after 2-second delay...");
-                    setFileUploadStatus({
-                      status: true,
-                      class: "success",
-                      msg: "Files Upload In Drop box",
-                    });
-                    redirect(appRoutes.userProfileOrders);
-                    // console.log("Executing function after 5-second delay...");
-                    // Replace the console.log statement with your desired function call
-                  }, 2000);
-                  setTimeout(function () {
-                    console.log("Executing function after 4-second delay...");
-                    return;
-                    // Function to execute after the delay
-                    // Replace the console.log statement with your desired function call
-                  }, 4000);
-                });
+        const task = workItems.reduce((acc, blob, idx, items) => {
+          if (idx === 0) {
+            return acc.then(() => {
+              return dbx
+                .filesUploadSessionStart({ close: false, contents: blob })
+                .then((response) => response.result.session_id);
             });
-          // setPersent(100)
+          } else if (idx < items.length - 1) {
+            return acc.then(async (sessionId) => {
+              const cursor = { session_id: sessionId, offset: idx * maxBlob };
+              await dbx.filesUploadSessionAppendV2({
+                cursor: cursor,
+                close: false,
+                contents: blob,
+              });
+              const progress = Math.min(
+                100,
+                Math.floor((blob.size / file.size) * 100)
+              );
+              console.log(Math.floor((blob / file.size) * 100));
+              progreShBar = progreShBar += progress;
+              setPersent(progreShBar);
+              setBuffer(progreShBar + 10);
+              console.log("progress = ", progress);
+              console.log("blob = ", blob);
+              console.log("file = ", file.size);
+              return sessionId;
+            });
+          } else {
+            return acc.then(async (sessionId) => {
+              const cursor = {
+                session_id: sessionId,
+                offset: file.size - blob.size,
+              };
+              const commit = {
+                path: `/ORDER-ID-${orderId}.zip`,
+                mode: "add",
+                autorename: true,
+                mute: false,
+              };
+              const result = await dbx.filesUploadSessionFinish({
+                cursor: cursor,
+                commit: commit,
+                contents: blob,
+              });
+
+              const progress = Math.min(
+                100,
+                Math.floor((blob.size / file.size) * 100)
+              );
+              console.log(Math.floor((blob.size / file.size) * 100));
+              console.log("Finnish progress = ", progress);
+              console.log("Finnish blob = ", blob);
+              console.log("Finnish file = ", file.size);
+              progreShBar = progreShBar + progress;
+              // setPersent(100);
+              setPersent(progreShBar);
+              return result;
+            });
+          }
+        }, Promise.resolve());
+
+        task
+          .then(async (result) => {
+            console.log(result);
+            const linkResponse = await dbx
+              .sharingCreateSharedLinkWithSettings({
+                path: result.result.path_display,
+              })
+              .then(async (linkResult) => {
+                setDownload(linkResult.result.url);
+                axios
+                  .post(apiRoutes.uploadfile, {
+                    orderNo: orderId,
+                    source_link: linkResult.result.url,
+                  })
+                  .then((state) => {
+                    setPersent(100);
+                    setTimeout(function () {
+                      // Function to execute after the delay
+                      console.log("Executing function after 2-second delay...");
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                      // redirect(appRoutes.userProfileOrders);
+                      // console.log("Executing function after 5-second delay...");
+                      // Replace the console.log statement with your desired function call
+                    }, 2000);
+                    setTimeout(function () {
+                      console.log("Executing function after 4-second delay...");
+                      router.refresh();
+                      router.push(appRoutes.userProfileOrders);
+                      return;
+                      // Function to execute after the delay
+                      // Replace the console.log statement with your desired function call
+                    }, 4000);
+                  });
+              });
+            // setPersent(100)
+          })
+          .catch((error) => {
+            setPersent(0);
+            setFileUploadStatus({
+              status: true,
+              class: "danger",
+              msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+            });
+            console.log(error);
+            // Handle error
+          });
+      }
+    } else {
+      axios
+        .post(apiRoutes.uploadfile, {
+          orderNo: orderId,
+          source_link: file,
         })
-        .catch((error) => {
+        .then((e) => {
           setFileUploadStatus({
             status: true,
-            class: "error",
-            msg: "Files Is not Uploaded",
+            class: "success",
+            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
           });
-          console.error(error);
-          // Handle error
+        })
+        .catch((e) => {
+          console.log(e);
+          setFileUploadStatus({
+            status: true,
+            class: "danger",
+            msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+          });
         });
     }
   };
@@ -527,8 +634,7 @@ function Checkout() {
                             class={`alert alert-${fileUploadStatus?.class}`}
                             role="alert"
                           >
-                            Your file is successfully received, pls contact us
-                            if you have any queries regarding you order
+                            {fileUploadStatus?.msg}
                           </div>
                           <Link
                             className="btn btn-primary w-100"
@@ -687,7 +793,7 @@ function Checkout() {
                                             <label htmlFor="">Enter Url</label>
                                             <input
                                               type="text"
-                                              value={orderDetaild.url}
+                                              value={file}
                                               onChange={(e) =>
                                                 setFile(e.target.value)
                                               }

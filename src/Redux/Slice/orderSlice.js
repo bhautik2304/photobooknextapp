@@ -240,6 +240,8 @@ const orderSlice = createSlice({
       state.productpaperType = [];
       state.productprintOption = [];
       state.productboxSleev = [];
+      state.productboxandsleeveoptions = [];
+      state.productboxandsleeveoptioncolor = [];
       state.productcolor = [];
     }
   }

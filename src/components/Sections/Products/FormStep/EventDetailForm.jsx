@@ -20,11 +20,11 @@ function EventDetailForm() {
     costumizeMessage: "",
     printing: "",
   });
-  const {
+  const { 
     orderData,
     orderData: { orderDetaild, product_id },
   } = useSelector((state) => state.order);
-  const { user } = useSelector((state) => state.auth);
+  const { users } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const next = () => {
     const newError = {};
@@ -55,9 +55,9 @@ function EventDetailForm() {
     // Continue with the next step
   };
 
-  console.log(user);
+  console.log(users);
   console.log(
-    user?.sample_orders?.find((data) => data.products_id === product_id)
+    users?.sample_orders?.find((data) => data.products_id === product_id)
   );
 
   return (
@@ -244,7 +244,7 @@ function EventDetailForm() {
       </div>
       <div className="card my-2 p-3">
         <div className="row">
-          {!user?.sample_orders?.find(
+          {!users?.sample_orders?.find(
             (data) => data.products_id === product_id
           ) && (
             <div className="col-6">
