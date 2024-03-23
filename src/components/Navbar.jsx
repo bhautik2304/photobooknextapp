@@ -37,14 +37,17 @@ function Navbar() {
             dispatch(fetchUsers(res.data.user.id));
           } else {
             dispatch(authLogout());
+            router.push(appRoutes.Login)
           }
         })
         .catch((err) => {
           dispatch(authLogout());
           console.log(err);
+          router.push(appRoutes.Login)
         });
     } else {
       dispatch(authLogout());
+      router.push(appRoutes.Login)
     }
   }, []);
 
