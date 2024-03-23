@@ -18,7 +18,6 @@ import { clearCart } from "@/Redux/Slice/orderSlice";
 import { Dropbox } from "dropbox";
 import { redirect } from "next/navigation";
 
-
 const status = {
   proceed: "Proceed to order",
   placeOrder: "Place an order",
@@ -96,6 +95,15 @@ function Checkout() {
 
     if (file.type == "application/x-zip-compressed") {
       const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
+      /*
+      - GITHUB PUSH PROTECTION
+...
+- Dropbox Short-Lived Access Token
+  locations:
+    - commit: 6c6542f5eb5dae7076796f858d2acdaac5f977a7
+    path: src/components/Sections/Checkout/Checkout.jsx:100
+
+      */
       const ACCESS_TOKEN =
         "sl.Bx_sCAUxXmMn_l4rSRe2T1bIh3cSXeQVTLcPJcpmQJnTOO1gYyM-VMC-LykTlElGM7Yu0gsou6yrrItBgx2S45u3fKU_jDCa3Q3sUicwC1VtXKA49StcYm1AqZ_IZ4la67g_lMbCbrapBOBnP2jq-wU";
       const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
@@ -202,7 +210,7 @@ function Checkout() {
                   }, 2000);
                   setTimeout(function () {
                     console.log("Executing function after 4-second delay...");
-                    return 
+                    return;
                     // Function to execute after the delay
                     // Replace the console.log statement with your desired function call
                   }, 4000);
@@ -525,10 +533,15 @@ function Checkout() {
                             class={`alert alert-${fileUploadStatus?.class}`}
                             role="alert"
                           >
-                            Your file is successfully received, pls contact us if you
-                            have any queries regarding you order
+                            Your file is successfully received, pls contact us
+                            if you have any queries regarding you order
                           </div>
-                          <Link className="btn btn-primary w-100" href={appRoutes.userProfileOrders} >Go To Orders</Link>
+                          <Link
+                            className="btn btn-primary w-100"
+                            href={appRoutes.userProfileOrders}
+                          >
+                            Go To Orders
+                          </Link>
                           {fileUploadStatus?.class == "danger" && (
                             <>
                               <div className="col-12">
