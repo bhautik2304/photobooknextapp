@@ -9,6 +9,7 @@ const orderDetaild = {
   eventName: "",
   printing: "Laser Imprinting",
   customizeMessage: "",
+  otherEvent: "",
 }
 
 const orderDataScemma = {

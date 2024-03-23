@@ -56,7 +56,9 @@ function EventDetailForm() {
   };
 
   console.log(user);
-  console.log(user?.sample_orders?.find((data) => data.products_id === product_id));
+  console.log(
+    user?.sample_orders?.find((data) => data.products_id === product_id)
+  );
 
   return (
     <>
@@ -81,9 +83,10 @@ function EventDetailForm() {
               >
                 <option value="">Select Event Type</option>
                 <option value="Wedding">Wedding</option>
-                <option value="pre-Wedding">pre-Wedding</option>
-                <option value="Birthday">Birthday</option>
+                <option value="others">others</option>
+                <option value="Pre-Wedding">Pre-Wedding</option>
                 <option value="Engagement">Engagement</option>
+                <option value="Birthdav">Birthdav</option>
                 <option value="Sweet 16">Sweet 16</option>
                 <option value="Bar Mitzvah">Bar Mitzvah</option>
                 <option value="Bat Mitzvah">Bat Mitzvah</option>
@@ -91,11 +94,36 @@ function EventDetailForm() {
                 <option value="Baby Shower">Baby Shower</option>
                 <option value="Portfolio">Portfolio</option>
                 <option value="Guestbook">Guestbook</option>
-                <option value="others">Others</option>
               </select>
               <span className="text-danger">{error?.eventType}</span>
             </div>
           </div>
+          {
+            orderDetaild.eventType ==="others" && (
+              <div className="col-6 my-2">
+            <div className="form-group">
+              <label htmlFor="">Others Event</label>
+              <input
+                value={orderDetaild.otherEvent}
+                onChange={(e) =>
+                  dispatch(
+                    changeOrderDetaildData({
+                      key: "otherEvent",
+                      value: e.target.value,
+                    })
+                  )
+                }
+                className="form-control"
+                name=""
+                id=""
+                aria-describedby="helpId"
+                placeholder=""
+              />
+            </div>
+          </div>
+            )
+          }
+          
           <div className="col-6 my-2">
             <div className="form-group">
               <label htmlFor="">Event Date</label>
@@ -216,51 +244,49 @@ function EventDetailForm() {
       </div>
       <div className="card my-2 p-3">
         <div className="row">
-          {
-          !user?.sample_orders?.find(
-              (data) => data.products_id === product_id
-            ) && (
-              <div className="col-6">
-                <h6 className="mt-2">Get a sample copy only</h6>
-                <div className="mb-4">
-                  <div className="col-12 my-2">
-                    <div
-                      className="pro"
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 50,
-                        borderRadius: 5,
-                        border: "2px solid #8ccec6",
-                        backgroundColor:
-                          orderData.isSample == true && "#8ccec6",
-                        color: orderData.isSample == true && "#ffffff",
-                      }}
-                      onClick={() =>
-                        dispatch(
-                          changeOrderData({
-                            key: "isSample",
-                            value: !orderData.isSample,
-                          })
-                        )
-                      }
-                    >
-                      Click to order sample copy
-                    </div>
+          {!user?.sample_orders?.find(
+            (data) => data.products_id === product_id
+          ) && (
+            <div className="col-6">
+              <h6 className="mt-2">Get a sample copy only</h6>
+              <div className="mb-4">
+                <div className="col-12 my-2">
+                  <div
+                    className="pro"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: 50,
+                      borderRadius: 5,
+                      border: "2px solid #8ccec6",
+                      backgroundColor: orderData.isSample == true && "#8ccec6",
+                      color: orderData.isSample == true && "#ffffff",
+                    }}
+                    onClick={() =>
+                      dispatch(
+                        changeOrderData({
+                          key: "isSample",
+                          value: !orderData.isSample,
+                        })
+                      )
+                    }
+                  >
+                    Click to order sample copy
                   </div>
-                  {orderData.isSample == true && (
-                    <>
-                      <span className="text-danger">
-                        Note : By selecting this option you will only receive a
-                        sample copy for this order
-                      </span>
-                    </>
-                  )}
                 </div>
+                {orderData.isSample == true && (
+                  <>
+                    <span className="text-danger">
+                      Note : By selecting this option you will only receive a
+                      sample copy for this order
+                    </span>
+                  </>
+                )}
               </div>
-            )}
+            </div>
+          )}
           <div className="col-6">
             <h6 className="mt-2">Order pocket book copies</h6>
             <div className="mb-4">

@@ -95,10 +95,11 @@ function Checkout() {
 
     if (file.type == "application/x-zip-compressed") {
       const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
-      
+
       /* Change hear */
-      const ACCESS_TOKEN = "sl.Bx_sCAUxXmMn_l4rSRe2T1bIh3cSXeQVTLcPJcpmQJnTOO1gYyM-VMC-LykTlElGM7Yu0gsou6yrrItBgx2S45u3fKU_jDCa3Q3sUicwC1VtXKA49StcYm1AqZ_IZ4la67g_lMbCbrapBOBnP2jq-wU";
-      
+      const ACCESS_TOKEN =
+        "sl.Bx9cda1ldnKjkJWfycWfAawTYJUs0sb4j2GT0DuclLQhpuh267C8aIR2uDTIuo6GleRpZ8ENdVy2Ei3hYheMlMPFBWiQu0ck6YXi-VV3gByiF_szAHkl-6uU0iVYtNBlyeDmYEEpyYVHVdnCLpVnltA";
+
       const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
       let progreShBar = 0;
       const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
