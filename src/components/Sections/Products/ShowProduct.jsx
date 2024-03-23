@@ -93,15 +93,16 @@ function ShowProduct() {
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Select your sizes & paper.</h2>
                 <div>
-                  <div>
-                    <span
+                  {/* <div className="d-flex" >
+                    <button
+                      className="btn btn-primary btn-sm mx-2"
                       style={{ fontSize: 18, fontWeight: "bold" }}
-                      className="text-success"
-                    >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}`}</span><br/>
-                    <span
-                      style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
-                    >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</span>
-                  </div>
+                    >{`Design cost : ${pritnig_price_value * page_qty} ${user?.zone?.currency_sign}`}</button><br/>
+                    <button
+                      className="btn btn-primary btn-sm mx-2"
+                      style={{ fontSize: 18, fontWeight: "bold" }}
+                    >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</button>
+                  </div> */}
                 </div>
               </div>
               <p>
@@ -117,7 +118,7 @@ function ShowProduct() {
             <>
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Select your Album Cover.</h2>
-                <div>
+                {/* <div>
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
@@ -126,7 +127,7 @@ function ShowProduct() {
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
                   >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</span>
-                </div>
+                </div> */}
               </div>
               <p>Please select cover options from below mentioned section.</p>
               <div className="row mt-2 mb-2">
@@ -163,7 +164,7 @@ function ShowProduct() {
             <>
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Order Details</h2>
-                <div>
+                {/* <div>
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
                     className="text-success"
@@ -172,7 +173,7 @@ function ShowProduct() {
                   <span
                     style={{ color: "red", fontSize: 18, fontWeight: "bold" }}
                   >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</span>
-                </div>
+                </div> */}
               </div>
               <p>
                 Please fill the below mentioned form which will help us to

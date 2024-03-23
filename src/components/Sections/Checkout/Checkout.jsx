@@ -15,6 +15,10 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import { apiRoutes, appRoutes } from "@/constants";
 import { clearCart } from "@/Redux/Slice/orderSlice";
+import { Dropbox } from "dropbox";
+import { redirect } from "next/navigation";
+
+
 const status = {
   proceed: "Proceed to order",
   placeOrder: "Place an order",
@@ -26,7 +30,9 @@ function Checkout() {
   const [chackOutStatus, setChackOutStatus] = useState(status.proceed);
   const [orderId, setOrderId] = useState(null);
   const [persent, setPersent] = useState(0);
+  const [buffer, setBuffer] = useState(3);
   const [another, setAnother] = useState(false);
+  const [downloadLink, setDownload] = useState("");
   const [sourceType, setSourceType] = useState(null);
   const [file, setFile] = useState(null);
   const [fileUploadStatus, setFileUploadStatus] = useState(false);
@@ -76,7 +82,7 @@ function Checkout() {
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
 
-  const fileUplode = () => {
+  const fileUplode = async () => {
     const error = {};
     if (file == null) {
       error.file = "Required *";
@@ -89,60 +95,138 @@ function Checkout() {
     }
 
     if (file.type == "application/x-zip-compressed") {
-      const formData = new FormData();
-      formData.append("orderNo", orderId);
-      formData.append("sourceType", sourceType);
-      if (sourceType == "Zip File") {
-        formData.append("photos_file", file);
-      } else {
-        formData.append("photos_url", file);
+      const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
+      const ACCESS_TOKEN =
+        "sl.Bx_sCAUxXmMn_l4rSRe2T1bIh3cSXeQVTLcPJcpmQJnTOO1gYyM-VMC-LykTlElGM7Yu0gsou6yrrItBgx2S45u3fKU_jDCa3Q3sUicwC1VtXKA49StcYm1AqZ_IZ4la67g_lMbCbrapBOBnP2jq-wU";
+      const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
+      let progreShBar = 0;
+      const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
+      setPersent(1);
+      const maxBlob = 250 * 1024 * 1024; // 12MB
+      const workItems = [];
+      let offset = 0;
+
+      while (offset < file.size) {
+        const chunkSize = Math.min(maxBlob, file.size - offset);
+        workItems.push(file.slice(offset, offset + chunkSize));
+        offset += chunkSize;
       }
-      axios
-        .post(apiRoutes.uploadfile, formData, {
-          signal: controller.signal,
-          cancelToken: source.token,
-          onUploadProgress: (progressEvent) => {
-            console.log(controller.signal);
-            console.log(progressEvent);
-            if (progressEvent.bytes) {
-              console.log(
-                Math.round((progressEvent.loaded / progressEvent.total) * 100)
-              );
-              setPersent(
-                Math.round((progressEvent.loaded / progressEvent.total) * 100)
-              );
-            }
-          },
-        })
-        .then((res) => {
-          if (res?.data?.code == 200) {
-            setFileUploadStatus({
-              status: true,
-              class: "success",
-              msg: res.data.msg,
+      const task = workItems.reduce((acc, blob, idx, items) => {
+        if (idx === 0) {
+          return acc.then(() => {
+            return dbx
+              .filesUploadSessionStart({ close: false, contents: blob })
+              .then((response) => response.result.session_id);
+          });
+        } else if (idx < items.length - 1) {
+          return acc.then(async (sessionId) => {
+            const cursor = { session_id: sessionId, offset: idx * maxBlob };
+            await dbx.filesUploadSessionAppendV2({
+              cursor: cursor,
+              close: false,
+              contents: blob,
             });
-          }
+            const progress = Math.min(
+              100,
+              Math.floor((blob.size / file.size) * 100)
+            );
+            console.log(Math.floor((blob / file.size) * 100));
+            progreShBar = progreShBar += progress;
+            setPersent(progreShBar);
+            setBuffer(progreShBar + 10);
+            console.log("progress = ", progress);
+            console.log("blob = ", blob);
+            console.log("file = ", file.size);
+            return sessionId;
+          });
+        } else {
+          return acc.then(async (sessionId) => {
+            const cursor = {
+              session_id: sessionId,
+              offset: file.size - blob.size,
+            };
+            const commit = {
+              path: `/ORDER-ID-${orderId}.zip`,
+              mode: "add",
+              autorename: true,
+              mute: false,
+            };
+            const result = await dbx.filesUploadSessionFinish({
+              cursor: cursor,
+              commit: commit,
+              contents: blob,
+            });
+
+            const progress = Math.min(
+              100,
+              Math.floor((blob.size / file.size) * 100)
+            );
+            console.log(Math.floor((blob.size / file.size) * 100));
+            console.log("Finnish progress = ", progress);
+            console.log("Finnish blob = ", blob);
+            console.log("Finnish file = ", file.size);
+            progreShBar = progreShBar + progress;
+            // setPersent(100);
+            setPersent(progreShBar);
+            return result;
+          });
+        }
+      }, Promise.resolve());
+
+      task
+        .then(async (result) => {
+          const linkResponse = await dbx
+            .sharingCreateSharedLinkWithSettings({
+              path: result.result.path_display,
+            })
+            .then(async (linkResult) => {
+              setDownload(linkResult.result.url);
+              axios
+                .post(apiRoutes.uploadfile, {
+                  orderNo: orderId,
+                  source_link: linkResult.result.url,
+                })
+                .then((state) => {
+                  setPersent(100);
+                  setTimeout(function () {
+                    // Function to execute after the delay
+                    console.log("Executing function after 2-second delay...");
+                    setFileUploadStatus({
+                      status: true,
+                      class: "success",
+                      msg: "Files Upload In Drop box",
+                    });
+                    redirect(appRoutes.userProfileOrders);
+                    // console.log("Executing function after 5-second delay...");
+                    // Replace the console.log statement with your desired function call
+                  }, 2000);
+                  setTimeout(function () {
+                    console.log("Executing function after 4-second delay...");
+                    return 
+                    // Function to execute after the delay
+                    // Replace the console.log statement with your desired function call
+                  }, 4000);
+                });
+            });
+          // setPersent(100)
         })
         .catch((error) => {
           setFileUploadStatus({
             status: true,
-            class: "danger",
-            msg: "Something wrong pls contact us",
+            class: "error",
+            msg: "Files Is not Uploaded",
           });
-          console.error("Error uploading file:", error);
+          console.error(error);
+          // Handle error
         });
-    } else {
-      setZipFileError("Select Only Zip File");
     }
   };
-
   const cancelFileUpload = () => {
     console.log("Before aborting");
     source.cancel("Operation canceled by the user.");
     controller.abort();
     console.log("After aborting");
   };
-
   return (
     <>
       <main className="page-wrapper bg-primary">
@@ -441,9 +525,10 @@ function Checkout() {
                             class={`alert alert-${fileUploadStatus?.class}`}
                             role="alert"
                           >
-                            Url successfully received, pls contact us if you
+                            Your file is successfully received, pls contact us if you
                             have any queries regarding you order
                           </div>
+                          <Link className="btn btn-primary w-100" href={appRoutes.userProfileOrders} >Go To Orders</Link>
                           {fileUploadStatus?.class == "danger" && (
                             <>
                               <div className="col-12">
@@ -510,9 +595,10 @@ function Checkout() {
                                   >
                                     <Box sx={{ width: "100%" }}>
                                       <LinearProgress
-                                        variant="determinate"
+                                        variant="buffer"
+                                        valueBuffer={buffer}
                                         sx={{
-                                          height: 8,
+                                          // height: 8,
                                           borderRadius: 100,
                                           marginX: 2,
                                         }}
@@ -644,38 +730,3 @@ function Checkout() {
   );
 }
 export default Checkout;
-
-// /*
-
-//         {orderStatus ?
-//           <>
-
-//           </>
-//           :
-//           <>
-//             <div className="container position-relative zindex-2 pt-0 pb-lg-5 pb-md-4 pb-2">
-//               <div className="row">
-//                 <div className="col-lg-12 mt-5 card p-5">
-//                   {/* <!-- Breadcrumb--> */}
-// {
-//   prossedToChackout
-
-//                       :
-//     <>
-
-//     </>
-// }
-
-//                 </div >
-//               </div >
-//   {/* <!-- Place an order button visible on screens < 992px--> */ }
-//   < div className="d-lg-none pb-2 mt-2 mt-lg-0 pt-4 pt-lg-5" >
-//     <div className="form-check mb-4">
-//       <input className="form-check-input" type="checkbox" checked id="save-info2" />
-//       <label className="form-check-label" for="save-info2"><span className="text-muted">Your personal information will be used to process your order, to support your experience on this site and for other purposes described in the </span><a className="fw-medium" href="#">privacy policy</a></label>
-//     </div>
-//               </ >
-//             </div >
-//           </>
-//         }
-// */

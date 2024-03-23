@@ -73,10 +73,10 @@ function ProductCover() {
                 disapatch(
                   addFrontCoverphoto({ coverphoto: e.target.files[0] })
                 );
+                disapatch(fcm({ key: "coverphoto", error: false }));
                 // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
               }}
             />
-            <span className="text-danger m-0 p-0">{formError?.coverphoto}</span>
             <br />
             <label>Upload your back cover photo ( optional )</label>
             <input
@@ -101,7 +101,10 @@ function ProductCover() {
                 className="form-control form-control-sm my-2"
                 type="file"
                 onChange={(e) => {
-                  disapatch(addFrontCoverphoto({ coverphoto: e.target.files[0] }));
+                  disapatch(
+                    addFrontCoverphoto({ coverphoto: e.target.files[0] })
+                  );
+                  disapatch(fcm({ key: "coverphoto", error: false }));
                   // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
                 }}
               />
@@ -109,11 +112,11 @@ function ProductCover() {
           )}
         </div>
         <div className="col-12 my-3">
-          <span className="text-danger m-0 p-0">
-            {formError?.product_cover_option}
-          </span>
           {productcoveroption.length !== 0 && (
             <>
+              <span className="text-danger m-0 p-0">
+                {formError?.product_cover_option}
+              </span>
               <>
                 <h6>Select options</h6>
               </>
@@ -122,9 +125,12 @@ function ProductCover() {
                   <>
                     <div className="col-2">
                       <div
-                        onClick={() =>
-                          disapatch(selectCoverOption({ coveroption: data }))
-                        }
+                        onClick={() => {
+                          disapatch(selectCoverOption({ coveroption: data }));
+                          disapatch(
+                            fcm({ key: "product_cover_option", error: false })
+                          );
+                        }}
                       >
                         <img
                           src={data.img}
@@ -150,6 +156,9 @@ function ProductCover() {
           )}
           {productcolor.length !== 0 && (
             <>
+              <span className="text-danger m-0 p-0">
+                {formError?.product_cover_color_option}
+              </span>
               <>
                 <h6>Select color options</h6>
               </>
@@ -161,9 +170,15 @@ function ProductCover() {
                     <>
                       <div className="col-2">
                         <div
-                          onClick={() =>
-                            disapatch(changeColor({ color: data }))
-                          }
+                          onClick={() => {
+                            disapatch(changeColor({ color: data }));
+                            disapatch(
+                              fcm({
+                                key: "product_cover_color_option",
+                                error: false,
+                              })
+                            );
+                          }}
                         >
                           <img
                             src={data.colors.img}
@@ -192,29 +207,43 @@ function ProductCover() {
       </div>
       <Button
         next={() => {
-          // if (!orderData.productcover) {
-          //   disapatch(
-          //     fcm({ key: "product_cover", error: "Select minimum one option" })
-          //   );
-          //   return;
-          // }
-          // if (!orderData.productcoveroption) {
-          //   disapatch(
-          //     fcm({
-          //       key: "product_cover_option",
-          //       error: "Select minimum one option",
-          //     })
-          //   );
-          //   return;
-          // }
-          // if (orderData.coverType == "img_options_img") {
-          //   if (!orderData.coverphoto) {
-          //     disapatch(
-          //       fcm({ key: "coverphoto", error: "Please upload a file" })
-          //     );
-          //     return;
-          //   }
-          // }
+          if (!orderData.productcover) {
+            disapatch(
+              fcm({ key: "product_cover", error: "Select minimum one option" })
+            );
+            return;
+          }
+          if (
+            orderData.coverType === "both_img" ||
+            orderData.coverType === "img_option_colors"
+          ) {
+            if (!orderData.coverphotofront) {
+              disapatch(
+                fcm({ key: "coverphoto", error: "Please upload a file" })
+              );
+              return;
+            }
+          }
+          if (orderData.coverType !== "both_img") {
+            if (!orderData.productcoveroption) {
+              disapatch(
+                fcm({
+                  key: "product_cover_option",
+                  error: "Select minimum one option",
+                })
+              );
+              return;
+            }
+            if (!orderData.productcovercolor) {
+              disapatch(
+                fcm({
+                  key: "product_cover_color_option",
+                  error: "Select minimum one option",
+                })
+              );
+              return;
+            }
+          }
           disapatch(formNext());
         }}
       />

@@ -300,7 +300,7 @@ function EventDetailForm() {
                           <label htmlFor="">Number Of Copy</label>
                           <input
                             type="number"
-                            value={orderDetaild.photoBookCopy}
+                            value={orderData.photoBookCopy}
                             onChange={(e) =>
                               dispatch(
                                 changeOrderData({

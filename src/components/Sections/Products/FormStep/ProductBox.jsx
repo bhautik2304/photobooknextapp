@@ -6,7 +6,7 @@ import {
   selectBoxSleeveOption,
   changeBoxColor,
   addFrontBoxphoto,
-addBackBoxphoto,
+  addBackBoxphoto,
   changePageCount,
   changeSheet,
   formError as fcm,
@@ -29,7 +29,7 @@ function ProductBox() {
     <>
       <div className="row">
         <div className="col-md-12 col-sm-12 col-lg-12">
-          <span className="text-danger">{formError?.product_cover}</span>
+          <span className="text-danger">{formError?.product_boxSleev}</span>
           <>
             <h6>Box & sleeve</h6>
           </>
@@ -42,9 +42,12 @@ function ProductBox() {
                       orderData.productboxSleev == data.id &&
                       "selected_prod_size"
                     }`}
-                    onClick={() =>
+                    onClick={() =>{
                       disapatch(changeBoxSleev({ boxSleev: data }))
-                    }
+                      disapatch(
+                        fcm({ key: "product_boxSleev", error: false })
+                      );
+                    }}
                   >
                     <div className="d-flex justify-content-between align-items-center">
                       <img
@@ -79,13 +82,15 @@ function ProductBox() {
                   className="form-control form-control-sm my-2"
                   type="file"
                   onChange={(e) => {
-                    disapatch(addFrontBoxphoto({ boxphoto: e.target.files[0] }));
+                    disapatch(
+                      addFrontBoxphoto({ boxphoto: e.target.files[0] })
+                    );
+                    disapatch(
+                      fcm({ key: "boxphoto", error: false })
+                    );
                     // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
                   }}
                 />
-                <span className="text-danger m-0 p-0">
-                  {formError?.boxphoto}
-                </span>
                 <br />
                 <label>Upload your frontside photo *</label>
                 <input
@@ -109,7 +114,12 @@ function ProductBox() {
                   className="form-control form-control-sm my-2"
                   type="file"
                   onChange={(e) => {
-                    disapatch(addFrontBoxphoto({ boxphoto: e.target.files[0] }));
+                    disapatch(
+                      addFrontBoxphoto({ boxphoto: e.target.files[0] })
+                    );
+                    disapatch(
+                      fcm({ key: "boxphoto", error: false })
+                    );
                     // localStorage.setItem(localstorageKey.coverphoto, e.target.files[0]);
                   }}
                 />
@@ -121,7 +131,7 @@ function ProductBox() {
             <>
               <div className="col-12 my-3">
                 <span className="text-danger m-0 p-0">
-                  {formError?.product_cover_option}
+                  {formError?.product_box_option}
                 </span>
                 <br />
                 {productboxandsleeveoptions.length !== 0 && (
@@ -134,11 +144,14 @@ function ProductBox() {
                         <>
                           <div className="col-2">
                             <div
-                              onClick={() =>
+                              onClick={() =>{
                                 disapatch(
                                   selectBoxSleeveOption({ boxSleev: data })
                                 )
-                              }
+                                disapatch(
+                                  fcm({ key: "product_box_option", error: false })
+                                );
+                              }}
                             >
                               <img
                                 src={data.img}
@@ -164,6 +177,10 @@ function ProductBox() {
                 )}
                 {productboxandsleeveoptioncolor.length !== 0 && (
                   <>
+                    <span className="text-danger m-0 p-0">
+                      {formError?.product_box_color_option}
+                    </span>
+                    <br />
                     <>
                       <h6>Select color options</h6>
                     </>
@@ -175,9 +192,12 @@ function ProductBox() {
                           <>
                             <div className="col-2">
                               <div
-                                onClick={() =>
+                                onClick={() =>{
                                   disapatch(changeBoxColor({ color: data }))
-                                }
+                                  disapatch(
+                                    fcm({ key: "product_box_color_option", error: false })
+                                  );
+                                }}
                               >
                                 <img
                                   src={data.colors[0].img}
@@ -209,29 +229,56 @@ function ProductBox() {
       </div>
       <Button
         next={() => {
-        //   if (!orderData.productcover) {
-        //     disapatch(
-        //       fcm({ key: "product_cover", error: "Select minimum one option" })
-        //     );
-        //     return;
-        //   }
-        //   if (!orderData.productcoveroption) {
-        //     disapatch(
-        //       fcm({
-        //         key: "product_cover_option",
-        //         error: "Select minimum one option",
-        //       })
-        //     );
-        //     return;
-        //   }
-        //   if (orderData.productboxandsleeveType == "img") {
-        //     if (!orderData.boxphoto) {
-        //       disapatch(
-        //         fcm({ key: "boxphoto", error: "Please upload a file" })
-        //       );
-        //       return;
-        //     }
-        //   }
+          if (!orderData.productboxSleev) {
+            disapatch(
+              fcm({
+                key: "product_boxSleev",
+                error: "Select minimum one option",
+              })
+            );
+            return;
+          }
+          if (!orderData.productcoveroption) {
+            disapatch(
+              fcm({
+                key: "product_cover_option",
+                error: "Select minimum one option",
+              })
+            );
+            return;
+          }
+          if (
+            orderData.productboxandsleeveType == "both_img" ||
+            orderData.productboxandsleeveType == "img_option_colors"
+          ) {
+            if (!orderData.boxphotofront) {
+              disapatch(
+                fcm({ key: "boxphoto", error: "Please upload a file" })
+              );
+              return;
+            }
+          }
+
+          if (orderData.productboxandsleeveType !== "both_img") {
+            if (!orderData.productboxandsleeveoption) {
+              disapatch(
+                fcm({
+                  key: "product_box_option",
+                  error: "Select minimum one option",
+                })
+              );
+              return;
+            }
+            if (!orderData.productboxandsleevecolor) {
+              disapatch(
+                fcm({
+                  key: "product_box_color_option",
+                  error: "Select minimum one option",
+                })
+              );
+              return;
+            }
+          }
           disapatch(formNext());
         }}
       />

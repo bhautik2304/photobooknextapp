@@ -25,6 +25,11 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
       productcover,
       productpaperType,
       productboxSleev,
+      productboxandsleeveoptions,
+      productboxandsleeveoptioncolor,
+      productcoveroption,
+      productcolor,
+      productOrientation,
     },
   } = useSelector((state) => state);
   const thermelSheet =
@@ -36,6 +41,22 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
   const box =
     productboxSleev.find((data) => data.id == orderData.productboxSleev) ||
     null;
+  const coverUpgrade =
+    productcoveroption.find((data) => data.id == orderData.productboxSleev) ||
+    null;
+  const coverUpgradeColor =
+    productcolor.find((data) => data.id == orderData.productboxSleev) || null;
+  const boxUpgrade =
+    productboxandsleeveoptions.find(
+      (data) => data.id == orderData.productboxandsleeveoption
+    ) || null;
+  const boxUpgradeColor =
+    productboxandsleeveoptioncolor.find(
+      (data) => data.id == orderData.productboxandsleevecolor
+    ) || null;
+
+  const size =
+    productSize.find((data) => data.id == orderData.productSize) || null;
 
   const dispatch = useDispatch();
 
@@ -88,308 +109,587 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
     <>
       {/* <!-- Order summary--> */}
       <div>
-        <h2 className="pb-2 pt-md-2">Order summary</h2>
-        {/* <!-- Item--> */}
-        <div className="row">
-          <div className="col-lg-6 col-md-6 col-sm-12 card">
-            <div className="d-sm-flex align-items-center py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={product?.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 mb-2">
-                      <a href="#">{product?.name}</a>
-                    </h3>
-                  </div>
-                </div>
-
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            </div>
-            {/* <!-- Item--> */}
-            <div className="d-sm-flex align-items-center border-top py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={thermelSheet?.sheet?.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 mb-2">
-                      <a href="#">{thermelSheet?.sheet?.name}</a>
-                    </h3>
-                    <div className="text-end ms-auto">
-                      <span className="text-danger">{pageErrorMsg}</span>
-                    </div>
-                  </div>
-                  <div className="text-end ms-auto">
-                    <div className="fs-5 mb-2">
-                      <div className="count-input ms-n3">
-                        <button
-                          className="btn btn-icon fs-xl pro"
-                          onClick={() => {
-                            if (orderData?.page_qty <= product?.min_page) {
-                              setErrorMsg(`Minimum page ${product?.min_page}+`);
-                              return;
-                            }
-                            dispatch(changePageCount(orderData?.page_qty - 1));
-                          }}
-                          type="button"
-                          data-decrement
-                        >
-                          -
-                        </button>
-                        <input
-                          className="form-control"
-                          type="number"
-                          value={orderData?.page_qty}
-                        />
-                        <button
-                          className="btn btn-icon fs-xl pro"
-                          type="button"
-                          onClick={() => {
-                            setErrorMsg("");
-                            dispatch(changePageCount(orderData?.page_qty + 1));
-                          }}
-                          data-increment
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            </div>
-            {/* <!-- Item--> */}
-            <div className="d-sm-flex align-items-center border-top py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={thermelSheet?.sheet?.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 mb-2">
-                      <a href="#">{thermelSheet?.sheet?.name}</a>
-                    </h3>
-                    <div className="text-end ms-auto">
-                      <div className="fs-5 mb-2">{`${
-                        zonePrice(thermelSheet?.sheetprice)?.priceSrring
-                      } X ${orderData?.page_qty} Pages`}</div>
-                    </div>
-                  </div>
-                  <div className="text-end ms-auto">
-                    <div className="fs-5 mb-2">
-                      {zonePrice(thermelSheet?.sheetprice)?.price *
-                        orderData?.page_qty}{" "}
-                      {user?.zone?.currency_sign}
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            </div>
-            {/* <!-- Item--> */}
-            <div className="d-sm-flex align-items-center border-top py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1 mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={papperType?.paper?.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 ">
-                      <a href="#">{papperType?.paper?.name}</a>
-                    </h3>
-                    <div className="text-end ms-auto">
-                      <div className="fs-5 mb-2">
-                        {zonePrice(thermelSheet?.sheetprice)?.price *
-                          orderData?.page_qty}{" "}
-                        + {papperType?.paper?.value} %
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-end ms-auto">
-                    <div className="fs-5 mb-2">
-                      {(  (orderData?.sheetValue * orderData.paperValue) / 100 +
-                        orderData?.sheetValue) *
-                        orderData?.page_qty - orderData?.sheetValue * orderData?.page_qty}{" "}
-                      {user?.zone?.currency_sign}
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            
-            </div>
-            {/* <!-- Item--> */}
-            <div className="d-sm-flex align-items-center border-top py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={cover?.cover?.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 mb-2">
-                      <a href="#">{cover?.cover?.name}</a>
-                    </h3>
-                  </div>
-                  <div className="text-end ms-auto">
-                    <div className="fs-5 mb-2">
-                      {zonePrice(cover?.coverprice)?.priceSrring}
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            </div>
-            {/* <!-- Item--> */}
-           
-            {/* <!-- Item--> */}
-            <div className="d-sm-flex align-items-center border-top py-2">
-              <a
-                className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                href="#"
-              >
-                <img src={box?.boxsleeve.img} width="50" alt="Product" />
-              </a>
-              <div className="w-100 pt-1 ps-sm-4">
-                <div className="d-flex">
-                  <div className="me-3">
-                    <h3 className="h5 mb-2">
-                      <a href="#"> Design + Print + Bind </a>
-                    </h3>
-                  </div>
-                  <div className="text-end ms-auto">
-                    <div className="fs-5 mb-2">
-                      {orderData.pritnigPriceTotalPageValue +
-                        "  " +
-                        zonePrice(box?.boxsleeveprice)?.currency +
-                        ""}
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-              </div>
-            </div>
-
-            {orderData?.isPhotoBookCopy && (
-                <>
-                  <div className="d-sm-flex align-items-center border-bottom py-2">
-                    <a
-                      className="d-inline-block flex-shrink-0 bg-secondary rounded-1  mb-2 mb-sm-0"
-                      href="#"
-                    >
-                      <img src={product?.img} width="50" alt="Product" />
-                    </a>
-                    <div className="w-100 pt-1 ps-sm-4">
-                      <div className="d-flex">
-                        <div className="me-3">
-                          <h3 className="h5 mb-2">
-                            <a href="#">Photo Book Copy</a>
-                          </h3>
+        <div className="row  ">
+          <div className="d-flex justify-content-center aligns-item-center">
+            <div className="col-lg-9 col-md-8 col-sm-12 card">
+              <div class="table-responsive p-3">
+                <h2 className="pb-2 pt-md-2">Order summary</h2>
+                <table
+                  class="table align-middle w-100"
+                  style={{ minWidth: "450px" }}
+                >
+                  <tbody>
+                    {/* Product detaild */}
+                    <tr>
+                      <td class="border-0 py-1 px-0">
+                        <div class="d-flex align-items-center">
+                          <a
+                            class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                            href="#"
+                          >
+                            <img src={product?.img} width="110" alt="Product" />
+                          </a>
+                          <div class="ps-3 ps-sm-4">
+                            <h4 class="h6 mb-2">
+                              <a href="#">{product?.name}</a>
+                            </h4>
+                          </div>
                         </div>
-                        <div className="text-end ms-auto">
-                          <div className="fs-5 mb-2">
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Quantity
+                        </div>
+                        <div class="fs-sm fw-medium text-dark">1</div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        {/* <div class="fs-sm text-body-secondary mb-2">Price</div>
+                                    <div class="fs-sm fw-medium text-dark">$16</div> */}
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        {/* <div class="fs-sm text-body-secondary mb-2">Total</div>
+                                    <div class="fs-sm fw-medium text-dark">$16</div> */}
+                      </td>
+                    </tr>
+                    {/* product sheet dtaild page */}
+                    <tr>
+                      <td class="border-0 py-1 px-0">
+                        <div class="d-flex align-items-center">
+                          <a
+                            class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                            href="#"
+                          >
+                            <img
+                              src={thermelSheet?.sheet?.img}
+                              width="110"
+                              alt="Product"
+                            />
+                          </a>
+                          <div class="ps-3 ps-sm-4">
+                            <h4 class="h6 mb-2">
+                              <a href="#">{thermelSheet?.sheet?.name}</a>
+                            </h4>
+                            <div class="text-body-secondary fs-sm me-3">
+                              Orientation :{" "}
+                              <span class="text-dark fw-medium">
+                                {productOrientation?.orientation?.name}
+                              </span>
+                            </div>
+                            <div class="text-body-secondary fs-sm me-3">
+                              Size :{" "}
+                              <span class="text-dark fw-medium">
+                                {size?.size?.name}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Sheet Quantity
+                        </div>
+                        <div class="fs-sm fw-medium text-dark">
+                          <div className="count-input ms-n3">
+                            <button
+                              className="btn btn-icon fs-xl pro"
+                              onClick={() => {
+                                if (orderData?.page_qty <= product?.min_page) {
+                                  setErrorMsg(
+                                    `Minimum page ${product?.min_page}+`
+                                  );
+                                  return;
+                                }
+                                dispatch(
+                                  changePageCount(orderData?.page_qty - 1)
+                                );
+                              }}
+                              type="button"
+                              data-decrement
+                            >
+                              -
+                            </button>
+                            <input
+                              className="form-control"
+                              type="number"
+                              value={orderData?.page_qty}
+                            />
+                            <button
+                              className="btn btn-icon fs-xl pro"
+                              type="button"
+                              onClick={() => {
+                                setErrorMsg("");
+                                dispatch(
+                                  changePageCount(orderData?.page_qty + 1)
+                                );
+                              }}
+                              data-increment
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {`${orderData?.sheetValue} ${user?.zone?.currency_sign}`}
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {`${orderData?.page_qty * orderData?.sheetValue} ${
+                            user?.zone?.currency_sign
+                          }`}
+                        </div>
+                      </td>
+                    </tr>
+
+                    {/* product papper dtaild page */}
+                    <tr>
+                      <td class="border-0 py-1 px-0">
+                        <div class="d-flex align-items-center">
+                          <a
+                            class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                            href="#"
+                          >
+                            <img
+                              src={papperType?.paper?.img}
+                              width="110"
+                              alt="Product"
+                            />
+                          </a>
+                          <div class="ps-3 ps-sm-4">
+                            <h4 class="h6 mb-2">
+                              <a href="#">{papperType?.paper?.name}</a>
+                            </h4>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Sheet Total
+                        </div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {zonePrice(thermelSheet?.sheetprice)?.price *
+                            orderData?.page_qty}{" "}
+                          + {papperType?.paper?.value} %
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Paper Price
+                        </div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {((orderData?.sheetValue * orderData.paperValue) /
+                            100 +
+                            orderData?.sheetValue) *
+                            orderData?.page_qty -
+                            orderData?.sheetValue * orderData?.page_qty}{" "}
+                          {user?.zone?.currency_sign}
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {" "}
+                          {((orderData?.sheetValue * orderData.paperValue) /
+                            100 +
+                            orderData?.sheetValue) *
+                            orderData?.page_qty}{" "}
+                          {user?.zone?.currency_sign}
+                        </div>
+                      </td>
+                    </tr>
+
+                    {/* product cover detaild */}
+                    <tr>
+                      <td class="border-0 py-1 px-0">
+                        <div class="d-flex align-items-center">
+                          <a
+                            class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                            href="#"
+                          >
+                            <img
+                              src={cover?.cover?.img}
+                              width="110"
+                              alt="Product"
+                            />
+                          </a>
+                          <div class="ps-3 ps-sm-4">
+                            <h4 class="h6 mb-2">
+                              <a href="#">{cover?.cover?.name}</a>
+                            </h4>
+                            {orderData?.coverType !== "both_img" && (
+                              <>
+                                <div class="text-body-secondary fs-sm me-3">
+                                  Cover Upgrade:{" "}
+                                  <span class="text-dark fw-medium">
+                                    {coverUpgrade?.name}
+                                  </span>
+                                </div>
+                                <div class="text-body-secondary fs-sm me-3">
+                                  Cover Color:{" "}
+                                  <span class="text-dark fw-medium">
+                                    {coverUpgradeColor?.colors?.color}
+                                  </span>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Quantity
+                        </div>
+                        <div class="fs-sm fw-medium text-dark">1</div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {zonePrice(cover?.coverprice)?.priceSrring}
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        <div class="fs-sm fw-medium text-dark">
+                          {zonePrice(cover?.coverprice)?.priceSrring}
+                        </div>
+                      </td>
+                    </tr>
+
+                    {/* product box & sleev detaild*/}
+                    <tr>
+                      <td class="border-0 py-1 px-0">
+                        <div class="d-flex align-items-center">
+                          <a
+                            class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                            href="#"
+                          >
+                            <img
+                              src={box?.boxsleeve.img}
+                              width="110"
+                              alt="Product"
+                            />
+                          </a>
+                          <div class="ps-3 ps-sm-4">
+                            <h4 class="h6 mb-2">
+                              <a href="#">{box?.boxsleeve.name}</a>
+                            </h4>
+                            {orderData?.productboxandsleeveType !==
+                              "both_img" && (
+                              <>
+                                <div class="text-body-secondary fs-sm me-3">
+                                  Box & Sleev Upgrade:{" "}
+                                  <span class="text-dark fw-medium">
+                                    {boxUpgrade?.name}
+                                  </span>
+                                </div>
+                                <div class="text-body-secondary fs-sm me-3">
+                                  Box & Sleev Color:{" "}
+                                  <span class="text-dark fw-medium">
+                                    {boxUpgradeColor?.colors[0]?.color}
+                                  </span>
+                                </div>
+                              </>
+                            )}
+                            {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Quantity
+                        </div>
+                        <div class="fs-sm fw-medium text-dark">1</div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData.boxSleeveValue}`}</div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData.boxSleeveValue}`}</div>
+                      </td>
+                    </tr>
+                    {Number(orderData?.isPhotoBookCopy) ? (
+                      <tr>
+                        <td class="border-0 py-1 px-0">
+                          <div class="d-flex align-items-center">
+                            <a
+                              class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                              href="#"
+                            >
+                              <img
+                                src={product?.img}
+                                width="110"
+                                alt="Product"
+                              />
+                            </a>
+                            <div class="ps-3 ps-sm-4">
+                              <h4 class="h6 mb-2">
+                                <a href="#">Pocket book copy</a>
+                              </h4>
+                              {/* <div class="text-body-secondary fs-sm me-3">
+                                                Box & Sleev Upgrade:{" "}
+                                                <span class="text-dark fw-medium">
+                                                  {datas?.coversupgrade?.name}
+                                                </span>
+                                              </div>
+                                              <div class="text-body-secondary fs-sm me-3">
+                                                Box & Sleev Color:{" "}
+                                                <span class="text-dark fw-medium">
+                                                  {
+                                                    datas?.coversupgradecolor
+                                                      ?.name
+                                                  }
+                                                </span>
+                                              </div> */}
+                              {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
+                            </div>
+                          </div>
+                        </td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Quantity
+                          </div>
+                          <div class="fs-sm fw-medium text-dark">
+                            {orderData?.photoBookCopy}
+                          </div>
+                        </td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Price
+                          </div>
+                          <div class="fs-sm fw-medium text-dark">
+                            {user?.zone?.currency_sign}{" "}
+                            {orderData?.photoBookCopyPrice *
+                              orderData?.photoBookCopy}{" "}
+                          </div>
+                        </td>
+                        <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Total
+                          </div>
+                          <div class="fs-sm fw-medium text-dark">
                             {user?.zone?.currency_sign}{" "}
                             {zonePrice(product?.album_copy_price)?.price *
                               orderData?.photoBookCopy}{" "}
-                            .
                           </div>
+                        </td>
+                      </tr>
+                    ) : null}
+                    {orderData?.pritnig_price_type == "design_print_bind" ? (
+                      <tr>
+                        <td class="border-0 py-1 my-2 px-0">
+                          <div class="d-flex align-items-center">
+                            <a
+                              class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
+                              href="#"
+                            >
+                              <img
+                                src={
+                                  "https://api.photokrafft.com/img/size/img.png"
+                                }
+                                width="110"
+                                alt="Product"
+                              />
+                            </a>
+                            <div class="ps-3 ps-sm-4">
+                              <h4 class="h6 mb-2">
+                                <a href="#">Design + Print + Bind</a>
+                              </h4>
+                              {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
+                            </div>
+                          </div>
+                        </td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Quantity
+                          </div>
+                          <div class="fs-sm fw-medium text-dark">
+                            {orderData?.page_qty}
+                          </div>
+                        </td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Price
+                          </div>
+                          <div class="fs-sm fw-medium text-dark">{`${
+                            user?.zone?.currency_sign
+                          } ${
+                            orderData?.page_qty * orderData?.pritnig_price_value
+                          }`}</div>
+                        </td>
+                        <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Total
+                          </div>
+                          <div class="fs-sm fw-medium text-dark">{`${
+                            user?.zone?.currency_sign
+                          } ${
+                            orderData?.page_qty * orderData?.pritnig_price_value
+                          }`}</div>
+                        </td>
+                      </tr>
+                    ) : null}
+
+                    {/* product box & sleev detaild*/}
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Subtotal
                         </div>
-                      </div>
-                      {/* <div className="nav justify-content-end mt-n5 mt-sm-n3"><a className="nav-link fs-xl p-2" href="#" data-bs-toggle="tooltip" title="Remove"><i className="ai-trash"></i></a></div> */}
-                    </div>
-                  </div>
-                </>
-              )}
-            {/* <div className="border-top pt-4 mb-3"></div> */}
-          </div>
-          <div className="col-lg-6 col-md-6 col-sm-12">
-            <div className="card p-3 ">
-              <div className="card-header">
-                <center>Order Summary</center>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark">
+                          {orderData.boxSleeveValue +
+                            orderData.coverValue +
+                            ((orderData?.sheetValue * orderData.paperValue) /
+                              100 +
+                              orderData?.sheetValue) *
+                              orderData?.page_qty +
+                            orderData.pritnigPriceTotalPageValue +
+                            orderData?.photoBookCopyPrice *
+                              orderData?.photoBookCopy}{" "}
+                          {user?.zone?.currency_sign}
+                        </div>
+                      </td>
+                    </tr>
+                    {Number(orderData?.discount) != 0 ? (
+                      <>
+                        <tr>
+                          <td class="border-0 py-1 px-0"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm text-body-secondary mb-2">
+                              Discount {`( ${orderData?.discount}% )`}
+                            </div>
+                          </td>
+                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm fw-medium text-danger">{`- ${
+                              user?.zone?.currency_sign
+                            } ${
+                              orderData.boxSleeveValue +
+                              orderData.coverValue +
+                              ((orderData?.sheetValue * orderData.paperValue) /
+                                100 +
+                                orderData?.sheetValue) *
+                                orderData?.page_qty +
+                              orderData.pritnigPriceTotalPageValue +
+                              orderData?.photoBookCopyPrice *
+                                orderData?.photoBookCopy -
+                              Math.round(orderData?.orderTotale)
+                            }`}</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="border-0 py-1 px-0"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm text-body-secondary mb-2">
+                              Afetr Discount Total
+                            </div>
+                          </td>
+                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm fw-medium text-success">{`${
+                              user?.zone?.currency_sign
+                            } ${Math.round(orderData?.orderTotale)}`}</div>
+                          </td>
+                        </tr>
+                      </>
+                    ) : null}
+                    {/* {datas?.pritnig_price_type ==
+                                    "design_print_bind" ? (
+                                      <>
+                                        <tr>
+                                          <td class="border-0 py-1 px-0"></td>
+                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm text-body-secondary mb-2">
+                                              design print bind{" "}
+                                              {datas?.pritnig_price}
+                                            </div>
+                                          </td>
+                                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                                            <div class="fs-sm fw-medium text-success">{`${
+                                             12
+                                            } ${
+                                              datas?.pritnig_price *
+                                              datas?.page_qty
+                                            }`}</div>
+                                          </td>
+                                        </tr>
+                                      </>
+                                    ) : null} */}
+                    {Number(orderData.isPhotoBookCopy) ? (
+                      <tr>
+                        <td class="border-0 py-1 px-0"></td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Pocket book Copy
+                          </div>
+                        </td>
+                        <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm fw-medium ">{`${
+                            user?.zone?.currency_sign
+                          } ${
+                            orderData?.photoBookCopyPrice *
+                            orderData?.photoBookCopy
+                          }`}</div>
+                        </td>
+                      </tr>
+                    ) : null}
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Shiping charges
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${user?.zone?.shipingcharge}`}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark">
+                          {user?.zone?.currency_sign}{" "}
+                          {orderData?.orderTotale + user?.zone?.shipingcharge}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button
+                  className="btn btn-lg btn-primary w-100"
+                  onClick={() => submitOrder()}
+                >
+                  Place an order
+                </button>
               </div>
-             
-              <ul className="list-unstyled py-3 mb-0">
-                <li className="d-flex justify-content-between mb-2">
-                  Subtotal:
-                  <span className="fw-semibold ms-2">
-                    {user?.zone?.currency_sign}{" "}
-                    {orderData.boxSleeveValue +
-                      orderData.coverValue +
-                      (orderData.sheetValue *
-                        orderData.page_qty *
-                        orderData?.paperValue) /
-                        100 +
-                      orderData.sheetValue * orderData.page_qty +
-                      orderData.pritnigPriceTotalPageValue}
-                  </span>
-                </li>
-                {Number(user?.discount) ? (
-                  <>
-                    <li className="d-flex justify-content-between mb-2">
-                      Discount:
-                      <span className="fw-semibold ms-2 text-danger">
-                        -{user?.zone?.currency_sign}{" "}
-                        {orderData?.orderDiscountAmount}
-                      </span>
-                    </li>
-                    <li className="d-flex justify-content-between mb-2">
-                      Subtotal ( after discount {user?.discount} % ):
-                      <span className="fw-semibold ms-2">
-                        {user?.zone?.currency_sign}{" "}
-                        {Math.round(orderData?.orderTotale)}
-                      </span>
-                    </li>
-                  </>
-                ) : null}
-                <li className="d-flex justify-content-between mb-2">
-                  Shipping cost:
-                  <span className="fw-semibold ms-2">
-                    {user?.zone?.currency_sign} {user?.zone?.shipingcharge}
-                  </span>
-                </li>
-              </ul>
-              <div className="d-flex align-items-center justify-content-between border-top fs-xl pt-4">
-                Total:
-                <span className="fs-3 fw-semibold text-dark ms-2">
-                  {user?.zone?.currency_sign}{" "}
-                  {orderData?.orderTotale + user?.zone?.shipingcharge}
-                </span>
-              </div>
-              <div className="my-3 py-2 border-top">
-                <span className="fw-semibold text-danger">
-                  Taxes are included in this price, we will send a bifurcated
-                  invoice copy to your email
-                </span>
-              </div>
-              <button
-                className="btn btn-lg btn-primary w-100"
-                onClick={() => submitOrder()}
-              >
-                Place an order
-              </button>
             </div>
           </div>
         </div>
       </div>
+      {/*
+       */}
     </>
   );
 }

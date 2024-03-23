@@ -23,18 +23,18 @@ export const appRoutes = {
 
 export const apiRoutes = {
     // auth routes
-    login: dserverDomain + '/auth/costomer/login',
-    register: dserverDomain + '/costomer',
-    token: dserverDomain + '/auth/costomer/token',
-    products: dserverDomain + '/product',
-    orders: dserverDomain + '/order',
-    uploadfile: dserverDomain + '/order/uploadfile',
-    zones: dserverDomain + '/zones',
-    user: dserverDomain + '/user',
-    checkout: dserverDomain + '/checkout',
-    updateAvtar: dserverDomain + 'costomer/change-avtar/',
-    customer: dserverDomain + '/costomer/',
-    forgetPassword: dserverDomain + '/auth/costomer/forget-password/',
+    login: serverApiDomain + '/auth/costomer/login',
+    register: serverApiDomain + '/costomer',
+    token: serverApiDomain + '/auth/costomer/token',
+    products: serverApiDomain + '/product',
+    orders: serverApiDomain + '/order',
+    uploadfile: serverApiDomain + '/order/uploadfile',
+    zones: serverApiDomain + '/zones',
+    user: serverApiDomain + '/user',
+    checkout: serverApiDomain + '/checkout',
+    updateAvtar: serverApiDomain + 'costomer/change-avtar/',
+    customer: serverApiDomain + '/costomer/',
+    forgetPassword: serverApiDomain + '/auth/costomer/forget-password/',
 }
 
 export const localstorageKey = {

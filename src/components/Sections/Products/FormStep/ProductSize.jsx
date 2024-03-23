@@ -27,6 +27,39 @@ function ProductSize() {
   return (
     <>
       <div className="row">
+        {/* <div className="col-md-12 col-sm-12 col-lg-12">
+          <span className="text-danger">{formError?.product_size}</span>
+          <>
+            <h6>Select size</h6>
+          </>
+          <div className="">
+            {productSize.map((data) => (
+              <div className="col-lg-2 col-md-4 col-sm-12">
+                <div
+                  className={`size card  my-2 pro ${
+                    orderData.productSize == data.id && "selected_prod_size"
+                  }`}
+                  onClick={() =>
+                    disapatch(changeOrientationSize({ size: data }))
+                  }
+                >
+                  <div className="d-flex justify-content-center align-items-center">
+                    <img
+                      src={data?.size?.img}
+                      style={{ height: 150, width: "100%", padding: "5px",borderRadius:"5px" }}
+                      alt=""
+                      srcset=""
+                    />
+                    <div></div>
+                  </div>
+                  <div className="py-3" >
+                  <center>{data?.size?.name}</center>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div> */}
         <div className="col-md-12 col-sm-12 col-lg-12">
           <span className="text-danger">{formError?.product_size}</span>
           <>
@@ -39,9 +72,10 @@ function ProductSize() {
                   className={`size card  my-2 pro ${
                     orderData.productSize == data.id && "selected_prod_size"
                   }`}
-                  onClick={() =>
-                    disapatch(changeOrientationSize({ size: data }))
-                  }
+                  onClick={() => {
+                    disapatch(changeOrientationSize({ size: data }));
+                    disapatch(fcm({ key: "product_size", error: false }));
+                  }}
                 >
                   <div className="d-flex justify-content-between align-items-center">
                     <img
@@ -61,7 +95,7 @@ function ProductSize() {
         {orderData.productSize && (
           <>
             <div className="col-12 my-3">
-              <span className="text-danger">{formError?.product_sheet}</span>
+              <span className="text-danger">{formError?.product_print}</span>
               <>
                 <h6>What do you want us to process ?</h6>
               </>
@@ -91,6 +125,7 @@ function ProductSize() {
                           value: product?.min_page * 0,
                         })
                       );
+                      disapatch(fcm({ key: "product_print", error: false }));
                     }}
                   >
                     <div className="d-flex justify-content-between align-items-center">
@@ -137,6 +172,7 @@ function ProductSize() {
                             product?.min_page * zonePrice(pritnig_price)?.price,
                         })
                       );
+                      disapatch(fcm({ key: "product_print", error: false }));
                     }}
                   >
                     <div className="d-flex justify-content-between align-items-center">
@@ -167,7 +203,8 @@ function ProductSize() {
               </div>
             </div>
 
-            {(orderData.pritnig_price_type == "print_bind" || orderData.pritnig_price_type == "design_print_bind") && (
+            {(orderData.pritnig_price_type == "print_bind" ||
+              orderData.pritnig_price_type == "design_print_bind") && (
               <>
                 <div className="col-12 my-3">
                   <span className="text-danger">
@@ -186,9 +223,12 @@ function ProductSize() {
                                 orderData.productSheet == data.id &&
                                 "selected_prod_size"
                               }`}
-                              onClick={() =>
-                                disapatch(changeSheet({ sheet: data }))
-                              }
+                              onClick={() => {
+                                disapatch(changeSheet({ sheet: data }));
+                                disapatch(
+                                  fcm({ key: "product_sheet", error: false })
+                                );
+                              }}
                             >
                               <div className="d-flex justify-content-between align-items-center">
                                 <img
@@ -223,9 +263,7 @@ function ProductSize() {
                 </div>
 
                 <div className="col-12 my-3">
-                  <span className="text-danger">
-                    {formError?.product_sheet}
-                  </span>
+                  <span className="text-danger">{formError?.paperType}</span>
                   <>
                     <h6>Select your paper type</h6>
                   </>
@@ -238,11 +276,14 @@ function ProductSize() {
                               orderData.paperType == data.id &&
                               "selected_prod_size"
                             }`}
-                            onClick={() =>
+                            onClick={() => {
                               disapatch(
                                 changePapertypeOption({ papertype: data })
-                              )
-                            }
+                              );
+                              disapatch(
+                                fcm({ key: "paperType", error: false })
+                              );
+                            }}
                           >
                             <div className="d-flex justify-content-between align-items-center">
                               <img
@@ -283,9 +324,10 @@ function ProductSize() {
                       </span>
                       <input
                         className="form-control form-control-lg my-2"
-                        onChange={(e) =>
-                          disapatch(changePageCount(e.target.value))
-                        }
+                        onChange={(e) => {
+                          disapatch(changePageCount(e.target.value));
+                          disapatch(fcm({ key: "product_page", error: false }));
+                        }}
                         type="number"
                         value={orderData.page_qty}
                       />
@@ -302,13 +344,25 @@ function ProductSize() {
         next={() => {
           if (!orderData.productSize) {
             disapatch(
-              fcm({ key: "product_sheet", error: "Select minimum one option" })
+              fcm({ key: "product_size", error: "Select minimum one option" })
+            );
+            return 0;
+          }
+          if (!orderData.pritnig_price_type) {
+            disapatch(
+              fcm({ key: "product_print", error: "Select minimum one option" })
             );
             return 0;
           }
           if (!orderData.productSheet) {
             disapatch(
-              fcm({ key: "product_size", error: "Select minimum one option" })
+              fcm({ key: "product_sheet", error: "Select minimum one option" })
+            );
+            return 0;
+          }
+          if (!orderData.paperType) {
+            disapatch(
+              fcm({ key: "paperType", error: "Select minimum one option" })
             );
             return 0;
           }

@@ -112,6 +112,7 @@ const orderSlice = createSlice({
     },
     changeOrientation: (state, action) => {
       state.orderData.productOrientation = action.payload.product.id
+      state.productOrientation = action.payload.product
       state.productSize = action.payload.product.size
     },
     changeOrientationSize: (state, action) => {
@@ -133,6 +134,9 @@ const orderSlice = createSlice({
     },
     changeCover: (state, action) => {
       state.productcolor = []
+      state.orderData.productcovercolor = null
+      state.orderData.productcoveroption = null
+      state.orderData.coverphotofront = null
       state.orderData.productcover = action.payload.cover.id
       state.productcoveroption = action.payload.cover.cover.coverupgrades
       state.orderData.coverValue = zonePrice(action.payload.cover.coverprice).price
@@ -155,12 +159,14 @@ const orderSlice = createSlice({
       state.productboxandsleeveoptioncolor = action.payload.boxSleev.boxsleeveupgradecolor
     },
     changeBoxSleev: (state, action) => {
-
+      state.productboxandsleeveoptioncolor = []
+      state.orderData.productboxandsleevecolor = null
+      state.orderData.productboxandsleeveoption = null
+      state.orderData.boxphotofront = null
       state.orderData.productboxSleev = action.payload.boxSleev.id
       state.orderData.productboxandsleeveType = action.payload.boxSleev.boxsleeve.type
       state.productboxandsleeveoptions = action.payload.boxSleev.boxsleeve.boxsleeveupgrades
       state.orderData.boxSleeveValue = zonePrice(action.payload.boxSleev.boxsleeveprice).price
-      // state.orderData.orderTotale = state.orderData.orderTotale += state.orderData.boxSleevTotale
     },
     setTotale: (state, action) => {
       // console.log("total", (((state.orderData.sheetValue + state.orderData.pritnigPriceValue) * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty);
