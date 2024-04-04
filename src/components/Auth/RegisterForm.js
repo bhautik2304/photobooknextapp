@@ -1,23 +1,25 @@
 "use client";
-import React, { useState,useMemo  } from "react";
+import React, { useState, useMemo } from "react";
 import axios from "axios";
 import { apiRoutes, appRoutes, localstorageKey } from "@/constants";
 import { useRouter } from "next/navigation";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
-import { Button } from "@mui/material";
+import { Button, IconButton, Tooltip } from "@mui/material";
 // import "react-phone-number-input/style.css";
 import PhoneInputWithCountry, {
   parsePhoneNumber,
   getCountryCallingCode
 } from "react-phone-number-input";
 import countryList from 'react-select-country-list'
-
+import { FaClipboard } from "react-icons/fa";
+import process from "../../assets/img/process.json"
 
 const errorMsg = {
   name: "Please enter your name.",
   mobile: "Please enter a valid mobile number.",
-  country: "Please Select a country Code.",
+  whatsapp_no: "Please enter a valid whatsapp number.",
+  mobaile_code: "Please Select a country Code.",
   email: "Please enter a valid email address.",
   password: "Please enter a password with at least 8 characters.",
 
@@ -31,6 +33,12 @@ const errorMsg = {
   social2: "Please enter a valid link for the second social media account.",
 };
 
+const registrationState = {
+  step1: "1",
+  step2: "2",
+  step3: "3",
+}
+
 function RegisterForm() {
   const router = useRouter();
   // const router = useRouter()
@@ -39,7 +47,8 @@ function RegisterForm() {
     name: "",
     email: "",
     mobaile: "",
-    mobaile_code: "",
+    whatsapp_no: "",
+    mobaile_code: 91,
     password: "",
 
     address: "",
@@ -54,7 +63,8 @@ function RegisterForm() {
   });
   const [status, setStatus] = useState(false);
   const [mobile, setMobile] = useState(false);
-  const [country, setCountry] = useState(false);
+  const [nowahtapp, setNowahtapp] = useState(false);
+  const [registrationProcess, setRegistrationProcess] = useState(registrationState.step1);
   const [error, setError] = useState(false);
   const [show, setHide] = useState(false);
 
@@ -62,8 +72,8 @@ function RegisterForm() {
 
   // axios.post()
   const submitData = async () => {
-    console.log(parsePhoneNumber(String(mobile)))
-    console.log(getCountryCallingCode('IN'))
+    // console.log(getCountryCallingCode(data.mobaile_code))
+    console.log(data.mobaile_code)
     const newError = {};
 
     if (!data?.name) {
@@ -72,8 +82,13 @@ function RegisterForm() {
     if (!data.mobaile) {
       newError.mobile = errorMsg.mobile;
     }
-    if (!country) {
-      newError.country = errorMsg.mobile;
+    if (!nowahtapp) {
+      if (!data.whatsapp_no) {
+        newError.whatsapp_no = errorMsg.whatsapp_no;
+      }
+    }
+    if (!data.mobaile_code) {
+      newError.mobaile_code = errorMsg.mobaile_code;
     }
     if (!data?.email) {
       newError.email = errorMsg.email;
@@ -99,10 +114,13 @@ function RegisterForm() {
       setError(newError);
       return 0; // Validation failed
     }
+
+    setRegistrationProcess(registrationState.step2)
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("country_code", getCountryCallingCode(country));
+    formData.append("country_code", data.mobaile_code);
     formData.append("phone_no", data.mobaile);
+    formData.append("whatsapp_no", `${data.mobaile_code}${data.whatsapp_no}`);
     formData.append("email", data.email);
     formData.append("password", data.password);
 
@@ -119,15 +137,21 @@ function RegisterForm() {
       if (Number(res.data.code) === 444) {
         newError.apiError = res.data.msg
         setError(newError);
+        setRegistrationProcess(registrationState.step1)
         return 0;
       }
-      setStatus(true)
-    }).catch(err => console.log(err))
+      setRegistrationProcess(registrationState.step3)
+      // setStatus(true)
+
+    }).catch(err => {
+      setRegistrationProcess(registrationState.step1)
+      console.log(err)
+    })
   };
 
   return (
     <div>
-      {!status ? (
+      {registrationProcess == "1" ? (
         <>
           <h3 className="h3 pb-2 pb-lg-3">Sign up to photokrafft.com</h3>
           <div classNameName="row">
@@ -149,14 +173,18 @@ function RegisterForm() {
                     <div className="col-3" >
                       <PhoneInputWithCountry
                         style={{ width: '100%' }}
+                        defaultCountry="IN"
                         className="form-control form-control-lg"
-                        onCountryChange={(E) => setCountry(E)}
+                        onCountryChange={(E) => {
+                          console.log(getCountryCallingCode(E));
+                          setData({ ...data, mobaile_code: getCountryCallingCode(E) })
+                        }}
                         placeholder="Your Mobile No *"
                         value={mobile}
                         onChange={setMobile}
                         required
                       />
-                      <span className="text-danger">{error?.country}</span>
+
                     </div>
                     <div className="col-9" >
                       <input
@@ -168,22 +196,62 @@ function RegisterForm() {
                         placeholder="Enter Mobile No."
                         required
                       />
-                        <span className="text-danger">{error?.mobile}</span>
+                      <span className="text-danger">{error?.mobile}</span>
+                      <span className="text-danger">{error?.mobaile_code}</span>
                     </div>
                   </div>
                 </div>
+
                 <div className="col mb-2">
-                  <input
-                    className="form-control form-control-lg"
-                    onChange={(e) =>
-                      setData({ ...data, email: e.target.value })
+                  <div className="password-toggle mb-2">
+                    <input
+                      className="form-control form-control-lg"
+                      disabled={nowahtapp}
+                      onChange={(e) =>
+                        setData({ ...data, whatsapp_no: e.target.value })
+                      }
+                      value={data.whatsapp_no}
+                      type="number"
+                      placeholder="Whatsapp No. For Order Notifications"
+                      required
+                    />
+                    <label
+                      className="password-toggle-btn"
+                      aria-label="Show/hide password"
+                    >
+                      <input
+                        className="password-toggle-check"
+                        type="checkbox"
+                        onClick={() => setHide(!show)}
+                      />
+                      <Tooltip title="Copy Your Mobile Number">
+                        <IconButton aria-label="" disabled={nowahtapp} onClick={() => {
+                          setData({ ...data, whatsapp_no: data.mobaile })
+                        }}>
+                          <FaClipboard />
+                        </IconButton>
+                      </Tooltip>
+                    </label>
+                  </div>
+                  <span className={`text-${nowahtapp ? "success" : "danger"} pro`} onClick={() => setNowahtapp(!nowahtapp)} >
+                    {
+                      nowahtapp ? "Click to add your Whatsapp number" : "Click if you don’t have a Whatsapp number"
                     }
-                    type="email"
-                    placeholder="Email address *"
-                    required
-                  />
-                    <span className="text-danger">{error?.email}</span>
+                  </span><br />
+                  <span className="text-danger">{error?.whatsapp_no}</span>
                 </div>
+              </div>
+              <div className="col-12 mb-2">
+                <input
+                  className="form-control form-control-lg"
+                  onChange={(e) =>
+                    setData({ ...data, email: e.target.value })
+                  }
+                  type="email"
+                  placeholder="Email address *"
+                  required
+                />
+                <span className="text-danger">{error?.email}</span>
               </div>
               <span className="text-danger">{error?.password}</span>
               <div className="password-toggle mb-2">
@@ -292,7 +360,7 @@ function RegisterForm() {
                     required
                   >
                     {
-                      options.map((data,key)=><option value={data.label} key={key}>{data.label}</option>)
+                      options.map((data, key) => <option value={data.label} key={key}>{data.label}</option>)
                     }
                   </select>
                 </div>
@@ -338,6 +406,18 @@ function RegisterForm() {
             Sign up
           </button>
         </>
+      ) : registrationProcess == "2" ? (
+        <>
+          <center>
+            <Player
+              autoplay
+              speed={0}
+              loop
+              src={process}
+              style={{ height: "250px", width: "250px" }}
+            ></Player>
+          </center>
+        </>
       ) : (
         <>
           <div classNameName="row">
@@ -352,6 +432,9 @@ function RegisterForm() {
               <div class="alert alert-primary" role="alert">
                 You have successfully registered and your profile is under
                 review , please wait for approval
+              </div>
+              <div class="alert alert-primary" role="alert">
+                We have sent a verification email , please verify it
               </div>
             </center>
             <center>

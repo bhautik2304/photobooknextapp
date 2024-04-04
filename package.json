@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev -p 4000",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"
@@ -15,6 +15,7 @@
         "@mui/lab": "^5.0.0-alpha.163",
         "@mui/material": "^5.15.6",
         "@reduxjs/toolkit": "^1.9.7",
+        "aws-sdk": "^2.1591.0",
         "axios": "^1.6.3",
         "dropbox": "^10.34.0",
         "moment": "^2.30.1",

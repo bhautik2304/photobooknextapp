@@ -20,7 +20,7 @@ function EventDetailForm() {
     costumizeMessage: "",
     printing: "",
   });
-  const { 
+  const {
     orderData,
     orderData: { orderDetaild, product_id },
   } = useSelector((state) => state.order);
@@ -83,7 +83,6 @@ function EventDetailForm() {
               >
                 <option value="">Select Event Type</option>
                 <option value="Wedding">Wedding</option>
-                <option value="others">others</option>
                 <option value="Pre-Wedding">Pre-Wedding</option>
                 <option value="Engagement">Engagement</option>
                 <option value="Birthdav">Birthdav</option>
@@ -94,36 +93,35 @@ function EventDetailForm() {
                 <option value="Baby Shower">Baby Shower</option>
                 <option value="Portfolio">Portfolio</option>
                 <option value="Guestbook">Guestbook</option>
+                <option value="others">Others</option>
               </select>
               <span className="text-danger">{error?.eventType}</span>
             </div>
           </div>
-          {
-            orderDetaild.eventType ==="others" && (
-              <div className="col-6 my-2">
-            <div className="form-group">
-              <label htmlFor="">Others Event</label>
-              <input
-                value={orderDetaild.otherEvent}
-                onChange={(e) =>
-                  dispatch(
-                    changeOrderDetaildData({
-                      key: "otherEvent",
-                      value: e.target.value,
-                    })
-                  )
-                }
-                className="form-control"
-                name=""
-                id=""
-                aria-describedby="helpId"
-                placeholder=""
-              />
+          {orderDetaild.eventType === "others" && (
+            <div className="col-6 my-2">
+              <div className="form-group">
+                <label htmlFor="">Others Event Type</label>
+                <input
+                  value={orderDetaild.otherEvent}
+                  onChange={(e) =>
+                    dispatch(
+                      changeOrderDetaildData({
+                        key: "otherEvent",
+                        value: e.target.value,
+                      })
+                    )
+                  }
+                  className="form-control"
+                  name=""
+                  id=""
+                  aria-describedby="helpId"
+                  placeholder="Ex. Corporate Event"
+                />
+              </div>
             </div>
-          </div>
-            )
-          }
-          
+          )}
+
           <div className="col-6 my-2">
             <div className="form-group">
               <label htmlFor="">Event Date</label>
@@ -287,6 +285,7 @@ function EventDetailForm() {
               </div>
             </div>
           )}
+
           <div className="col-6">
             <h6 className="mt-2">Order pocket book copies</h6>
             <div className="mb-4">
@@ -359,7 +358,7 @@ function EventDetailForm() {
                             color: "#ffffff",
                           }}
                         >
-                          {user.zone.currency_sign}{" "}
+                          {users && users?.zone?.currency_sign}{" "}
                           {orderData.photoBookCopyPrice *
                             orderData.photoBookCopy || 0}
                         </div>

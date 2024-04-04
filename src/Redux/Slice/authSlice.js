@@ -30,7 +30,7 @@ const authSlice = createSlice({
   reducers: {
     authLogin: (state, action) => {
       console.log(action.payload?.user.zone.id);
-      localStorage.setItem(localstorageKey.authKey, JSON.stringify(action.payload.token))
+      localStorage.setItem(localstorageKey.authKey, action.payload.token)
       localStorage.setItem(localstorageKey.authStatus, true)
       localStorage.setItem(localstorageKey.zone, action.payload?.user.zone.id)
       state.authStatus = true
@@ -42,6 +42,7 @@ const authSlice = createSlice({
       localStorage.removeItem(localstorageKey.zone)
       state.authStatus = false
       state.user = {}
+      // location.reload()
     }
   }
 });

@@ -5,6 +5,7 @@ import { apiRoutes, appRoutes, localstorageKey } from '@/constants'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { authLogin } from '@/Redux/Slice/authSlice';
+import { fetchUsers } from '@/Redux/Slice/userSlice';
 import { useRouter } from 'next/navigation';
 
 function LoginForm() {
@@ -20,16 +21,17 @@ function LoginForm() {
 
 
     const [show, setHide] = useState(false)
-   
-   
+
+
 
     const submitData = () => {
         axios.post(apiRoutes.login, data).then(res => {
             if (res.data.code == 200) {
                 // alert("logd in")
                 dispatch(authLogin(res.data))
-                router.replace(appRoutes.userProfileOrders)
-                
+                dispatch(fetchUsers())
+                location.reload()
+
                 return
             }
             setError(res.data.msg)

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ProfilePageLayout from "./ProfilePageLayout";
 import axios from "axios";
-import { apiRoutes, appRoutes, secretTokken } from "@/constants";
+import { apiRoutes, secretTokken, appAxios, appRoutes } from "@/constants";
 import { useSelector } from "react-redux";
 import Accordion from "@mui/material/Accordion";
 import { AccordionDetails, Box, Typography } from "@mui/material";
@@ -19,6 +19,8 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import emputycart from "@/assets/img/emputycart.json";
 import Image from "next/image";
 import { Dropbox } from "dropbox";
+import AWS from "aws-sdk";
+
 const productTotalPrice = (
   page,
   sheet,
@@ -52,11 +54,16 @@ function Order() {
   const [itemsPerPage] = useState(4);
   const [dataCount, setDataCount] = useState(0);
   const userId = useSelector((state) => state.auth.user);
-
+  const [accessToken, setAccessToken] = useState("");
   console.log(`${apiRoutes.orders} / user_order`);
 
+  // useEffect(() => {
+  // }, []);
+
   useEffect(() => {
-    axios
+    // Call the refreshAccessToken function with your refresh token
+    // const refreshToken = 'YOUR_REFRESH_TOKEN';
+    appAxios
       .post(`${apiRoutes.orders}/user_order`, { user_id: userId.id })
       .then((response) => {
         setData(response.data.data.reverse());
@@ -82,7 +89,7 @@ function Order() {
     setCurrentPage(value);
   };
 
-  console.log(pageCount); // This will now log the correct currentItems after data is fetched
+  console.log(accessToken);
 
   return (
     <ProfilePageLayout>
@@ -92,11 +99,20 @@ function Order() {
         <div className="row g-4 mb-4">
           <section className="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 shadow-sm">
             <div className="card-body">
-              <div className="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                <Badge badgeContent={data.length} color="success">
-                  <i className="ai-cart text-primary lead pe-1 me-2"></i>
-                </Badge>
-                <h2 className="h4 mb-0 mx-4">Orders</h2>
+              <div className="d-flex align-items-center justify-content-between mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                <div className="d-flex align-items-center">
+                  <Badge badgeContent={data.length} color="success">
+                    <i className="ai-cart text-primary lead pe-1 me-2"></i>
+                  </Badge>
+                  <h2 className="h4 mb-0 mx-4">Orders</h2>
+                </div>
+                <div>
+                  <Link href={appRoutes.StartPrinting}>
+                    <button className="btn btn-primary pro btn-sm">
+                      New Order
+                    </button>
+                  </Link>
+                </div>
               </div>
               {data.length ? (
                 <>
@@ -260,9 +276,7 @@ function Order() {
                                             href="#"
                                           >
                                             <img
-                                              src={
-                                                datas?.productsheet?.sheet?.img
-                                              }
+                                              src={datas?.productsheet?.img}
                                               width="110"
                                               alt="Product"
                                             />
@@ -270,10 +284,7 @@ function Order() {
                                           <div class="ps-3 ps-sm-4">
                                             <h4 class="h6 mb-2">
                                               <a href="#">
-                                                {
-                                                  datas?.productsheet?.sheet
-                                                    ?.name
-                                                }
+                                                {datas?.productsheet?.name}
                                               </a>
                                             </h4>
                                             <div class="text-body-secondary fs-sm me-3">
@@ -281,14 +292,14 @@ function Order() {
                                               <span class="text-dark fw-medium">
                                                 {
                                                   datas?.productorientation
-                                                    ?.orientation?.name
+                                                    ?.name
                                                 }
                                               </span>
                                             </div>
                                             <div class="text-body-secondary fs-sm me-3">
                                               Size :{" "}
                                               <span class="text-dark fw-medium">
-                                                {datas?.productsize?.size?.name}
+                                                {datas?.productsize?.name}
                                               </span>
                                             </div>
                                           </div>
@@ -329,9 +340,7 @@ function Order() {
                                             href="#"
                                           >
                                             <img
-                                              src={
-                                                datas?.productpaper?.paper?.img
-                                              }
+                                              src={datas?.productpaper?.img}
                                               width="110"
                                               alt="Product"
                                             />
@@ -339,10 +348,7 @@ function Order() {
                                           <div class="ps-3 ps-sm-4">
                                             <h4 class="h6 mb-2">
                                               <a href="#">
-                                                {
-                                                  datas?.productpaper?.paper
-                                                    ?.name
-                                                }
+                                                {datas?.productpaper?.name}
                                               </a>
                                             </h4>
                                           </div>
@@ -396,9 +402,7 @@ function Order() {
                                             href="#"
                                           >
                                             <img
-                                              src={
-                                                datas?.productcover?.cover?.img
-                                              }
+                                              src={datas?.productcover?.img}
                                               width="110"
                                               alt="Product"
                                             />
@@ -406,10 +410,7 @@ function Order() {
                                           <div class="ps-3 ps-sm-4">
                                             <h4 class="h6 mb-2">
                                               <a href="#">
-                                                {
-                                                  datas?.productcover?.cover
-                                                    ?.name
-                                                }
+                                                {datas?.productcover?.name}
                                               </a>
                                             </h4>
                                             <div class="text-body-secondary fs-sm me-3">
@@ -461,10 +462,7 @@ function Order() {
                                             href="#"
                                           >
                                             <img
-                                              src={
-                                                datas?.productboxsleeve
-                                                  ?.boxsleeve?.img
-                                              }
+                                              src={datas?.productboxsleeve?.img}
                                               width="110"
                                               alt="Product"
                                             />
@@ -472,10 +470,7 @@ function Order() {
                                           <div class="ps-3 ps-sm-4">
                                             <h4 class="h6 mb-2">
                                               <a href="#">
-                                                {
-                                                  datas?.productboxsleeve
-                                                    ?.boxsleeve?.name
-                                                }
+                                                {datas?.productboxsleeve?.name}
                                               </a>
                                             </h4>
                                             <div class="text-body-secondary fs-sm me-3">
@@ -983,10 +978,10 @@ const FileUpload = ({ orderId }) => {
 
   const controller = new AbortController();
 
-  const CancelToken = axios.CancelToken;
-  const source = CancelToken.source();
+  const CancelToken = appAxios.CancelToken;
+  // const source = CancelToken.source();
 
-  console.log(orderId);
+  // console.log(orderId);
   const fileUplode = async () => {
     const error = {};
     if (file == null) {
@@ -1000,201 +995,83 @@ const FileUpload = ({ orderId }) => {
     }
 
     if (file.type == "application/x-zip-compressed") {
-      const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
-
       /* Change hear */
-      const ACCESS_TOKEN = secretTokken.dropbox;
-      const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
-      if (file.size < UPLOAD_FILE_SIZE_LIMIT) {
-        // Upload smaller files directly using Dropbox API v2
-        const formData = new FormData();
-        formData.append("file", file);
-        axios
-          .post("https://content.dropboxapi.com/2/files/upload", file, {
-            headers: {
-              "Content-Type": "application/octet-stream",
-              Authorization: `Bearer ${ACCESS_TOKEN}`,
-              "Dropbox-API-Arg": JSON.stringify({
-                path: `/ORDER-ID-${orderId}.zip`,
-                mode: "add",
-                autorename: true,
-                mute: false,
-              }),
-            },
-            onUploadProgress: (progressEvent) => {
-              console.log(controller.signal);
-              console.log(progressEvent);
-              if (progressEvent.bytes) {
-                console.log(
-                  Math.round((progressEvent.loaded / progressEvent.total) * 100)
-                );
-                if (
-                  Math.round(
-                    (progressEvent.loaded / progressEvent.total) * 100
-                  ) <= 98
-                ) {
-                  setPersent(
-                    Math.round(
-                      (progressEvent.loaded / progressEvent.total) * 100
-                    )
-                  );
+      const s3 = new AWS.S3({
+        accessKeyId: "AKIAZW3CG5TZXIPJK7UK",
+        secretAccessKey: "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",
+        region: "ap-south-1",
+      });
+
+      const params = {
+        Bucket: "photokrafft",
+        Key: `ORD-${orderId}.zip`,
+        Body: file,
+      };
+
+      s3.upload(params)
+        .on("httpUploadProgress", (progress) => {
+          const percentage = Math.round(
+            (progress.loaded / progress.total) * 100
+          );
+          if (percentage < 98) {
+            setPersent(percentage);
+          }
+        })
+        .send((err, data) => {
+          if (err) {
+            console.log("Error uploading file");
+            console.error(err);
+            console.log("Error uploading file");
+            setPersent(0);
+          } else {
+            console.log("File uploaded successfully");
+            console.log("Upload successful", data);
+            console.log("File uploaded successfully");
+            // Get downloadable URL
+            s3.getSignedUrl(
+              "getObject",
+              { Bucket: "photokrafft", Key: `ORD-${orderId}.zip` },
+              (err, url) => {
+                if (err) {
+                  console.error(err);
+                  alert("Error getting downloadable URL");
+                } else {
+                  console.log(url);
+                  appAxios
+                    .post(apiRoutes.uploadfile, {
+                      orderNo: orderId,
+                      source_link: url,
+                    })
+                    .then((e) => {
+                      setPersent(100);
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                    })
+                    .catch((e) => {
+                      console.log(e);
+                      setFileUploadStatus({
+                        status: true,
+                        class: "danger",
+                        msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+                      });
+                    });
                 }
               }
-            },
-          })
-          .then(async (response) => {
-            console.log(response);
-            const linkResponse = await dbx
-              .sharingCreateSharedLinkWithSettings({
-                path: response.data.path_display,
-              })
-              .then(async (linkResult) => {
-                axios
-                  .post(apiRoutes.uploadfile, {
-                    orderNo: orderId,
-                    source_link: linkResult.result.url,
-                  })
-                  .then((state) => {
-                    setPersent(100);
-                    setTimeout(function () {
-                      // Function to execute after the delay
-                      console.log("Executing function after 2-second delay...");
-                      setFileUploadStatus({
-                        status: true,
-                        class: "success",
-                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
-                      });
-                      // redirect(appRoutes.userProfileOrders);
-                      // console.log("Executing function after 5-second delay...");
-                      // Replace the console.log statement with your desired function call
-                    }, 2000);
-                  });
-              });
-            // Handle success
-          })
-          .catch((error) => {
-            console.error(error);
-            // Handle error
-          });
-      } else {
-        let progreShBar = 0;
-        const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
-        setPersent(1);
-        const maxBlob = 250 * 1024 * 1024; // 12MB
-        const workItems = [];
-        let offset = 0;
-
-        while (offset < file.size) {
-          const chunkSize = Math.min(maxBlob, file.size - offset);
-          workItems.push(file.slice(offset, offset + chunkSize));
-          offset += chunkSize;
-        }
-        const task = workItems.reduce((acc, blob, idx, items) => {
-          if (idx === 0) {
-            return acc.then(() => {
-              return dbx
-                .filesUploadSessionStart({ close: false, contents: blob })
-                .then((response) => response.result.session_id);
-            });
-          } else if (idx < items.length - 1) {
-            return acc.then(async (sessionId) => {
-              const cursor = { session_id: sessionId, offset: idx * maxBlob };
-              await dbx.filesUploadSessionAppendV2({
-                cursor: cursor,
-                close: false,
-                contents: blob,
-              });
-              const progress = Math.min(
-                100,
-                Math.floor((blob.size / file.size) * 100)
-              );
-              console.log(Math.floor((blob / file.size) * 100));
-              progreShBar = progreShBar += progress;
-              setPersent(progreShBar);
-              setBuffer(progreShBar + 10);
-              console.log("progress = ", progress);
-              console.log("blob = ", blob);
-              console.log("file = ", file.size);
-              return sessionId;
-            });
-          } else {
-            return acc.then(async (sessionId) => {
-              const cursor = {
-                session_id: sessionId,
-                offset: file.size - blob.size,
-              };
-              const commit = {
-                path: `/ORDER-ID-${orderId}.zip`,
-                mode: "add",
-                autorename: true,
-                mute: false,
-              };
-              const result = await dbx.filesUploadSessionFinish({
-                cursor: cursor,
-                commit: commit,
-                contents: blob,
-              });
-
-              const progress = Math.min(
-                100,
-                Math.floor((blob.size / file.size) * 100)
-              );
-              console.log(Math.floor((blob.size / file.size) * 100));
-              console.log("Finnish progress = ", progress);
-              console.log("Finnish blob = ", blob);
-              console.log("Finnish file = ", file.size);
-              progreShBar = progreShBar + progress;
-              // setPersent(100);
-              setPersent(progreShBar);
-              return result;
-            });
+            );
+            // setSelectedFile(null);
+            // setUploadProgress(0);
           }
-        }, Promise.resolve());
-
-        task
-          .then(async (result) => {
-            console.log(result);
-            const linkResponse = await dbx
-              .sharingCreateSharedLinkWithSettings({
-                path: result.result.path_display,
-              })
-              .then(async (linkResult) => {
-                axios
-                  .post(apiRoutes.uploadfile, {
-                    orderNo: orderId,
-                    source_link: linkResult.result.url,
-                  })
-                  .then((state) => {
-                    setPersent(100);
-                    setTimeout(function () {
-                      // Function to execute after the delay
-                      console.log("Executing function after 2-second delay...");
-                      setFileUploadStatus({
-                        status: true,
-                        class: "success",
-                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
-                      });
-                      // redirect(appRoutes.userProfileOrders);
-                      // console.log("Executing function after 5-second delay...");
-                      // Replace the console.log statement with your desired function call
-                    }, 2000);
-                  });
-              });
-            // setPersent(100)
-          })
-          .catch((error) => {
-            setPersent(0);
-            setFileUploadStatus({
-              status: true,
-              class: "danger",
-              msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
-            });
-            console.log(error);
-            // Handle error
-          });
-      }
+        });
     } else {
-      axios
+      appAxios
         .post(apiRoutes.uploadfile, {
           orderNo: orderId,
           source_link: file,

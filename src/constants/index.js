@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { isLocalStorageAvailable } from '@/utils'
+
 const userProfile = '/Profiles';
 const dserverDomain = 'http://localhost:8000/api';
 const serverApiDomain = 'https://api.photokrafft.com/api';
@@ -23,18 +26,18 @@ export const appRoutes = {
 
 export const apiRoutes = {
     // auth routes
-    login: dserverDomain + '/auth/costomer/login',
-    register: dserverDomain + '/costomer',
-    token: dserverDomain + '/auth/costomer/token',
+    login: dserverDomain + '/auth/customer/login',
+    register: dserverDomain + '/auth/customer/register',
+    token: dserverDomain + '/auth/customer/token',
     products: dserverDomain + '/product',
     orders: dserverDomain + '/order',
     uploadfile: dserverDomain + '/order/uploadfile',
     zones: dserverDomain + '/zones',
     user: dserverDomain + '/user',
     checkout: dserverDomain + '/checkout',
-    updateAvtar: dserverDomain + 'costomer/change-avtar/',
-    customer: dserverDomain + '/costomer/',
-    forgetPassword: dserverDomain + '/auth/costomer/forget-password/',
+    updateAvtar: dserverDomain + 'customer/change-avtar/',
+    customer: dserverDomain + '/customer/',
+    forgetPassword: dserverDomain + '/auth/customer/forget-password/',
 }
 
 export const localstorageKey = {
@@ -49,6 +52,19 @@ export const errorText = {
 
 }
 
-export const secretTokken={
-    dropbox:"sl.Bx95O5ueuCDJcMB525mKKaV2IyahPTpVF8eIEthTXx3zKmFauGK73qXxNVzPtAFr9usdSb1-KrLhyageiScPsdkNmWZsr_iDPQRK4ZzhrY3nWLIEWdrNna3TWp0dh43MtKblkCZfpo25MphDAFFFuJw"
+const userKey = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authKey) : null
+
+export const appAxios = axios.create({
+    headers: {
+        Authorization: userKey,
+    }
+})
+
+export const secretTokken = {
+    dropbox: "sl.ByQ80A7k_83UKMUbIZ1eorKTGj3u_pvWwWygd4kOsbfl7nC8ii4yOfGM3Mg5gH4VHk6FmXLnUOvd-2YrEdXU7LjrR1xUQ-jCVMf3kBlLc7lU6fyU_AaMMxjACyDRF1yapW5K2BaAxoFpSsZlOuEDrpE"
 }
+
+// Call the refreshAccessToken function with your refresh token
+// export const token = refreshAccessToken(refreshToken);
+
+

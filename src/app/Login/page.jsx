@@ -1,20 +1,28 @@
 "use client";
-import React, { useEffect } from 'react'
-import { LoginForm } from '@/components'
-import { appRoutes, localstorageKey } from '@/constants'
-import { redirect } from 'next/navigation'
-import { isLocalStorageAvailable } from '@/utils'
+import React, { useEffect } from "react";
+import { LoginForm } from "@/components";
+import { appRoutes, localstorageKey } from "@/constants";
+import { redirect } from "next/navigation";
+import { isLocalStorageAvailable } from "@/utils";
 function page() {
-  const authStatus = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authStatus) : null
+  const authStatus = isLocalStorageAvailable()
+    ? localStorage.getItem(localstorageKey.authStatus)
+    : null;
 
   useEffect(() => {
     if (authStatus == "true") {
-      redirect(appRoutes.Home)
+      redirect(appRoutes.userProfileOrders);
     }
-  }, [authStatus])
+  }, [authStatus]);
   return (
     <>
-      <main className="page-wrapper" style={{ backgroundColor: '#80d0c7', backgroundImage: 'linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)' }}>
+      <main
+        className="page-wrapper"
+        style={{
+          backgroundColor: "#80d0c7",
+          backgroundImage: "linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)",
+        }}
+      >
         {/* <!-- Page content--> */}
         <div className="d-flex flex-column position-relative h-100 signin-signup-card">
           {/* <!-- Home button--> */}
@@ -31,10 +39,10 @@ function page() {
           </div>
           {/* <!-- Copyright--> */}
           {/* <div className="container fs-sm pt-5 mt-auto mb-5"><span className="text-muted">&copy; All rights reserved. Made by</span><a className="nav-link d-inline-block p-0 ms-1" href="https://createx.studio/" target="_blank" rel="noopener">Createx Studio</a></div> */}
-        </div >
-      </main >
+        </div>
+      </main>
     </>
-  )
+  );
 }
 
-export default page
+export default page;

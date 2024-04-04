@@ -32,12 +32,13 @@ function ProductCover() {
           </>
           <div className="row">
             {productcover.map((datas) => {
-              //console.log(datas);
+              console.log(datas);
               return (
                 <div className="col-lg-4 col-md-4 col-sm-12">
                   <div
                     className={`size card my-2 pro ${
-                      orderData.productcover == datas.id && "selected_prod_size"
+                      orderData.productcover == datas.cover.id &&
+                      "selected_prod_size"
                     }`}
                     onClick={() => disapatch(changeCover({ cover: datas }))}
                   >
@@ -121,32 +122,35 @@ function ProductCover() {
                 <h6>Select options</h6>
               </>
               <div className="row">
-                {productcoveroption.map((data) => (
-                  <>
-                    <div className="col-2">
-                      <div
-                        onClick={() => {
-                          disapatch(selectCoverOption({ coveroption: data }));
-                          disapatch(
-                            fcm({ key: "product_cover_option", error: false })
-                          );
-                        }}
-                      >
-                        <img
-                          src={data.img}
-                          style={{ width: 120 }}
-                          className={`pro ${
-                            orderData.productcoveroption == data.id &&
-                            "selected_prod_cover_option"
-                          }`}
-                          alt=""
-                          srcset=""
-                        />
+                {productcoveroption.map((data) => {
+                  console.log(data);
+                  return (
+                    <>
+                      <div className="col-2">
+                        <div
+                          onClick={() => {
+                            disapatch(selectCoverOption({ coveroption: data }));
+                            disapatch(
+                              fcm({ key: "product_cover_option", error: false })
+                            );
+                          }}
+                        >
+                          <img
+                            src={data.img}
+                            style={{ width: 120 }}
+                            className={`pro ${
+                              orderData.productcoveroption == data.id &&
+                              "selected_prod_cover_option"
+                            }`}
+                            alt=""
+                            srcset=""
+                          />
+                        </div>
+                        <div className="my-2">{data.name}</div>
                       </div>
-                      <div className="my-2">{data.name}</div>
-                    </div>
-                  </>
-                )) || (
+                    </>
+                  );
+                }) || (
                   <>
                     <h1>Select Size</h1>
                   </>

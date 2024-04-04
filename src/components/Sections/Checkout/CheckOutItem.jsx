@@ -12,7 +12,7 @@ function roundToDecimalPlaces(number, decimalPlaces) {
   return Math.round(number * factor) / factor;
 }
 
-function CheckOutItem({ setOrderStatus, submitOrder }) {
+function CheckOutItem({ back, submitOrder }) {
   const [pageErrorMsg, setErrorMsg] = useState("");
 
   const {
@@ -33,14 +33,18 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
     },
   } = useSelector((state) => state);
   const thermelSheet =
-    productSheet.find((data) => data.id == orderData.productSheet) || null;
-  const papperType =
-    productpaperType.find((data) => data.id == orderData.paperType) || null;
-  const cover =
-    productcover.find((data) => data.id == orderData.productcover) || null;
-  const box =
-    productboxSleev.find((data) => data.id == orderData.productboxSleev) ||
+    productSheet.find((data) => data.sheet.id == orderData.productSheet) ||
     null;
+  const papperType =
+    productpaperType.find((data) => data.paper.id == orderData.paperType) ||
+    null;
+  const cover =
+    productcover.find((data) => data.cover.id == orderData.productcover) ||
+    null;
+  const box =
+    productboxSleev.find(
+      (data) => data.boxsleeve.id == orderData.productboxSleev
+    ) || null;
   const coverUpgrade =
     productcoveroption.find((data) => data.id == orderData.productboxSleev) ||
     null;
@@ -677,12 +681,25 @@ function CheckOutItem({ setOrderStatus, submitOrder }) {
                     </tr>
                   </tbody>
                 </table>
-                <button
-                  className="btn btn-lg btn-primary w-100"
-                  onClick={() => submitOrder()}
-                >
-                  Place an order
-                </button>
+                <div className="row">
+                  <div className="col-6">
+                    <button
+                      className="pro btn btn-dark w-100"
+                      style={{ width: 250 }}
+                      onClick={() => back()}
+                    >
+                      Back
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button
+                      className="pro btn btn-primary w-100"
+                      onClick={() => submitOrder()}
+                    >
+                      Place an order
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

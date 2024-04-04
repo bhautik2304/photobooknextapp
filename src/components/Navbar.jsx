@@ -7,7 +7,7 @@ import { apiRoutes, appRoutes, localstorageKey } from "@/constants";
 import Link from "next/link";
 import axios from "axios";
 import { authLogin, authLogout } from "@/Redux/Slice/authSlice";
-import { fetchUsers } from "@/Redux/Slice/userSlice";
+import { addUsers } from "@/Redux/Slice/userSlice";
 import Avatar from "react-avatar";
 import { isLocalStorageAvailable } from "@/utils";
 function Navbar() {
@@ -17,7 +17,7 @@ function Navbar() {
   // const
   const dispatch = useDispatch();
 
-  const router =useRouter()
+  const router = useRouter();
 
   const { authStatus, user } = useSelector((state) => state.auth);
 
@@ -27,27 +27,72 @@ function Navbar() {
 
   useEffect(() => {
     if (token) {
-      console.log(JSON.parse(token));
+      // console.log(JSON.parse(token));
       //'http://localhost:8000/api/auth/costomer/token'
       axios
-        .post(apiRoutes.token, { token: JSON.parse(token) })
+        .post(
+          apiRoutes.token,
+          { token: token },
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        )
         .then((res) => {
           if (res.data.code == 200) {
             dispatch(authLogin(res.data));
-            dispatch(fetchUsers(res.data.user.id));
+            dispatch(addUsers(res.data.user));
           } else {
             dispatch(authLogout());
-            router.push(appRoutes.Login)
+            console.log(pathname);
+            if (pathname == appRoutes.userProfile) {
+              router.push(appRoutes.Login);
+              console.log("1");
+              return 0;
+            }
+            if (pathname == appRoutes.userProfileOrders) {
+              router.push(appRoutes.Login);
+              console.log("2");
+              return 0;
+            }
+            if (pathname == appRoutes.checkout) {
+              console.log("3");
+              router.push(appRoutes.Login);
+              return 0;
+            }
           }
         })
         .catch((err) => {
           dispatch(authLogout());
+          if (pathname == appRoutes.userProfile) {
+            router.push(appRoutes.Login);
+            return;
+          }
+          if (pathname == appRoutes.userProfileOrders) {
+            router.push(appRoutes.Login);
+            return;
+          }
+          if (pathname == appRoutes.checkout) {
+            router.push(appRoutes.Login);
+            return;
+          }
           console.log(err);
-          router.push(appRoutes.Login)
         });
     } else {
       dispatch(authLogout());
-      router.push(appRoutes.Login)
+      if (pathname == appRoutes.userProfile) {
+        router.push(appRoutes.Login);
+        return;
+      }
+      if (pathname == appRoutes.userProfileOrders) {
+        router.push(appRoutes.Login);
+        return;
+      }
+      if (pathname == appRoutes.checkout) {
+        router.push(appRoutes.Login);
+        return;
+      }
     }
   }, []);
 
@@ -125,7 +170,7 @@ function Navbar() {
                   <button
                     onClick={() => {
                       dispatch(authLogout());
-                      router.push(appRoutes.Login)
+                      router.refresh(appRoutes.Login);
                     }}
                     className="dropdown-item"
                   >

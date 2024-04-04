@@ -66,30 +66,34 @@ function ProductSize() {
             <h6>Select size</h6>
           </>
           <div className="row">
-            {productSize.map((data) => (
-              <div className="col-lg-4 col-md-4 col-sm-12">
-                <div
-                  className={`size card  my-2 pro ${
-                    orderData.productSize == data.id && "selected_prod_size"
-                  }`}
-                  onClick={() => {
-                    disapatch(changeOrientationSize({ size: data }));
-                    disapatch(fcm({ key: "product_size", error: false }));
-                  }}
-                >
-                  <div className="d-flex justify-content-between align-items-center">
-                    <img
-                      src={data?.size?.img}
-                      style={{ height: 70, width: 70, padding: "5px" }}
-                      alt=""
-                      srcset=""
-                    />
-                    {data?.size?.name}
-                    <div></div>
+            {productSize.map((data) => {
+              console.log(data);
+              return (
+                <div className="col-lg-4 col-md-4 col-sm-12">
+                  <div
+                    className={`size card  my-2 pro ${
+                      orderData.productSize == data.size.id &&
+                      "selected_prod_size"
+                    }`}
+                    onClick={() => {
+                      disapatch(changeOrientationSize({ size: data }));
+                      disapatch(fcm({ key: "product_size", error: false }));
+                    }}
+                  >
+                    <div className="d-flex justify-content-between align-items-center">
+                      <img
+                        src={data?.size?.img}
+                        style={{ height: 70, width: 70, padding: "5px" }}
+                        alt=""
+                        srcset=""
+                      />
+                      {data?.size?.name}
+                      <div></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         {orderData.productSize && (
@@ -220,10 +224,11 @@ function ProductSize() {
                           <div className="col-lg-4 col-md-4 col-sm-12">
                             <div
                               className={`size card my-2 pro ${
-                                orderData.productSheet == data.id &&
+                                orderData.productSheet == data?.sheet?.id &&
                                 "selected_prod_size"
                               }`}
                               onClick={() => {
+                                console.log(data);
                                 disapatch(changeSheet({ sheet: data }));
                                 disapatch(
                                   fcm({ key: "product_sheet", error: false })
@@ -273,10 +278,11 @@ function ProductSize() {
                         <div className="col-lg-4 col-md-4 col-sm-12">
                           <div
                             className={`size card my-2 pro ${
-                              orderData.paperType == data.id &&
+                              orderData.paperType == data.paper.id &&
                               "selected_prod_size"
                             }`}
                             onClick={() => {
+                              console.log(data);
                               disapatch(
                                 changePapertypeOption({ papertype: data })
                               );
@@ -316,23 +322,56 @@ function ProductSize() {
                   </div>
                 </div>
                 <div className="my-5">
-                  <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-12">
-                      <h6>Total pages to print</h6>
-                      <span className="text-danger">
-                        {formError?.product_page}
-                      </span>
-                      <input
-                        className="form-control form-control-lg my-2"
-                        onChange={(e) => {
-                          disapatch(changePageCount(e.target.value));
-                          disapatch(fcm({ key: "product_page", error: false }));
-                        }}
-                        type="number"
-                        value={orderData.page_qty}
-                      />
-                      <p>Enter your total pages to print for the album</p>
+                  <div className="col-lg-6 col-md-6 col-sm-12">
+                    <h6>Total pages to print</h6>
+                    <span className="text-danger">
+                      {formError?.product_page}
+                    </span>
+                    <div class="fs-sm fw-medium text-dark">
+                      <div className="count-input">
+                        <button
+                          className="btn btn-primary text-white btn-sm pro"
+                          onClick={() => {
+                            if (orderData?.page_qty <= product?.min_page) {
+                              disapatch(
+                                fcm({
+                                  key: "product_page",
+                                  error: `Minimum page ${product?.min_page}+`,
+                                })
+                              );
+                              return;
+                            }
+                            disapatch(changePageCount(orderData?.page_qty - 1));
+                          }}
+                          type="button"
+                          data-decrement
+                        >
+                          -
+                        </button>
+                        <input
+                          className="form-control-input mx-2 border-primary form-control-sm my-2"
+                          type="number"
+                          value={orderData?.page_qty}
+                        />
+                        <button
+                          className="btn btn-primary btn-sm pro text-white"
+                          type="button"
+                          onClick={() => {
+                            disapatch(
+                              fcm({
+                                key: "product_page",
+                                error: false,
+                              })
+                            );
+                            disapatch(changePageCount(orderData?.page_qty + 1));
+                          }}
+                          data-increment
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
+                    <p>Enter your total pages to print for the album</p>
                   </div>
                 </div>
               </>

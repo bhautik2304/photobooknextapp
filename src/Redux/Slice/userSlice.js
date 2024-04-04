@@ -7,13 +7,18 @@ export const fetchUsers = createAsyncThunk('User Slice', async () => {
     const authStatus = localStorage.getItem(localstorageKey.authStatus)
     const userKey = localStorage.getItem(localstorageKey.authKey)
     if (authStatus == "true") {
-        console.log("run user slice");
-        const response = await axios.post(apiRoutes.customer + 'fetch', {}, {
+        console.log(userKey);
+        const response = await axios.post(apiRoutes.token, {}, {
             headers: {
-                Authorization: `${JSON.parse(userKey)}`
+                Authorization: `${userKey}`
             },
         })
-            .then(res => res.data)
+            .then(res => {
+                console.log(res);
+                return res.data
+            }).catch((er) => {
+                console.log(er);
+            })
         return response.data
     }
     return {}
@@ -34,14 +39,18 @@ const initialState = {
 const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        addUsers: (state, action) => {
+            state.users = action.payload
+        }
+    },
     extraReducers: {
         [fetchUsers.fulfilled]: (state, action) => {
-            state.users = action.payload
+            state.users = action.payload.user
         }
     }
 });
 
-export const { } = userSlice.actions
+export const { addUsers } = userSlice.actions
 
 export default userSlice.reducer

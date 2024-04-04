@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
+import fileupload from "@/assets/img/fileupload.json";
 import processing from "@/assets/img/success.json";
 import emputycart from "@/assets/img/emputycart.json";
 import back from "@/assets/img/back-svgrepo-com.svg";
@@ -13,9 +14,15 @@ import Link from "next/link";
 import { Box, Button } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import { apiRoutes, appRoutes, secretTokken } from "@/constants";
+import {
+  apiRoutes,
+  appRoutes,
+  secretTokken,
+  appAxios,
+  token,
+} from "@/constants";
 import { clearCart } from "@/Redux/Slice/orderSlice";
-import { Dropbox } from "dropbox";
+import AWS from "aws-sdk";
 import { redirect, useRouter } from "next/navigation";
 import { fetchUsers } from "@/Redux/Slice/userSlice";
 // import {  } from 'next/navigation'
@@ -66,7 +73,7 @@ function Checkout() {
     formData.append("coverbackphoto", orderData.boxphotoback);
     // formData.append("photoszip", orderData.photoszip);
 
-    axios
+    appAxios
       .post(apiRoutes.orders, formData)
       .then((res) => {
         setOrderId(res.data.order_id);
@@ -81,8 +88,8 @@ function Checkout() {
 
   const controller = new AbortController();
 
-  const CancelToken = axios.CancelToken;
-  const source = CancelToken.source();
+  // const CancelToken = appAxios.CancelToken;
+  // const source = CancelToken.source();
 
   const fileUplode = async () => {
     const error = {};
@@ -97,218 +104,82 @@ function Checkout() {
     }
 
     if (file.type == "application/x-zip-compressed") {
-      const UPLOAD_FILE_SIZE_LIMIT = 500 * 1024 * 1024;
+      const s3 = new AWS.S3({
+        accessKeyId: "AKIAZW3CG5TZXIPJK7UK",
+        secretAccessKey: "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",
+        region: "ap-south-1",
+      });
 
-      /* Change hear */
-      const ACCESS_TOKEN = secretTokken.dropbox;
-      const dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
-      if (file.size < UPLOAD_FILE_SIZE_LIMIT) {
-        // Upload smaller files directly using Dropbox API v2
-        const formData = new FormData();
-        formData.append("file", file);
-        axios
-          .post("https://content.dropboxapi.com/2/files/upload", file, {
-            headers: {
-              "Content-Type": "application/octet-stream",
-              Authorization: `Bearer ${ACCESS_TOKEN}`,
-              "Dropbox-API-Arg": JSON.stringify({
-                path: `/ORDER-ID-${orderId}.zip`,
-                mode: "add",
-                autorename: true,
-                mute: false,
-              }),
-            },
-            onUploadProgress: (progressEvent) => {
-              console.log(controller.signal);
-              console.log(progressEvent);
-              if (progressEvent.bytes) {
-                console.log(
-                  Math.round((progressEvent.loaded / progressEvent.total) * 100)
-                );
-                if (
-                  Math.round(
-                    (progressEvent.loaded / progressEvent.total) * 100
-                  ) <= 98
-                ) {
-                  setPersent(
-                    Math.round(
-                      (progressEvent.loaded / progressEvent.total) * 100
-                    )
-                  );
+      const params = {
+        Bucket: "photokrafft",
+        Key: `ORD-${orderId}.zip`,
+        Body: file,
+      };
+
+      s3.upload(params)
+        .on("httpUploadProgress", (progress) => {
+          const percentage = Math.round(
+            (progress.loaded / progress.total) * 100
+          );
+          if (percentage < 98) {
+            setPersent(percentage);
+          }
+        })
+        .send((err, data) => {
+          if (err) {
+            console.log("Error uploading file");
+            console.error(err);
+            console.log("Error uploading file");
+            setPersent(0);
+          } else {
+            console.log("File uploaded successfully");
+            console.log("Upload successful", data);
+            console.log("File uploaded successfully");
+            // Get downloadable URL
+            s3.getSignedUrl(
+              "getObject",
+              { Bucket: "photokrafft", Key: `ORD-${orderId}.zip` },
+              (err, url) => {
+                if (err) {
+                  console.error(err);
+                  alert("Error getting downloadable URL");
+                } else {
+                  console.log(url);
+                  appAxios
+                    .post(apiRoutes.uploadfile, {
+                      orderNo: orderId,
+                      source_link: url,
+                    })
+                    .then((e) => {
+                      setPersent(100);
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                      setFileUploadStatus({
+                        status: true,
+                        class: "success",
+                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                      });
+                    })
+                    .catch((e) => {
+                      console.log(e);
+                      setFileUploadStatus({
+                        status: true,
+                        class: "danger",
+                        msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+                      });
+                    });
                 }
               }
-            },
-          })
-          .then(async (response) => {
-            console.log(response);
-            const linkResponse = await dbx
-              .sharingCreateSharedLinkWithSettings({
-                path: response.data.path_display,
-              })
-              .then(async (linkResult) => {
-                setDownload(linkResult.result.url);
-                axios
-                  .post(apiRoutes.uploadfile, {
-                    orderNo: orderId,
-                    source_link: linkResult.result.url,
-                  })
-                  .then((state) => {
-                    setPersent(100);
-                    setTimeout(function () {
-                      // Function to execute after the delay
-                      console.log("Executing function after 2-second delay...");
-                      setFileUploadStatus({
-                        status: true,
-                        class: "success",
-                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
-                      });
-                      // redirect(appRoutes.userProfileOrders);
-                      // console.log("Executing function after 5-second delay...");
-                      // Replace the console.log statement with your desired function call
-                    }, 2000);
-                    setTimeout(function () {
-                      dispatch(fetchUsers());
-                      router.push(appRoutes.userProfileOrders);
-                      return;
-                      // Function to execute after the delay
-                      // Replace the console.log statement with your desired function call
-                    }, 5000);
-                  });
-              });
-            // Handle success
-          })
-          .catch((error) => {
-            console.error(error);
-            // Handle error
-          });
-      } else {
-        let progreShBar = 0;
-        const CHUNK_SIZE = 250 * 1024 * 1024; // 500MB chunks
-        setPersent(1);
-        const maxBlob = 250 * 1024 * 1024; // 12MB
-        const workItems = [];
-        let offset = 0;
-
-        while (offset < file.size) {
-          const chunkSize = Math.min(maxBlob, file.size - offset);
-          workItems.push(file.slice(offset, offset + chunkSize));
-          offset += chunkSize;
-        }
-        const task = workItems.reduce((acc, blob, idx, items) => {
-          if (idx === 0) {
-            return acc.then(() => {
-              return dbx
-                .filesUploadSessionStart({ close: false, contents: blob })
-                .then((response) => response.result.session_id);
-            });
-          } else if (idx < items.length - 1) {
-            return acc.then(async (sessionId) => {
-              const cursor = { session_id: sessionId, offset: idx * maxBlob };
-              await dbx.filesUploadSessionAppendV2({
-                cursor: cursor,
-                close: false,
-                contents: blob,
-              });
-              const progress = Math.min(
-                100,
-                Math.floor((blob.size / file.size) * 100)
-              );
-              console.log(Math.floor((blob / file.size) * 100));
-              progreShBar = progreShBar += progress;
-              setPersent(progreShBar);
-              setBuffer(progreShBar + 10);
-              console.log("progress = ", progress);
-              console.log("blob = ", blob);
-              console.log("file = ", file.size);
-              return sessionId;
-            });
-          } else {
-            return acc.then(async (sessionId) => {
-              const cursor = {
-                session_id: sessionId,
-                offset: file.size - blob.size,
-              };
-              const commit = {
-                path: `/ORDER-ID-${orderId}.zip`,
-                mode: "add",
-                autorename: true,
-                mute: false,
-              };
-              const result = await dbx.filesUploadSessionFinish({
-                cursor: cursor,
-                commit: commit,
-                contents: blob,
-              });
-
-              const progress = Math.min(
-                100,
-                Math.floor((blob.size / file.size) * 100)
-              );
-              console.log(Math.floor((blob.size / file.size) * 100));
-              console.log("Finnish progress = ", progress);
-              console.log("Finnish blob = ", blob);
-              console.log("Finnish file = ", file.size);
-              progreShBar = progreShBar + progress;
-              // setPersent(100);
-              setPersent(progreShBar);
-              return result;
-            });
+            );
+            // setSelectedFile(null);
+            // setUploadProgress(0);
           }
-        }, Promise.resolve());
-
-        task
-          .then(async (result) => {
-            console.log(result);
-            const linkResponse = await dbx
-              .sharingCreateSharedLinkWithSettings({
-                path: result.result.path_display,
-              })
-              .then(async (linkResult) => {
-                setDownload(linkResult.result.url);
-                axios
-                  .post(apiRoutes.uploadfile, {
-                    orderNo: orderId,
-                    source_link: linkResult.result.url,
-                  })
-                  .then((state) => {
-                    setPersent(100);
-                    setTimeout(function () {
-                      // Function to execute after the delay
-                      console.log("Executing function after 2-second delay...");
-                      setFileUploadStatus({
-                        status: true,
-                        class: "success",
-                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
-                      });
-                      // redirect(appRoutes.userProfileOrders);
-                      // console.log("Executing function after 5-second delay...");
-                      // Replace the console.log statement with your desired function call
-                    }, 2000);
-                    setTimeout(function () {
-                      console.log("Executing function after 4-second delay...");
-                      router.refresh();
-                      router.push(appRoutes.userProfileOrders);
-                      return;
-                      // Function to execute after the delay
-                      // Replace the console.log statement with your desired function call
-                    }, 4000);
-                  });
-              });
-            // setPersent(100)
-          })
-          .catch((error) => {
-            setPersent(0);
-            setFileUploadStatus({
-              status: true,
-              class: "danger",
-              msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
-            });
-            console.log(error);
-            // Handle error
-          });
-      }
+        });
     } else {
-      axios
+      appAxios
         .post(apiRoutes.uploadfile, {
           orderNo: orderId,
           source_link: file,
@@ -590,14 +461,10 @@ function Checkout() {
                       justifyContent: "flex-end",
                     }}
                   ></div>
-                  <CheckOutItem submitOrder={submitOrder} />
-                  <button
-                    className="pro btn btn-dark my-4"
-                    style={{ width: 250 }}
-                    onClick={() => setChackOutStatus(status.proceed)}
-                  >
-                    back
-                  </button>
+                  <CheckOutItem
+                    submitOrder={submitOrder}
+                    back={() => setChackOutStatus(status.proceed)}
+                  />
                 </>
               )}
               {chackOutStatus == status.processingOrder && (
@@ -684,17 +551,22 @@ function Checkout() {
                           </center>
                           <div class="bg-secondary rounded-1 p-4 my-2">
                             <center>
-                              <img
+                              {/* <img
                                 src="https://basira.in/assets/sharde link.jpg"
                                 style={{ width: "400px" }}
-                              />
+                              /> */}
+                              <Player
+                                autoplay
+                                speed={0}
+                                loop
+                                src={fileupload}
+                                style={{ width: "200px" }}
+                              ></Player>
                             </center>
                             <p class="my-2 p-3">
                               Please select one of the source options to upload
                               your photos which needs to be print in your order.
-                              If something went wrong please contact us, also
-                              you can check your orders in your order section
-                              from customer dashbord.
+                              If something went wrong please contact us .
                               {/* If something went wrong please contact us, also you can check your orders in your profile section */}
                             </p>
                             <div className="row mb-4 p-3">
