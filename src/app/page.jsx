@@ -87,7 +87,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section class="container mt-5">
+        <section class="container mt-5 d-none d-lg-block d-md-block">
           <section class="container py-5 mt-5 mb-xl-3 mb-xxl-5">
             <div class="row pt-2">
               {/* <!-- Text + CTA button --> */}
@@ -173,14 +173,14 @@ export default function Home() {
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/7.jpg)" }}
                         >
-                          <div
+                          {/* <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Web design
                             </h2>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -209,14 +209,14 @@ export default function Home() {
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/3.jpg)" }}
                         >
-                          <div
+                          {/* <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Branding
                             </h2>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -240,7 +240,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
               {/* <!-- Services (Grid of cards) --> */}
               <div class="col-lg-6">
                 <div class="row row-cols-1 row-cols-sm-2 g-1">
@@ -252,14 +251,14 @@ export default function Home() {
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/2.jpg)" }}
                         >
-                          <div
+                          {/* <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Strategy
                             </h2>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -288,12 +287,12 @@ export default function Home() {
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/5.jpg)" }}
                         >
-                          <div
+                          {/* <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">Social</h2>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -324,14 +323,14 @@ export default function Home() {
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/7.jpg)" }}
                         >
-                          <div
+                          {/* <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Web design
                             </h2>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -360,14 +359,14 @@ export default function Home() {
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/3.jpg)" }}
                         >
-                          <div
+                          {/* <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Branding
                             </h2>
-                          </div>
+                          </div> */}
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
