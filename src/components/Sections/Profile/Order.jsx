@@ -1099,13 +1099,14 @@ const FileUpload = ({ orderId }) => {
               (err, url) => {
                 if (err) {
                   console.error(err);
-                  alert("Error getting downloadable URL");
+                  // alert("Error getting downloadable URL");
                 } else {
                   console.log(url);
                   appAxios
                     .post(apiRoutes.uploadfile, {
                       orderNo: orderId,
                       source_link: url,
+                      Expires: 31536000,
                     })
                     .then((e) => {
                       setPersent(100);
