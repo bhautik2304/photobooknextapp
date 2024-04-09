@@ -37,7 +37,7 @@ function ProductCover() {
                 <div className="col-lg-4 col-md-4 col-sm-12">
                   <div
                     className={`size card my-2 pro ${
-                      orderData.productcover == datas.cover.id &&
+                      orderData.productcover == datas?.cover?.id &&
                       "selected_prod_size"
                     }`}
                     onClick={() => disapatch(changeCover({ cover: datas }))}
@@ -192,7 +192,7 @@ function ProductCover() {
                               backgroundColor: data.colorcode,
                             }}
                             className={`pro ${
-                              orderData.productcovercolor == data.id &&
+                              orderData.productcovercolor == data?.colors?.id &&
                               "selected_prod_cover_option"
                             }`}
                             alt=""

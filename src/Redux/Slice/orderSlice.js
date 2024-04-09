@@ -184,10 +184,10 @@ const orderSlice = createSlice({
       state.orderData.pritnigPriceTotalPageValue = state.orderData.page_qty * state.orderData.pritnigPriceValue
     },
     changeColor: (state, action) => {
-      state.orderData.productcovercolor = action.payload.color.id
+      state.orderData.productcovercolor = action.payload.color.colors.id
     },
     changeBoxColor: (state, action) => {
-      state.orderData.productboxandsleevecolor = action.payload.color.id
+      state.orderData.productboxandsleevecolor = action.payload.color.colors.id
     },
     formBack: (state, action) => {
       if (state.formStep != 0) {

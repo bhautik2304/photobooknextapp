@@ -185,7 +185,7 @@ function ProductBox() {
                     <div className="row">
                       {productboxandsleeveoptioncolor.map((data) => {
                         //console.log("color")
-                        console.log(data.colors[0]);
+                        console.log(data.colors);
                         return (
                           <>
                             <div className="col-2">
@@ -201,7 +201,7 @@ function ProductBox() {
                                 }}
                               >
                                 <img
-                                  src={data.colors[0].img}
+                                  src={data.colors.img}
                                   style={{
                                     width: 120,
                                     height: 120,
@@ -209,13 +209,14 @@ function ProductBox() {
                                   }}
                                   className={`pro ${
                                     orderData.productboxandsleevecolor ==
-                                      data.id && "selected_prod_cover_option"
+                                      data.colors.id &&
+                                    "selected_prod_cover_option"
                                   }`}
                                   alt=""
                                   srcset=""
                                 />
                               </div>
-                              <div className="my-2">{data.colors[0].color}</div>
+                              <div className="my-2">{data.colors.color}</div>
                             </div>
                           </>
                         );

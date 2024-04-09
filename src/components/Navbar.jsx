@@ -11,8 +11,6 @@ import { addUsers } from "@/Redux/Slice/userSlice";
 import Avatar from "react-avatar";
 import { isLocalStorageAvailable } from "@/utils";
 function Navbar() {
-  // const [authStatus, setAuthStatus] = useState(false)
-
   const pathname = usePathname();
   // const
   const dispatch = useDispatch();
@@ -95,7 +93,6 @@ function Navbar() {
       }
     }
   }, []);
-
   return (
     <div>
       <header className="navbar navbar-expand-lg bg-light">

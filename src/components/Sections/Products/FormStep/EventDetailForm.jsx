@@ -19,6 +19,7 @@ function EventDetailForm() {
     eventName: "",
     costumizeMessage: "",
     printing: "",
+    fontType: "",
   });
   const {
     orderData,
@@ -43,6 +44,9 @@ function EventDetailForm() {
     }
     if (!orderDetaild?.printing) {
       newError.printing = "Please select Printing Option";
+    }
+    if (!orderDetaild?.fontType) {
+      newError.fontType = "Please select Font Option";
     }
 
     // Check if there are any errors
@@ -188,6 +192,32 @@ function EventDetailForm() {
               placeholder=""
             />
             <span className="text-danger">{error?.costumizeMessage}</span>
+          </div>
+          <div className="col-6 my-2">
+            <div className="form-group">
+              <label htmlFor="">Select Font Type</label>
+              <select
+                className="form-control"
+                value={orderDetaild?.fontType}
+                onChange={(e) =>
+                  dispatch(
+                    changeOrderDetaildData({
+                      key: "fontType",
+                      value: e.target.value,
+                    })
+                  )
+                }
+                name=""
+                id=""
+              >
+                <option value="Barkentina script">Barkentina script</option>
+                <option value="Cinzel">Cinzel</option>
+                <option value="Bickhem script">Bickhem script</option>
+                <option value="Scriptina">Scriptina</option>
+                <option value="Snell roundhed">Snell roundhed</option>
+              </select>
+              <span className="text-danger">{error?.fontType}</span>
+            </div>
           </div>
           {/* <div className="col-4 my-2">
             <div className="form-group">
