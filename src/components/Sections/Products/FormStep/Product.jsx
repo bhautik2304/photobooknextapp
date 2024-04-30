@@ -7,6 +7,7 @@ import {
   formNext,
   selectProduct,
 } from "../../../../Redux/Slice/orderSlice";
+import { productFormStep } from "@/constants";
 
 function Product() {
   const {
@@ -25,9 +26,20 @@ function Product() {
                   className={`pro ${
                     order.product?.id == data.id ? "selected_prod" : null
                   }`}
-                  onClick={() => disapatch(selectProduct({ product: data }))}
+                  onClick={() => {
+                    formError({
+                      key: "product",
+                      product_error: false,
+                    });
+                    disapatch(selectProduct({ product: data }));
+                  }}
                 >
-                  <img src={data?.img} alt="" srcset="" />
+                  <img
+                    src={data?.img}
+                    style={{ borderRadius: "15px" }}
+                    alt=""
+                    srcset=""
+                  />
                 </div>
                 <h6 className="my-3">{data.name}</h6>
               </div>
@@ -37,13 +49,13 @@ function Product() {
       <Button
         next={() => {
           if (order.orderData.product_id) {
-            disapatch(formNext());
+            disapatch(formNext(productFormStep.orientation));
             return;
           }
           disapatch(
             formError({
               key: "product",
-              product_error: "Select minimum one option",
+              product_error: "Select one option",
             })
           );
         }}

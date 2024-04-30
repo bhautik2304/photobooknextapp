@@ -5,27 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
-import fileupload from "@/assets/img/fileupload.json";
+import zipfile from "@/assets/img/zipfile.json";
+import link from "@/assets/img/link.json";
 import processing from "@/assets/img/success.json";
 import emputycart from "@/assets/img/emputycart.json";
-import back from "@/assets/img/back-svgrepo-com.svg";
-import axios from "axios";
 import Link from "next/link";
 import { Box, Button } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import {
-  apiRoutes,
-  appRoutes,
-  secretTokken,
-  appAxios,
-  token,
-} from "@/constants";
+import { apiRoutes, appRoutes, appAxios } from "@/constants";
 import { clearCart } from "@/Redux/Slice/orderSlice";
 import AWS from "aws-sdk";
 import { redirect, useRouter } from "next/navigation";
 import { fetchUsers } from "@/Redux/Slice/userSlice";
-// import {  } from 'next/navigation'
+// import Image from "next/Image";
 
 const status = {
   proceed: "Proceed to order",
@@ -91,101 +84,129 @@ function Checkout() {
   // const CancelToken = appAxios.CancelToken;
   // const source = CancelToken.source();
 
-  const fileUplode = async () => {
+  const fileUplode = async (type) => {
+    setPersent(2);
     const error = {};
-    if (file == null) {
-      error.file = "Required *";
-    }
 
-    // Check if there are any errors
-    if (Object.keys(error).length > 0) {
-      setError(error);
-      return 0; // Validation failed
-    }
+    if (type == "file") {
+      if (file?.zip == null) {
+        error.file = "Required *";
+      }
 
-    if (file.type == "application/x-zip-compressed") {
-      const s3 = new AWS.S3({
-        accessKeyId: "AKIAZW3CG5TZXIPJK7UK",
-        secretAccessKey: "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",
-        region: "ap-south-1",
-      });
-
-      const params = {
-        Bucket: "photokrafft",
-        Key: `ORD-${orderId}.zip`,
-        Body: file,
-      };
-
-      s3.upload(params)
-        .on("httpUploadProgress", (progress) => {
-          const percentage = Math.round(
-            (progress.loaded / progress.total) * 100
-          );
-          if (percentage < 98) {
-            setPersent(percentage);
-          }
-        })
-        .send((err, data) => {
-          if (err) {
-            console.log("Error uploading file");
-            console.error(err);
-            console.log("Error uploading file");
-            setPersent(0);
-          } else {
-            console.log("File uploaded successfully");
-            console.log("Upload successful", data);
-            console.log("File uploaded successfully");
-            // Get downloadable URL
-            s3.getSignedUrl(
-              "getObject",
-              { Bucket: "photokrafft", Key: `ORD-${orderId}.zip` },
-              (err, url) => {
-                if (err) {
-                  console.error(err);
-                  // alert("Error getting downloadable URL");
-                } else {
-                  console.log(url);
-                  appAxios
-                    .post(apiRoutes.uploadfile, {
-                      orderNo: orderId,
-                      source_link: url,
-                      Expires: 31536000,
-                    })
-                    .then((e) => {
-                      setPersent(100);
-                      setFileUploadStatus({
-                        status: true,
-                        class: "success",
-                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
-                      });
-                      setFileUploadStatus({
-                        status: true,
-                        class: "success",
-                        msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
-                      });
-                    })
-                    .catch((e) => {
-                      console.log(e);
-                      setFileUploadStatus({
-                        status: true,
-                        class: "danger",
-                        msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
-                      });
-                    });
-                }
-              }
-            );
-            // setSelectedFile(null);
-            // setUploadProgress(0);
-          }
+      // Check if there are any errors
+      if (Object.keys(error).length > 0) {
+        setError(error);
+        setPersent(0);
+        return 0; // Validation failed
+      }
+      if (file.type == "application/x-zip-compressed") {
+        const s3 = new AWS.S3({
+          accessKeyId: "AKIAZW3CG5TZXIPJK7UK",
+          secretAccessKey: "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",
+          region: "ap-south-1",
         });
+
+        const params = {
+          Bucket: "photokrafft",
+          Key: `ORD-${orderId}.zip`,
+          Body: file?.zip,
+        };
+
+        try {
+          s3.upload(params)
+            .on("httpUploadProgress", (progress) => {
+              const percentage = Math.round(
+                (progress.loaded / progress.total) * 100
+              );
+              if (percentage < 98) {
+                setPersent(percentage);
+              }
+            })
+            .send((err, data) => {
+              if (err) {
+                console.log("Error uploading file");
+                console.error(err);
+                console.log("Error uploading file");
+                setPersent(0);
+              } else {
+                console.log("File uploaded successfully");
+                console.log("Upload successful", data);
+                console.log("File uploaded successfully");
+                // Get downloadable URL
+                s3.getSignedUrl(
+                  "getObject",
+                  { Bucket: "photokrafft", Key: `ORD-${orderId}.zip` },
+                  (err, url) => {
+                    if (err) {
+                      console.error(err);
+                      // alert("Error getting downloadable URL");
+                    } else {
+                      console.log(url);
+                      appAxios
+                        .post(apiRoutes.uploadfile, {
+                          orderNo: orderId,
+                          source_link: url,
+                          Expires: 31536000,
+                        })
+                        .then((e) => {
+                          setPersent(100);
+                          setFileUploadStatus({
+                            status: true,
+                            class: "success",
+                            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                          });
+                          setFileUploadStatus({
+                            status: true,
+                            class: "success",
+                            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                          });
+                        })
+                        .catch((e) => {
+                          console.log(e);
+                          setFileUploadStatus({
+                            status: true,
+                            class: "danger",
+                            msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+                          });
+                        });
+                    }
+                  }
+                );
+                // setSelectedFile(null);
+                // setUploadProgress(0);
+              }
+            });
+        } catch (error) {
+          setFileUploadStatus({
+            status: true,
+            class: "danger",
+            msg: "File Upload Failed, pls contact us if you have any queries regarding you order",
+          });
+        }
+      } else {
+        error.fileType = "Only zip files*";
+        setPersent(0);
+        setError(error);
+        return 0;
+      }
     } else {
+      if (file?.url == null) {
+        error.url = "Required *";
+      }
+
+      // Check if there are any errors
+      if (Object.keys(error).length > 0) {
+        setError(error);
+        setPersent(0);
+        return 0; // Validation failed
+      }
       appAxios
         .post(apiRoutes.uploadfile, {
           orderNo: orderId,
-          source_link: file,
+          source_link: file?.url,
         })
         .then((e) => {
+          setPersent(100);
           setFileUploadStatus({
             status: true,
             class: "success",
@@ -197,7 +218,7 @@ function Checkout() {
           setFileUploadStatus({
             status: true,
             class: "danger",
-            msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+            msg: "Url Failed, pls contact us if you have any queries regarding you order",
           });
         });
     }
@@ -351,8 +372,6 @@ function Checkout() {
                               </span>
                             </div>
                           </div>
-                        </div>
-                        <div className="col-md-5 col-lg-5 col-sm-12 p-5">
                           <h3 className="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">
                             2.
                             <span className="text-decoration-underline ms-1">
@@ -410,8 +429,17 @@ function Checkout() {
                             className="btn btn-lg btn-primary w-100 pro"
                             onClick={() => setChackOutStatus(status.placeOrder)}
                           >
-                            Proceed to order
+                            Checkout
                           </button>
+                        </div>
+                        <div className="col-md-7 col-lg-7 p-5 col-sm-12 d-flex">
+                          <img
+                            width={"100%"}
+                            height={"100%"}
+                            src="/images/Photo_checkout.png"
+                            alt=""
+                            srcset=""
+                          />
                         </div>
                       </div>
                     </>
@@ -523,11 +551,7 @@ function Checkout() {
                               <div className="d-flex justify-content-center aligns-item-center">
                                 <div className="card p-3 col-8">
                                   <h6>
-                                    Select the source from above drop-down and
-                                    add your photos which needs to be print.
-                                    Please don’t refresh your page , while
-                                    photos are uploading, if something went
-                                    wrong please{" "}
+                                    if something went wrong please{" "}
                                     <Link
                                       href={`https://wa.me/+919081770314?text=please%20help%20me%20with%20my%20order%20number%20:%20${orderId}%20,%20something%20went%20wrong%20while%20uploading%20my%20photos`}
                                       className="link text-primary"
@@ -556,20 +580,14 @@ function Checkout() {
                                 src="https://basira.in/assets/sharde link.jpg"
                                 style={{ width: "400px" }}
                               /> */}
-                              <Player
-                                autoplay
-                                speed={0}
-                                loop
-                                src={fileupload}
-                                style={{ width: "200px" }}
-                              ></Player>
                             </center>
                             <p class="my-2 p-3">
                               Please select one of the source options to upload
                               your photos which needs to be print in your order.
-                              If something went wrong please contact us .
+                              If something went wrong please contact us.
                               {/* If something went wrong please contact us, also you can check your orders in your profile section */}
                             </p>
+
                             <div className="row mb-4 p-3">
                               {persent != 0 ? (
                                 <>
@@ -608,97 +626,148 @@ function Checkout() {
                                 </>
                               ) : (
                                 <>
-                                  <div className="col-6 my-2">
-                                    <div className="form-group">
-                                      <label htmlFor="">Source Type</label>
-                                      <select
-                                        className="form-control"
-                                        value={sourceType}
-                                        onChange={(e) =>
-                                          setSourceType(e.target.value)
-                                        }
-                                        name=""
-                                        id=""
-                                      >
-                                        <option value="">
-                                          Select Source Type
-                                        </option>
-                                        <option value="Zip File">
-                                          Zip File
-                                        </option>
-                                        <option value="Third Party">
-                                          Drive Link / Third Party
-                                        </option>
-                                      </select>
+                                  <div className="col-12">
+                                    <div className="row ">
+                                      <div className="col-6">
+                                        <div class="card">
+                                          {/* <img
+                                            src="assets/img/blog/grid/01.jpg"
+                                            class="card-img-top"
+                                            alt="Card image"
+                                          /> */}
+                                          <Player
+                                            autoplay
+                                            speed={0}
+                                            loop
+                                            src={zipfile}
+                                            style={{ width: "200px" }}
+                                          ></Player>
+                                          <div class="card-body">
+                                            <h4 class="card-title">
+                                              Upload zip
+                                            </h4>
+                                            <p class="card-text">
+                                              Please upload your photos
+                                              compressed in zip file format and
+                                              submit here
+                                            </p>
+                                            <div className="col-12 my-2">
+                                              {zipFileError && (
+                                                <span className="text-danger">
+                                                  {zipFileError}
+                                                </span>
+                                              )}
+                                              <div className="form-group">
+                                                <label>Source Type</label>
+                                                <input
+                                                  type="file"
+                                                  accept=".zip"
+                                                  onChange={(e) =>
+                                                    setFile({
+                                                      zip: e.target.files[0],
+                                                    })
+                                                  }
+                                                  className="form-control"
+                                                  name=""
+                                                  id=""
+                                                  aria-describedby="helpId"
+                                                  placeholder=""
+                                                />
+                                              </div>
+                                              <span className="text-danger">
+                                                {fileerror?.file}
+                                                {fileerror?.fileType}
+                                              </span>
+                                            </div>
+                                            {persent === 0 && (
+                                              <>
+                                                <button
+                                                  className="btn btn-primary col-12 my-3 pro"
+                                                  onClick={() =>
+                                                    fileUplode("file")
+                                                  }
+                                                >
+                                                  Submit
+                                                </button>
+                                              </>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="col-6">
+                                        <div class="card">
+                                          {/* <img
+                                            src="assets/img/blog/grid/01.jpg"
+                                            class="card-img-top"
+                                            alt="Card image"
+                                          /> */}
+                                          <Player
+                                            autoplay
+                                            speed={0}
+                                            loop
+                                            src={link}
+                                            style={{ width: "200px" }}
+                                          ></Player>
+                                          <div class="card-body">
+                                            <h4 class="card-title">
+                                              Drive Url
+                                            </h4>
+                                            <p class="card-text">
+                                              Please upload your photos
+                                              compressed in zip file format and
+                                              submit here
+                                            </p>
+                                            <div className="col-12 my-2">
+                                              <div className="form-group">
+                                                <label htmlFor="">
+                                                  Enter Url
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  value={file?.url}
+                                                  onChange={(e) =>
+                                                    setFile({
+                                                      url: e.target.value,
+                                                    })
+                                                  }
+                                                  className="form-control"
+                                                  name=""
+                                                  id=""
+                                                  aria-describedby="helpId"
+                                                  placeholder=""
+                                                />
+                                              </div>
+                                              <span className="text-danger">
+                                                {fileerror?.url}
+                                              </span>
+                                            </div>
+                                            {persent === 0 && (
+                                              <>
+                                                <button
+                                                  className="btn btn-primary col-12 my-3 pro"
+                                                  onClick={() => fileUplode("")}
+                                                >
+                                                  Submit
+                                                </button>
+                                              </>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                  {sourceType && (
+                                  {/* {sourceType && (
                                     <>
                                       {sourceType == "Zip File" ? (
-                                        <div className="col-6 my-2">
-                                          {zipFileError && (
-                                            <span className="text-danger">
-                                              {zipFileError}
-                                            </span>
-                                          )}
-                                          <div className="form-group">
-                                            <label>Source Type</label>
-                                            <input
-                                              type="file"
-                                              accept=".zip"
-                                              onChange={(e) =>
-                                                setFile(e.target.files[0])
-                                              }
-                                              className="form-control"
-                                              name=""
-                                              id=""
-                                              aria-describedby="helpId"
-                                              placeholder=""
-                                            />
-                                          </div>
-                                          <span className="text-danger">
-                                            {fileerror?.file}
-                                          </span>
-                                        </div>
+                                        
                                       ) : (
-                                        <div className="col-6 my-2">
-                                          <div className="form-group">
-                                            <label htmlFor="">Enter Url</label>
-                                            <input
-                                              type="text"
-                                              value={file}
-                                              onChange={(e) =>
-                                                setFile(e.target.value)
-                                              }
-                                              className="form-control"
-                                              name=""
-                                              id=""
-                                              aria-describedby="helpId"
-                                              placeholder=""
-                                            />
-                                          </div>
-                                          <span className="text-danger">
-                                            {fileerror?.file}
-                                          </span>
-                                        </div>
+                                        
                                       )}
                                     </>
-                                  )}
+                                  )} */}
                                 </>
                               )}
                               {/* <center>{`uploading file : ${persent} %`}</center> */}
-                              <div className="col-12 my-4">
-                                {persent === 0 && (
-                                  <>
-                                    <button
-                                      className="btn btn-primary col-12 my-3 pro"
-                                      onClick={() => fileUplode()}
-                                    >
-                                      Submit
-                                    </button>
-                                  </>
-                                )}
-                              </div>
                             </div>
                           </div>
                         </>

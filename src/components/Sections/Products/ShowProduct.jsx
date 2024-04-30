@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { appRoutes } from "@/constants";
+import { appRoutes, productFormStep } from "@/constants";
 import {
   selectProduct,
   setTotale,
@@ -36,7 +36,7 @@ function ShowProduct() {
         coverValue,
         boxSleeveValue,
         orderTotale,
-        pritnig_price_value
+        pritnig_price_value,
       },
     },
   } = useSelector((state) => state);
@@ -64,7 +64,7 @@ function ShowProduct() {
     <>
       {authStatus ? (
         <>
-          {formStep == 0 ? (
+          {formStep == productFormStep.product ? (
             <>
               <h2>Select your product.</h2>
               <p>
@@ -76,7 +76,7 @@ function ShowProduct() {
               </div>
             </>
           ) : null}
-          {formStep == 1 ? (
+          {formStep == productFormStep.orientation ? (
             <>
               <h2>Select your orientation.</h2>
               <p>
@@ -88,7 +88,7 @@ function ShowProduct() {
               </div>
             </>
           ) : null}
-          {formStep == 2 ? (
+          {formStep == productFormStep.papper ? (
             <>
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Select your sizes & paper.</h2>
@@ -114,7 +114,7 @@ function ShowProduct() {
               </div>
             </>
           ) : null}
-          {formStep == 3 ? (
+          {formStep == productFormStep.cover ? (
             <>
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Select your Album Cover.</h2>
@@ -135,10 +135,10 @@ function ShowProduct() {
               </div>
             </>
           ) : null}
-          {formStep == 4 ? (
+          {formStep == productFormStep.boxsleeve ? (
             <>
               <div className="d-flex justify-content-between aligns-item-center">
-                <h2>Select your box & sleeve.</h2>
+                <h2>Select your box or sleeve .</h2>
                 {/* <div>
                   <span
                     style={{ fontSize: 18, fontWeight: "bold" }}
@@ -160,7 +160,7 @@ function ShowProduct() {
               </div>
             </>
           ) : null}
-          {formStep == 5 ? (
+          {formStep == productFormStep.event ? (
             <>
               <div className="d-flex justify-content-between aligns-item-center">
                 <h2>Order Details</h2>
@@ -184,7 +184,7 @@ function ShowProduct() {
               </div>
             </>
           ) : null}
-          {formStep == 6 ? (
+          {formStep == null ? (
             <>
               <div className="row mt-2 mb-2">
                 <OrderDetaild />

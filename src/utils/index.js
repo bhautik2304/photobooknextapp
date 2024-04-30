@@ -3,9 +3,9 @@ import { localstorageKey } from '@/constants'
 export const zonePrice = (price) => {
     if (price) {
         const zone = window.localStorage.getItem(localstorageKey.zone) || 'IND'
-        const zonePrice = price.filter((data) => data.countryzone_id== zone)[0]
+        const zonePrice = price.filter((data) => data.countryzone_id == zone)[0]
         return {
-            priceSrring: `${zonePrice?.price} ${zonePrice?.currency?.currency_sign || zonePrice?.zone?.currency_sign}`,
+            priceSrring: `${zonePrice?.currency?.currency_sign || zonePrice?.zone?.currency_sign} ${zonePrice?.price}`,
             price: parseInt(zonePrice?.price),
             currency: zonePrice?.currency?.currency_sign || zonePrice?.zone?.currency_sign
         }

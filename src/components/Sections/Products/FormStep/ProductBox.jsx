@@ -14,7 +14,7 @@ import {
   selectCoverOption,
 } from "@/Redux/Slice/orderSlice";
 import { zonePrice } from "@/utils";
-import { localstorageKey } from "@/constants";
+import { localstorageKey, productFormStep } from "@/constants";
 
 function ProductBox() {
   const {
@@ -31,36 +31,65 @@ function ProductBox() {
         <div className="col-md-12 col-sm-12 col-lg-12">
           <span className="text-danger">{formError?.product_boxSleev}</span>
           <>
-            <h6>Box & sleeve</h6>
+            <h6>box or sleeve </h6>
           </>
           <div className="row">
             {productboxSleev.map((data) => {
               console.log(data);
               return (
-                <div className="col-lg-4 col-md-4 col-sm-12">
+                // <div className="col-lg-4 col-md-4 col-sm-12">
+                //   <div
+                //     className={`size card my-2 pro ${
+                //       orderData.productboxSleev == data.boxsleeve.id &&
+                //       "selected_prod_size"
+                //     }`}
+                //     onClick={() => {
+                //       disapatch(changeBoxSleev({ boxSleev: data }));
+                //       disapatch(fcm({ key: "product_boxSleev", error: false }));
+                //     }}
+                //   >
+                //     <div className="d-flex justify-content-between align-items-center">
+                //       <img
+                //         src={data.boxsleeve.img}
+                //         style={{ height: 70, width: 70, padding: "5px" }}
+                //         alt=""
+                //         srcset=""
+                //       />
+                //       <div>
+                //         {data.boxsleeve.name}
+                //         <div>{zonePrice(data.boxsleeveprice)?.priceSrring}</div>
+                //       </div>
+                //       <div></div>
+                //     </div>
+                //   </div>
+                // </div>
+                <div className="col-2 my-3">
                   <div
-                    className={`size card my-2 pro ${
-                      orderData.productboxSleev == data.boxsleeve.id &&
-                      "selected_prod_size"
-                    }`}
                     onClick={() => {
+                      console.log(data);
                       disapatch(changeBoxSleev({ boxSleev: data }));
                       disapatch(fcm({ key: "product_boxSleev", error: false }));
                     }}
                   >
-                    <div className="d-flex justify-content-between align-items-center">
-                      <img
-                        src={data.boxsleeve.img}
-                        style={{ height: 70, width: 70, padding: "5px" }}
-                        alt=""
-                        srcset=""
-                      />
-                      <div>
-                        {data.boxsleeve.name}
-                        <div>{zonePrice(data.boxsleeveprice)?.priceSrring}</div>
-                      </div>
-                      <div></div>
-                    </div>
+                    <img
+                      src={data?.boxsleeve?.img}
+                      style={{
+                        width: 120,
+                        height: 120,
+                        borderRadius: "10px",
+                        // backgroundColor: data.colorcode,
+                      }}
+                      className={`pro ${
+                        orderData.productboxSleev == data.boxsleeve.id &&
+                        "selected_prod_cover_option"
+                      }`}
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                  <div className="my-2">{data.boxsleeve.name}</div>
+                  <div className="my-2">
+                    <b>{zonePrice(data.boxsleeveprice).priceSrring}</b>
                   </div>
                 </div>
               );
@@ -132,7 +161,7 @@ function ProductBox() {
                 {productboxandsleeveoptions.length !== 0 && (
                   <>
                     <>
-                      <h6>Select options</h6>
+                      <h6>Select box or sleeve material</h6>
                     </>
                     <div className="row">
                       {productboxandsleeveoptions.map((data) => (
@@ -180,7 +209,7 @@ function ProductBox() {
                     </span>
                     <br />
                     <>
-                      <h6>Select color options</h6>
+                      <h6>Select material color</h6>
                     </>
                     <div className="row">
                       {productboxandsleeveoptioncolor.map((data) => {
@@ -235,7 +264,7 @@ function ProductBox() {
             disapatch(
               fcm({
                 key: "product_boxSleev",
-                error: "Select minimum one option",
+                error: "Select one option ",
               })
             );
             return;
@@ -257,7 +286,7 @@ function ProductBox() {
               disapatch(
                 fcm({
                   key: "product_box_option",
-                  error: "Select minimum one option",
+                  error: "Select one option ",
                 })
               );
               return;
@@ -266,13 +295,16 @@ function ProductBox() {
               disapatch(
                 fcm({
                   key: "product_box_color_option",
-                  error: "Select minimum one option",
+                  error: "Select one option ",
                 })
               );
               return;
             }
           }
-          disapatch(formNext());
+          disapatch(formNext(productFormStep.event));
+        }}
+        back={() => {
+          disapatch(formNext(productFormStep.cover));
         }}
       />
     </>

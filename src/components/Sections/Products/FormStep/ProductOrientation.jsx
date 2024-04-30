@@ -6,6 +6,7 @@ import {
   formNext,
   formError,
 } from "@/Redux/Slice/orderSlice";
+import { productFormStep } from "@/constants";
 
 function ProductOrientation() {
   const { order } = useSelector((state) => state);
@@ -30,6 +31,12 @@ function ProductOrientation() {
               }`}
               onClick={() => {
                 console.log(data);
+                disapatch(
+                  formError({
+                    key: "product_orientation",
+                    error: false,
+                  })
+                );
                 disapatch(changeOrientation({ product: data }));
               }}
             >
@@ -45,12 +52,15 @@ function ProductOrientation() {
             disapatch(
               formError({
                 key: "product_orientation",
-                error: "Please select orientation",
+                error: "Select one option",
               })
             );
             return 0;
           }
-          disapatch(formNext());
+          disapatch(formNext(productFormStep.papper));
+        }}
+        back={() => {
+          disapatch(formNext(productFormStep.product));
         }}
       />
     </>

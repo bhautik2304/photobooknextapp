@@ -11,7 +11,7 @@ import {
   addBackCoverphoto,
 } from "@/Redux/Slice/orderSlice";
 import { zonePrice } from "@/utils";
-import { localstorageKey } from "@/constants";
+import { localstorageKey, productFormStep } from "@/constants";
 function ProductCover() {
   const {
     productcover,
@@ -19,6 +19,7 @@ function ProductCover() {
     productcoveroption,
     formError,
     productcolor,
+    product,
   } = useSelector((state) => state.order);
   const disapatch = useDispatch();
   //console.log(productcover);
@@ -34,27 +35,56 @@ function ProductCover() {
             {productcover.map((datas) => {
               console.log(datas);
               return (
-                <div className="col-lg-4 col-md-4 col-sm-12">
+                // <div className="col-lg-4 col-md-4 col-sm-12">
+                //   <div
+                //     className={`size card my-2 pro ${
+                //       orderData.productcover == datas?.cover?.id &&
+                //       "selected_prod_size"
+                //     }`}
+                //     onClick={() => disapatch(changeCover({ cover: datas }))}
+                //   >
+                //     <div className="d-flex justify-content-between align-items-center">
+                //       <img
+                //         src={datas.cover.img}
+                //         style={{ height: 70, width: 70, padding: "5px" }}
+                //         alt=""
+                //         srcset=""
+                //       />
+                //       <div>
+                //         {datas.cover.name}
+                //         <div>{zonePrice(datas.coverprice).priceSrring}</div>
+                //       </div>
+                //       <div></div>
+                //     </div>
+                //   </div>
+                // </div>
+                <div className="col-2 my-3">
                   <div
-                    className={`size card my-2 pro ${
-                      orderData.productcover == datas?.cover?.id &&
-                      "selected_prod_size"
-                    }`}
-                    onClick={() => disapatch(changeCover({ cover: datas }))}
+                    onClick={() => {
+                      console.log(datas);
+                      disapatch(changeCover({ cover: datas }));
+                      disapatch(fcm({ key: "product_cover", error: false }));
+                    }}
                   >
-                    <div className="d-flex justify-content-between align-items-center">
-                      <img
-                        src={datas.cover.img}
-                        style={{ height: 70, width: 70, padding: "5px" }}
-                        alt=""
-                        srcset=""
-                      />
-                      <div>
-                        {datas.cover.name}
-                        <div>{zonePrice(datas.coverprice).priceSrring}</div>
-                      </div>
-                      <div></div>
-                    </div>
+                    <img
+                      src={datas?.cover?.img}
+                      style={{
+                        width: 120,
+                        height: 120,
+                        borderRadius: "10px",
+                        // backgroundColor: data.colorcode,
+                      }}
+                      className={`pro ${
+                        orderData.productcover == datas?.cover?.id &&
+                        "selected_prod_cover_option"
+                      }`}
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                  <div className="my-2">{datas.cover.name}</div>
+                  <div className="my-2">
+                    <b>{zonePrice(datas.coverprice).priceSrring}</b>
                   </div>
                 </div>
               );
@@ -119,14 +149,14 @@ function ProductCover() {
                 {formError?.product_cover_option}
               </span>
               <>
-                <h6>Select options</h6>
+                <h6>Select cover material</h6>
               </>
               <div className="row">
                 {productcoveroption.map((data) => {
                   console.log(data);
                   return (
                     <>
-                      <div className="col-2">
+                      <div className="col-2 my-3">
                         <div
                           onClick={() => {
                             disapatch(selectCoverOption({ coveroption: data }));
@@ -164,7 +194,7 @@ function ProductCover() {
                 {formError?.product_cover_color_option}
               </span>
               <>
-                <h6>Select color options</h6>
+                <h6>Select material color</h6>
               </>
               <div className="row">
                 {productcolor.map((data) => {
@@ -172,7 +202,7 @@ function ProductCover() {
                   console.log(data);
                   return (
                     <>
-                      <div className="col-2">
+                      <div className="col-2 my-3">
                         <div
                           onClick={() => {
                             disapatch(changeColor({ color: data }));
@@ -213,7 +243,7 @@ function ProductCover() {
         next={() => {
           if (!orderData.productcover) {
             disapatch(
-              fcm({ key: "product_cover", error: "Select minimum one option" })
+              fcm({ key: "product_cover", error: "Select one option " })
             );
             return;
           }
@@ -233,7 +263,7 @@ function ProductCover() {
               disapatch(
                 fcm({
                   key: "product_cover_option",
-                  error: "Select minimum one option",
+                  error: "Select one option ",
                 })
               );
               return;
@@ -242,13 +272,20 @@ function ProductCover() {
               disapatch(
                 fcm({
                   key: "product_cover_color_option",
-                  error: "Select minimum one option",
+                  error: "Select one option ",
                 })
               );
               return;
             }
           }
-          disapatch(formNext());
+          if (product.boxandsleeve) {
+            disapatch(formNext(productFormStep.boxsleeve));
+          } else {
+            disapatch(formNext(productFormStep.event));
+          }
+        }}
+        back={() => {
+          disapatch(formNext(productFormStep.papper));
         }}
       />
     </>

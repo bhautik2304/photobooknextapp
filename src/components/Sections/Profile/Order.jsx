@@ -21,6 +21,7 @@ import loader from "@/assets/img/loading.json";
 import Image from "next/image";
 import { Dropbox } from "dropbox";
 import AWS from "aws-sdk";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const productTotalPrice = (
   page,
@@ -52,7 +53,7 @@ const productTotalPrice = (
 function Order() {
   const [data, setData] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(4);
+  const [itemsPerPage] = useState(5);
   const [dataCount, setDataCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const userId = useSelector((state) => state.auth.user);
@@ -111,7 +112,10 @@ function Order() {
                     </div>
                     <div>
                       <Link href={appRoutes.StartPrinting}>
-                        <button className="btn btn-primary pro btn-sm">
+                        <button
+                          className="btn btn-primary pro btn-sm"
+                          style={{ fontSize: "14px" }}
+                        >
                           New Order
                         </button>
                       </Link>
@@ -157,7 +161,10 @@ function Order() {
                   </div>
                   <div>
                     <Link href={appRoutes.StartPrinting}>
-                      <button className="btn btn-primary pro btn-sm">
+                      <button
+                        className="btn btn-primary pro btn-sm"
+                        style={{ fontSize: "14px" }}
+                      >
                         New Order
                       </button>
                     </Link>
@@ -188,7 +195,11 @@ function Order() {
                             class="accordion-item border-top mb-0"
                           >
                             <AccordionSummary
-                              // expandIcon={<ArrowDownwardIcon />}
+                              expandIcon={
+                                <>
+                                  <ExpandMoreIcon />
+                                </>
+                              }
                               aria-controls={`panel${key}-content`}
                               id={`panel${key}-header`}
                             >
@@ -205,7 +216,7 @@ function Order() {
                                 >
                                   <div class="me-3 me-sm-4">
                                     <div class="fs-sm text-body-secondary">
-                                      #ord-{datas?.order_no}
+                                      <b>#ord-{datas?.order_no}</b>
                                     </div>
                                     <Chip
                                       label={datas?.order_status}
@@ -227,26 +238,46 @@ function Order() {
                                   </div>
                                   <div class="me-3 me-sm-4">
                                     <div class="d-none d-sm-block fs-sm text-body-secondary mb-2">
-                                      Order date
+                                      <b>Product</b>
                                     </div>
                                     <div class="d-sm-none fs-sm text-body-secondary mb-2">
-                                      Date
+                                      <b>Date</b>
                                     </div>
                                     {/* {.format('M'))} */}
                                     <div class="fs-sm fw-medium text-dark">
-                                      {date.format("MMM DD, YY h:m a")}
+                                      {datas?.product?.name}
+                                    </div>
+                                  </div>
+                                  <div class="me-3 me-sm-4">
+                                    <div class="d-none d-sm-block fs-sm text-body-secondary mb-2">
+                                      <b> Order Date</b>
+                                    </div>
+                                    {/* {.format('M'))} */}
+                                    <div class="fs-sm fw-medium text-dark">
+                                      {date.format("MMM DD, YY")}
                                     </div>
                                   </div>
                                   <div class="me-3 me-sm-4">
                                     <div class="fs-sm text-body-secondary mb-2">
-                                      Total
+                                      <b>Total</b>
                                     </div>
                                     <div class="fs-sm fw-medium text-dark">{`${
                                       datas?.countryzone?.currency_sign
-                                    } ${
+                                    } ${Math.round(
                                       subTotal +
-                                      datas?.pritnig_price * datas?.page_qty
-                                    }`}</div>
+                                        datas?.pritnig_price * datas?.page_qty
+                                    )}`}</div>
+                                  </div>
+                                </div>
+                                <div
+                                  class=""
+                                  style={{ width: "300px", marginTop: -10 }}
+                                >
+                                  <div class="fs-sm text-body-secondary mb-2">
+                                    <b>Order Name</b>
+                                  </div>
+                                  <div class="fs-sm fw-medium text-dark">
+                                    {datas?.order_detaild?.event_name}
                                   </div>
                                 </div>
                                 {/* <div class="accordion-button d-none d-sm-flex">
@@ -301,19 +332,21 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Quantity
+                                            <b>Quantity</b>
                                           </div>
-                                          <div class="fs-sm fw-medium text-dark">
-                                            1
-                                          </div>
+                                          <div class="fs-sm fw-medium text-dark"></div>
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                          {/* <div class="fs-sm text-body-secondary mb-2">Price</div>
-                                      <div class="fs-sm fw-medium text-dark">$16</div> */}
+                                          <div class="fs-sm text-body-secondary mb-2">
+                                            <b>Price</b>
+                                          </div>
+                                          <div class="fs-sm fw-medium text-dark"></div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                          {/* <div class="fs-sm text-body-secondary mb-2">Total</div>
-                                      <div class="fs-sm fw-medium text-dark">$16</div> */}
+                                          <div class="fs-sm text-body-secondary mb-2">
+                                            <b>Total</b>
+                                          </div>
+                                          <div class="fs-sm fw-medium text-dark"></div>
                                         </td>
                                       </tr>
                                       {/* product sheet dtaild page */}
@@ -356,7 +389,7 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Sheet Quantity
+                                            {/* Sheet Quantity */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">
                                             {datas?.page_qty}
@@ -364,13 +397,13 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Price
+                                            {/* Price */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${datas?.sheetValue} ${datas?.countryzone?.currency_sign}`}</div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Total
+                                            {/* Total */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.page_qty * datas?.sheetValue
@@ -405,7 +438,7 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Sheet Total
+                                            {/* Sheet Total */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
@@ -415,7 +448,7 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Paper Price
+                                            {/* Paper Price */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
@@ -428,7 +461,7 @@ function Order() {
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Total
+                                            {/* Total */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
@@ -483,7 +516,7 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Quantity
+                                            {/* Quantity */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">
                                             1
@@ -491,13 +524,13 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Price
+                                            {/* Price */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.coverValue}`}</div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Total
+                                            {/* Total */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.coverValue}`}</div>
                                         </td>
@@ -550,7 +583,7 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Quantity
+                                            {/* Quantity */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">
                                             1
@@ -558,13 +591,13 @@ function Order() {
                                         </td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Price
+                                            {/* Price */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.boxSleeveValue}`}</div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Total
+                                            {/* Total */}
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.boxSleeveValue}`}</div>
                                         </td>
@@ -610,7 +643,7 @@ function Order() {
                                           </td>
                                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                             <div class="fs-sm text-body-secondary mb-2">
-                                              Quantity
+                                              {/* Quantity */}
                                             </div>
                                             <div class="fs-sm fw-medium text-dark">
                                               {datas?.album_book_copy_qty}
@@ -618,13 +651,13 @@ function Order() {
                                           </td>
                                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                             <div class="fs-sm text-body-secondary mb-2">
-                                              Price
+                                              {/* Price */}
                                             </div>
                                             <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.album_book_copy_price}`}</div>
                                           </td>
                                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                             <div class="fs-sm text-body-secondary mb-2">
-                                              Total
+                                              {/* Total */}
                                             </div>
                                             <div class="fs-sm fw-medium text-dark">{`${
                                               datas?.countryzone?.currency_sign
@@ -664,7 +697,7 @@ function Order() {
                                           </td>
                                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                             <div class="fs-sm text-body-secondary mb-2">
-                                              Quantity
+                                              {/* Quantity */}
                                             </div>
                                             <div class="fs-sm fw-medium text-dark">
                                               {datas?.page_qty}
@@ -672,13 +705,13 @@ function Order() {
                                           </td>
                                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                             <div class="fs-sm text-body-secondary mb-2">
-                                              Price
+                                              {/* Price */}
                                             </div>
                                             <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${datas?.pritnig_price}`}</div>
                                           </td>
                                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                             <div class="fs-sm text-body-secondary mb-2">
-                                              Total
+                                              {/* Total */}
                                             </div>
                                             <div class="fs-sm fw-medium text-dark">{`${
                                               datas?.countryzone?.currency_sign
@@ -702,11 +735,11 @@ function Order() {
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
-                                          } ${
+                                          } ${Math.round(
                                             productTotal +
-                                            datas?.pritnig_price *
-                                              datas?.page_qty
-                                          }`}</div>
+                                              datas?.pritnig_price *
+                                                datas?.page_qty
+                                          )}`}</div>
                                         </td>
                                       </tr>
                                       {Number(datas?.discount) != 0 ? (
@@ -721,7 +754,12 @@ function Order() {
                                               </div>
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                              <div class="fs-sm fw-medium text-danger">{`- ${datas?.countryzone?.currency_sign} ${discountValue}`}</div>
+                                              <div class="fs-sm fw-medium text-danger">{`- ${
+                                                datas?.countryzone
+                                                  ?.currency_sign
+                                              } ${Math.round(
+                                                discountValue
+                                              )}`}</div>
                                             </td>
                                           </tr>
                                           <tr>
@@ -733,7 +771,12 @@ function Order() {
                                               </div>
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                              <div class="fs-sm fw-medium text-success">{`${datas?.countryzone?.currency_sign} ${afterDiscount}`}</div>
+                                              <div class="fs-sm fw-medium text-success">{`${
+                                                datas?.countryzone
+                                                  ?.currency_sign
+                                              } ${Math.round(
+                                                afterDiscount
+                                              )}`}</div>
                                             </td>
                                           </tr>
                                         </>
@@ -804,13 +847,13 @@ function Order() {
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
-                                          } ${
+                                          } ${Math.round(
                                             subTotal +
-                                            datas?.album_book_copy_price *
-                                              datas?.album_book_copy_qty +
-                                            datas?.pritnig_price *
-                                              datas?.page_qty
-                                          }`}</div>
+                                              datas?.album_book_copy_price *
+                                                datas?.album_book_copy_qty +
+                                              datas?.pritnig_price *
+                                                datas?.page_qty
+                                          )}`}</div>
                                         </td>
                                       </tr>
                                     </tbody>

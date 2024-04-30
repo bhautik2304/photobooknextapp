@@ -60,7 +60,7 @@ function CheckOutItem({ back, submitOrder }) {
     ) || null;
 
   const size =
-    productSize.find((data) => data.id == orderData.productSize) || null;
+    productSize.find((data) => data.size.id == orderData.productSize) || null;
 
   const dispatch = useDispatch();
 
@@ -595,7 +595,7 @@ function CheckOutItem({ back, submitOrder }) {
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                             <div class="fs-sm text-body-secondary mb-2">
-                              Afetr Discount Total
+                              After Discount Total
                             </div>
                           </td>
                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">

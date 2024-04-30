@@ -8,9 +8,13 @@ import {
   changeOrderDetaildData,
   addphotoszip,
   changeOrderData,
+  formNext,
 } from "@/Redux/Slice/orderSlice";
-import { appRoutes } from "@/constants";
+import { appRoutes, productFormStep } from "@/constants";
 import { zonePrice } from "@/utils";
+import Tooltip from "@mui/material/Tooltip";
+import Fade from "@mui/material/Fade";
+
 function EventDetailForm() {
   const router = useRouter();
   const [error, setError] = useState({
@@ -22,6 +26,7 @@ function EventDetailForm() {
     fontType: "",
   });
   const {
+    product,
     orderData,
     orderData: { orderDetaild, product_id },
   } = useSelector((state) => state.order);
@@ -195,7 +200,7 @@ function EventDetailForm() {
           </div>
           <div className="col-6 my-2">
             <div className="form-group">
-              <label htmlFor="">Select Font Type</label>
+              <label htmlFor="">Font Type</label>
               <select
                 className="form-control"
                 value={orderDetaild?.fontType}
@@ -210,6 +215,7 @@ function EventDetailForm() {
                 name=""
                 id=""
               >
+                <option>Select Font</option>
                 <option value="Barkentina script">Barkentina script</option>
                 <option value="Cinzel">Cinzel</option>
                 <option value="Bickhem script">Bickhem script</option>
@@ -317,34 +323,43 @@ function EventDetailForm() {
           )}
 
           <div className="col-6">
-            <h6 className="mt-2">Order pocket book copies</h6>
+            <h6 className="mt-2">Pocketbooks</h6>
             <div className="mb-4">
               <div className="col-12 my-2">
-                <div
-                  className="pro mt-3"
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: 50,
-                    borderRadius: 5,
-                    border: "2px solid #8ccec6",
-                    backgroundColor:
-                      orderData.isPhotoBookCopy == true && "#8ccec6",
-                    color: orderData.isPhotoBookCopy == true && "#ffffff",
-                  }}
-                  onClick={() =>
-                    dispatch(
-                      changeOrderData({
-                        key: "isPhotoBookCopy",
-                        value: !orderData.isPhotoBookCopy,
-                      })
-                    )
-                  }
+                <Tooltip
+                  title=" Pocketbooks will be exact replica of the main album design with hardbound cover"
+                  TransitionComponent={Fade}
+                  TransitionProps={{ timeout: 600 }}
                 >
-                  Click to order a pocket book copies {}
-                </div>
+                  <div
+                    className="pro mt-3"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Tooltip on top"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: 50,
+                      borderRadius: 5,
+                      border: "2px solid #8ccec6",
+                      backgroundColor:
+                        orderData.isPhotoBookCopy == true && "#8ccec6",
+                      color: orderData.isPhotoBookCopy == true && "#ffffff",
+                    }}
+                    onClick={() =>
+                      dispatch(
+                        changeOrderData({
+                          key: "isPhotoBookCopy",
+                          value: !orderData.isPhotoBookCopy,
+                        })
+                      )
+                    }
+                  >
+                    Click to order a pocketbook {}
+                  </div>
+                </Tooltip>
               </div>
               <div className="col-12">
                 {orderData.isPhotoBookCopy && (
@@ -352,7 +367,7 @@ function EventDetailForm() {
                     <div className="row">
                       <div className="col-6">
                         <div className="form-group">
-                          <label htmlFor="">Number Of Copy</label>
+                          <label htmlFor=""> Number of copies</label>
                           <input
                             type="number"
                             value={orderData.photoBookCopy}
@@ -373,7 +388,7 @@ function EventDetailForm() {
                         </div>
                       </div>
                       <div className="col-6">
-                        <label htmlFor="">Amount</label>
+                        <label htmlFor="">Price</label>
                         <div
                           className="pro"
                           style={{
@@ -401,7 +416,16 @@ function EventDetailForm() {
           </div>
         </div>
       </div>
-      <Button next={next} />
+      <Button
+        next={next}
+        back={() => {
+          if (product.boxandsleeve) {
+            dispatch(formNext(productFormStep.boxsleeve));
+          } else {
+            dispatch(formNext(productFormStep.cover));
+          }
+        }}
+      />
     </>
   );
 }

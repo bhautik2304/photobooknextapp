@@ -51,6 +51,14 @@ export const localstorageKey = {
 export const errorText = {
 
 }
+export const productFormStep = {
+    product: "select_product",
+    orientation: "select_orientation",
+    papper: "select_papers",
+    cover: "select_cover",
+    event: "select_event",
+    boxsleeve: "select_boxsleeve",
+}
 
 const userKey = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authKey) : null
 

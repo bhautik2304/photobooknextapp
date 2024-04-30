@@ -1,5 +1,6 @@
 'use client'
 
+import { productFormStep } from '@/constants'
 import { zonePrice } from '@/utils'
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -11,6 +12,8 @@ const orderDetaild = {
   customizeMessage: "",
   otherEvent: "",
 }
+
+
 
 const orderDataScemma = {
   // costomer Detaild
@@ -81,7 +84,7 @@ const errorSchima = {
 
 const initialState = {
   orderData: orderDataScemma,
-  formStep: 0,
+  formStep: productFormStep.product,
   formError: errorSchima,
   product: {},
   productSize: [],
@@ -195,10 +198,7 @@ const orderSlice = createSlice({
       }
     },
     formNext: (state, action) => {
-      if (state.formStep != 7) {
-
-        state.formStep = ++state.formStep
-      }
+      state.formStep = action.payload
     },
     formError: (state, action) => {
       state.formError[action.payload.key] = action.payload.error

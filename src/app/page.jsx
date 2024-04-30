@@ -41,7 +41,7 @@ export default function Home() {
                 <div class="intro-section p-5">
                   <div class="z-index-1 position-relative">
                     <h2>
-                      Introducing Photokrafft: Elevating Vsual Experiences
+                      Introducing Photokrafft : Elevating Vsual Experiences
                       Globally
                     </h2>
                     <p>
@@ -425,7 +425,7 @@ export default function Home() {
         <div className="container">
           <div className="d-flex justify-content-center aligns-item-center">
             <div className="p-5">
-              <p>What Photokraft provides you ?</p>
+              <p>What Photokrafft provides you ?</p>
               <h2>
                 Happiness, Which Comes In All Shapes And Size,
                 <br /> So Do Our Books.

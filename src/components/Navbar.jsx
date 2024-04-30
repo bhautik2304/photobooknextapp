@@ -143,26 +143,6 @@ function Navbar() {
                     <i className="ai-cart fs-lg opacity-70 me-2"></i>
                     Orders
                   </Link>
-                  {/* <a href="#" className="dropdown-item">
-                                        <i className="ai-wallet fs-base opacity-70 me-2 mt-n1"></i>
-                                        Billing
-                                    </a>
-                                    <div className="dropdown-divider"></div>
-                                    <h6 className="dropdown-header fs-xs fw-medium text-body-secondary text-uppercase pb-1">Dashboard</h6>
-
-                                    <a href="#" className="dropdown-item">
-                                        <i className="ai-activity fs-lg opacity-70 me-2"></i>
-                                        Earnings
-                                    </a>
-                                    <a href="#" className="dropdown-item d-flex align-items-center">
-                                        <i className="ai-messages fs-lg opacity-70 me-2"></i>
-                                        Chat
-                                        <span className="badge bg-danger ms-auto">4</span>
-                                    </a>
-                                    <a href="#" className="dropdown-item">
-                                        <i className="ai-heart fs-lg opacity-70 me-2"></i>
-                                        Favorites
-                                    </a> */}
                   <div className="dropdown-divider"></div>
                   <button
                     onClick={() => {
@@ -267,7 +247,7 @@ function Navbar() {
                         className="btn btn-primary btn-sm fs-sm ms-3 mb-4 mb-lg-0"
                         style={{
                           borderRadius: "5px !important",
-                          fontSize: "12px !important",
+                          fontSize: "16px !important",
                           backgroundColor: "#5bb5a2 !important",
                         }}
                       >
