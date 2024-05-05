@@ -69,7 +69,7 @@ export const appAxios = axios.create({
 })
 
 export const secretTokken = {
-    dropbox: "sl.ByQ80A7k_83UKMUbIZ1eorKTGj3u_pvWwWygd4kOsbfl7nC8ii4yOfGM3Mg5gH4VHk6FmXLnUOvd-2YrEdXU7LjrR1xUQ-jCVMf3kBlLc7lU6fyU_AaMMxjACyDRF1yapW5K2BaAxoFpSsZlOuEDrpE"
+    dropbox: ""
 }
 
 // Call the refreshAccessToken function with your refresh token

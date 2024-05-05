@@ -1024,8 +1024,8 @@ const FileUpload = ({ orderId }) => {
     if (file.type == "application/x-zip-compressed") {
       /* Change hear */
       const s3 = new AWS.S3({
-        accessKeyId: "AKIAZW3CG5TZXIPJK7UK",
-        secretAccessKey: "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",
+        accessKeyId: "",
+        secretAccessKey: "",
         region: "ap-south-1",
       });
 
