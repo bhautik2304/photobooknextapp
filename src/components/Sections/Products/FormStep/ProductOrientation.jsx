@@ -22,28 +22,30 @@ function ProductOrientation() {
       </span>
       {order?.product?.orientation.map((data, key) => (
         <>
-          <div key={key} className="col-lg-3 col-md-3 col-sm-12">
-            <div
-              className={`pro ${
-                order.orderData?.productOrientation == data.orientation.id
-                  ? "selected_prod"
-                  : null
-              }`}
-              onClick={() => {
-                console.log(data);
-                disapatch(
-                  formError({
-                    key: "product_orientation",
-                    error: false,
-                  })
-                );
-                disapatch(changeOrientation({ product: data }));
-              }}
-            >
-              <img src={data?.orientation?.img} alt="" srcset="" />
+          {data.orientation.status ? (
+            <div key={key} className="col-lg-3 col-md-3 col-sm-12">
+              <div
+                className={`pro ${
+                  order.orderData?.productOrientation == data.orientation.id
+                    ? "selected_prod"
+                    : null
+                }`}
+                onClick={() => {
+                  console.log(data);
+                  disapatch(
+                    formError({
+                      key: "product_orientation",
+                      error: false,
+                    })
+                  );
+                  disapatch(changeOrientation({ product: data }));
+                }}
+              >
+                <img src={data?.orientation?.img} alt="" srcset="" />
+              </div>
+              <h6 className="my-3">{data?.orientation?.name}</h6>
             </div>
-            <h6 className="my-3">{data?.orientation?.name}</h6>
-          </div>
+          ) : null}
         </>
       ))}
       <Button

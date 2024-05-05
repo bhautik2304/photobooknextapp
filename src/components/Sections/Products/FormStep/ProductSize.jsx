@@ -74,31 +74,35 @@ function ProductSize() {
             {productSize.map((data) => {
               console.log(data);
               return (
-                <div className="col-2 my-3">
-                  <div
-                    onClick={() => {
-                      disapatch(changeOrientationSize({ size: data }));
-                      disapatch(fcm({ key: "product_size", error: false }));
-                    }}
-                  >
-                    <img
-                      src={data?.size?.img}
-                      style={{
-                        width: 120,
-                        height: 120,
-                        borderRadius: "10px",
-                        // backgroundColor: data.colorcode,
-                      }}
-                      className={`pro ${
-                        orderData.productSize == data.size.id &&
-                        "selected_prod_cover_option"
-                      }`}
-                      alt=""
-                      srcset=""
-                    />
-                  </div>
-                  <div className="my-2">{data?.size?.name}</div>
-                </div>
+                <>
+                  {data.size.status ? (
+                    <div className="col-2 my-3">
+                      <div
+                        onClick={() => {
+                          disapatch(changeOrientationSize({ size: data }));
+                          disapatch(fcm({ key: "product_size", error: false }));
+                        }}
+                      >
+                        <img
+                          src={data?.size?.img}
+                          style={{
+                            width: 120,
+                            height: 120,
+                            borderRadius: "10px",
+                            // backgroundColor: data.colorcode,
+                          }}
+                          className={`pro ${
+                            orderData.productSize == data.size.id &&
+                            "selected_prod_cover_option"
+                          }`}
+                          alt=""
+                          srcset=""
+                        />
+                      </div>
+                      <div className="my-2">{data?.size?.name}</div>
+                    </div>
+                  ) : null}
+                </>
               );
             })}
           </div>
@@ -229,37 +233,39 @@ function ProductSize() {
                     {productSheet.map((data) => {
                       return (
                         <>
-                          <div className="col-2 my-3">
-                            <div
-                              onClick={() => {
-                                console.log(data);
-                                disapatch(changeSheet({ sheet: data }));
-                                disapatch(
-                                  fcm({ key: "product_sheet", error: false })
-                                );
-                              }}
-                            >
-                              <img
-                                src={data?.sheet?.img}
-                                style={{
-                                  width: 120,
-                                  height: 120,
-                                  borderRadius: "10px",
-                                  // backgroundColor: data.colorcode,
+                          {data.sheet.status ? (
+                            <div className="col-2 my-3">
+                              <div
+                                onClick={() => {
+                                  console.log(data);
+                                  disapatch(changeSheet({ sheet: data }));
+                                  disapatch(
+                                    fcm({ key: "product_sheet", error: false })
+                                  );
                                 }}
-                                className={`pro ${
-                                  orderData.productSheet == data?.sheet?.id &&
-                                  "selected_prod_cover_option"
-                                }`}
-                                alt=""
-                                srcset=""
-                              />
+                              >
+                                <img
+                                  src={data?.sheet?.img}
+                                  style={{
+                                    width: 120,
+                                    height: 120,
+                                    borderRadius: "10px",
+                                    // backgroundColor: data.colorcode,
+                                  }}
+                                  className={`pro ${
+                                    orderData.productSheet == data?.sheet?.id &&
+                                    "selected_prod_cover_option"
+                                  }`}
+                                  alt=""
+                                  srcset=""
+                                />
+                              </div>
+                              <div className="my-2">{data?.sheet?.name}</div>
+                              <div className="my-2">
+                                <b>{zonePrice(data.sheetprice)?.priceSrring}</b>
+                              </div>
                             </div>
-                            <div className="my-2">{data?.sheet?.name}</div>
-                            <div className="my-2">
-                              <b>{zonePrice(data.sheetprice)?.priceSrring}</b>
-                            </div>
-                          </div>
+                          ) : null}
                         </>
                       );
                     }) || (
@@ -278,42 +284,44 @@ function ProductSize() {
                   <div className="row">
                     {productpaperType.map((data) => (
                       <>
-                        <div className="col-2 my-3">
-                          <div
-                            onClick={() => {
-                              console.log(data);
-                              disapatch(
-                                changePapertypeOption({ papertype: data })
-                              );
-                              disapatch(
-                                fcm({ key: "paperType", error: false })
-                              );
-                            }}
-                          >
-                            <img
-                              src={data?.paper?.img}
-                              style={{
-                                width: 120,
-                                height: 120,
-                                // backgroundColor: data.colorcode,
-                                borderRadius: "10px",
+                        {data.paper.status ? (
+                          <div className="col-2 my-3">
+                            <div
+                              onClick={() => {
+                                console.log(data);
+                                disapatch(
+                                  changePapertypeOption({ papertype: data })
+                                );
+                                disapatch(
+                                  fcm({ key: "paperType", error: false })
+                                );
                               }}
-                              className={`pro ${
-                                orderData.paperType == data.paper.id &&
-                                "selected_prod_cover_option"
-                              }`}
-                              alt=""
-                              srcset=""
-                            />
+                            >
+                              <img
+                                src={data?.paper?.img}
+                                style={{
+                                  width: 120,
+                                  height: 120,
+                                  // backgroundColor: data.colorcode,
+                                  borderRadius: "10px",
+                                }}
+                                className={`pro ${
+                                  orderData.paperType == data.paper.id &&
+                                  "selected_prod_cover_option"
+                                }`}
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div className="my-2">{data.paper.name}</div>
+                            <div className="my-2">
+                              <b>
+                                {data.paper.value > 0 &&
+                                  `+ ${data.paper.value} % Extra`}
+                              </b>
+                            </div>
                           </div>
-                          <div className="my-2">{data.paper.name}</div>
-                          <div className="my-2">
-                            <b>
-                              {data.paper.value > 0 &&
-                                `+ ${data.paper.value} % Extra`}
-                            </b>
-                          </div>
-                        </div>
+                        ) : null}
                       </>
                     )) || (
                       <>

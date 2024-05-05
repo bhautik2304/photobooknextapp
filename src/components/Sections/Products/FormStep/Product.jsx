@@ -21,28 +21,30 @@ function Product() {
       {product
         ? product.map((data, key) => (
             <>
-              <div key={key} className="col-lg-3 col-md-3 col-sm-12">
-                <div
-                  className={`pro ${
-                    order.product?.id == data.id ? "selected_prod" : null
-                  }`}
-                  onClick={() => {
-                    formError({
-                      key: "product",
-                      product_error: false,
-                    });
-                    disapatch(selectProduct({ product: data }));
-                  }}
-                >
-                  <img
-                    src={data?.img}
-                    style={{ borderRadius: "15px" }}
-                    alt=""
-                    srcset=""
-                  />
+              {data?.status ? (
+                <div key={key} className="col-lg-3 col-md-3 col-sm-12">
+                  <div
+                    className={`pro ${
+                      order.product?.id == data.id ? "selected_prod" : null
+                    }`}
+                    onClick={() => {
+                      formError({
+                        key: "product",
+                        product_error: false,
+                      });
+                      disapatch(selectProduct({ product: data }));
+                    }}
+                  >
+                    <img
+                      src={data?.img}
+                      style={{ borderRadius: "15px" }}
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                  <h6 className="my-3">{data.name}</h6>
                 </div>
-                <h6 className="my-3">{data.name}</h6>
-              </div>
+              ) : null}
             </>
           ))
         : null}

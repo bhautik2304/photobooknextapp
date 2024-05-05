@@ -58,35 +58,41 @@ function ProductCover() {
                 //     </div>
                 //   </div>
                 // </div>
-                <div className="col-2 my-3">
-                  <div
-                    onClick={() => {
-                      console.log(datas);
-                      disapatch(changeCover({ cover: datas }));
-                      disapatch(fcm({ key: "product_cover", error: false }));
-                    }}
-                  >
-                    <img
-                      src={datas?.cover?.img}
-                      style={{
-                        width: 120,
-                        height: 120,
-                        borderRadius: "10px",
-                        // backgroundColor: data.colorcode,
-                      }}
-                      className={`pro ${
-                        orderData.productcover == datas?.cover?.id &&
-                        "selected_prod_cover_option"
-                      }`}
-                      alt=""
-                      srcset=""
-                    />
-                  </div>
-                  <div className="my-2">{datas.cover.name}</div>
-                  <div className="my-2">
-                    <b>{zonePrice(datas.coverprice).priceSrring}</b>
-                  </div>
-                </div>
+                <>
+                  {datas.cover.status ? (
+                    <div className="col-2 my-3">
+                      <div
+                        onClick={() => {
+                          console.log(datas);
+                          disapatch(changeCover({ cover: datas }));
+                          disapatch(
+                            fcm({ key: "product_cover", error: false })
+                          );
+                        }}
+                      >
+                        <img
+                          src={datas?.cover?.img}
+                          style={{
+                            width: 120,
+                            height: 120,
+                            borderRadius: "10px",
+                            // backgroundColor: data.colorcode,
+                          }}
+                          className={`pro ${
+                            orderData.productcover == datas?.cover?.id &&
+                            "selected_prod_cover_option"
+                          }`}
+                          alt=""
+                          srcset=""
+                        />
+                      </div>
+                      <div className="my-2">{datas.cover.name}</div>
+                      <div className="my-2">
+                        <b>{zonePrice(datas.coverprice).priceSrring}</b>
+                      </div>
+                    </div>
+                  ) : null}
+                </>
               );
             })}
           </div>
@@ -156,28 +162,35 @@ function ProductCover() {
                   console.log(data);
                   return (
                     <>
-                      <div className="col-2 my-3">
-                        <div
-                          onClick={() => {
-                            disapatch(selectCoverOption({ coveroption: data }));
-                            disapatch(
-                              fcm({ key: "product_cover_option", error: false })
-                            );
-                          }}
-                        >
-                          <img
-                            src={data.img}
-                            style={{ width: 120 }}
-                            className={`pro ${
-                              orderData.productcoveroption == data.id &&
-                              "selected_prod_cover_option"
-                            }`}
-                            alt=""
-                            srcset=""
-                          />
+                      {data.status ? (
+                        <div className="col-2 my-3">
+                          <div
+                            onClick={() => {
+                              disapatch(
+                                selectCoverOption({ coveroption: data })
+                              );
+                              disapatch(
+                                fcm({
+                                  key: "product_cover_option",
+                                  error: false,
+                                })
+                              );
+                            }}
+                          >
+                            <img
+                              src={data.img}
+                              style={{ width: 120 }}
+                              className={`pro ${
+                                orderData.productcoveroption == data.id &&
+                                "selected_prod_cover_option"
+                              }`}
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div className="my-2">{data.name}</div>
                         </div>
-                        <div className="my-2">{data.name}</div>
-                      </div>
+                      ) : null}
                     </>
                   );
                 }) || (
@@ -202,35 +215,38 @@ function ProductCover() {
                   console.log(data);
                   return (
                     <>
-                      <div className="col-2 my-3">
-                        <div
-                          onClick={() => {
-                            disapatch(changeColor({ color: data }));
-                            disapatch(
-                              fcm({
-                                key: "product_cover_color_option",
-                                error: false,
-                              })
-                            );
-                          }}
-                        >
-                          <img
-                            src={data.colors.img}
-                            style={{
-                              width: 120,
-                              height: 120,
-                              backgroundColor: data.colorcode,
+                      {data.colors.status ? (
+                        <div className="col-2 my-3">
+                          <div
+                            onClick={() => {
+                              disapatch(changeColor({ color: data }));
+                              disapatch(
+                                fcm({
+                                  key: "product_cover_color_option",
+                                  error: false,
+                                })
+                              );
                             }}
-                            className={`pro ${
-                              orderData.productcovercolor == data?.colors?.id &&
-                              "selected_prod_cover_option"
-                            }`}
-                            alt=""
-                            srcset=""
-                          />
+                          >
+                            <img
+                              src={data.colors.img}
+                              style={{
+                                width: 120,
+                                height: 120,
+                                backgroundColor: data.colorcode,
+                              }}
+                              className={`pro ${
+                                orderData.productcovercolor ==
+                                  data?.colors?.id &&
+                                "selected_prod_cover_option"
+                              }`}
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div className="my-2">{data.colors.color}</div>
                         </div>
-                        <div className="my-2">{data.colors.color}</div>
-                      </div>
+                      ) : null}
                     </>
                   );
                 })}

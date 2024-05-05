@@ -63,35 +63,41 @@ function ProductBox() {
                 //     </div>
                 //   </div>
                 // </div>
-                <div className="col-2 my-3">
-                  <div
-                    onClick={() => {
-                      console.log(data);
-                      disapatch(changeBoxSleev({ boxSleev: data }));
-                      disapatch(fcm({ key: "product_boxSleev", error: false }));
-                    }}
-                  >
-                    <img
-                      src={data?.boxsleeve?.img}
-                      style={{
-                        width: 120,
-                        height: 120,
-                        borderRadius: "10px",
-                        // backgroundColor: data.colorcode,
-                      }}
-                      className={`pro ${
-                        orderData.productboxSleev == data.boxsleeve.id &&
-                        "selected_prod_cover_option"
-                      }`}
-                      alt=""
-                      srcset=""
-                    />
-                  </div>
-                  <div className="my-2">{data.boxsleeve.name}</div>
-                  <div className="my-2">
-                    <b>{zonePrice(data.boxsleeveprice).priceSrring}</b>
-                  </div>
-                </div>
+                <>
+                  {data.boxsleeve.status ? (
+                    <div className="col-2 my-3">
+                      <div
+                        onClick={() => {
+                          console.log(data);
+                          disapatch(changeBoxSleev({ boxSleev: data }));
+                          disapatch(
+                            fcm({ key: "product_boxSleev", error: false })
+                          );
+                        }}
+                      >
+                        <img
+                          src={data?.boxsleeve?.img}
+                          style={{
+                            width: 120,
+                            height: 120,
+                            borderRadius: "10px",
+                            // backgroundColor: data.colorcode,
+                          }}
+                          className={`pro ${
+                            orderData.productboxSleev == data.boxsleeve.id &&
+                            "selected_prod_cover_option"
+                          }`}
+                          alt=""
+                          srcset=""
+                        />
+                      </div>
+                      <div className="my-2">{data.boxsleeve.name}</div>
+                      <div className="my-2">
+                        <b>{zonePrice(data.boxsleeveprice).priceSrring}</b>
+                      </div>
+                    </div>
+                  ) : null}
+                </>
               );
             })}
           </div>
@@ -166,33 +172,35 @@ function ProductBox() {
                     <div className="row">
                       {productboxandsleeveoptions.map((data) => (
                         <>
-                          <div className="col-2">
-                            <div
-                              onClick={() => {
-                                disapatch(
-                                  selectBoxSleeveOption({ boxSleev: data })
-                                );
-                                disapatch(
-                                  fcm({
-                                    key: "product_box_option",
-                                    error: false,
-                                  })
-                                );
-                              }}
-                            >
-                              <img
-                                src={data.img}
-                                style={{ width: 120 }}
-                                className={`pro ${
-                                  orderData.productboxandsleeveoption ==
-                                    data.id && "selected_prod_cover_option"
-                                }`}
-                                alt=""
-                                srcset=""
-                              />
+                          {data.status ? (
+                            <div className="col-2">
+                              <div
+                                onClick={() => {
+                                  disapatch(
+                                    selectBoxSleeveOption({ boxSleev: data })
+                                  );
+                                  disapatch(
+                                    fcm({
+                                      key: "product_box_option",
+                                      error: false,
+                                    })
+                                  );
+                                }}
+                              >
+                                <img
+                                  src={data.img}
+                                  style={{ width: 120 }}
+                                  className={`pro ${
+                                    orderData.productboxandsleeveoption ==
+                                      data.id && "selected_prod_cover_option"
+                                  }`}
+                                  alt=""
+                                  srcset=""
+                                />
+                              </div>
+                              <div className="my-2">{data.name}</div>
                             </div>
-                            <div className="my-2">{data.name}</div>
-                          </div>
+                          ) : null}
                         </>
                       )) || (
                         <>
@@ -217,36 +225,38 @@ function ProductBox() {
                         console.log(data.colors);
                         return (
                           <>
-                            <div className="col-2">
-                              <div
-                                onClick={() => {
-                                  disapatch(changeBoxColor({ color: data }));
-                                  disapatch(
-                                    fcm({
-                                      key: "product_box_color_option",
-                                      error: false,
-                                    })
-                                  );
-                                }}
-                              >
-                                <img
-                                  src={data.colors.img}
-                                  style={{
-                                    width: 120,
-                                    height: 120,
-                                    backgroundColor: data.colorcode,
+                            {data.colors.status ? (
+                              <div className="col-2">
+                                <div
+                                  onClick={() => {
+                                    disapatch(changeBoxColor({ color: data }));
+                                    disapatch(
+                                      fcm({
+                                        key: "product_box_color_option",
+                                        error: false,
+                                      })
+                                    );
                                   }}
-                                  className={`pro ${
-                                    orderData.productboxandsleevecolor ==
-                                      data.colors.id &&
-                                    "selected_prod_cover_option"
-                                  }`}
-                                  alt=""
-                                  srcset=""
-                                />
+                                >
+                                  <img
+                                    src={data.colors.img}
+                                    style={{
+                                      width: 120,
+                                      height: 120,
+                                      backgroundColor: data.colorcode,
+                                    }}
+                                    className={`pro ${
+                                      orderData.productboxandsleevecolor ==
+                                        data.colors.id &&
+                                      "selected_prod_cover_option"
+                                    }`}
+                                    alt=""
+                                    srcset=""
+                                  />
+                                </div>
+                                <div className="my-2">{data.colors.color}</div>
                               </div>
-                              <div className="my-2">{data.colors.color}</div>
-                            </div>
+                            ) : null}
                           </>
                         );
                       })}

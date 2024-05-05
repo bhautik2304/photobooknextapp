@@ -1,5 +1,5 @@
-import { appRoutes } from '@/constants'
-import React from 'react'
+import { appRoutes } from "@/constants";
+import React from "react";
 
 function Footer() {
   return (
@@ -9,43 +9,122 @@ function Footer() {
           <div className="row pb-4 pb-md-5 pt-sm-2 mb-lg-2">
             <div className="col-md-4 col-lg-3 pb-2 pb-md-0 mb-4 mb-md-0">
               <a className="navbar-brand text-nav py-0 mb-3 mb-md-4" href="/">
-                <img src='/assets/img/logo.png'/>
+                <img src="/assets/img/logo.png" />
               </a>
-              <p className="fs-sm pb-2 pb-md-3 mb-3">Photokrafft has been at the forefront of graphic design and album manufacturing,
-shaping visual narratives that captivate and inspire.</p>
-              <div className="d-flex"><a className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3" href="#"><i className="ai-facebook"></i></a><a className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3" href="#"><i className="ai-instagram"></i></a><a className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle" href="#"><i className="ai-linkedin"></i></a></div>
+              <p className="fs-sm pb-2 pb-md-3 mb-3">
+                Photokrafft has been at the forefront of graphic design and
+                album manufacturing, shaping visual narratives that captivate
+                and inspire.
+              </p>
+              <div className="d-flex">
+                <a
+                  className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3"
+                  href="#"
+                >
+                  <i className="ai-facebook"></i>
+                </a>
+                <a
+                  className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3"
+                  href="#"
+                >
+                  <i className="ai-instagram"></i>
+                </a>
+                <a
+                  className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle"
+                  href="#"
+                >
+                  <i className="ai-linkedin"></i>
+                </a>
+              </div>
             </div>
             <div className="col-md-8 col-lg-7 col-xl-6 offset-lg-2 offset-xl-3">
               <div className="row row-cols-1 row-cols-sm-3">
                 <div className="col mb-3 mb-md-0">
                   <ul className="nav flex-column">
-                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Home}>Home</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Products}>Products</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.AboutUS}>About US</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.Support}>Faqs</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href={appRoutes.StartPrinting}>Order Now</a></li>
+                    <li>
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
+                        href={appRoutes.Home}
+                      >
+                        Home
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
+                        href={appRoutes.Products}
+                      >
+                        Products
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
+                        href={appRoutes.AboutUS}
+                      >
+                        About US
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
+                        href={appRoutes.Support}
+                      >
+                        Faqs
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
+                        href={appRoutes.StartPrinting}
+                      >
+                        Order Now
+                      </a>
+                    </li>
                   </ul>
                 </div>
                 <div className="col mb-4 mb-md-0">
                   <ul className="nav flex-column">
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Help center</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Terms & conditions</a></li>
-                    <li><a className="nav-link fw-normal py-1 px-0" href="#">Privacy policy</a></li>
+                    <li>
+                      <a className="nav-link fw-normal py-1 px-0" href="#">
+                        Help center
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link fw-normal py-1 px-0" href="#">
+                        Terms & conditions
+                      </a>
+                    </li>
+                    <li>
+                      <a className="nav-link fw-normal py-1 px-0" href="#">
+                        Privacy policy
+                      </a>
+                    </li>
                   </ul>
                 </div>
-                <div className="col">
-                </div>
+                <div className="col"></div>
               </div>
             </div>
           </div>
-          <p className="fs-sm mb-0"><span className="opacity-70">&copy; All rights reserved. by </span><a className="nav-link d-inline fw-normal p-0" href="/" target="_blank" rel="noopener"> Photokrafft Worldwide LLP.</a></p>
+          <p className="fs-sm mb-0">
+            <span className="opacity-70">&copy; All rights reserved. by </span>
+            <a
+              className="nav-link d-inline fw-normal p-0"
+              href="/"
+              target="_blank"
+              rel="noopener"
+            >
+              {" "}
+              Photokrafft Worldwide LLP.
+            </a>
+          </p>
         </div>
       </footer>
     </>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
 
 /*
  <footer className="footer bg-secondary py-5">

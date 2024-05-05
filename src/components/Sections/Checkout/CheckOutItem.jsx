@@ -2,7 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { zonePrice } from "@/utils";
-import { changePageCount, changeOrderData } from "@/Redux/Slice/orderSlice";
+import {
+  changePageCount,
+  changeOrderData,
+  changeAlbumQty,
+  formError as fcm,
+} from "@/Redux/Slice/orderSlice";
 import axios from "axios";
 
 import { localstorageKey } from "@/constants";
@@ -30,6 +35,7 @@ function CheckOutItem({ back, submitOrder }) {
       productcoveroption,
       productcolor,
       productOrientation,
+      formError,
     },
   } = useSelector((state) => state);
   const thermelSheet =
@@ -541,6 +547,63 @@ function CheckOutItem({ back, submitOrder }) {
 
                     {/* product box & sleev detaild*/}
                     <tr>
+                      <td class="border-0 pb-1 px-0"></td>
+                      <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark">
+                          <p>Total Album to print</p>
+                          <div className="count-input">
+                            <button
+                              className="btn btn-primary text-white btn-sm pro"
+                              onClick={() => {
+                                if (orderData?.album_qty <= 1) {
+                                  dispatch(
+                                    fcm({
+                                      key: "album_qty",
+                                      error: `Minimum Album qty 1`,
+                                    })
+                                  );
+                                  return;
+                                }
+                                dispatch(
+                                  changeAlbumQty(orderData?.album_qty - 1)
+                                );
+                              }}
+                              type="button"
+                              data-decrement
+                            >
+                              -
+                            </button>
+                            <input
+                              className="form-control-input mx-2 border-primary form-control-sm my-2"
+                              type="number"
+                              value={orderData?.album_qty}
+                            />
+                            <button
+                              className="btn btn-primary btn-sm pro text-white"
+                              type="button"
+                              onClick={() => {
+                                dispatch(
+                                  fcm({
+                                    key: "album_qty",
+                                    error: false,
+                                  })
+                                );
+                                dispatch(
+                                  changeAlbumQty(orderData?.album_qty + 1)
+                                );
+                              }}
+                              data-increment
+                            >
+                              +
+                            </button>
+                          </div>
+                          <p className="text-danger">{formError?.album_qty}</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
                       <td class="border-0 py-1 px-0"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
@@ -550,13 +613,14 @@ function CheckOutItem({ back, submitOrder }) {
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm fw-medium text-dark">
-                          {orderData.boxSleeveValue +
+                          {(orderData.boxSleeveValue +
                             orderData.coverValue +
                             ((orderData?.sheetValue * orderData.paperValue) /
                               100 +
                               orderData?.sheetValue) *
                               orderData?.page_qty +
-                            orderData.pritnigPriceTotalPageValue +
+                            orderData.pritnigPriceTotalPageValue) *
+                            orderData?.album_qty +
                             orderData?.photoBookCopyPrice *
                               orderData?.photoBookCopy}{" "}
                           {user?.zone?.currency_sign}
@@ -657,7 +721,7 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${user?.zone?.shipingcharge}`}</div>
+                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.shipingcharge} ${user?.zone?.currency_sign}`}</div>
                       </td>
                     </tr>
                     <tr>
@@ -668,8 +732,8 @@ function CheckOutItem({ back, submitOrder }) {
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm fw-medium text-dark">
-                          {user?.zone?.currency_sign}{" "}
-                          {orderData?.orderTotale + user?.zone?.shipingcharge}
+                          {orderData?.orderTotale + user?.zone?.shipingcharge}{" "}
+                          {user?.zone?.currency_sign}
                         </div>
                       </td>
                     </tr>

@@ -44,6 +44,7 @@ const orderDataScemma = {
 
   // product cost
   page_qty: 0,
+  album_qty: 1,
   sheetValue: 0,
   pritnig_price_value: 0,
   pritnigPriceTotalPageValue: 0,
@@ -136,6 +137,10 @@ const orderSlice = createSlice({
       state.orderData.page_qty = action.payload
       // state.orderData.orderTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * state.orderData.paperTypeTotalevalue) / 100 + (state.orderData.sheetTotale * state.orderData.page_qty))
     },
+    changeAlbumQty: (state, action) => {
+      state.orderData.album_qty = action.payload
+      // state.orderData.orderTotale = (((state.orderData.sheetTotale * state.orderData.page_qty) * state.orderData.paperTypeTotalevalue) / 100 + (state.orderData.sheetTotale * state.orderData.page_qty))
+    },
     changeCover: (state, action) => {
       state.productcolor = []
       state.orderData.productcovercolor = null
@@ -180,7 +185,7 @@ const orderSlice = createSlice({
       let coverTotale = state.orderData.coverValue
       let boxSleevTotale = state.orderData.boxSleeveValue
       // let photoBookCopy = state.orderData.photoBookCopyPrice * state.orderData.photoBookCopy;
-      state.orderData.orderTotale = paperTotale + coverTotale + boxSleevTotale
+      state.orderData.orderTotale = (paperTotale + coverTotale + boxSleevTotale) * state.orderData.album_qty
     },
     setPrintingTotale: (state, action) => {
       // let photoBookCopy = state.orderData.photoBookCopyPrice * state.orderData.photoBookCopy;
@@ -247,7 +252,7 @@ const orderSlice = createSlice({
   }
 });
 
-export const { addFrontCoverphoto, selectCoverOption, addBackCoverphoto, addFrontBoxphoto, addBackBoxphoto, setPrintingTotale, clearCart, changeBoxColor, selectBoxSleeveOption, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
+export const { changeAlbumQty, addFrontCoverphoto, selectCoverOption, addBackCoverphoto, addFrontBoxphoto, addBackBoxphoto, setPrintingTotale, clearCart, changeBoxColor, selectBoxSleeveOption, addphotoszip, changeOrderDetaildData, addOrderDetail, addCoverphoto, changePageCount, setTotale, changeSheet, changeOrientation, changeOrientationSize, changeCover, changePapertypeOption, changeBoxSleev, changeColor, selectProduct, changeOrderData, formBack, formNext, formError } = orderSlice.actions
 
 export default orderSlice.reducer
 
