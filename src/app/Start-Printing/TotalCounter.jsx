@@ -25,6 +25,7 @@ function TotalCounter() {
         boxSleeveValue,
         orderTotale,
         pritnig_price_value,
+        album_qty,
       },
     },
   } = useSelector((state) => state);
@@ -46,6 +47,7 @@ function TotalCounter() {
     boxSleeveValue,
     orderTotale,
     photoBookCopy,
+    album_qty,
   ]);
 
   return (

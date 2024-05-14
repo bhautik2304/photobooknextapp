@@ -52,6 +52,20 @@ function Checkout() {
     },
   } = useSelector((state) => state);
 
+  // useEffect(() => {
+  //   // dispatch(setPrintingTotale());
+  //   dispatch(setTotale());
+  // }, [
+  //   orderData.page_qty,
+  //   orderData.sheetValue,
+  //   orderData.paperValue,
+  //   orderData.coverValue,
+  //   orderData.boxSleeveValue,
+  //   orderData.orderTotale,
+  //   orderData.photoBookCopy,
+  //   orderData.album_qty,
+  // ]);
+
   const submitOrder = () => {
     setChackOutStatus(status.processingOrder);
 
@@ -231,7 +245,13 @@ function Checkout() {
   };
   return (
     <>
-      <main className="page-wrapper bg-primary">
+      <main
+        className="page-wrapper"
+        style={{
+          backgroundColor: "#e5e5e5",
+          //   backgroundImage: "linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)",
+        }}
+      >
         {/* <!-- Page content--> */}
         {/* <div className="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style={{ width:"52.5%" }}></div> */}
         <div className="container position-relative zindex-2 pt-0 pb-lg-5 pb-md-4 pb-2">
@@ -640,7 +660,10 @@ function Checkout() {
                                             speed={0}
                                             loop
                                             src={zipfile}
-                                            style={{ width: "200px" }}
+                                            style={{
+                                              width: "200px",
+                                              height: "135px",
+                                            }}
                                           ></Player>
                                           <div class="card-body">
                                             <h4 class="card-title">
@@ -706,7 +729,10 @@ function Checkout() {
                                             speed={0}
                                             loop
                                             src={link}
-                                            style={{ width: "200px" }}
+                                            style={{
+                                              width: "200px",
+                                              height: "135px",
+                                            }}
                                           ></Player>
                                           <div class="card-body">
                                             <h4 class="card-title">

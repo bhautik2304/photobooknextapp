@@ -85,6 +85,8 @@ function Sidebar() {
                     <a
                       className="nav-link py-2 px-0"
                       style={{ color: "#64748b" }}
+                      target="_blank"
+                      href="https://tawk.to/photokrafftsupport"
                     >
                       <i className="ai-chat fs-5 opacity-60 me-2"></i>
                       Chat
@@ -93,7 +95,8 @@ function Sidebar() {
                 ) : (
                   <>
                     <Link
-                      href={appRoutes.userProfileOrders}
+                      target="_blank"
+                      href="https://tawk.to/photokrafftsupport"
                       className="nav-link py-2 px-0"
                       style={{ color: "#64748b" }}
                     >

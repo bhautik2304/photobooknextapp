@@ -30,14 +30,15 @@ export default function RootLayout({ children }) {
         </Providers>
         {/* Vendor scripts and other scripts */}
         {/* <!-- Vendor scripts: js libraries and plugins--> */}
-        <Script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></Script>
-        <Script src="./assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></Script>
-        <Script src="./assets/vendor/parallax-js/dist/parallax.min.js"></Script>
-        <Script src="./assets/vendor/aos/dist/aos.js"></Script>
-        <Script src="./assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js"></Script>
-        <Script src="./assets/vendor/img-comparison-slider/dist/index.js"></Script>
-        <Script src="./assets/vendor/swiper/swiper-bundle.min.js"></Script>
-        <Script src="./assets/js/theme.js"></Script>
+        <Script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></Script>
+        <Script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></Script>
+        <Script src="/assets/vendor/parallax-js/dist/parallax.min.js"></Script>
+        <Script src="/assets/vendor/aos/dist/aos.js"></Script>
+        <Script src="/assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js"></Script>
+        <Script src="/assets/vendor/img-comparison-slider/dist/index.js"></Script>
+        <Script src="/assets/vendor/swiper/swiper-bundle.min.js"></Script>
+        <Script src="/assets/js/theme.js"></Script>
+        <Script src="/assets/js/chat.js"></Script>
       </body>
     </html>
   );

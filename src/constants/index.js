@@ -7,7 +7,7 @@ const serverApiDomain = 'https://api.photokrafft.com/api';
 
 export const appRoutes = {
     Home: '/',
-    Products: '/products',
+    Products: '/Products',
     AboutUS: '/About-US',
     Support: '/Faqs',
     StartPrinting: '/Start-Printing',

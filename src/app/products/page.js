@@ -6,145 +6,84 @@ export default function page() {
 
   return (
     <>
-      <section class="container pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 
-        <nav aria-label="breadcrumb">
-          <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Products</li>
-          </ol>
-        </nav>
+      <section class="">
+        <div class="container pt-5 pb-sm-3 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 
-        <h1 class="pb-5">Our Product Range</h1>
+          {/* <!-- Breadcrumb --> */}
+          <nav aria-label="breadcrumb">
+            <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Products</li>
+            </ol>
+          </nav>
 
-        {/* <!-- Item --> */}
-        <div class="row align-items-center pt-xl-2 pb-5 mb-lg-2 mb-xl-3 mb-xxl-4">
-          <div class="col-md-7 col-lg-6 mb-4 mb-md-0">
-            <a class="d-block position-relative" href="portfolio-single-v1.html">
-              <div class="rounded-5 position-absolute top-0 start-0 w-100 h-100" data-aos="zoom-in" data-aos-duration="600" data-aos-offset="250"></div>
-              <img class="d-block position-relative z-2 mx-auto" style={{ borderRadius: 10 }} src="images/ProductFlushMountAlbums.jpg" width="600" alt="Image" data-aos="fade-in" data-aos-duration="400" data-aos-offset="250" />
-            </a>
-          </div>
-          <div class="col-md-5 col-xl-4 offset-lg-1" data-aos="fade-up" data-aos-duration="400" data-aos-offset="170">
-            <div class="ps-md-3 ps-lg-0">
-              <img class="d-block d-dark-mode-none mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
-              <img class="d-none d-dark-mode-block mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
-              <h2 class="h4">Flush Mount Albums</h2>
-              <p class="fs-sm pb-3 pb-lg-4 mb-3">Flush mount albums are a beautiful way to preserve and showcase your cherished memories. Unlike traditional photo albums, flush mount albums feature pages that are thick and rigid, creating a seamless and elegant presentation of your photos. Here's some content about flush mount albums.</p>
-              <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/FlushMountAlbums`}>Get More Details</Link>
-              <Link class="btn btn-sm btn-outline-success rounded-pill mx-2" href={appRoutes.StartPrinting}>Order Now</Link>
-              <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
-                <div className="d-flex">
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3"
-                    href="https://www.facebook.com/photokrafft?mibextid=LQQJ4d"
-                  >
-                    <i className="ai-facebook"></i>
-                  </a>
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3"
-                    href="https://www.instagram.com/photokrafftofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                  >
-                    <i className="ai-instagram"></i>
-                  </a>
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle"
-                    href="https://www.linkedin.com/company/photokrafft/?originalSubdomain=in"
-                  >
-                    <i className="ai-linkedin"></i>
-                  </a>
-                </div>
+          {/* <!-- Page title --> */}
+          <h1 class="text-center pb-3 pb-md-4 pb-lg-5 mb-lg-0 mb-xl-2 mb-xxl-4">Our Products</h1>
+
+          {/* <!-- Item --> */}
+          <article class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
+            <div class="col-md-7 offset-xxl-1 mb-4 mb-md-0">
+              <Link href={`${appRoutes.Products}/FlushMountAlbums`}>
+                <img class="rounded-5" src="images/ProductFlushMountAlbums.jpg" width="700" alt="Image" />
+              </Link>
+            </div>
+            <div class="col-md-5 col-xl-4" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
+              <div class="ms-md-4 ms-lg-5 ms-xxl-0" style={{ maxWidth: 400 }}>
+                {/* <div class="text-body-secondary mb-2"><img class="d-block d-dark-mode-none mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
+                  <img class="d-none d-dark-mode-block mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" /></div> */}
+                <h2 class="mb-lg-4">
+                  <Link href={`${appRoutes.Products}/FlushMountAlbums`}>Flush Mount Albums</Link>
+                </h2>
+                <p class="mb-0 mb-md-1 mb-lg-3">Flush mount albums are a beautiful way to preserve and showcase your cherished memories. Unlike traditional photo albums, flush mount albums feature pages that are thick and rigid, creating a seamless and elegant presentation of your photos.</p>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/FlushMountAlbums`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-success rounded-pill mx-2" href={appRoutes.StartPrinting}>Order Now</Link>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row align-items-center pt-xl-2 pb-5 mb-lg-2 mb-xl-3 mb-xxl-4">
-          <div class="col-md-7 col-lg-6 mb-4 mb-md-0">
-            <a class="d-block position-relative" href="portfolio-single-v1.html">
-              <div class="rounded-5 position-absolute top-0 start-0 w-100 h-100" data-aos="zoom-in" data-aos-duration="600" data-aos-offset="250"></div>
-              <img class="d-block position-relative z-2 mx-auto" style={{ borderRadius: 10 }} src="images/ProductPhotobooks.jpg" width="600" alt="Image" data-aos="fade-in" data-aos-duration="400" data-aos-offset="250" />
-            </a>
-          </div>
-          <div class="col-md-5 col-xl-4 offset-lg-1" data-aos="fade-up" data-aos-duration="400" data-aos-offset="170">
-            <div class="ps-md-3 ps-lg-0">
-              <img class="d-block d-dark-mode-none mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
-              <img class="d-none d-dark-mode-block mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
-              <h2 class="h4">TruVib Photobooks</h2>
-              <p class="fs-sm pb-3 pb-lg-4 mb-3">Introducing TruVib Photobooks: Where True Vibrancy Meets Timeless Memories</p>
-              <p>
-                TruVib Photobooks are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion.
-              </p>
-              <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/TrueVibPhotobooks`}>Get More Details</Link>
-              <Link class="btn btn-sm btn-outline-success rounded-pill mx-2" href={appRoutes.StartPrinting}>Order Now</Link>
-              <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
-                <div className="d-flex">
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3"
-                    href="https://www.facebook.com/photokrafft?mibextid=LQQJ4d"
-                  >
-                    <i className="ai-facebook"></i>
-                  </a>
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3"
-                    href="https://www.instagram.com/photokrafftofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                  >
-                    <i className="ai-instagram"></i>
-                  </a>
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle"
-                    href="https://www.linkedin.com/company/photokrafft/?originalSubdomain=in"
-                  >
-                    <i className="ai-linkedin"></i>
-                  </a>
-                </div>
+          </article>
+
+          {/* <!-- Item --> */}
+          <article class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
+            <div class="col-md-7 order-md-2 mb-4 mb-md-0">
+              <Link href={`${appRoutes.Products}/TrueVibPhotobooks`}>
+                <img class="rounded-5" src="images/ProductPhotobooks.jpg" width="700" alt="Image" />
+              </Link>
+            </div>
+            <div class="col-md-5 col-xl-4 offset-xxl-1 order-md-1" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
+              <div class="me-md-4 me-lg-5 me-xxl-0" style={{ maxWidth: 400 }}>
+                {/* <div class="text-body-secondary mb-2">Branding</div> */}
+                <h2 class="mb-lg-4">
+                  <Link href={`${appRoutes.Products}/TrueVibPhotobooks`}>TruVib Photobooks</Link>
+                </h2>
+                <p class="mb-0 mb-md-1 mb-lg-3">TruVib Photobooks are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion.</p>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/TrueVibPhotobooks`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-success rounded-pill mx-2" href={appRoutes.StartPrinting}>Order Now</Link>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row align-items-center pt-xl-2 pb-5 mb-lg-2 mb-xl-3 mb-xxl-4">
-          <div class="col-md-7 col-lg-6 mb-4 mb-md-0">
-            <a class="d-block position-relative" href="portfolio-single-v1.html">
-              <div class="rounded-5 position-absolute top-0 start-0 w-100 h-100" data-aos="zoom-in" data-aos-duration="600" data-aos-offset="250"></div>
-              <img class="d-block position-relative z-2 mx-auto" style={{ borderRadius: 10 }} src="images/ProductKrafftbook.jpg" width="600" alt="Image" data-aos="fade-in" data-aos-duration="400" data-aos-offset="250" />
-            </a>
-          </div>
-          <div class="col-md-5 col-xl-4 offset-lg-1" data-aos="fade-up" data-aos-duration="400" data-aos-offset="170">
-            <div class="ps-md-3 ps-lg-0">
-              <img class="d-block d-dark-mode-none mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
-              <img class="d-none d-dark-mode-block mb-2 mb-lg-3" width={50} src="/images/loader.png" alt="photokrafft" />
-              <h2 class="h4">The Krafft Book</h2>
-              <p class="fs-sm pb-3 pb-lg-4 mb-3">"The Krafft Book" is an exquisite line of photobooks designed and crafted by Photokrafft, renowned for its elegance, quality, and innovation. Here's a description of "The Krafft Book".</p>
-              <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/TheKrafftBook`}>Get More Details</Link>
-              <Link class="btn btn-sm btn-outline-success rounded-pill mx-2" href={appRoutes.StartPrinting}>Order Now</Link>
-              <div class="d-flex align-items-center pt-2 pt-lg-3 mt-3">
-                <div className="d-flex">
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3"
-                    href="https://www.facebook.com/photokrafft?mibextid=LQQJ4d"
-                  >
-                    <i className="ai-facebook"></i>
-                  </a>
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3"
-                    href="https://www.instagram.com/photokrafftofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                  >
-                    <i className="ai-instagram"></i>
-                  </a>
-                  <a
-                    className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle"
-                    href="https://www.linkedin.com/company/photokrafft/?originalSubdomain=in"
-                  >
-                    <i className="ai-linkedin"></i>
-                  </a>
-                </div>
+          </article>
+
+          {/* <!-- Item --> */}
+          <article class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
+            <div class="col-md-7 offset-xxl-1 mb-4 mb-md-0">
+              <Link href={`${appRoutes.Products}/TheKrafftBook`}>
+                <img class="rounded-5" src="images/ProductKrafftbook.jpg" width="700" alt="Image" />
+              </Link>
+            </div>
+            <div class="col-md-5 col-xl-4" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
+              <div class="ms-md-4 ms-lg-5 ms-xxl-0" style={{ maxWidth: 400 }}>
+                {/* <div class="text-body-secondary mb-2">Identity, Packaging</div> */}
+                <h2 class="mb-lg-4"><Link href={`${appRoutes.Products}/TheKrafftBook`}>The Krafft Book</Link></h2>
+                <p class="mb-0 mb-md-1 mb-lg-3">"The Krafft Book" is an exquisite line of photobooks designed and crafted by Photokrafft, renowned for its elegance, quality, and innovation.</p>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/FlushMountAlbums`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-success rounded-pill mx-2" href={appRoutes.StartPrinting}>Order Now</Link>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </section>
       {/* <!-- Hero section --> */}
       <div class="bg-black py-4" data-bs-theme="dark">
-        <div class="container fs-lg text-white text-center">Our dedicated team of Photokrafft is prepared to assist you. <a class="text-white" href="https://wa.me/919227232123">Talk to our Customer Support</a></div>
+        <div class="container fs-lg text-white text-center">Our dedicated team of Photokrafft is prepared to assist you. <a class="text-white" href="https://tawk.to/photokrafftsupport" target="_blank">Talk to our Customer Support</a></div>
       </div>
     </>
   )

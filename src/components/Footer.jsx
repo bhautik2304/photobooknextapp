@@ -86,7 +86,11 @@ function Footer() {
                 <div className="col mb-4 mb-md-0">
                   <ul className="nav flex-column">
                     <li>
-                      <a className="nav-link fw-normal py-1 px-0" href="#">
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
+                        href="https://tawk.to/photokrafftsupport"
+                        target="_blank"
+                      >
                         Help center
                       </a>
                     </li>

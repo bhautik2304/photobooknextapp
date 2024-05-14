@@ -7,6 +7,7 @@ import {
   changeOrderData,
   changeAlbumQty,
   formError as fcm,
+  setTotale,
 } from "@/Redux/Slice/orderSlice";
 import axios from "axios";
 
@@ -76,15 +77,16 @@ function CheckOutItem({ back, submitOrder }) {
       const discount = user?.discount || 0;
       const paperValue = orderData?.paperValue || 0;
       const pageQty = orderData.page_qty || 0;
+      const album_qty = orderData.album_qty || 0;
       const photoBookCopy =
         zonePrice(product?.album_copy_price)?.price * orderData?.photoBookCopy;
       // Calculate the orderTotale without discount
       const orderTotaleWithoutDiscount =
-        orderData.boxSleeveValue +
-        orderData.coverValue +
-        (orderData.sheetValue * pageQty * paperValue) / 100 +
-        orderData.sheetValue * pageQty +
-        orderData.pritnigPriceTotalPageValue;
+        (orderData.boxSleeveValue +
+          orderData.coverValue +
+          (orderData.sheetValue * pageQty * paperValue) / 100 +
+          orderData.sheetValue * pageQty) *
+        album_qty;
 
       // Calculate the discount amount
       const discountAmount = Math.round(
@@ -114,14 +116,28 @@ function CheckOutItem({ back, submitOrder }) {
     orderData.page_qty,
     orderData?.paperValue,
   ]);
+
+  useEffect(() => {
+    // dispatch(setPrintingTotale());
+    dispatch(setTotale());
+  }, [
+    orderData.page_qty,
+    orderData.sheetValue,
+    orderData.paperValue,
+    orderData.coverValue,
+    orderData.boxSleeveValue,
+    orderData.orderTotale,
+    orderData.photoBookCopy,
+    orderData.album_qty,
+  ]);
+
   console.log(orderData);
   return (
     <>
-      {/* <!-- Order summary--> */}
       <div>
-        <div className="row  ">
+        <div className="row">
           <div className="d-flex justify-content-center aligns-item-center">
-            <div className="col-lg-9 col-md-8 col-sm-12 card">
+            <div className="col-lg-12 col-md-8 col-sm-12 card border-0">
               <div class="table-responsive p-3">
                 <h2 className="pb-2 pt-md-2">Order summary</h2>
                 <table
@@ -130,6 +146,22 @@ function CheckOutItem({ back, submitOrder }) {
                 >
                   <tbody>
                     {/* Product detaild */}
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Quantity
+                        </div>
+                      </td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        {/* <div class="fs-sm fw-medium text-dark">$16</div> */}
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        {/* <div class="fs-sm fw-medium text-dark">$16</div> */}
+                      </td>
+                    </tr>
                     <tr>
                       <td class="border-0 py-1 px-0">
                         <div class="d-flex align-items-center">
@@ -147,10 +179,57 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
-                          Quantity
+                        {/* <div class="fs-sm text-body-secondary mb-2">
+                          Sheet Quantity
+                        </div> */}
+                        <div class="fs-sm fw-medium text-dark">
+                          <div className="count-input ms-n3">
+                            <button
+                              className="btn btn-icon fs-xl pro"
+                              onClick={() => {
+                                if (orderData?.album_qty <= 1) {
+                                  dispatch(
+                                    fcm({
+                                      key: "album_qty",
+                                      error: `Minimum Album qty 1`,
+                                    })
+                                  );
+                                  return;
+                                }
+                                dispatch(
+                                  changeAlbumQty(orderData?.album_qty - 1)
+                                );
+                              }}
+                              type="button"
+                              data-decrement
+                            >
+                              -
+                            </button>
+                            <input
+                              className="form-control"
+                              type="number"
+                              value={orderData?.album_qty}
+                            />
+                            <button
+                              className="btn btn-icon fs-xl pro"
+                              type="button"
+                              onClick={() => {
+                                dispatch(
+                                  fcm({
+                                    key: "album_qty",
+                                    error: false,
+                                  })
+                                );
+                                dispatch(
+                                  changeAlbumQty(orderData?.album_qty + 1)
+                                );
+                              }}
+                              data-increment
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
-                        <div class="fs-sm fw-medium text-dark">1</div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                         {/* <div class="fs-sm text-body-secondary mb-2">Price</div>
@@ -191,13 +270,26 @@ function CheckOutItem({ back, submitOrder }) {
                                 {size?.size?.name}
                               </span>
                             </div>
+                            <div class="text-body-secondary fs-sm me-3">
+                              Papper Type :{" "}
+                              <span class="text-dark fw-medium">
+                                {papperType?.paper?.name} (+{" "}
+                                {papperType?.paper?.value} %)
+                              </span>
+                            </div>
+                            <div class="text-body-secondary fs-sm me-3">
+                              Sheet Price :{" "}
+                              <span class="text-dark fw-medium">
+                                {`${user?.zone?.currency_sign} ${orderData?.sheetValue} + ${papperType?.paper?.value} %`}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
+                        {/* <div class="fs-sm text-body-secondary mb-2">
                           Sheet Quantity
-                        </div>
+                        </div> */}
                         <div class="fs-sm fw-medium text-dark">
                           <div className="count-input ms-n3">
                             <button
@@ -240,74 +332,23 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        {/* <div class="fs-sm text-body-secondary mb-2">Price</div> */}
                         <div class="fs-sm fw-medium text-dark">
-                          {`${orderData?.sheetValue} ${user?.zone?.currency_sign}`}
+                          {user?.zone?.currency_sign}{" "}
+                          {(orderData?.sheetValue * orderData.paperValue) /
+                            100 +
+                            orderData?.sheetValue}{" "}
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        {/* <div class="fs-sm text-body-secondary mb-2">Total</div> */}
                         <div class="fs-sm fw-medium text-dark">
-                          {`${orderData?.page_qty * orderData?.sheetValue} ${
-                            user?.zone?.currency_sign
+                          {`${user?.zone?.currency_sign} ${
+                            ((orderData?.sheetValue * orderData.paperValue) /
+                              100 +
+                              orderData?.sheetValue) *
+                            orderData?.page_qty
                           }`}
-                        </div>
-                      </td>
-                    </tr>
-
-                    {/* product papper dtaild page */}
-                    <tr>
-                      <td class="border-0 py-1 px-0">
-                        <div class="d-flex align-items-center">
-                          <a
-                            class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-md-2 p-lg-3"
-                            href="#"
-                          >
-                            <img
-                              src={papperType?.paper?.img}
-                              width="110"
-                              alt="Product"
-                            />
-                          </a>
-                          <div class="ps-3 ps-sm-4">
-                            <h4 class="h6 mb-2">
-                              <a href="#">{papperType?.paper?.name}</a>
-                            </h4>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
-                          Sheet Total
-                        </div>
-                        <div class="fs-sm fw-medium text-dark">
-                          {zonePrice(thermelSheet?.sheetprice)?.price *
-                            orderData?.page_qty}{" "}
-                          + {papperType?.paper?.value} %
-                        </div>
-                      </td>
-                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
-                          Paper Price
-                        </div>
-                        <div class="fs-sm fw-medium text-dark">
-                          {((orderData?.sheetValue * orderData.paperValue) /
-                            100 +
-                            orderData?.sheetValue) *
-                            orderData?.page_qty -
-                            orderData?.sheetValue * orderData?.page_qty}{" "}
-                          {user?.zone?.currency_sign}
-                        </div>
-                      </td>
-                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Total</div>
-                        <div class="fs-sm fw-medium text-dark">
-                          {" "}
-                          {((orderData?.sheetValue * orderData.paperValue) /
-                            100 +
-                            orderData?.sheetValue) *
-                            orderData?.page_qty}{" "}
-                          {user?.zone?.currency_sign}
                         </div>
                       </td>
                     </tr>
@@ -350,19 +391,19 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
+                        {/* <div class="fs-sm text-body-secondary mb-2">
                           Quantity
-                        </div>
+                        </div> */}
                         <div class="fs-sm fw-medium text-dark">1</div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        {/* <div class="fs-sm text-body-secondary mb-2">Price</div> */}
                         <div class="fs-sm fw-medium text-dark">
                           {zonePrice(cover?.coverprice)?.priceSrring}
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        {/* <div class="fs-sm text-body-secondary mb-2">Total</div> */}
                         <div class="fs-sm fw-medium text-dark">
                           {zonePrice(cover?.coverprice)?.priceSrring}
                         </div>
@@ -409,17 +450,17 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
+                        {/* <div class="fs-sm text-body-secondary mb-2">
                           Quantity
-                        </div>
+                        </div> */}
                         <div class="fs-sm fw-medium text-dark">1</div>
                       </td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Price</div>
+                        {/* <div class="fs-sm text-body-secondary mb-2">Price</div> */}
                         <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData.boxSleeveValue}`}</div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">Total</div>
+                        {/* <div class="fs-sm text-body-secondary mb-2">Total</div> */}
                         <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData.boxSleeveValue}`}</div>
                       </td>
                     </tr>
@@ -461,17 +502,17 @@ function CheckOutItem({ back, submitOrder }) {
                           </div>
                         </td>
                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
+                          {/* <div class="fs-sm text-body-secondary mb-2">
                             Quantity
-                          </div>
+                          </div> */}
                           <div class="fs-sm fw-medium text-dark">
                             {orderData?.photoBookCopy}
                           </div>
                         </td>
                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
+                          {/* <div class="fs-sm text-body-secondary mb-2">
                             Price
-                          </div>
+                          </div> */}
                           <div class="fs-sm fw-medium text-dark">
                             {user?.zone?.currency_sign}{" "}
                             {orderData?.photoBookCopyPrice *
@@ -479,9 +520,9 @@ function CheckOutItem({ back, submitOrder }) {
                           </div>
                         </td>
                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
+                          {/* <div class="fs-sm text-body-secondary mb-2">
                             Total
-                          </div>
+                          </div> */}
                           <div class="fs-sm fw-medium text-dark">
                             {user?.zone?.currency_sign}{" "}
                             {zonePrice(product?.album_copy_price)?.price *
@@ -515,17 +556,17 @@ function CheckOutItem({ back, submitOrder }) {
                           </div>
                         </td>
                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
+                          {/* <div class="fs-sm text-body-secondary mb-2">
                             Quantity
-                          </div>
+                          </div> */}
                           <div class="fs-sm fw-medium text-dark">
                             {orderData?.page_qty}
                           </div>
                         </td>
                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
+                          {/* <div class="fs-sm text-body-secondary mb-2">
                             Price
-                          </div>
+                          </div> */}
                           <div class="fs-sm fw-medium text-dark">{`${
                             user?.zone?.currency_sign
                           } ${
@@ -533,9 +574,9 @@ function CheckOutItem({ back, submitOrder }) {
                           }`}</div>
                         </td>
                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
+                          {/* <div class="fs-sm text-body-secondary mb-2">
                             Total
-                          </div>
+                          </div> */}
                           <div class="fs-sm fw-medium text-dark">{`${
                             user?.zone?.currency_sign
                           } ${
@@ -546,13 +587,13 @@ function CheckOutItem({ back, submitOrder }) {
                     ) : null}
 
                     {/* product box & sleev detaild*/}
-                    <tr>
+                    {/* <tr>
                       <td class="border-0 pb-1 px-0"></td>
                       <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4"></td>
                       <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4"></td>
                       <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm fw-medium text-dark">
-                          <p>Total Album to print</p>
+                          <p>Total album to print</p>
                           <div className="count-input">
                             <button
                               className="btn btn-primary text-white btn-sm pro"
@@ -602,28 +643,19 @@ function CheckOutItem({ back, submitOrder }) {
                           <p className="text-danger">{formError?.album_qty}</p>
                         </div>
                       </td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <td class="border-0 py-1 px-0"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm text-body-secondary mb-2">
-                          Subtotal
+                          Album cost
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm fw-medium text-dark">
-                          {(orderData.boxSleeveValue +
-                            orderData.coverValue +
-                            ((orderData?.sheetValue * orderData.paperValue) /
-                              100 +
-                              orderData?.sheetValue) *
-                              orderData?.page_qty +
-                            orderData.pritnigPriceTotalPageValue) *
-                            orderData?.album_qty +
-                            orderData?.photoBookCopyPrice *
-                              orderData?.photoBookCopy}{" "}
-                          {user?.zone?.currency_sign}
+                          {`${user?.zone?.currency_sign} ${orderData.albumCost}
+                           `}
                         </div>
                       </td>
                     </tr>
@@ -634,24 +666,15 @@ function CheckOutItem({ back, submitOrder }) {
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                             <div class="fs-sm text-body-secondary mb-2">
-                              Discount {`( ${orderData?.discount}% )`}
+                              Per album discount {`( ${orderData?.discount}% )`}
                             </div>
                           </td>
                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                             <div class="fs-sm fw-medium text-danger">{`- ${
                               user?.zone?.currency_sign
-                            } ${
-                              orderData.boxSleeveValue +
-                              orderData.coverValue +
-                              ((orderData?.sheetValue * orderData.paperValue) /
-                                100 +
-                                orderData?.sheetValue) *
-                                orderData?.page_qty +
-                              orderData.pritnigPriceTotalPageValue +
-                              orderData?.photoBookCopyPrice *
-                                orderData?.photoBookCopy -
-                              Math.round(orderData?.orderTotale)
-                            }`}</div>
+                            } ${Math.round(
+                              orderData.albumDiscountAmountCost
+                            )} `}</div>
                           </td>
                         </tr>
                         <tr>
@@ -659,47 +682,64 @@ function CheckOutItem({ back, submitOrder }) {
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                             <div class="fs-sm text-body-secondary mb-2">
-                              After Discount Total
+                              After discount album cost
                             </div>
                           </td>
                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                             <div class="fs-sm fw-medium text-success">{`${
                               user?.zone?.currency_sign
-                            } ${Math.round(orderData?.orderTotale)}`}</div>
+                            } ${Math.round(
+                              orderData?.albumAfterDiscountCost
+                            )} `}</div>
                           </td>
                         </tr>
                       </>
                     ) : null}
-                    {/* {datas?.pritnig_price_type ==
-                                    "design_print_bind" ? (
-                                      <>
-                                        <tr>
-                                          <td class="border-0 py-1 px-0"></td>
-                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                            <div class="fs-sm text-body-secondary mb-2">
-                                              design print bind{" "}
-                                              {datas?.pritnig_price}
-                                            </div>
-                                          </td>
-                                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                            <div class="fs-sm fw-medium text-success">{`${
-                                             12
-                                            } ${
-                                              datas?.pritnig_price *
-                                              datas?.page_qty
-                                            }`}</div>
-                                          </td>
-                                        </tr>
-                                      </>
-                                    ) : null} */}
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Total album cost {`( ${orderData?.album_qty} )`}
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark">
+                          {`${user?.zone?.currency_sign} ${Math.round(
+                            orderData.totaleAlbumcost
+                          )}
+                           `}
+                        </div>
+                      </td>
+                    </tr>
+                    {orderData?.pritnig_price_type == "design_print_bind" ? (
+                      <>
+                        <tr>
+                          <td class="border-0 py-1 px-0"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm text-body-secondary mb-2">
+                              design print bind {orderData?.pritnig_price}
+                            </div>
+                          </td>
+                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm fw-medium">{`${
+                              user?.zone?.currency_sign
+                            } ${
+                              orderData?.pritnig_price_value *
+                              orderData?.page_qty
+                            } `}</div>
+                          </td>
+                        </tr>
+                      </>
+                    ) : null}
                     {Number(orderData.isPhotoBookCopy) ? (
                       <tr>
                         <td class="border-0 py-1 px-0"></td>
                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                           <div class="fs-sm text-body-secondary mb-2">
-                            Pocket book Copy
+                            Pocket book Copy {`( ${orderData?.photoBookCopy} )`}
                           </div>
                         </td>
                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
@@ -708,10 +748,25 @@ function CheckOutItem({ back, submitOrder }) {
                           } ${
                             orderData?.photoBookCopyPrice *
                             orderData?.photoBookCopy
-                          }`}</div>
+                          } `}</div>
                         </td>
                       </tr>
                     ) : null}
+                    <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Subtotal
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark">
+                          {`${user?.zone?.currency_sign}
+                           ${Math.round(orderData?.subtotale)}`}
+                        </div>
+                      </td>
+                    </tr>
                     <tr>
                       <td class="border-0 py-1 px-0"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
@@ -721,7 +776,7 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.shipingcharge} ${user?.zone?.currency_sign}`}</div>
+                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${user?.zone?.shipingcharge}`}</div>
                       </td>
                     </tr>
                     <tr>
@@ -732,8 +787,9 @@ function CheckOutItem({ back, submitOrder }) {
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm fw-medium text-dark">
-                          {orderData?.orderTotale + user?.zone?.shipingcharge}{" "}
-                          {user?.zone?.currency_sign}
+                          {`${user?.zone?.currency_sign} ${Math.round(
+                            orderData?.subtotale + user?.zone?.shipingcharge
+                          )}`}
                         </div>
                       </td>
                     </tr>

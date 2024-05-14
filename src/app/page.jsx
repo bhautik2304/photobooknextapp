@@ -38,7 +38,7 @@ export default function Home() {
           <div class="card p-5 main-section">
             <div class="row position-relative">
               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
-                <div class="intro-section p-5">
+                {/* <div class="intro-section p-5">
                   <div class="z-index-1 position-relative">
                     <h2>
                       Introducing Photokrafft : Elevating Vsual Experiences
@@ -51,10 +51,10 @@ export default function Home() {
                     </p>
                     <button class="primary-button">Start Printing</button>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12 p-5 z-index-1 position-relative">
-                <img src="/images/about.png" alt="about us" width="80%" />
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12 z-index-1 position-relative">
+                {/* <img src="/images/about.png" alt="about us" width="80%" /> */}
               </div>
               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12 text-center mb-5">
                 <div class="about-us-section p-5 mt-1">
@@ -74,7 +74,7 @@ export default function Home() {
                 </div>
               </div>
               <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-12"></div>
-              <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-12 mt-1">
+              <div class="col-xxl-5 col-xl-5 py-5 col-lg-5 col-md-5 col-12 mt-1">
                 <h2>
                   Welcome to <a href="">photokrafft.com</a>, Where Your Memories
                   Come to Life
@@ -91,15 +91,24 @@ export default function Home() {
           <section class="container py-5 mt-5 mb-xl-3 mb-xxl-5">
             <div class="row pt-2">
               {/* <!-- Text + CTA button --> */}
-              <div class="col-lg-6">
+              <div class="col-lg-12">
+                {/* <h2 className="mb-5">
+                  Happiness, Which Comes In All Shapes And Size,
+                  <br /> So Do Our Books.
+                </h2> */}
                 <div class="row row-cols-1 row-cols-sm-2 g-1">
                   {/* <!-- Card --> */}
                   <div class="col">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/2.jpg)" }}
+                          style={{
+                            height: 345,
+                            width: 630,
+                            borderRadius: 6,
+                            backgroundImage: "url(/images/2.jpg)",
+                          }}
                         >
                           <div
                             class="d-flex flex-column h-100"
@@ -131,11 +140,16 @@ export default function Home() {
 
                   {/* <!-- Card --> */}
                   <div class="col">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/5.jpg)" }}
+                          style={{
+                            height: 345,
+                            width: 630,
+                            borderRadius: 6,
+                            backgroundImage: "url(/images/5.jpg)",
+                          }}
                         >
                           <div
                             class="d-flex flex-column h-100"
@@ -167,11 +181,16 @@ export default function Home() {
 
                   {/* <!-- Card --> */}
                   <div class="col order-sm-2">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/7.jpg)" }}
+                          style={{
+                            height: 345,
+                            width: 630,
+                            borderRadius: 6,
+                            backgroundImage: "url(/images/7.jpg)",
+                          }}
                         >
                           {/* <div
                             class="d-flex flex-column h-100"
@@ -203,11 +222,16 @@ export default function Home() {
 
                   {/* <!-- Card --> */}
                   <div class="col order-sm-1">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/3.jpg)" }}
+                          style={{
+                            height: 345,
+                            width: 630,
+                            borderRadius: 6,
+                            backgroundImage: "url(/images/3.jpg)",
+                          }}
                         >
                           {/* <div
                             class="d-flex flex-column h-100"
@@ -241,24 +265,24 @@ export default function Home() {
                 </div>
               </div>
               {/* <!-- Services (Grid of cards) --> */}
-              <div class="col-lg-6">
+              {/* <div class="col-lg-6">
                 <div class="row row-cols-1 row-cols-sm-2 g-1">
-                  {/* <!-- Card --> */}
+                  <!-- Card -->
                   <div class="col">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/2.jpg)" }}
                         >
-                          {/* <div
+                          <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Strategy
                             </h2>
-                          </div> */}
+                          </div>
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -279,20 +303,20 @@ export default function Home() {
                     </a>
                   </div>
 
-                  {/* <!-- Card --> */}
+                  <!-- Card -->
                   <div class="col">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/5.jpg)" }}
                         >
-                          {/* <div
+                          <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">Social</h2>
-                          </div> */}
+                          </div>
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -315,22 +339,22 @@ export default function Home() {
                     </a>
                   </div>
 
-                  {/* <!-- Card --> */}
+                  <!-- Card -->
                   <div class="col order-sm-2">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/7.jpg)" }}
                         >
-                          {/* <div
+                          <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Web design
                             </h2>
-                          </div> */}
+                          </div>
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -351,22 +375,22 @@ export default function Home() {
                     </a>
                   </div>
 
-                  {/* <!-- Card --> */}
+                  <!-- Card -->
                   <div class="col order-sm-1">
-                    <a class="card-flip" href="#">
+                    <a class="card" href="#">
                       <div class="card-flip-inner">
                         <div
                           class="card-flip-front"
                           style={{ backgroundImage: "url(/images/3.jpg)" }}
                         >
-                          {/* <div
+                          <div
                             class="d-flex flex-column h-100"
                             data-bs-theme="light"
                           >
                             <h2 class="fs-lg fw-normal mb-0 mt-auto">
                               Branding
                             </h2>
-                          </div> */}
+                          </div>
                         </div>
                         <div class="card-flip-back bg-secondary">
                           <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
@@ -389,12 +413,13 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </section>
         </section>
 
-        {/* <section class="container my-5">
+        {/* 
+        <section class="container my-5">
           <div class="row align-items-center">
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
               <img src="images/intro.jpg" alt="photography" class="w-100" />
@@ -711,7 +736,7 @@ export default function Home() {
                         aria-expanded="true"
                         aria-controls="questionOne"
                       >
-                        Q. How do I order an album online?
+                        Q. How many times can I revise the design?
                       </button>
                     </h3>
                     <div
@@ -721,12 +746,12 @@ export default function Home() {
                       data-bs-parent="#faq"
                     >
                       <div className="accordion-body fs-sm">
-                        Adipiscing sagittis neque egestas id platea accumsan.
-                        Morbi inpa platea urna curabitur habitant pulvinar
-                        lacinia neque. Netus gravida amet, aliquam quam turpis
-                        aliquet cras. Find aute irure dolor in reprehenderit
-                        voluptate velit esse cillum dolore eu nulla pariatur.
-                        Sit amet, adipiscing elit.
+                        We provide two rounds of complimentary consolidated
+                        feedback to review the book designs. Once we have shared
+                        the first review, you can send us layout specific
+                        corrections as comments. We will make the changes and
+                        share the second review. Any further changes beyond 3rd
+                        review onwards, will be charged per layout basis.
                       </div>
                     </div>
                   </div>
@@ -740,7 +765,8 @@ export default function Home() {
                         aria-expanded="false"
                         aria-controls="questionTwo"
                       >
-                        Q. What paper surfaces are available at the lab?
+                        Q. Can you do only the design and let me print
+                        elsewhere?
                       </button>
                     </h3>
                     <div
@@ -750,12 +776,10 @@ export default function Home() {
                       data-bs-parent="#faq"
                     >
                       <div className="accordion-body fs-sm">
-                        Quisque rutrum sit amet magna sit amet tristique.
-                        Vivamus rhoncus ac purus vitae convallis. Aliquam erat
-                        volutpat. Proin egestas, mauris ut semper semper, ipsum
-                        felis mattis ligula, et porttitor ante arcu nec ante.
-                        Aliquam congue est eu turpis sollicitudin, et
-                        ullamcorper tortor aliquam.
+                        Yes, we can definitely design your album and you are
+                        free to choose the printer of your choice. The design
+                        services for such orders are treated as Custom Design
+                        and will be billed accordingly.
                       </div>
                     </div>
                   </div>
@@ -769,7 +793,8 @@ export default function Home() {
                         aria-expanded="false"
                         aria-controls="questionThree"
                       >
-                        Q. What is the turn around time for an album?
+                        Q. How many images can an album accommodate, does it
+                        change with the size?
                       </button>
                     </h3>
                     <div
@@ -779,12 +804,15 @@ export default function Home() {
                       data-bs-parent="#faq"
                     >
                       <div className="accordion-body fs-sm">
-                        Proin ac quam eget velit luctus tincidunt vel in nunc.
-                        Maecenas cursus erat lacus, id interdum elit accumsan
-                        in. Mauris placerat dapibus sem, condimentum interdum
-                        nulla varius ac. Mauris quam mauris, rhoncus et tortor
-                        vel, tempus dignissim libero. Curabitur sed odio in odio
-                        elementum cursus.
+                        The size of the book does not really affect the number
+                        of images that the book can hold. It is the design that
+                        dictates the number of images that a book will contain.
+                        We generally recommend to add 5-6 images per layout or
+                        100-120 images for a 20 layout/spread or a 40
+                        sides/pages book. We usually do not recommend adding
+                        more images as this can make the design look cluttered.
+                        In case you would like to add more images, you can
+                        definitely increase the number of layouts in the album
                       </div>
                     </div>
                   </div>
@@ -798,7 +826,13 @@ export default function Home() {
             <h2 className="text-white">
               Need to counsult about your product needs
             </h2>
-            <button class="secondary-button">Chat Now</button>
+            <a
+              target="_blank"
+              href="https://tawk.to/photokrafftsupport"
+              class="secondary-button"
+            >
+              Chat Now
+            </a>
           </div>
         </footer>
       </section>

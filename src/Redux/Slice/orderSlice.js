@@ -51,11 +51,14 @@ const orderDataScemma = {
   paperValue: 0,
   coverValue: 0,
   boxSleeveValue: 0,
-  orderTotale: 0,
   shippingcost: 0,
   discount: 0,
   orderDiscountAmount: 0,
   orderAfterDiscount: 0,
+  albumCost: 0,
+  albumDiscountAmountCost: 0,
+  albumAfterDiscountCost: 0,
+  orderTotale: 0,
 
   isSample: false,
   isPhotoBookCopy: false,
@@ -184,7 +187,13 @@ const orderSlice = createSlice({
       let paperTotale = ((state.orderData.sheetValue * state.orderData.paperValue / 100) + state.orderData.sheetValue) * state.orderData.page_qty
       let coverTotale = state.orderData.coverValue
       let boxSleevTotale = state.orderData.boxSleeveValue
+      let perAlbumCost = paperTotale + coverTotale + boxSleevTotale
+      state.orderData.albumCost = perAlbumCost
+      state.orderData.albumDiscountAmountCost = ((perAlbumCost * state.orderData.discount) / 100)
+      state.orderData.albumAfterDiscountCost = perAlbumCost - ((perAlbumCost * state.orderData.discount) / 100)
+      let albumTotalCost = state.orderData.totaleAlbumcost = state.orderData.albumAfterDiscountCost * state.orderData.album_qty
       // let photoBookCopy = state.orderData.photoBookCopyPrice * state.orderData.photoBookCopy;
+      state.orderData.subtotale = albumTotalCost + (state.orderData?.pritnig_price_value * state.orderData?.page_qty) + (state.orderData?.photoBookCopyPrice * state.orderData?.photoBookCopy)
       state.orderData.orderTotale = (paperTotale + coverTotale + boxSleevTotale) * state.orderData.album_qty
     },
     setPrintingTotale: (state, action) => {
@@ -234,7 +243,7 @@ const orderSlice = createSlice({
     },
     clearCart: (state, action) => {
       state.orderData = orderDataScemma;
-      state.formStep = 0;
+      state.formStep = productFormStep.product;
       state.formError = errorSchima;
       state.product = {};
       state.productSize = [];
