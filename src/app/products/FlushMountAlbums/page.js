@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { appRoutes } from "@/constants"
+import Slider from './Slider'
 function page() {
     return (
         <>
@@ -18,7 +19,7 @@ function page() {
                     </nav>
 
                     <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
-                        <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="/images/ProductFlushMountAlbums.jpg" width="550" alt="Image" />
+                        <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="/images/ProductFlushMountAlbums.svg" width="550" alt="Image" />
                         <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
                             <h1 class="display-2 text-uppercase pb-3 pb-lg-4">Flush Mount Albums</h1>
                             <p class="fs-lg mx-auto mx-lg-0 mb-0" style={{ maxWidth: "530px" }}>Flush mount albums are a beautiful way to preserve and showcase your cherished memories. Unlike traditional photo albums, flush mount albums feature pages that are thick and rigid, creating a seamless and elegant presentation of your photos. Here's some content about flush mount albums.</p>
@@ -46,6 +47,7 @@ function page() {
                     </div>
                 </div>
             </section>
+            {/* <Slider /> */}
             <section class="container pt-lg-2 pt-xl-4 pt-xxl-5">
                 <div class="row py-sm-3 py-md-4 py-lg-5">
                     <div class="col-md-9 offset-lg-1">

@@ -13,12 +13,12 @@ function page() {
                         <ol class="pt-lg-2 pb-1 breadcrumb">
                             <li class="breadcrumb-item"><Link href="/">Home</Link></li>
                             <li class="breadcrumb-item"><Link href={appRoutes.Products}>Products</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Flush Mount Albums</li>
+                            <li class="breadcrumb-item active" aria-current="page">TruVib Photobooks</li>
                         </ol>
                     </nav>
 
                     <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
-                        <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="/images/ProductPhotobooks.jpg" width="550" alt="Image" />
+                        <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="/images/ProductPhotobooks.svg" width="550" alt="Image" />
                         <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
                             <h1 class="display-2 text-uppercase pb-3 pb-lg-4">TruVib Photobooks
                             </h1>

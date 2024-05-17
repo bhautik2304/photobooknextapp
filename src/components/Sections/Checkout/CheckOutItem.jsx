@@ -515,8 +515,7 @@ function CheckOutItem({ back, submitOrder }) {
                           </div> */}
                           <div class="fs-sm fw-medium text-dark">
                             {user?.zone?.currency_sign}{" "}
-                            {orderData?.photoBookCopyPrice *
-                              orderData?.photoBookCopy}{" "}
+                            {orderData?.photoBookCopyPrice}{" "}
                           </div>
                         </td>
                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
@@ -567,11 +566,7 @@ function CheckOutItem({ back, submitOrder }) {
                           {/* <div class="fs-sm text-body-secondary mb-2">
                             Price
                           </div> */}
-                          <div class="fs-sm fw-medium text-dark">{`${
-                            user?.zone?.currency_sign
-                          } ${
-                            orderData?.page_qty * orderData?.pritnig_price_value
-                          }`}</div>
+                          <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData?.pritnig_price_value}`}</div>
                         </td>
                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                           {/* <div class="fs-sm text-body-secondary mb-2">
@@ -719,7 +714,7 @@ function CheckOutItem({ back, submitOrder }) {
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                           <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                             <div class="fs-sm text-body-secondary mb-2">
-                              design print bind {orderData?.pritnig_price}
+                              Design charges {orderData?.pritnig_price}
                             </div>
                           </td>
                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
