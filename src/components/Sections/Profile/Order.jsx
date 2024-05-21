@@ -121,13 +121,16 @@ function Order() {
                       </Link>
                     </div>
                   </div>
-                  <Player
-                    autoplay
-                    speed={0}
-                    loop
-                    src={loader}
-                    style={{ height: "250px", width: "250px" }}
-                  ></Player>
+                  <center className="my-5">
+                    <img src="/images/loader.png" height={60} width={60} />
+                  </center>
+                  {/* <Player
+                      autoplay
+                      speed={0}
+                      loop
+                      src={loader}
+                      style={{ height: "250px", width: "250px" }}
+                    ></Player> */}
                   <center>
                     <div class="alert alert-danger" role="alert">
                       Loading....
@@ -960,14 +963,17 @@ function Order() {
                   </>
                 ) : (
                   <>
-                    <Player
+                    <center className="my-5">
+                      <img src="/images/loader.png" height={60} width={60} />
+                    </center>
+                    {/* <Player
                       autoplay
                       speed={0}
                       loop
                       src={loader}
                       style={{ height: "250px", width: "250px" }}
-                    ></Player>
-                    <center>
+                    ></Player> */}
+                    <center className="my-5">
                       <div class="alert alert-danger" role="alert">
                         No Orders Found
                       </div>

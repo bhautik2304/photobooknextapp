@@ -1,25 +1,26 @@
 "use client";
-import React, { useEffect } from 'react'
-import Link from "next/link"
-import { RegisterForm } from '@/components'
-import { appRoutes, localstorageKey } from '@/constants'
-import { redirect } from 'next/navigation'
-import { isLocalStorageAvailable } from '@/utils'
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { RegisterForm } from "@/components";
+import { appRoutes, localstorageKey } from "@/constants";
+import { redirect } from "next/navigation";
+import { isLocalStorageAvailable } from "@/utils";
 function page() {
-  const authStatus = isLocalStorageAvailable() ? localStorage.getItem(localstorageKey.authStatus) : null
+  const authStatus = isLocalStorageAvailable()
+    ? localStorage.getItem(localstorageKey.authStatus)
+    : null;
 
   useEffect(() => {
     if (authStatus == "true") {
-      redirect(appRoutes.Home)
+      redirect(appRoutes.Home);
     }
-  }, [authStatus])
+  }, [authStatus]);
   return (
     <>
       <main
         className="page-wrapper"
         style={{
-          backgroundColor: "#80d0c7",
-          backgroundImage: "linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)",
+          backgroundColor: "#e5e5e5",
         }}
       >
         {/* <!-- Page content--> */}
@@ -32,10 +33,7 @@ function page() {
               <div className="col-md-8 col-xl-8 col-sm-12 card signin-signup-card-padding">
                 <div className="ps-md-3 ps-lg-5 ps-xl-0 ps-sm-0">
                   <RegisterForm />
-                  <Link
-                    href={appRoutes.Login}
-                    className="link"
-                  >
+                  <Link href={appRoutes.Login} className="link">
                     If you already have an account with us please login here.
                   </Link>
                 </div>

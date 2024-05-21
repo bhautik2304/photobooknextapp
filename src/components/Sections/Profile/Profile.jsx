@@ -127,6 +127,17 @@ function Profile() {
                     />
                   </div>
                 </div>
+                <div className="col-12 mb-2">
+                  <h6 className="mt-3">GST Number</h6>
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    onChange={(e) => setData({ ...data, gst: e.target.value })}
+                    value={data?.gst}
+                    placeholder="GST Number"
+                    required
+                  />
+                </div>
               </div>
             </div>
             <div className="alert alert-success d-flex mb-0" role="alert">
@@ -135,7 +146,7 @@ function Profile() {
                 Fill in the information 100% correct to receive quality service.
               </div>
             </div>
-            <div className="col-12">
+            {/* <div className="col-12">
               <button
                 className="btn btn-primary btn-sm mt-3"
                 onClick={() => console.log(data)}
@@ -143,7 +154,7 @@ function Profile() {
               >
                 Save changes
               </button>
-            </div>
+            </div> */}
           </div>
         </section>
         <div className="row g-4 mb-4">

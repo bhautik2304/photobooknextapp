@@ -14,651 +14,267 @@ import { VscWorkspaceTrusted } from "react-icons/vsc";
 import axios from "axios";
 import { landscape, portrait, square } from "@/assets/img";
 import LoginButton from "./LoginButton";
+import Script from "next/script";
+
+const homeHeroCard = [
+  {
+    title: "Flush Mount Album ",
+    img: "images/homebancard/FlushMountAlbum.jpg",
+    link: appRoutes.Products,
+  },
+  {
+    title: "True HD Photo Books",
+    img: "images/homebancard/TrueHDPhotoBooks.jpg",
+    link: appRoutes.Products,
+  },
+  {
+    title: "The Krafft Book",
+    img: "images/homebancard/ProductKrafftbook.svg",
+    link: appRoutes.Products,
+  },
+  {
+    title: "Baby Books",
+    img: "images/homebancard/BabyBooks.jpg",
+    link: appRoutes.Products,
+  },
+];
 
 export default function Home() {
   return (
     <>
-      <section>
-        <section class="hero">
-          <video autoPlay loop muted className="hero-video">
-            <source src="/photokrafft_banner_video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="overlay"></div>
-          <div class="hero-content">
-            <h1 className="text-white">Your album printing starts here.</h1>
-            <p>
-              Photokrafft has been at the forefront of graphic design and album
-              manufacturing, shaping visual narratives that
-            </p>
-            <button class="primary-button">Start Printing</button>
+      {/* <!-- Hero --> */}
+      <section class="bg-white py-5 mb-5">
+        <div class="container text-center pt-5 mt-lg-4 mt-xl-5">
+          <div
+            class="position-relative mx-auto my-3"
+            style={{ maxWidth: "850px" }}
+          >
+            <h1 class="display-5 position-relative z-2 mb-0">
+              Begin your album printing
+              <br /> journey here.
+            </h1>
           </div>
-        </section>
-        <section class="container">
-          <div class="card p-5 main-section">
-            <div class="row position-relative">
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
-                {/* <div class="intro-section p-5">
-                  <div class="z-index-1 position-relative">
-                    <h2>
-                      Introducing Photokrafft : Elevating Vsual Experiences
-                      Globally
-                    </h2>
-                    <p>
-                      Established in 2007 in the vibrant landscape of India,
-                      Photokarfft has been at te forefront of graphic design and
-                      album manufacturing
-                    </p>
-                    <button class="primary-button">Start Printing</button>
-                  </div>
-                </div> */}
-              </div>
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12 z-index-1 position-relative">
-                {/* <img src="/images/about.png" alt="about us" width="80%" /> */}
-              </div>
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12 text-center mb-5">
-                <div class="about-us-section p-5 mt-1">
-                  <div>
-                    <h2 className="text-white">
-                      The Ultimate Store for Exquisite Photo Album
-                    </h2>
-                    <p>
-                      Hundreds of options to choose for your perfect print and
-                      bind.
-                    </p>
-                  </div>
-                  <div class="card p-4">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <p class="d-block mt-2">30+ Types of cover option!!</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-12"></div>
-              <div class="col-xxl-5 col-xl-5 py-5 col-lg-5 col-md-5 col-12 mt-1">
-                <h2>
-                  Welcome to <a href="">photokrafft.com</a>, Where Your Memories
-                  Come to Life
-                </h2>
-                <p>
-                  Potokrafft has been at the forefront of graphic design and
-                  album manufacturing.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="container mt-5 d-none d-lg-block d-md-block">
-          <section class="container py-5 mt-5 mb-xl-3 mb-xxl-5">
-            <div class="row pt-2">
-              {/* <!-- Text + CTA button --> */}
-              <div class="col-lg-12">
-                {/* <h2 className="mb-5">
-                  Happiness, Which Comes In All Shapes And Size,
-                  <br /> So Do Our Books.
-                </h2> */}
-                <div class="row row-cols-1 row-cols-sm-2 g-1">
-                  {/* <!-- Card --> */}
-                  <div class="col">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{
-                            height: 345,
-                            width: 630,
-                            borderRadius: 6,
-                            backgroundImage: "url(/images/2.jpg)",
-                          }}
-                        >
-                          <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">
-                              Strategy
-                            </h2>
-                          </div>
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Strategy</h3>
-                            <p class="text-body mb-3">
-                              Leo vitae sem eget eget at in vivamus placerat in
-                              sodales tristique a risusiis senectusic vitae sem
-                              eget eget at in vivamus placerat in sodales.
-                            </p>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+          <Link
+            class="btn btn-lg btn-primary rounded-pill"
+            href={appRoutes.StartPrinting}
+          >
+            Start Printing
+          </Link>
+        </div>
+      </section>
 
-                  {/* <!-- Card --> */}
-                  <div class="col">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{
-                            height: 345,
-                            width: 630,
-                            borderRadius: 6,
-                            backgroundImage: "url(/images/5.jpg)",
-                          }}
-                        >
-                          <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">Social</h2>
-                          </div>
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Social</h3>
-                            <ul class="text-body ps-4 mb-3">
-                              <li class="mb-2">Social media posts</li>
-                              <li class="mb-2">Content plan</li>
-                              <li class="mb-2">Advertising launch</li>
-                              <li class="mb-2">Photo and video content</li>
-                              <li class="mb-1">Cases and portfolio</li>
-                            </ul>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  {/* <!-- Card --> */}
-                  <div class="col order-sm-2">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{
-                            height: 345,
-                            width: 630,
-                            borderRadius: 6,
-                            backgroundImage: "url(/images/7.jpg)",
-                          }}
-                        >
-                          {/* <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">
-                              Web design
-                            </h2>
-                          </div> */}
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Web design</h3>
-                            <p class="text-body mb-3">
-                              Pharetra in morbi quis is massa maecenas arcu
-                              vulputate in pulvinar elit non nullage a, duis
-                              tortor mi massa ipsum in eu eu eget libero.
-                            </p>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  {/* <!-- Card --> */}
-                  <div class="col order-sm-1">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{
-                            height: 345,
-                            width: 630,
-                            borderRadius: 6,
-                            backgroundImage: "url(/images/3.jpg)",
-                          }}
-                        >
-                          {/* <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">
-                              Branding
-                            </h2>
-                          </div> */}
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Branding</h3>
-                            <ul class="text-body ps-4 mb-3">
-                              <li class="mb-2">Identity design</li>
-                              <li class="mb-2">Brand book creation</li>
-                              <li class="mb-2">Colors and fonts</li>
-                              <li class="mb-2">Banners and covers</li>
-                              <li class="mb-1">Visual style</li>
-                            </ul>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              {/* <!-- Services (Grid of cards) --> */}
-              {/* <div class="col-lg-6">
-                <div class="row row-cols-1 row-cols-sm-2 g-1">
-                  <!-- Card -->
-                  <div class="col">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/2.jpg)" }}
-                        >
-                          <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">
-                              Strategy
-                            </h2>
-                          </div>
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Strategy</h3>
-                            <p class="text-body mb-3">
-                              Leo vitae sem eget eget at in vivamus placerat in
-                              sodales tristique a risusiis senectusic vitae sem
-                              eget eget at in vivamus placerat in sodales.
-                            </p>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card -->
-                  <div class="col">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/5.jpg)" }}
-                        >
-                          <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">Social</h2>
-                          </div>
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Social</h3>
-                            <ul class="text-body ps-4 mb-3">
-                              <li class="mb-2">Social media posts</li>
-                              <li class="mb-2">Content plan</li>
-                              <li class="mb-2">Advertising launch</li>
-                              <li class="mb-2">Photo and video content</li>
-                              <li class="mb-1">Cases and portfolio</li>
-                            </ul>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card -->
-                  <div class="col order-sm-2">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/7.jpg)" }}
-                        >
-                          <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">
-                              Web design
-                            </h2>
-                          </div>
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Web design</h3>
-                            <p class="text-body mb-3">
-                              Pharetra in morbi quis is massa maecenas arcu
-                              vulputate in pulvinar elit non nullage a, duis
-                              tortor mi massa ipsum in eu eu eget libero.
-                            </p>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <!-- Card -->
-                  <div class="col order-sm-1">
-                    <a class="card" href="#">
-                      <div class="card-flip-inner">
-                        <div
-                          class="card-flip-front"
-                          style={{ backgroundImage: "url(/images/3.jpg)" }}
-                        >
-                          <div
-                            class="d-flex flex-column h-100"
-                            data-bs-theme="light"
-                          >
-                            <h2 class="fs-lg fw-normal mb-0 mt-auto">
-                              Branding
-                            </h2>
-                          </div>
-                        </div>
-                        <div class="card-flip-back bg-secondary">
-                          <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                            <h3 class="h4">Branding</h3>
-                            <ul class="text-body ps-4 mb-3">
-                              <li class="mb-2">Identity design</li>
-                              <li class="mb-2">Brand book creation</li>
-                              <li class="mb-2">Colors and fonts</li>
-                              <li class="mb-2">Banners and covers</li>
-                              <li class="mb-1">Visual style</li>
-                            </ul>
-                            <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                              <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle">
-                                <i class="ai-arrow-right"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-            </div>
-          </section>
-        </section>
-
-        {/* 
-        <section class="container my-5">
-          <div class="row align-items-center">
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
-              <img src="images/intro.jpg" alt="photography" class="w-100" />
-            </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
-              <div class="card p-5">
-                <h2>You Design we Print and Bind</h2>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id
-                  maiores soluta qui ducimus magnam quos unde et repudiandae
-                  molestias, nulla cupiditate necessitatibus nobis, iure
-                  blanditiis inventore. Soluta hic dolores sit.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-                  aperiam sunt, omnis alias sequi
-                </p>
-                <div class="mt-3">
-                  <a href="" class="third-button">
-                    Start Printing Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-         */}
-        <div className="container">
-          <div className="d-flex justify-content-center aligns-item-center">
-            <div className="p-5">
-              <p>What Photokrafft provides you ?</p>
-              <h2>
-                Happiness, Which Comes In All Shapes And Size,
-                <br /> So Do Our Books.
-              </h2>
-              <p>
-                Experience the power of creativity with Photokrafft. Let’s
-                embark on a journey of visual storytelling together, with our
-                verity of product range you can choose one of the product to
-                start with
-              </p>
-              <div className="row my-5">
-                <div className="col-lg-4 col-md-3 col-sm-12">
-                  <Link
-                    href={appRoutes.StartPrinting}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Image width={300} src={square} alt="" srcset="" />
-                    <h6 className="my-3">Square</h6>
-                  </Link>
-                </div>
-                <div className="col-lg-4 col-md-3 col-sm-12">
-                  <Link
-                    href={appRoutes.StartPrinting}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Image width={300} src={landscape} alt="" srcset="" />
-                    <h6 className="my-3">Landscape</h6>
-                  </Link>
-                </div>
-                <div className="col-lg-4 col-md-3 col-sm-12">
-                  <Link
-                    href={appRoutes.StartPrinting}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Image width={300} src={portrait} alt="" srcset="" />
-                    <h6 className="my-3">Portrait</h6>
-                  </Link>
-                </div>
-              </div>
-
-              <Link
-                href={appRoutes.StartPrinting}
-                className="nav-link text-success mb-4 mt-5 d-flex align-center"
-                style={{ fontSize: 18 }}
+      <section class="container mt-n3 mt-sm-0 pb-5 mt-5">
+        <div class="row g-4 pb-2 pb-md-4">
+          {homeHeroCard.map((data) => (
+            <div class="col-md-3">
+              {/* <!-- Card --> */}
+              <div
+                class="card zoom-effect h-100 border-0 overflow-hidden "
+                style={{ minHeight: "600px", borderRadius: "20px" }}
               >
-                Sart your printing journey with us{" "}
-                <FaArrowRightLong size={20} style={{ marginLeft: 10 }} />
-              </Link>
+                <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+                <div class="zoom-effect-wrapper rounded-1 position-absolute top-0 start-0 w-100 h-100">
+                  <div
+                    class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
+                    style={{
+                      // height: 900,
+                      backgroundImage: `url(${data.img})`,
+                    }}
+                  ></div>
+                </div>
+                <center>
+                  <Link
+                    class="card-body d-flex flex-column justify-content-end position-absolute top-0 start-0 w-100 h-100 text-decoration-none z-3"
+                    href={data.link}
+                  >
+                    <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
+                      {data.title}
+                    </span>
+                  </Link>
+                </center>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="bg-white">
+        <div
+          class="container"
+          style={{ position: "relative", textAlign: "center" }}
+        >
+          <img
+            src="/images/AllAlbums.png"
+            style={{ width: "100%", borderRadius: 20 }}
+            className="mb-4"
+            alt=""
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1,
+              maxWidth: "850px",
+              width: "100%",
+            }}
+          >
+            <h1 class="display-6 mb-4">
+              Begin your album printing
+              <br /> journey here.
+            </h1>
+            <Link
+              class="text-primary rounded-pill"
+              href={appRoutes.StartPrinting}
+            >
+              Start Printing <i class="ai-arrow-right fs-lg text-success"></i>
+            </Link>
+          </div>
+        </div>
+      </section>
+      {/* <section class="container mt-n3 mt-sm-0 pb-5 mt-5"></section> */}
+      {/* <section class="container mt-n3 mt-sm-0 pb-5 mt-5"></section> */}
+      <section class="container mt-n3 mt-sm-0 pb-5 mt-5">
+        <div class="row g-4 pb-2 pb-md-4">
+          <div class="col-md-4">
+            {/* <!-- Card --> */}
+            <div
+              class="card zoom-effect h-100 border-0 overflow-hidden "
+              style={{ minHeight: "450px", borderRadius: "20px" }}
+            >
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+              <div class="zoom-effect-wrapper rounded-1 position-absolute top-0 start-0 w-100 h-100">
+                <div
+                  class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
+                  style={{
+                    // height: 900,
+                    backgroundImage: `url(images/ProductPhotobooks.svg)`,
+                  }}
+                ></div>
+              </div>
+              <center>
+                <Link
+                  class="card-body d-flex flex-column justify-content-end position-absolute top-0 start-0 w-100 h-100 text-decoration-none z-3"
+                  href={appRoutes.Products}
+                >
+                  <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
+                    Presentation Boxes & Sleeves
+                  </span>
+                </Link>
+              </center>
+            </div>
+          </div>
+          <div class="col-md-4">
+            {/* <!-- Card --> */}
+            <div
+              class="card zoom-effect h-100 border-0 overflow-hidden p-5"
+              style={{ minHeight: "450px", borderRadius: "20px" }}
+            >
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+              <div className="my-5">
+                <h3>
+                  Hundreds of options to choose for your perfect print and bind.
+                </h3>
+                <Link href={appRoutes.StartPrinting}>
+                  <i
+                    class="ai-arrow-right pro"
+                    style={{
+                      fontSize: 70,
+                    }}
+                  ></i>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            {/* <!-- Card --> */}
+            <div
+              class="card zoom-effect h-100 border-0 overflow-hidden "
+              style={{ minHeight: "450px", borderRadius: "20px" }}
+            >
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+              <div class="zoom-effect-wrapper rounded-1 position-absolute top-0 start-0 w-100 h-100">
+                <div
+                  class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
+                  style={{
+                    // height: 900,
+                    backgroundImage: `url(images/Thickness_AcrylicCoverBrown_2.jpg)`,
+                  }}
+                ></div>
+              </div>
+              <center>
+                <Link
+                  class="card-body d-flex flex-column justify-content-end position-absolute top-0 start-0 w-100 h-100 text-decoration-none z-3"
+                  href={appRoutes.Products}
+                >
+                  <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
+                    Flush Mount Binding
+                  </span>
+                </Link>
+              </center>
+            </div>
+          </div>
+          <div class="col-md-8">
+            {/* <!-- Card --> */}
+            <div
+              class="card zoom-effect h-100 border-0 overflow-hidden "
+              style={{ minHeight: "450px", borderRadius: "20px" }}
+            >
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+              <div class="zoom-effect-wrapper rounded-1 position-absolute top-0 start-0 w-100 h-100">
+                <div
+                  class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
+                  style={{
+                    // height: 900,
+                    backgroundImage: `url(images/Thickness_AcrylicCoverBrown_2.jpg)`,
+                  }}
+                ></div>
+              </div>
+              <center>
+                <Link
+                  class="card-body d-flex flex-column justify-content-end position-absolute top-0 start-0 w-100 h-100 text-decoration-none z-3"
+                  href={appRoutes.Products}
+                >
+                  <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
+                    Flush Mount Binding
+                  </span>
+                </Link>
+              </center>
+            </div>
+          </div>
+          <div class="col-md-4">
+            {/* <!-- Card --> */}
+            <div
+              class="card zoom-effect h-100 border-0 overflow-hidden "
+              style={{ minHeight: "450px", borderRadius: "20px" }}
+            >
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+              <div class="zoom-effect-wrapper rounded-1 position-absolute top-0 start-0 w-100 h-100">
+                <div
+                  class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
+                  style={{
+                    // height: 900,
+                    backgroundImage: `url(images/progressive_v_cut.jpg)`,
+                  }}
+                ></div>
+              </div>
+              <center>
+                <Link
+                  class="card-body d-flex flex-column justify-content-end position-absolute top-0 start-0 w-100 h-100 text-decoration-none z-3"
+                  href={appRoutes.Products}
+                >
+                  <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
+                    Progressive V Cut
+                  </span>
+                </Link>
+              </center>
             </div>
           </div>
         </div>
-        <div className="container">
-          <section className="overflow-hidden">
-            <div className="container pb-5 pt-3 pt-md-4 pt-lg-5 my-xl-3 my-xxl-5">
-              <div className="row pb-md-3 pb-lg-4 mb-2 mb-lg-3">
-                {/* <!-- CEO quote--> */}
-                <div className="col-md-5 d-flex align-items-center mb-md-0">
-                  <div>
-                    <div
-                      className="position-relative"
-                      style={{ maxWidth: "416px" }}
-                    >
-                      <img
-                        className="d-block position-relative zindex-2"
-                        src="/assets/img/logo.png"
-                        alt="Nicolas Black"
-                      />
-                      <div
-                        className="position-absolute start-0 bottom-0 w-100"
-                        style={{
-                          height: "85.4%",
-                          borderRadius: "2.25rem 8rem 2.25rem 2.25rem",
-                        }}
-                      ></div>
-                    </div>
-                    <div className="text-center text-md-start pt-3 mt-3">
-                      <h2 className="mb-2">Parth Shah</h2>
-                      <p className="fs-xl text-muted mb-2">
-                        CEO Photokrafft.com
-                      </p>
-                      <div
-                        className="position-relative pt-4"
-                        style={{ maxWidth: "500px" }}
-                      >
-                        <div className="position-absolute top-0 start-0 w-100 text-center text-md-start ms-md-1">
-                          <svg
-                            className="text-border"
-                            width="155"
-                            height="111"
-                            viewBox="0 0 155 111"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M125.969 38.7937C129.372 30.2345 134.734 21.7781 141.902 13.6311C144.17 11.053 144.48 7.34066 142.623 4.45316C141.18 2.18441 138.808 0.94696 136.23 0.94696C135.508 0.94696 134.786 0.99826 134.064 1.25633C118.905 5.69065 83.4811 21.4171 82.5014 71.8454C82.1407 91.2842 96.3717 107.99 114.883 109.898C125.144 110.93 135.353 107.578 142.933 100.772C150.512 93.914 154.844 84.117 154.844 73.9077C154.844 56.8922 142.778 41.9905 125.969 38.7937Z"></path>
-                            <path d="M32.5904 109.898C42.7999 110.93 53.0092 107.578 60.5888 100.772C68.1686 93.914 72.5 84.117 72.5 73.9077C72.5 56.8922 60.4342 41.9905 43.6248 38.7937C47.0281 30.2345 52.3905 21.7781 59.5578 13.6312C61.8265 11.0531 62.1359 7.34071 60.2794 4.45321C58.8358 2.18446 56.4638 0.947006 53.8857 0.947006C53.1641 0.947006 52.4421 0.998306 51.7202 1.25638C36.5608 5.6907 1.13734 21.4172 0.157654 71.8454V72.5671C0.157654 91.6968 14.2341 107.99 32.5904 109.898Z"></path>
-                          </svg>
-                        </div>
-                        <p className="fs-xl position-relative zindex-2 mb-0">
-                          The main task of our organization is{" "}
-                          <strong>
-                            to assess the state of your enterprise now and how
-                            you can achieve your goals.
-                          </strong>{" "}
-                          Self-assessment of current activities and review of
-                          processes formulate decisions to achieve the desired
-                          outcome.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- Steps--> */}
-                <div className="col-md-7 col-lg-6 col-xxl-5 offset-lg-1 offset-xxl-2">
-                  <div className="ps-md-4 ps-lg-0">
-                    <div
-                      className="position-relative d-flex justify-content-end"
-                      data-aos="fade-left"
-                      data-aos-easing="ease-out-back"
-                    >
-                      <div className="btn btn-lg btn-icon btn-primary fs-xl fw-bold rounded-circle position-absolute top-50 start-0 translate-middle-y zindex-2 pe-none">
-                        01
-                      </div>
-                      <div
-                        className="card border-0 ps-3"
-                        style={{ width: "calc(100% - 1.75rem)" }}
-                      >
-                        <div className="card-body ps-4">
-                          <h3 className="h5 card-title pb-2 mb-1">
-                            Create an account with us
-                          </h3>
-                          <p className="card-text">
-                            Create an account with us by clicking on signup
-                            button and add your company details during the
-                            signup process
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="position-relative d-flex justify-content-end"
-                      data-aos="fade-left"
-                      data-aos-easing="ease-out-back"
-                      data-aos-delay="250"
-                    >
-                      <div className="btn btn-lg btn-icon btn-primary fs-xl fw-bold rounded-circle position-absolute top-50 start-0 translate-middle-y zindex-2 pe-none">
-                        02
-                      </div>
-                      <div
-                        className="card border-0 ps-3"
-                        style={{ width: "calc(100% - 1.75rem)" }}
-                      >
-                        <div className="card-body ps-4">
-                          <h3 className="h5 card-title pb-2 mb-1">
-                            Login to your dashboard
-                          </h3>
-                          <p className="card-text">
-                            We will evaluate your new account request and
-                            profile before accepting the request, ones you
-                            receive the approval mail you can login and go to
-                            your dashboard and can start the order
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="position-relative d-flex justify-content-end"
-                      data-aos="fade-left"
-                      data-aos-easing="ease-out-back"
-                      data-aos-delay="500"
-                    >
-                      <div className="btn btn-lg btn-icon btn-primary fs-xl fw-bold rounded-circle position-absolute top-50 start-0 translate-middle-y zindex-2 pe-none">
-                        03
-                      </div>
-                      <div
-                        className="card border-0 ps-3"
-                        style={{ width: "calc(100% - 1.75rem)" }}
-                      >
-                        <div className="card-body ps-4">
-                          <h3 className="h5 card-title pb-2 mb-1">
-                            Select product and start order journey
-                          </h3>
-                          <p className="card-text">
-                            After you get your approval for your account you can
-                            start ordering by clicking on the start printing
-                            button and process the order as per your
-                            requirements
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    {/* <div className="position-relative d-flex justify-content-end my-3" data-aos="fade-left" data-aos-easing="ease-out-back" data-aos-delay="700">
-                    <div className="btn btn-lg btn-icon btn-primary fs-xl fw-bold rounded-circle position-absolute top-50 start-0 translate-middle-y zindex-2 pe-none">04</div>
-                    <div className="card border-0 ps-3" style={{ width: 'calc(100% - 1.75rem)' }}>
-                      <div className="card-body ps-4">
-                        <h3 className="h5 card-title pb-2 mb-1">Upload your memories and just click send to print</h3>
-                        <p className="card-text">Elementum purus, nisl ipsum sit. Amet sit praesent proin sit cras. Leo sed praesent nunc  vel nec risus.</p>
-                      </div>
-                    </div>
-                  </div> */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+      </section>
 
-        {/* <Testymonial /> */}
-
+      <section>
         {/* <!-- FAQ (Accordion)--> */}
         <section className="bg-body py-5">
           <div className="container py-md-2 py-lg-3 py-xl-5 my-2 my-sm-3 my-md-4 my-xxl-5">
@@ -836,6 +452,12 @@ export default function Home() {
           </div>
         </footer>
       </section>
+      <Script src="assets/vendor/jarallax/dist/jarallax.min.js"></Script>
+      <Script src="assets/vendor/swiper/swiper-bundle.min.js"></Script>
+      <Script src="assets/vendor/lightgallery/lightgallery.min.js"></Script>
+      <Script src="assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></Script>
+      <Script src="assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></Script>
+      <Script src="assets/js/theme.min.js"></Script>
     </>
   );
 }

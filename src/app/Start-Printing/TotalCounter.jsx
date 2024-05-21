@@ -57,13 +57,13 @@ function TotalCounter() {
           <div className="col-md-8 noothing d-none d-lg-block">
             <div className="w-100 d-flex justify-content-end aligns-item-center mb-3">
               <button
-                className="btn btn-warning btn-sm mx-2"
+                className="btn btn-primary btn-sm mx-2"
                 style={{ fontSize: 18, fontWeight: "bold" }}
               >{`Design cost : ${pritnig_price_value * page_qty} ${
                 user?.zone?.currency_sign
               }`}</button>
               <button
-                className="btn btn-danger btn-sm"
+                className="btn btn-success btn-sm"
                 style={{ fontSize: 18, fontWeight: "bold" }}
               >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</button>
             </div>

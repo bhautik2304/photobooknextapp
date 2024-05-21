@@ -95,7 +95,7 @@ function Navbar() {
   }, []);
   return (
     <div>
-      <header className="navbar navbar-expand-lg bg-light">
+      <header className="navbar navbar-expand-lg bg-light shadow-sm">
         <div className="container">
           <Link href="/" className="navbar-brand">
             <img
@@ -184,7 +184,7 @@ function Navbar() {
                   Products
                 </Link>
               </li>
-              <li
+              {/* <li
                 className={`nav-item ${
                   pathname == appRoutes.services && "active"
                 }`}
@@ -192,14 +192,14 @@ function Navbar() {
                 <Link href={appRoutes.services} className="nav-link">
                   Services
                 </Link>
-              </li>
+              </li> */}
               <li
                 className={`nav-item ${
                   pathname == appRoutes.AboutUS && "active"
                 }`}
               >
                 <Link href={appRoutes.AboutUS} className="nav-link">
-                  About US
+                  About us
                 </Link>
               </li>
               <li
@@ -217,7 +217,7 @@ function Navbar() {
                 }`}
               >
                 <Link href={appRoutes.StartPrinting} className="nav-link">
-                  Order Now
+                  Order now
                 </Link>
               </li>
             </ul>

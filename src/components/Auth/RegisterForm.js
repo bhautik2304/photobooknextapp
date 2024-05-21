@@ -62,6 +62,7 @@ function RegisterForm() {
     logo: "",
     social1: "",
     social2: "",
+    gst: "",
   });
   const [status, setStatus] = useState(false);
   const [mobile, setMobile] = useState(false);
@@ -135,6 +136,7 @@ function RegisterForm() {
     formData.append("city", data.city);
     formData.append("state", data.state);
     formData.append("country", data.country);
+    formData.append("gst", data.gst);
 
     formData.append("compunys_name", data.company);
     formData.append("compunys_logo", data.logo);
@@ -396,6 +398,27 @@ function RegisterForm() {
                 <hr />
               </div>
 
+              {
+                data.country == "India" && (
+                  <>
+                    <h6 classNameName="">GST Number</h6>
+                    <div className="col-12 mb-2">
+                      <input
+                        className="form-control form-control-lg"
+                        onChange={(e) =>
+                          setData({ ...data, gst: e.target.value })
+                        }
+                        placeholder="GST if applicable"
+                        required
+                      />
+                    </div>
+                    <div className="my-4 px-5">
+                      <hr />
+                    </div>
+                  </>
+                )
+              }
+
               <h6 classNameName="">Social Information</h6>
               <div className="password-toggle mb-2">
                 <span className="text-danger">{error?.socialLinkTwo}</span>
@@ -405,7 +428,7 @@ function RegisterForm() {
                     setData({ ...data, social1: e.target.value })
                   }
                   type="text"
-                  placeholder="Social Profile Link *"
+                  placeholder="Social Profile Link"
                   required
                 />
               </div>
@@ -417,7 +440,7 @@ function RegisterForm() {
                     setData({ ...data, social2: e.target.value })
                   }
                   type="text"
-                  placeholder="Social Profile Link *"
+                  placeholder="Social Profile Link"
                   required
                 />
               </div>

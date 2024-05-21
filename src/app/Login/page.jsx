@@ -19,8 +19,7 @@ function page() {
       <main
         className="page-wrapper"
         style={{
-          backgroundColor: "#80d0c7",
-          backgroundImage: "linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)",
+          backgroundColor: "#e5e5e5",
         }}
       >
         {/* <!-- Page content--> */}

@@ -1,11 +1,7 @@
 export const metadata = {
-  title: 'Photokraft - Profile',
-}
+  title: "Photokrafft - Profile",
+};
 
 export default function RootLayout({ children }) {
-  return (
-    <>  
-            {children}
-    </>
-  )
+  return <>{children}</>;
 }

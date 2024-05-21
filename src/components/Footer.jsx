@@ -62,7 +62,7 @@ function Footer() {
                         className="nav-link fw-normal py-1 px-0"
                         href={appRoutes.AboutUS}
                       >
-                        About US
+                        About us
                       </a>
                     </li>
                     <li>
@@ -78,7 +78,7 @@ function Footer() {
                         className="nav-link fw-normal py-1 px-0"
                         href={appRoutes.StartPrinting}
                       >
-                        Order Now
+                        Order now
                       </a>
                     </li>
                   </ul>

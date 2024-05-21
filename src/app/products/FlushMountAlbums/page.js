@@ -5,10 +5,10 @@ import Slider from './Slider'
 function page() {
     return (
         <>
-            <section class="position-relative pt-5 mb-5">
+            <section class="bg-secondary position-relative py-5 mb-5">
                 <div class="bg-secondary position-absolute top-0 end-0 w-50 h-100 d-none d-lg-block"></div>
                 <div class="bg-secondary position-absolute top-0 end-0 w-100 h-100 d-lg-none"></div>
-                <div class="container position-relative z-2 py-5 pb-lg-0">
+                <div class="bg-secondary container position-relative z-2 py-5 pb-lg-0">
 
                     <nav aria-label="breadcrumb">
                         <ol class="pt-lg-2 pb-1 breadcrumb">
