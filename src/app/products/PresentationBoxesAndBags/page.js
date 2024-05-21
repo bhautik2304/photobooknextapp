@@ -78,8 +78,7 @@ function page() {
                                 keepsake.
                             </p>
                             <h3 class="h3 pt-3 pt-sm-4 pt-xl-5 pb-2">Customizable
-                                Opti
-                                ons</h3>
+                                Options</h3>
                             <p class="fs-lg">Personalize your presentation boxes and sleeves with custom text, logos, or designs.
                                 Make your packaging as unique as the memories it holds.
                             </p>
