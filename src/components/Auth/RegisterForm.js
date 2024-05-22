@@ -483,7 +483,7 @@ function RegisterForm() {
                 review , please wait for approval
               </div>
               <div class="alert alert-primary" role="alert">
-                We have sent a verification email , please verify it
+                We have sent a verification email , please verify it or contact us for verification.
               </div>
             </center>
             <center>

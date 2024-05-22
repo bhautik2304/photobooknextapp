@@ -548,7 +548,7 @@ function CheckOutItem({ back, submitOrder }) {
                             </a>
                             <div class="ps-3 ps-sm-4">
                               <h4 class="h6 mb-2">
-                                <a href="#">Design + Print + Bind</a>
+                                <a href="#">Design charges</a>
                               </h4>
                               {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
                             </div>

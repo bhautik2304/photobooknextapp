@@ -267,7 +267,7 @@ function Order() {
                                     <div class="fs-sm fw-medium text-dark">{`${
                                       datas?.countryzone?.currency_sign
                                     } ${Math.round(
-                                      datas?.subtotale + datas?.shippingValue
+                                      datas?.order_total + datas?.shippingValue
                                     )}`}</div>
                                   </div>
                                 </div>
@@ -670,9 +670,7 @@ function Order() {
                                               </a>
                                               <div class="ps-3 ps-sm-4">
                                                 <h4 class="h6 mb-2">
-                                                  <a href="#">
-                                                    Design + Print + Bind
-                                                  </a>
+                                                  <a href="#">Design charges</a>
                                                 </h4>
                                                 {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
                                               </div>
@@ -774,7 +772,7 @@ function Order() {
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                               <div class="fs-sm text-body-secondary mb-2">
-                                                {`design print bind ( ${datas?.countryzone?.currency_sign} ${datas?.pritnig_price} )`}
+                                                {`Design charges ( ${datas?.countryzone?.currency_sign} ${datas?.pritnig_price} )`}
                                               </div>
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
@@ -820,7 +818,7 @@ function Order() {
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
                                           } ${Math.round(
-                                            datas?.subtotale
+                                            datas?.order_total
                                           )}`}</div>
                                         </td>
                                       </tr>
@@ -848,7 +846,7 @@ function Order() {
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
                                           } ${Math.round(
-                                            datas?.subtotale +
+                                            datas?.order_total +
                                               datas?.shippingValue
                                           )}`}</div>
                                         </td>
