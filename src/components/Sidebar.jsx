@@ -80,7 +80,7 @@ function Sidebar() {
                     </Link>
                   </>
                 )}
-                {path == appRoutes.userProfileOrders ? (
+                {/* {path == appRoutes.userProfileOrders ? (
                   <>
                     <a
                       className="nav-link py-2 px-0"
@@ -104,7 +104,7 @@ function Sidebar() {
                       Chat
                     </Link>
                   </>
-                )}
+                )} */}
               </nav>
               <nav className="nav flex-column">
                 <a className="nav-link py-2 px-0" style={{ color: "#64748b" }}>

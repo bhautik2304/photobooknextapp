@@ -199,7 +199,7 @@ function Navbar() {
                 }`}
               >
                 <Link href={appRoutes.AboutUS} className="nav-link">
-                  About us
+                  About Us
                 </Link>
               </li>
               <li
@@ -208,7 +208,7 @@ function Navbar() {
                 }`}
               >
                 <Link href={appRoutes.Support} className="nav-link">
-                  Faqs
+                  FAQ
                 </Link>
               </li>
               <li
@@ -217,7 +217,7 @@ function Navbar() {
                 }`}
               >
                 <Link href={appRoutes.StartPrinting} className="nav-link">
-                  Order now
+                  Order Now
                 </Link>
               </li>
             </ul>

@@ -184,7 +184,7 @@ function RegisterForm() {
                         style={{ width: '100%' }}
                         className="form-control form-control-lg"
                         onCountryChange={(E) => {
-                          console.log(getCountryCallingCode(E));
+                          // console.log(getCountryCallingCode(E));
                           setData({ ...data, mobaile_code: getCountryCallingCode(E) })
                         }}
                         placeholder="Your Mobile No *"
@@ -216,7 +216,7 @@ function RegisterForm() {
                         style={{ width: '100%' }}
                         className="form-control form-control-lg"
                         onCountryChange={(E) => {
-                          console.log(getCountryCallingCode(E));
+                          // console.log(getCountryCallingCode(E));
                           setData({ ...data, whatsapp_no_code: getCountryCallingCode(E) })
                         }}
                         placeholder="Your Mobile No *"
@@ -237,7 +237,7 @@ function RegisterForm() {
                           }
                           value={data.whatsapp_no}
                           type="number"
-                          placeholder="Whatsapp No. For Order Notifications"
+                          placeholder="Whatsapp No."
                           required
                         />
                         <label
@@ -251,7 +251,7 @@ function RegisterForm() {
                           />
                           <Tooltip title="Copy Your Mobile Number">
                             <IconButton aria-label="" disabled={nowahtapp} onClick={() => {
-                              setData({ ...data, whatsapp_no: data.mobaile })
+                              setData({ ...data, whatsapp_no: mobaile })
                             }}>
                               <FaClipboard />
                             </IconButton>
@@ -379,7 +379,7 @@ function RegisterForm() {
                 <div className="col mb-2">
                   <span className="text-danger">{error?.country}</span>
                   <select
-                    className="form-control form-control-lg"
+                    className="form-select form-select-lg"
                     onChange={(e) =>
                       setData({ ...data, country: e.target.value })
                     }

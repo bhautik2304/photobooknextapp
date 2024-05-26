@@ -19,12 +19,12 @@ import Script from "next/script";
 const homeHeroCard = [
   {
     title: "Flush Mount Album ",
-    img: "images/homebancard/FlushMountAlbum.jpg",
+    img: "images/3D_AcrylicCoverBrown.svg",
     link: appRoutes.Products,
   },
   {
-    title: "True HD Photo Books",
-    img: "images/homebancard/TrueHDPhotoBooks.jpg",
+    title: "TrueHD Photo Books",
+    img: "/images/slider/TrueHDPhotobooks/JT8A5088_2.jpg",
     link: appRoutes.Products,
   },
   {
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section class="bg-white">
+      <section class="bg-white d-none d-lg-block">
         <div
           class="container"
           style={{ position: "relative", textAlign: "center" }}
@@ -121,8 +121,9 @@ export default function Home() {
             }}
           >
             <h1 class="display-6 mb-4">
-              Begin your album printing
-              <br /> journey here.
+              Creativity Beyond Your Imagination,
+              <br /> Quality Beyond Your <br />
+              Expectation!!!
             </h1>
             <Link
               class="text-primary rounded-pill"
@@ -167,25 +168,30 @@ export default function Home() {
           </div>
           <div class="col-md-4">
             {/* <!-- Card --> */}
-            <div
-              class="card zoom-effect h-100 border-0 overflow-hidden p-5"
-              style={{ minHeight: "450px", borderRadius: "20px" }}
+            <Link
+              href={appRoutes.StartPrinting}
+              className="pro"
+              style={{ textDecoration: "none" }}
             >
-              <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
-              <div className="my-5">
-                <h3>
-                  Hundreds of options to choose for your perfect print and bind.
-                </h3>
-                <Link href={appRoutes.StartPrinting}>
+              <div
+                class="card zoom-effect h-100 border-0 overflow-hidden p-5"
+                style={{ minHeight: "450px", borderRadius: "20px" }}
+              >
+                <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
+                <div className="my-5">
+                  <h3>
+                    Hundreds of options to choose for your perfect print and
+                    bind.
+                  </h3>
                   <i
                     class="ai-arrow-right pro"
                     style={{
                       fontSize: 70,
                     }}
                   ></i>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div class="col-md-4">
             {/* <!-- Card --> */}
@@ -227,7 +233,7 @@ export default function Home() {
                   class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
                   style={{
                     // height: 900,
-                    backgroundImage: `url(images/Thickness_AcrylicCoverBrown_2.jpg)`,
+                    backgroundImage: `url(images/JT8A4839.jpg)`,
                   }}
                 ></div>
               </div>
@@ -237,7 +243,7 @@ export default function Home() {
                   href={appRoutes.Products}
                 >
                   <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
-                    Flush Mount Binding
+                    TrueHD Photo Books
                   </span>
                 </Link>
               </center>
@@ -296,10 +302,31 @@ export default function Home() {
                   </div>
                   <div className="col-10">
                     <div>
-                      <a href="tel:+919227232123">
-                        <h6 className="m-0">+91 9227 232 123</h6>
+                      <a href="tel:+919227094949">
+                        <h6 className="m-0">+91-92270 94949</h6>
                       </a>
-                      <p className="text-muted">Support Hotline</p>
+                      <p className="text-muted">India Support</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="row col-12">
+                  <div className="col-2">
+                    <IoIosCall
+                      size={50}
+                      color="#5BB5A2"
+                      style={{
+                        backgroundColor: "#E8F2EE",
+                        padding: 10,
+                        borderRadius: 50,
+                      }}
+                    />
+                  </div>
+                  <div className="col-10">
+                    <div>
+                      <a href="tel:+19054525252">
+                        <h6 className="m-0">+1-905 452 5252</h6>
+                      </a>
+                      <p className="text-muted">North America Support</p>
                     </div>
                   </div>
                 </div>
@@ -317,8 +344,8 @@ export default function Home() {
                   </div>
                   <div className="col-10">
                     <div>
-                      <a href="mailto:support@photokrafft.com">
-                        <h6 className="m-0">support@photokrafft.com</h6>
+                      <a href="mailto:info@photokrafft.com">
+                        <h6 className="m-0">info@photokrafft.com</h6>
                       </a>
                       <p className="text-muted">Support Email</p>
                     </div>
@@ -440,7 +467,7 @@ export default function Home() {
         <footer>
           <div class="d-flex justify-content-between align-items-center px-5 py-4">
             <h2 className="text-white">
-              Need to counsult about your product needs
+              Need to consult about your product needs
             </h2>
             <a
               target="_blank"

@@ -1,5 +1,6 @@
 import { appRoutes } from "@/constants";
 import React from "react";
+import { IoIosCall, IoMdMailUnread } from "react-icons/io";
 
 function Footer() {
   return (
@@ -106,12 +107,38 @@ function Footer() {
                     </li>
                   </ul>
                 </div>
-                <div className="col"></div>
+                {/* <div className="col">
+                  <ul className="nav flex-column">
+                    <li>
+                      <h6 className="m-0">Contact Support</h6>
+                    </li>
+                    <li>
+                      <a href="tel:+919227094949">
+                        <h6 className="m-0">+91-92270 94949</h6>
+                        <div>
+                          <p className="text-muted">India Support</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="tel:+19054525252">
+                        <h6 className="m-0">+1-905 452 5252</h6>
+                      </a>
+                      <p className="text-muted">North America Support</p>
+                    </li>
+                    <li>
+                      <a href="mailto:info@photokrafft.com">
+                        <h6 className="m-0">info@photokrafft.com</h6>
+                      </a>
+                      <p className="text-muted">Support Email</p>
+                    </li>
+                  </ul>
+                </div> */}
               </div>
             </div>
           </div>
           <p className="fs-sm mb-0">
-            <span className="opacity-70">&copy; All rights reserved. by </span>
+            <span className="opacity-70">&copy; All rights reserved by </span>
             <a
               className="nav-link d-inline fw-normal p-0"
               href="/"

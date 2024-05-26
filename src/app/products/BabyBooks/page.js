@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import { appRoutes } from "@/constants"
+import Slider from './Slider'
+
 function page() {
     return (
         <>
@@ -18,7 +20,9 @@ function page() {
                     </nav>
 
                     <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
-                        <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="/images/babybookDetaild.svg" width="550" alt="Image" />
+                        <div class="d-block order-lg-2 me-auto me-lg-0 ms-auto" style={{ width: 550, height: "100%", backgroundColor: 'transparent' }}>
+                            <Slider />
+                        </div>
                         <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
                             <h1 class="display-2 text-uppercase pb-3 pb-lg-4">Baby Books
                             </h1>
