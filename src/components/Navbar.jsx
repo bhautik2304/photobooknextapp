@@ -216,7 +216,10 @@ function Navbar() {
                   pathname == appRoutes.StartPrinting && "active"
                 }`}
               >
-                <Link href={appRoutes.StartPrinting} className="nav-link">
+                <Link
+                  href={appRoutes.StartPrinting}
+                  className="nav-link link-sm border-lg rounded"
+                >
                   Order Now
                 </Link>
               </li>

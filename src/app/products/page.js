@@ -3,6 +3,11 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { appRoutes } from "@/constants"
 
+export const metadata = {
+  title: "Photokrafft - Products",
+  description: "Begin your album printing journey here.",
+};
+
 export default function page() {
 
   return (
