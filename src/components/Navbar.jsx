@@ -219,6 +219,9 @@ function Navbar() {
                 <Link
                   href={appRoutes.StartPrinting}
                   className="nav-link link-sm border-lg rounded"
+                  style={{
+                    borderColor: "#5bb5a2 !important",
+                  }}
                 >
                   Order Now
                 </Link>
