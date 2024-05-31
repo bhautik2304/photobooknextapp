@@ -17,12 +17,12 @@ const homeHeroCard = [
     album is effortless, offering convenience and peace
     of mind every step of the way."`,
     img: "images/design.JPG",
-    link: appRoutes.Products,
+    link: "#",
   },
   {
     title: "Printing",
     img: "/images/babybook.JPG",
-    link: appRoutes.Products,
+    link: "#",
     content: `"Experience the benefits of our state-of-the-art printing technology, delivering
 vivid and lifelike reproduction of your cherished photos. With meticulous
 attention to detail, we ensure your memories are preserved in stunning clarity,
@@ -34,7 +34,7 @@ finishes, and quantities, all effortlessly customizable to suit your preferences
   {
     title: "Binding",
     img: "/images/ThickWhiteSheet.jpg",
-    link: appRoutes.Products,
+    link: "#",
     content: `Photo album binding offers various methods, each
     with unique benefits. Photo album binding is
     important because it significantly enhances the
