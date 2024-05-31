@@ -73,16 +73,16 @@ export default function page() {
           }} class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5 pt-5" id="TrueVibPhotobooks" data-aos="fade-up" data-aos-duration="600" data-aos-offset="280">
             <div class="col-md-7 order-md-2 mb-4 mb-md-0">
               <Link href={`${appRoutes.Products}/TrueHDPhotobooks`}>
-                <img class="rounded-5" src="images/JT8A4839.jpg" width="700" alt="Image" />
+                <img class="rounded-5" src="images/trueHd1.jpg" width="700" alt="Image" />
               </Link>
             </div>
             <div class="col-md-5 col-xl-4 offset-xxl-1 order-md-1" data-aos="fade-up" data-aos-duration="850" data-aos-offset="180" data-disable-parallax-down="md">
               <div class="me-md-4 me-lg-5 me-xxl-0" style={{ maxWidth: 400 }}>
                 {/* <div class="text-body-secondary mb-2">Branding</div> */}
                 <h2 class="mb-lg-4">
-                  <Link href={`${appRoutes.Products}/TrueHDPhotobooks`}>TrueHD Photobooks</Link>
+                  <Link href={`${appRoutes.Products}/TrueHDPhotobooks`}>True HD Photo Books</Link>
                 </h2>
-                <p class="mb-0 mb-md-1 mb-lg-3">TrueHD Photobooks are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion.</p>
+                <p class="mb-0 mb-md-1 mb-lg-3">True HD Photo Books are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion.</p>
                 <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/TrueHDPhotobooks`}>Get More Details</Link>
 
               </div>
@@ -116,7 +116,7 @@ export default function page() {
             // width: '100vw'
           }} class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5 pt-5" data-aos="fade-up" id="PresentationBoxesAndBags" data-aos-duration="600" data-aos-offset="280">
             <div class="col-md-7 order-md-2 mb-4 mb-md-0">
-              <Link href={`#`}>
+              <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`}>
                 <img class="rounded-5" src="images/prasentationsboxandsleeve.svg" width="700" alt="Image" />
               </Link>
             </div>
@@ -124,9 +124,15 @@ export default function page() {
               <div class="me-md-4 me-lg-5 me-xxl-0" style={{ maxWidth: 400 }}>
                 {/* <div class="text-body-secondary mb-2">Branding</div> */}
                 <h2 class="mb-lg-4">
-                  <Link href={`#`}>Presentation Boxes & Bags</Link>
+                  <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`}>Presentation Boxes & Sleeves</Link>
                 </h2>
-                <p class="mb-0 mb-md-1 mb-lg-3">TrueHD Photobooks are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion.</p>
+                <p class="mb-0 mb-md-1 mb-lg-3">W
+                  e
+                  offer beautifully designed presentation boxes and sleeves to complement and protect your
+                  cherished photobooks, albums, and other keepsakes. Our premium packaging solutions are
+                  crafted to add a touch of elegance and sophistication, making them perfect for
+                  gifting and
+                  preserving your memories.</p>
                 <button disabled={true} class="btn btn-sm btn-outline-dark rounded-pill disabled" >Get More Details</button>
 
               </div>
@@ -155,7 +161,7 @@ export default function page() {
           </section>
         </div>
       </section>
-      <div style={{
+      <div className="d-none d-md-block" style={{
         position: "-webkit - sticky",
         position: "sticky",
         bottom: 0,
@@ -185,7 +191,7 @@ export default function page() {
               fontWeight: 500
             }}
           >
-            TrueHD Photobooks
+            True HD Photo Books
           </Link>
           <Link
             href={"#TheKrafftBook"}

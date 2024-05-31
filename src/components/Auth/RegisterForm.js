@@ -251,7 +251,8 @@ function RegisterForm() {
                           />
                           <Tooltip title="Copy Your Mobile Number">
                             <IconButton aria-label="" disabled={nowahtapp} onClick={() => {
-                              setData({ ...data, whatsapp_no: mobaile })
+                              setData({ ...data, whatsapp_no: data.mobaile })
+                              console.log(data.mobaile);
                             }}>
                               <FaClipboard />
                             </IconButton>

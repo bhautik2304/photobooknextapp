@@ -7,10 +7,13 @@ function page() {
     <>
       <main class="page-wrapper">
         {/* <!-- Hero --> */}
-        <section class="bg-dark position-relative py-5">
+        <section
+          class="position-relative py-5"
+          style={{ backgroundImage: "url(/images/AllAlbums.svg)" }}
+        >
           <div
             class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100"
-            style={{ backgroundColor: "rgba(255,255,255, .03)" }}
+            style={{ backgroundImage: "url(/images/AllAlbums.svg)" }}
           ></div>
           <div
             class="container position-relative z-2 py-5 mb-4 mb-sm-5"
@@ -29,7 +32,10 @@ function page() {
                                     </ol>
                                 </nav> */}
 
-                <h1 class="display-3 pb-2 pb-sm-3 text-white">
+                <h1
+                  class="display-4 text-white p-5"
+                  style={{ backgroundColor: "#333333c7", borderRadius: 5 }}
+                >
                   Introducing Photokrafft: Elevating Visual Experiences Globally
                 </h1>
               </div>
@@ -40,20 +46,8 @@ function page() {
         {/* <!-- About --> */}
         <section
           class="container position-relative z-3"
-          style={{ marginTop: "-135px" }}
+          // style={{ marginTop: "-135px" }}
         >
-          <div class="rounded-5 overflow-hidden">
-            <div
-              class="jarallax ratio ratio-16x9"
-              data-jarallax
-              data-speed="0.6"
-            >
-              <div
-                class="jarallax-img"
-                style={{ backgroundImage: "url(/images/AllAlbums.svg)" }}
-              ></div>
-            </div>
-          </div>
           <div class="row pt-5 mt-n2 mt-sm-0 mt-md-2 mt-lg-4 mt-xl-5">
             <div class="col-md-6 col-lg-5">
               <div class="fs-sm text-uppercase mb-3">What we do</div>

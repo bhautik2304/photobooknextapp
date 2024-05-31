@@ -19,12 +19,12 @@ import Script from "next/script";
 const homeHeroCard = [
   {
     title: "Flush Mount Album ",
-    img: "images/3D_AcrylicCoverBrown.svg",
+    img: "images/flushmounts.jpg",
     link: appRoutes.Products,
   },
   {
     title: "TrueHD Photo Books",
-    img: "/images/slider/TrueHDPhotobooks/JT8A5088_2.jpg",
+    img: "/images/trueHd.jpg",
     link: appRoutes.Products,
   },
   {
@@ -51,15 +51,21 @@ export default function Home() {
           >
             <h1 class="display-5 position-relative z-2 mb-0">
               Begin your album printing
-              <br /> journey here.
+              <br /> journey{" "}
+              <Link
+                className="text-primary link"
+                href={appRoutes.StartPrinting}
+              >
+                here.
+              </Link>
             </h1>
           </div>
-          <Link
+          {/* <Link
             class="btn btn-lg btn-primary rounded-pill"
             href={appRoutes.StartPrinting}
           >
             Start Printing
-          </Link>
+          </Link> */}
         </div>
       </section>
 
@@ -122,14 +128,19 @@ export default function Home() {
           >
             <h1 class="display-6 mb-4">
               Creativity Beyond Your Imagination,
-              <br /> Quality Beyond Your <br />
-              Expectation!!!
+              <br /> Quality Beyond Your Expectation!!!
             </h1>
-            <Link
+            {/* <Link
               class="text-primary rounded-pill"
               href={appRoutes.StartPrinting}
             >
               Start Printing <i class="ai-arrow-right fs-lg text-success"></i>
+            </Link> */}
+            <Link
+              class="btn btn-lg btn-primary rounded-pill"
+              href={appRoutes.StartPrinting}
+            >
+              Start Printing
             </Link>
           </div>
         </div>
@@ -150,7 +161,7 @@ export default function Home() {
                   class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
                   style={{
                     // height: 900,
-                    backgroundImage: `url(images/ProductPhotobooks.svg)`,
+                    backgroundImage: `url(images/BoxesSleeves.jpg)`,
                   }}
                 ></div>
               </div>
@@ -180,7 +191,7 @@ export default function Home() {
                 <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
                 <div className="my-5">
                   <h3>
-                    Hundreds of options to choose for your perfect print and
+                    Limitless of options to choose for your perfect print and
                     bind.
                   </h3>
                   <i
@@ -215,7 +226,7 @@ export default function Home() {
                   href={appRoutes.Products}
                 >
                   <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
-                    Flush Mount Binding
+                    Thin Sheet Binding
                   </span>
                 </Link>
               </center>
@@ -243,7 +254,7 @@ export default function Home() {
                   href={appRoutes.Products}
                 >
                   <span class="bg-light text-dark rounded-pill fs-sm fw-semibold lh-1 py-3 px-4">
-                    TrueHD Photo Books
+                    Flush Mount Package
                   </span>
                 </Link>
               </center>
@@ -261,7 +272,7 @@ export default function Home() {
                   class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
                   style={{
                     // height: 900,
-                    backgroundImage: `url(images/progressive_v_cut.jpg)`,
+                    backgroundImage: `url(images/vcut.jpg)`,
                   }}
                 ></div>
               </div>
@@ -465,7 +476,7 @@ export default function Home() {
           </div>
         </section>
         <footer>
-          <div class="d-flex justify-content-between align-items-center px-5 py-4">
+          {/* <div class="d-flex justify-content-between align-items-center px-5 py-4">
             <h2 className="text-white">
               Need to consult about your product needs
             </h2>
@@ -476,7 +487,7 @@ export default function Home() {
             >
               Chat Now
             </a>
-          </div>
+          </div> */}
         </footer>
       </section>
       <Script src="assets/vendor/jarallax/dist/jarallax.min.js"></Script>

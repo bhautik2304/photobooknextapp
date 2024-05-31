@@ -25,7 +25,9 @@ export default function RootLayout({ children }) {
       <body className={poppins.className}>
         <Providers>
           <Navbar />
-          {children}
+          <div className="mt-4">
+            <div className="mt-5">{children}</div>
+          </div>
           <Footer />
         </Providers>
         {/* Vendor scripts and other scripts */}

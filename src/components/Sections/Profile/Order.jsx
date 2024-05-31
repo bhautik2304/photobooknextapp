@@ -151,7 +151,7 @@ function Order() {
       <ProfilePageLayout>
         {/* <!-- Orders--> */}
 
-        <div className="col-lg-9">
+        <div className="col-lg-9 mt-5">
           <div className="row g-4 mb-4">
             <section className="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 shadow-sm">
               <div className="card-body">

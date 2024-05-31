@@ -14,7 +14,7 @@ function page() {
                         <ol class="pt-lg-2 pb-1 breadcrumb">
                             <li class="breadcrumb-item"><Link href="/">Home</Link></li>
                             <li class="breadcrumb-item"><Link href={appRoutes.Products}>Products</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">TrueHD Photobooks</li>
+                            <li class="breadcrumb-item active" aria-current="page">True HD Photo Books</li>
                         </ol>
                     </nav>
 
@@ -24,10 +24,10 @@ function page() {
                             <Slider />
                         </div>
                         <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
-                            <h1 class="display-2 text-uppercase pb-3 pb-lg-4">TrueHD Photobooks
+                            <h1 class="display-2 text-uppercase pb-3 pb-lg-4">True HD Photo Books
                             </h1>
-                            <p class="fs-lg mx-auto mx-lg-0 mb-0" style={{ maxWidth: "530px" }}>Introducing TrueHD Photobooks: Where True Vibrancy Meets Timeless Memories <br />
-                                TrueHD Photobooks are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion, TrueHD stands as a testament to the power of preserving memories with unparalleled vibrancy and authenticity.</p>
+                            <p class="fs-lg mx-auto mx-lg-0 mb-0" style={{ maxWidth: "530px" }}>Introducing True HD Photo Books: Where True Vibrancy Meets Timeless Memories <br />
+                                True HD Photo Books are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion, TrueHD stands as a testament to the power of preserving memories with unparalleled vibrancy and authenticity.</p>
                         </div>
                     </div>
                     <div className="d-flex">
@@ -71,11 +71,11 @@ function page() {
                             </p>
                             <h3 class="h3 pt-3 pt-sm-4 pt-xl-5 pb-2">Perfect for Every Occasion
                             </h3>
-                            <p class="fs-lg mb-0">TrueHD Photobooks are perfect for capturing and commemorating all of life's special moments. Whether it's a wedding, a birthday, a graduation, or a family vacation, TrueHD offers a versatile and elegant way to preserve your memories for years to come. With True Hd, every occasion becomes an opportunity to create something truly extraordinary.
+                            <p class="fs-lg mb-0">True HD Photo Books are perfect for capturing and commemorating all of life's special moments. Whether it's a wedding, a birthday, a graduation, or a family vacation, TrueHD offers a versatile and elegant way to preserve your memories for years to come. With True Hd, every occasion becomes an opportunity to create something truly extraordinary.
                             </p>
                             <h3 class="h3 pt-3 pt-sm-4 pt-xl-5 pb-2">Experience True Vibrancy with True Hd
                             </h3>
-                            <p class="fs-lg mb-0">Your memories are vibrant, dynamic, and full of life – shouldn't your photobooks be too? Experience the true vibrancy of your memories with TrueHD Photobooks and embark on a journey through your most cherished moments like never before. Because when it comes to preserving memories, nothing captures the true essence of life quite like True Hd.
+                            <p class="fs-lg mb-0">Your memories are vibrant, dynamic, and full of life – shouldn't your photobooks be too? Experience the true vibrancy of your memories with True HD Photo Books and embark on a journey through your most cherished moments like never before. Because when it comes to preserving memories, nothing captures the true essence of life quite like True Hd.
                             </p>
                         </div>
                     </div>

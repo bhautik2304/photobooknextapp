@@ -77,7 +77,7 @@ function EventDetailForm() {
             <div className="form-group">
               <label htmlFor="">Event Type</label>
               <select
-                className="form-control"
+                className="form-select"
                 value={orderDetaild.eventType}
                 onChange={(e) =>
                   dispatch(
@@ -145,6 +145,8 @@ function EventDetailForm() {
                     })
                   )
                 }
+                max="2099-12-31"
+                // min="2099-12-31"
                 className="form-control"
                 name=""
                 id=""
@@ -202,7 +204,7 @@ function EventDetailForm() {
             <div className="form-group">
               <label htmlFor="">Font Type</label>
               <select
-                className="form-control"
+                className="form-select"
                 value={orderDetaild?.fontType}
                 onChange={(e) =>
                   dispatch(

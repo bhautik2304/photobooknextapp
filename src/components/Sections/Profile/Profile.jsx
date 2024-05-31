@@ -22,7 +22,7 @@ function Profile() {
   return (
     <ProfilePageLayout>
       {/* <!-- Page content--> */}
-      <div className="col-lg-9">
+      <div className="col-lg-9 mt-5">
         {/* <h1 className="h3 mb-4">Your Profile</h1> */}
         {/* <!-- Basic info--> */}
         <section className="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 shadow-sm">
