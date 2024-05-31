@@ -16,12 +16,12 @@ const homeHeroCard = [
     streamlined ordering process, creating your dream
     album is effortless, offering convenience and peace
     of mind every step of the way."`,
-    img: "images/design.jpg",
+    img: "images/design.JPG",
     link: appRoutes.Products,
   },
   {
     title: "Printing",
-    img: "/images/babybook.jpg",
+    img: "/images/babybook.JPG",
     link: appRoutes.Products,
     content: `"Experience the benefits of our state-of-the-art printing technology, delivering
 vivid and lifelike reproduction of your cherished photos. With meticulous
@@ -111,10 +111,6 @@ function page() {
                     </Link>
                   </center>
                   <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">
-                      Some quick example text to build on the card title.
-                    </p>
                     <div class="extra-content">
                       <p>{data?.content}</p>
                     </div>
