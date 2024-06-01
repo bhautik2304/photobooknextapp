@@ -17,7 +17,7 @@ const homeHeroCard = [
     album is effortless, offering convenience and peace
     of mind every step of the way."`,
     img: "images/design.JPG",
-    link: `${appRoutes.services}/design`,
+    link: "#", //`${appRoutes.services}/design`,
   },
   {
     title: "Printing",
@@ -34,7 +34,7 @@ finishes, and quantities, all effortlessly customizable to suit your preferences
   {
     title: "Binding",
     img: "/images/ThickWhiteSheet.jpg",
-    link: "#", //`${appRoutes.services}/bind`,
+    link: `${appRoutes.services}/binding`,
     content: `Photo album binding offers various methods, each
     with unique benefits. Photo album binding is
     important because it significantly enhances the
