@@ -18,12 +18,12 @@ function page() {
                         </ol>
                     </nav>
 
-                    <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
-                        <div class="d-block order-lg-2 me-auto me-lg-0 ms-auto" style={{ width: 550, height: "100%" }}>
+                    <div class="row d-lg-flex align-items-center pt-3 pb-xxl-5">
+                        <div class="col-lg-6 col-md-6 col-sm-12 d-block order-lg-2 me-auto me-lg-0 ms-auto" style={{ width: 550, height: "100%" }}>
                             <Slider />
                         </div>
                         {/* <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="/images/ProductKrafftbook.svg" width="550" alt="Image" /> */}
-                        <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
+                        <div class="col-lg-6 col-md-6 col-sm-12 order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
                             <h1 class="display-2 text-uppercase pb-3 pb-lg-4">THE KRAFFT BOOK
                             </h1>
                             <p class="fs-lg mx-auto mx-lg-0 mb-0" style={{ maxWidth: "530px" }}>"The Krafft Book" is an exquisite line of photobooks designed and crafted by Photokrafft, renowned for its elegance, quality, and innovation. Here's a description of "The Krafft Book".</p>

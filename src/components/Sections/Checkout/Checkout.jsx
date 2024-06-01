@@ -672,7 +672,7 @@ function Checkout() {
                                             <p class="card-text">
                                               Please upload your photos
                                               compressed in zip file format and
-                                              submit here
+                                              submit here.
                                             </p>
                                             <div className="col-12 my-2">
                                               {zipFileError && (
@@ -736,12 +736,12 @@ function Checkout() {
                                           ></Player>
                                           <div class="card-body">
                                             <h4 class="card-title">
-                                              Drive Url
+                                              Drive Link
                                             </h4>
                                             <p class="card-text">
-                                              Please upload your photos
-                                              compressed in zip file format and
-                                              submit here
+                                              Please submit the link to your
+                                              Drive, or storage service that
+                                              contains your album photos.
                                             </p>
                                             <div className="col-12 my-2">
                                               <div className="form-group">

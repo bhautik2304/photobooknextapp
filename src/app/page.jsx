@@ -23,7 +23,7 @@ const homeHeroCard = [
     link: appRoutes.Products,
   },
   {
-    title: "TrueHD Photo Books",
+    title: "True HD Photo Books",
     img: "/images/trueHd.jpg",
     link: appRoutes.Products,
   },

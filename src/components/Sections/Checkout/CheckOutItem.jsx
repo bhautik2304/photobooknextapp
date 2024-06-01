@@ -52,16 +52,16 @@ function CheckOutItem({ back, submitOrder }) {
     productboxSleev.find(
       (data) => data.boxsleeve.id == orderData.productboxSleev
     ) || null;
-  const coverUpgrade =
+  const coverMeterial =
     productcoveroption.find((data) => data.id == orderData.productboxSleev) ||
     null;
-  const coverUpgradeColor =
+  const coverMeterialColor =
     productcolor.find((data) => data.id == orderData.productboxSleev) || null;
-  const boxUpgrade =
+  const boxMeterial =
     productboxandsleeveoptions.find(
       (data) => data.id == orderData.productboxandsleeveoption
     ) || null;
-  const boxUpgradeColor =
+  const boxMeterialColor =
     productboxandsleeveoptioncolor.find(
       (data) => data.id == orderData.productboxandsleevecolor
     ) || null;
@@ -271,7 +271,7 @@ function CheckOutItem({ back, submitOrder }) {
                               </span>
                             </div>
                             <div class="text-body-secondary fs-sm me-3">
-                              Papper Type :{" "}
+                              Paper Type :{" "}
                               <span class="text-dark fw-medium">
                                 {papperType?.paper?.name} (+{" "}
                                 {papperType?.paper?.value} %)
@@ -374,15 +374,15 @@ function CheckOutItem({ back, submitOrder }) {
                             {orderData?.coverType !== "both_img" && (
                               <>
                                 <div class="text-body-secondary fs-sm me-3">
-                                  Cover Upgrade:{" "}
+                                  Cover Meterial:{" "}
                                   <span class="text-dark fw-medium">
-                                    {coverUpgrade?.name}
+                                    {coverMeterial?.name}
                                   </span>
                                 </div>
                                 <div class="text-body-secondary fs-sm me-3">
                                   Cover Color:{" "}
                                   <span class="text-dark fw-medium">
-                                    {coverUpgradeColor?.colors?.color}
+                                    {coverMeterialColor?.colors?.color}
                                   </span>
                                 </div>
                               </>
@@ -432,15 +432,15 @@ function CheckOutItem({ back, submitOrder }) {
                               "both_img" && (
                               <>
                                 <div class="text-body-secondary fs-sm me-3">
-                                  Box & Sleev Upgrade:{" "}
+                                  Box & Sleeve Meterial:{" "}
                                   <span class="text-dark fw-medium">
-                                    {boxUpgrade?.name}
+                                    {boxMeterial?.name}
                                   </span>
                                 </div>
                                 <div class="text-body-secondary fs-sm me-3">
-                                  Box & Sleev Color:{" "}
+                                  Box & Sleeve Color:{" "}
                                   <span class="text-dark fw-medium">
-                                    {boxUpgradeColor?.colors[0]?.color}
+                                    {boxMeterialColor?.colors[0]?.color}
                                   </span>
                                 </div>
                               </>
@@ -483,16 +483,16 @@ function CheckOutItem({ back, submitOrder }) {
                                 <a href="#">Pocket book copy</a>
                               </h4>
                               {/* <div class="text-body-secondary fs-sm me-3">
-                                                Box & Sleev Upgrade:{" "}
+                                                Box & Sleev Meterial:{" "}
                                                 <span class="text-dark fw-medium">
-                                                  {datas?.coversupgrade?.name}
+                                                  {datas?.coversMeterial?.name}
                                                 </span>
                                               </div>
                                               <div class="text-body-secondary fs-sm me-3">
                                                 Box & Sleev Color:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {
-                                                    datas?.coversupgradecolor
+                                                    datas?.coversMeterialcolor
                                                       ?.name
                                                   }
                                                 </span>
@@ -767,7 +767,7 @@ function CheckOutItem({ back, submitOrder }) {
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                         <div class="fs-sm text-body-secondary mb-2">
-                          Shiping charges
+                          Shipping charges
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">

@@ -114,7 +114,7 @@ export default function page() {
           <section style={{
             height: '100vh',
             // width: '100vw'
-          }} class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5 pt-5" data-aos="fade-up" id="PresentationBoxesAndBags" data-aos-duration="600" data-aos-offset="280">
+          }} class="row align-items-center card-hover pb-5 mb-md-3 mb-lg-4 mb-xl-5 pt-5" data-aos="fade-up" id="PresentationBoxesAndSleeves" data-aos-duration="600" data-aos-offset="280">
             <div class="col-md-7 order-md-2 mb-4 mb-md-0">
               <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`}>
                 <img class="rounded-5" src="images/prasentationsboxandsleeve.svg" width="700" alt="Image" />
@@ -126,14 +126,12 @@ export default function page() {
                 <h2 class="mb-lg-4">
                   <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`}>Presentation Boxes & Sleeves</Link>
                 </h2>
-                <p class="mb-0 mb-md-1 mb-lg-3">W
-                  e
-                  offer beautifully designed presentation boxes and sleeves to complement and protect your
+                <p class="mb-0 mb-md-1 mb-lg-3">We offer beautifully designed presentation boxes and sleeves to complement and protect your
                   cherished photobooks, albums, and other keepsakes. Our premium packaging solutions are
                   crafted to add a touch of elegance and sophistication, making them perfect for
                   gifting and
                   preserving your memories.</p>
-                <button disabled={true} class="btn btn-sm btn-outline-dark rounded-pill disabled" >Get More Details</button>
+                <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`} class="btn btn-sm btn-outline-dark rounded-pill" >Get More Details</Link>
 
               </div>
             </div>
@@ -204,14 +202,14 @@ export default function page() {
             The Krafft Book
           </Link>
           <Link
-            href={"#PresentationBoxesAndBags"}
+            href={"#PresentationBoxesAndSleeves"}
             // type="button"
             class="btn btn btn-outline-light mx-2 rounded btn-sm pro"
             style={{
               fontWeight: 500
             }}
           >
-            Boxes & Bags
+            Boxes & Sleeves
           </Link >
           <Link
             href={"#BabyBooks"}

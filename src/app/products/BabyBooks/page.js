@@ -19,17 +19,17 @@ function page() {
                         </ol>
                     </nav>
 
-                    <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
-                        <div class="d-block order-lg-2 me-auto me-lg-0 ms-auto" style={{ width: 550, height: "100%", backgroundColor: 'transparent' }}>
+                    <div class="row d-lg-flex align-items-center pt-3 pb-xxl-5">
+                        <div class="col-lg-6 col-md-6 col-sm-12 d-block order-lg-2 me-auto me-lg-0 ms-auto" style={{ width: 550, height: "100%", backgroundColor: 'transparent' }}>
                             <Slider />
                         </div>
-                        <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
+                        <div class="col-lg-6 col-md-6 col-sm-12 order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
                             <h1 class="display-2 text-uppercase pb-3 pb-lg-4">Baby Books
                             </h1>
                             <p class="fs-lg mx-auto mx-lg-0 mb-0" style={{ maxWidth: "530px" }}>Celebrate the magical journey of motherhood and your baby's milestones with our premium, customizable photo albums. Designed to preserve your cherished memories in the most elegant way, our albums make perfect keepsakes for you and your loved ones.</p>
                         </div>
                     </div>
-                    <div className="d-flex">
+                    <div className="d-flex mt-5">
                         <a
                             className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3"
                             href="https://www.facebook.com/photokrafft?mibextid=LQQJ4d"
