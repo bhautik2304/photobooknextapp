@@ -480,7 +480,7 @@ function Order() {
                                                 </a>
                                               </h4>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Cover Upgrade:{" "}
+                                                Cover Meterial:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {datas?.coversupgrade?.name}
                                                 </span>
@@ -545,7 +545,7 @@ function Order() {
                                                 </a>
                                               </h4>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Box & SleeveUpgrade:{" "}
+                                                Box & Sleeve Meterial:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {datas?.coversupgrade?.name}
                                                 </span>
