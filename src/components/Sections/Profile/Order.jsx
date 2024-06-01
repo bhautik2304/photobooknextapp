@@ -408,7 +408,7 @@ function Order() {
                                                 </span>
                                               </div>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Papper :{" "}
+                                                Paper :{" "}
                                                 <span class="text-dark fw-medium">
                                                   {`${datas?.productpaper?.name} ( ${datas?.paperValue} % )`}
                                                 </span>
@@ -519,7 +519,7 @@ function Order() {
                                         </td>
                                       </tr>
 
-                                      {/* product box & sleev detaild*/}
+                                      {/* product box & Sleevedetaild*/}
                                       <tr>
                                         <td class="border-0 py-1 px-0">
                                           <div class="d-flex align-items-center">
@@ -545,13 +545,13 @@ function Order() {
                                                 </a>
                                               </h4>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Box & Sleev Upgrade:{" "}
+                                                Box & SleeveUpgrade:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {datas?.coversupgrade?.name}
                                                 </span>
                                               </div>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Box & Sleev Color:{" "}
+                                                Box & SleeveColor:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {
                                                     datas
@@ -606,13 +606,13 @@ function Order() {
                                                   </a>
                                                 </h4>
                                                 <div class="text-body-secondary fs-sm me-3">
-                                                  Box & Sleev Upgrade:{" "}
+                                                  Box & SleeveUpgrade:{" "}
                                                   <span class="text-dark fw-medium">
                                                     {datas?.coversupgrade?.name}
                                                   </span>
                                                 </div>
                                                 <div class="text-body-secondary fs-sm me-3">
-                                                  Box & Sleev Color:{" "}
+                                                  Box & SleeveColor:{" "}
                                                   <span class="text-dark fw-medium">
                                                     {
                                                       datas?.coversupgradecolor
@@ -704,7 +704,7 @@ function Order() {
                                         </tr>
                                       ) : null}
 
-                                      {/* product box & sleev detaild*/}
+                                      {/* product box & Sleevedetaild*/}
                                       <tr>
                                         <td class="border-0 py-1 px-0"></td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
@@ -827,7 +827,7 @@ function Order() {
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                                         <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
-                                            Shiping charges
+                                            Shipping charges
                                           </div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
