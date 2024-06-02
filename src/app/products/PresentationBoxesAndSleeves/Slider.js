@@ -10,9 +10,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
 const img = [
-    "/images/ProductKrafftbook.svg",
-    "/images/ProductKrafftbook.svg",
-    "/images/ProductKrafftbook.svg",
+    "/images/JT8A4619.jpg",
+    "/images/JT8A4622.jpg",
+    "/images/JT8A4625.jpg",
+    "/images/JT8A4818.jpg",
+    "/images/JT8A4823.jpg",
+    "/images/JT8A4840.jpg",
+    "/images/JT8A4852.jpg",
+    "/images/JT8A4946.jpg",
 ]
 
 function Slider() {

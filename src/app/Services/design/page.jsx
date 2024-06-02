@@ -98,16 +98,17 @@ function page() {
                     fontWeight: 600,
                   }}
                 >
-                  Blended Style
+                  Clean Style
                 </h2>
                 <p class="mb-5 col-lg-6 col-12">
-                  Designing a blended style photo album involves seamlessly
-                  integrating photos with backgrounds, borders, and overlays,
-                  creating a cohesive, artistic look that enhances storytelling
-                  with soft edges and creative, professional transitions.
+                  Clean style design offers various innovative looks and
+                  multiple layout options, ensuring each image creates a fresh,
+                  memorable impression while maintaining a sleek, modern
+                  aesthetic. Two Styles in the same category,again offers
+                  options to the users.
                 </p>
                 <center>
-                  <Slider img={blended} />
+                  <Slider img={Clean} />
                 </center>
               </div>
             </div>
@@ -160,17 +161,16 @@ function page() {
                     fontWeight: 600,
                   }}
                 >
-                  Clean Style
+                  Blended Style
                 </h2>
                 <p class="mb-5 col-lg-6 col-12">
-                  Clean style design offers various innovative looks and
-                  multiple layout options, ensuring each image creates a fresh,
-                  memorable impression while maintaining a sleek, modern
-                  aesthetic. Two Styles in the same category,again offers
-                  options to the users.
+                  Designing a blended style photo album involves seamlessly
+                  integrating photos with backgrounds, borders, and overlays,
+                  creating a cohesive, artistic look that enhances storytelling
+                  with soft edges and creative, professional transitions.
                 </p>
                 <center>
-                  <Slider img={Clean} />
+                  <Slider img={blended} />
                 </center>
               </div>
             </div>

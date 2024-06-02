@@ -18,6 +18,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import emputycart from "@/assets/img/emputycart.json";
 import loader from "@/assets/img/loading.json";
+import processing from "@/assets/img/processing.json";
 import Image from "next/image";
 import { Dropbox } from "dropbox";
 import AWS from "aws-sdk";
@@ -266,9 +267,7 @@ function Order() {
                                     </div>
                                     <div class="fs-sm fw-medium text-dark">{`${
                                       datas?.countryzone?.currency_sign
-                                    } ${Math.round(
-                                      datas?.order_total + datas?.shippingValue
-                                    )}`}</div>
+                                    } ${Math.round(datas?.order_total)}`}</div>
                                   </div>
                                 </div>
                                 <div
@@ -480,7 +479,7 @@ function Order() {
                                                 </a>
                                               </h4>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Cover Meterial:{" "}
+                                                Cover Material:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {datas?.coversupgrade?.name}
                                                 </span>
@@ -545,7 +544,7 @@ function Order() {
                                                 </a>
                                               </h4>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Box & Sleeve Meterial:{" "}
+                                                Box & Sleeve Material:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {datas?.coversupgrade?.name}
                                                 </span>
@@ -831,8 +830,7 @@ function Order() {
                                           <div class="fs-sm fw-medium text-dark">{`${
                                             datas?.countryzone?.currency_sign
                                           } ${Math.round(
-                                            datas?.order_total +
-                                              datas?.shippingValue
+                                            datas?.order_total
                                           )}`}</div>
                                         </td>
                                       </tr>

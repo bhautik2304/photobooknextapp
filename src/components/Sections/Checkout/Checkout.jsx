@@ -7,7 +7,7 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
 import zipfile from "@/assets/img/zipfile.json";
 import link from "@/assets/img/link.json";
-import processing from "@/assets/img/success.json";
+// import processing from "@/assets/img/success.json";
 import emputycart from "@/assets/img/emputycart.json";
 import Link from "next/link";
 import { Box, Button } from "@mui/material";
@@ -18,6 +18,7 @@ import { clearCart } from "@/Redux/Slice/orderSlice";
 import AWS from "aws-sdk";
 import { redirect, useRouter } from "next/navigation";
 import { fetchUsers } from "@/Redux/Slice/userSlice";
+import processing from "@/assets/img/processing.json";
 // import Image from "next/Image";
 
 const status = {
@@ -167,12 +168,12 @@ function Checkout() {
                           setFileUploadStatus({
                             status: true,
                             class: "success",
-                            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                            msg: "Your file is successfully received, pls contact us if you have any queries regarding your order",
                           });
                           setFileUploadStatus({
                             status: true,
                             class: "success",
-                            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+                            msg: "Your file is successfully received, pls contact us if you have any queries regarding your order",
                           });
                         })
                         .catch((e) => {
@@ -180,7 +181,7 @@ function Checkout() {
                           setFileUploadStatus({
                             status: true,
                             class: "danger",
-                            msg: "Files Is not Uploaded , pls contact us if you have any queries regarding you order",
+                            msg: "Files Is not Uploaded , pls contact us if you have any queries regarding your order",
                           });
                         });
                     }
@@ -194,7 +195,7 @@ function Checkout() {
           setFileUploadStatus({
             status: true,
             class: "danger",
-            msg: "File Upload Failed, pls contact us if you have any queries regarding you order",
+            msg: "File Upload Failed, pls contact us if you have any queries regarding your order",
           });
         }
       } else {
@@ -224,7 +225,7 @@ function Checkout() {
           setFileUploadStatus({
             status: true,
             class: "success",
-            msg: "Your file is successfully received, pls contact us if you have any queries regarding you order",
+            msg: "Your file is successfully received, pls contact us if you have any queries regarding your order",
           });
         })
         .catch((e) => {
@@ -232,7 +233,7 @@ function Checkout() {
           setFileUploadStatus({
             status: true,
             class: "danger",
-            msg: "Url Failed, pls contact us if you have any queries regarding you order",
+            msg: "Url Failed, pls contact us if you have any queries regarding your order",
           });
         });
     }
@@ -667,7 +668,7 @@ function Checkout() {
                                           ></Player>
                                           <div class="card-body">
                                             <h4 class="card-title">
-                                              Upload zip
+                                              Upload Zip
                                             </h4>
                                             <p class="card-text">
                                               Please upload your photos
@@ -746,7 +747,7 @@ function Checkout() {
                                             <div className="col-12 my-2">
                                               <div className="form-group">
                                                 <label htmlFor="">
-                                                  Enter Url
+                                                  Enter Link
                                                 </label>
                                                 <input
                                                   type="text"

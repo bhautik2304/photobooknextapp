@@ -56,14 +56,16 @@ function CheckOutItem({ back, submitOrder }) {
     productcoveroption.find((data) => data.id == orderData.productboxSleev) ||
     null;
   const coverMeterialColor =
-    productcolor.find((data) => data.id == orderData.productboxSleev) || null;
+    productcolor.find(
+      (data) => data.colors.id == orderData.productcovercolor
+    ) || null;
   const boxMeterial =
     productboxandsleeveoptions.find(
       (data) => data.id == orderData.productboxandsleeveoption
     ) || null;
   const boxMeterialColor =
     productboxandsleeveoptioncolor.find(
-      (data) => data.id == orderData.productboxandsleevecolor
+      (data) => data.colors.id == orderData.productboxandsleevecolor
     ) || null;
 
   const size =
@@ -374,7 +376,7 @@ function CheckOutItem({ back, submitOrder }) {
                             {orderData?.coverType !== "both_img" && (
                               <>
                                 <div class="text-body-secondary fs-sm me-3">
-                                  Cover Meterial:{" "}
+                                  Cover Material:{" "}
                                   <span class="text-dark fw-medium">
                                     {coverMeterial?.name}
                                   </span>
@@ -432,7 +434,7 @@ function CheckOutItem({ back, submitOrder }) {
                               "both_img" && (
                               <>
                                 <div class="text-body-secondary fs-sm me-3">
-                                  Box & Sleeve Meterial:{" "}
+                                  Box & Sleeve Material:{" "}
                                   <span class="text-dark fw-medium">
                                     {boxMeterial?.name}
                                   </span>
@@ -440,7 +442,7 @@ function CheckOutItem({ back, submitOrder }) {
                                 <div class="text-body-secondary fs-sm me-3">
                                   Box & Sleeve Color:{" "}
                                   <span class="text-dark fw-medium">
-                                    {boxMeterialColor?.colors[0]?.color}
+                                    {` ${boxMeterialColor?.colors?.color}`}
                                   </span>
                                 </div>
                               </>
