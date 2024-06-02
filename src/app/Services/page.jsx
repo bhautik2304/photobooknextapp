@@ -17,7 +17,7 @@ const homeHeroCard = [
     album is effortless, offering convenience and peace
     of mind every step of the way."`,
     img: "images/design.JPG",
-    link: "#", //`${appRoutes.services}/design`,
+    link: `${appRoutes.services}/design`,
   },
   {
     title: "Printing",

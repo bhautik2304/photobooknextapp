@@ -61,7 +61,7 @@ function page() {
           </a>
         </center>
       </section>
-      <section class="pt-4" id="FlushmountThick" style={{ height: "100vh" }}>
+      <section class="pt-4" id="FlushmountThick" style={{ height: 780 }}>
         <div class="container text-start pe-lg-5 pe-md-5 pt-5 mt-lg-4 mt-xl-5">
           <div className="row">
             <div
@@ -124,7 +124,7 @@ function page() {
           </div>
         </div>
       </section>
-      <section class="py-5 bg-white" style={{ height: 600 }}>
+      <section class="py-5 bg-white" style={{ height: 780 }}>
         <div class="container text-center pt-5 mt-lg-4 mt-xl-5">
           <div
             class="position-relative mx-auto my-3"
@@ -156,7 +156,7 @@ function page() {
       <section
         class="pt-4"
         id="ProgressiveVCutBinding"
-        style={{ height: "100vh" }}
+        style={{ height: 780, backgroundColor: "#5bb5a22b" }}
       >
         <div class="container text-start pe-lg-5 pe-md-5 pt-5 mt-lg-4 mt-xl-5">
           <div className="row  pt-5">

@@ -551,7 +551,7 @@ function Order() {
                                                 </span>
                                               </div>
                                               <div class="text-body-secondary fs-sm me-3">
-                                                Box & SleeveColor:{" "}
+                                                Box & Sleeve Color:{" "}
                                                 <span class="text-dark fw-medium">
                                                   {
                                                     datas
@@ -605,21 +605,6 @@ function Order() {
                                                     Pocket book copy
                                                   </a>
                                                 </h4>
-                                                <div class="text-body-secondary fs-sm me-3">
-                                                  Box & SleeveUpgrade:{" "}
-                                                  <span class="text-dark fw-medium">
-                                                    {datas?.coversupgrade?.name}
-                                                  </span>
-                                                </div>
-                                                <div class="text-body-secondary fs-sm me-3">
-                                                  Box & SleeveColor:{" "}
-                                                  <span class="text-dark fw-medium">
-                                                    {
-                                                      datas?.coversupgradecolor
-                                                        ?.name
-                                                    }
-                                                  </span>
-                                                </div>
                                                 {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
                                               </div>
                                             </div>
@@ -1022,8 +1007,8 @@ const FileUpload = ({ orderId }) => {
     if (file.type == "application/x-zip-compressed") {
       /* Change hear */
       const s3 = new AWS.S3({
-        accessKeyId: "",
-        secretAccessKey: "",
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_CLIENT_ID,
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_KEY,
         region: "ap-south-1",
       });
 

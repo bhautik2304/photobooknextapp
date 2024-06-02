@@ -6,13 +6,61 @@ import React from "react";
 import { IoIosCall, IoMdMailUnread } from "react-icons/io";
 import Slider from "./Slider";
 
-const flushMountThick = [
-  "/images/Thick Black Sheet.jpg",
-  "/images/Thick White Sheet (1).jpg",
-  "/images/Thick White Sheet.jpg",
+const blended = [
+  "/images/004-min.jpg",
+  "/images/005-min.jpg",
+  "/images/006-min.jpg",
+  "/images/007-min.jpg",
+  "/images/008-min.jpg",
+  "/images/009-min.jpg",
+  "/images/010-min.jpg",
+  "/images/011-min.jpg",
+  "/images/012-min.jpg",
+  "/images/013-min.jpg",
+  "/images/014-min.jpg",
+  "/images/015-min.jpg",
 ];
-const flushMountSlim = ["/images/Slim Thermal Sheet.jpg"];
-const PrograssiveVcut = ["/images/progressive_v_cut.jpg", "/images/vcut.jpg"];
+
+const Classic = [
+  "/images/Classic/002-min.jpg",
+  "/images/Classic/003-min.jpg",
+  "/images/Classic/004-min.jpg",
+  "/images/Classic/005-min.jpg",
+  "/images/Classic/006-min.jpg",
+  "/images/Classic/007-min.jpg",
+  "/images/Classic/008-min.jpg",
+  "/images/Classic/009-min.jpg",
+  "/images/Classic/010-min.jpg",
+  "/images/Classic/011-min.jpg",
+  "/images/Classic/012-min.jpg",
+  "/images/Classic/013-min.jpg",
+  "/images/Classic/014-min.jpg",
+  "/images/Classic/015-min.jpg",
+  "/images/Classic/016-min.jpg",
+];
+const Clean = [
+  "/images/Clean/001-min.jpg",
+  "/images/Clean/001-min-1.jpg",
+  "/images/Clean/002-min.jpg",
+  "/images/Clean/002-min-1.jpg",
+  "/images/Clean/003-min.jpg",
+  "/images/Clean/003-min-1.jpg",
+  "/images/Clean/004-min.jpg",
+  "/images/Clean/004-min-1.jpg",
+  "/images/Clean/005-min.jpg",
+  "/images/Clean/005-min-1.jpg",
+  "/images/Clean/006-min.jpg",
+  "/images/Clean/006-min-1.jpg",
+  "/images/Clean/007-min.jpg",
+  "/images/Clean/007-min-1.jpg",
+  "/images/Clean/008-min.jpg",
+  "/images/Clean/008-min-1.jpg",
+  "/images/Clean/009-min.jpg",
+  "/images/Clean/009-min-1.jpg",
+  "/images/Clean/010-min.jpg",
+  "/images/Clean/010-min-1.jpg",
+];
+
 function page() {
   const scrollToNextSection = () => {
     const targetElement = document.getElementById(target);
@@ -23,115 +71,108 @@ function page() {
 
   return (
     <>
-      <section
-        class="py-5"
-        style={{ height: 300, backgroundColor: "#5bb5a22b" }}
-      >
-        <div class="container text-center pt-3 mt-lg-4 mt-xl-5">
+      <section id="design">
+        <div class="container text-center pt-5 mt-lg-4 mt-xl-5">
           <div
             class="position-relative mx-auto my-3"
             style={{ maxWidth: "850px" }}
           >
-            <h1 class="display-5 position-relative z-2 mb-0">
-              Designing Services
-            </h1>
+            <h1 class="display-5 position-relative z-2 mb-0">Our Designs</h1>
             <br />
-            <br />
+            <p className="fs-4">Tailered Styles for Every Occassion</p>
           </div>
         </div>
       </section>
-      <section class="pt-4" id="FlushmountThick" style={{ height: "100vh" }}>
-        <div class="container text-start pe-lg-5 pe-md-5 pt-5 mt-lg-4 mt-xl-5">
-          <div className="row">
-            <div
-              class="position-relative mx-auto my-3 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center"
-              style={{ maxWidth: "850px" }}
-            >
-              <div>
-                <h1 class="display-5 position-relative z-2 mb-0">
-                  Flushmount Thick
-                </h1>
-                <br />
-                <p>
-                  We offer premium flush mount binding for your photo albums.
-                  Our flush mount albums provide a seamless, sophisticated look
-                  that beautifully showcases your photos with unmatched
-                  durability and elegance. Perfect for weddings, special events,
-                  or any cherished memories, our flush mount albums are designed
-                  to be treasured for a life time
+      <section class="blended my-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div
+                class="heading"
+                style={{ padding: "3em 0 0", position: "relative" }}
+              >
+                <h2
+                  style={{
+                    textAlign: "left",
+                    fontSize: "28px",
+                    fontWeight: 600,
+                  }}
+                >
+                  Blended Style
+                </h2>
+                <p class="mb-5 col-lg-6 col-12">
+                  Designing a blended style photo album involves seamlessly
+                  integrating photos with backgrounds, borders, and overlays,
+                  creating a cohesive, artistic look that enhances storytelling
+                  with soft edges and creative, professional transitions.
                 </p>
+                <center>
+                  <Slider img={blended} />
+                </center>
               </div>
-            </div>
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <center>
-                <Slider img={flushMountThick} />
-              </center>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        class="pt-4"
-        id="FlushmountThick"
-        style={{ height: "100vh", backgroundColor: "#5bb5a22b" }}
-      >
-        <div class="container text-start pe-lg-5 pe-md-5 pt-5 mt-lg-4 mt-xl-5">
-          <div className="row">
-            <div
-              class="position-relative mx-auto my-3 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center"
-              style={{ maxWidth: "850px" }}
-            >
-              <div>
-                <h1 class="display-5 position-relative z-2 mb-0">
-                  Flushmount Slim
-                </h1>
-                <br />
-                <p>
-                  Flush Mount Thin albums feature the same high - quality, edge
-                  - to - edge photo presentation as traditional flush mount
-                  albums but with thinner, more lightweight pages. This creates
-                  a sleek, modern look without compromising on the seamless
-                  spread and durability that flush mount albums are known for.
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <center>
-                <Slider img={flushMountSlim} />
-              </center>
             </div>
           </div>
         </div>
       </section>
-      <section class="pt-4" id="FlushmountThick" style={{ height: "100vh" }}>
-        <div class="container text-start pe-lg-5 pe-md-5 pt-5 mt-lg-4 mt-xl-5">
-          <div className="row">
-            <div
-              class="position-relative mx-auto my-3 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center"
-              style={{ maxWidth: "850px" }}
-            >
-              <div>
-                <h1 class="display-5 position-relative z-2 mb-0">
-                  Progressive <br />V Cut Binding
-                </h1>
-                <br />
-                <p>
-                  We offer Progressive V Cut Binding for your TrueHD Photobooks,
-                  which are printed on 8 Color HP Indigo Digital Offset
-                  Technology. This cutting - edge binding technique combines
-                  durability with a sleek, modern design, making it the perfect
-                  choice for preserving and showcasing your most cherished
-                  memories. Whether it’s a wedding, family reunion, or special
-                  celebration, our Progressive V Cut Binding albums provide a
-                  unique and elegant way to present your photos in a light
-                  weight photobook.
+      <section class="blended my-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div
+                class="heading"
+                style={{ padding: "3em 0 0", position: "relative" }}
+              >
+                <h2
+                  style={{
+                    textAlign: "left",
+                    fontSize: "28px",
+                    fontWeight: 600,
+                  }}
+                >
+                  Classic Style
+                </h2>
+                <p class="mb-5 col-lg-6 col-12">
+                  Classic style design combines modern, stylish layouts to
+                  create a sophisticated look, blending timeless elegance with
+                  contemporary elements, resulting in an album that exudes both
+                  tradition and chic modernity.
                 </p>
+                <center>
+                  <Slider img={Classic} />
+                </center>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <center>
-                <Slider img={PrograssiveVcut} />
-              </center>
+          </div>
+        </div>
+      </section>
+      <section class="blended my-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div
+                class="heading"
+                style={{ padding: "3em 0 0", position: "relative" }}
+              >
+                <h2
+                  style={{
+                    textAlign: "left",
+                    fontSize: "28px",
+                    fontWeight: 600,
+                  }}
+                >
+                  Clean Style
+                </h2>
+                <p class="mb-5 col-lg-6 col-12">
+                  Clean style design offers various innovative looks and
+                  multiple layout options, ensuring each image creates a fresh,
+                  memorable impression while maintaining a sleek, modern
+                  aesthetic. Two Styles in the same category,again offers
+                  options to the users.
+                </p>
+                <center>
+                  <Slider img={Clean} />
+                </center>
+              </div>
             </div>
           </div>
         </div>

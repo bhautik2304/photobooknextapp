@@ -60,7 +60,7 @@ export default function page() {
                   <Link href={`${appRoutes.Products}/FlushMountAlbums`}>Flush Mount Albums</Link>
                 </h2>
                 <p class="mb-0 mb-md-1 mb-lg-3">Flush mount albums are a beautiful way to preserve and showcase your cherished memories. Unlike traditional photo albums, flush mount albums feature pages that are thick and rigid, creating a seamless and elegant presentation of your photos.</p>
-                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/FlushMountAlbums`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill mt-3" href={`${appRoutes.Products}/FlushMountAlbums`}>Get More Details</Link>
 
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function page() {
                   <Link href={`${appRoutes.Products}/TrueHDPhotobooks`}>True HD Photo Books</Link>
                 </h2>
                 <p class="mb-0 mb-md-1 mb-lg-3">True HD Photo Books are more than just albums; they're vibrant, immersive journeys through your most cherished moments. Crafted with precision and passion.</p>
-                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/TrueHDPhotobooks`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill mt-3" href={`${appRoutes.Products}/TrueHDPhotobooks`}>Get More Details</Link>
 
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function page() {
                 {/* <div class="text-body-secondary mb-2">Identity, Packaging</div> */}
                 <h2 class="mb-lg-4"><Link href={`${appRoutes.Products}/TheKrafftBook`}>The Krafft Book</Link></h2>
                 <p class="mb-0 mb-md-1 mb-lg-3">"The Krafft Book" is an exquisite line of photobooks designed and crafted by Photokrafft, renowned for its elegance, quality, and innovation.</p>
-                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/TheKrafftBook`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill mt-3" href={`${appRoutes.Products}/TheKrafftBook`}>Get More Details</Link>
 
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function page() {
                   crafted to add a touch of elegance and sophistication, making them perfect for
                   gifting and
                   preserving your memories.</p>
-                <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`} class="btn btn-sm btn-outline-dark rounded-pill" >Get More Details</Link>
+                <Link href={`${appRoutes.Products}/PresentationBoxesAndSleeves`} class="btn btn-sm btn-outline-dark rounded-pill mt-3" >Get More Details</Link>
 
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function page() {
                 {/* <div class="text-body-secondary mb-2">Identity, Packaging</div> */}
                 <h2 class="mb-lg-4"><Link href={`${appRoutes.Products}/BabyBooks`}>Baby Books</Link></h2>
                 <p class="mb-0 mb-md-1 mb-lg-3">Celebrate the magical journey of motherhood and your baby's milestones with our premium, customizable photo albums. Designed to preserve your cherished memories in the most elegant way, our albums make perfect keepsakes for you and your loved ones.</p>
-                <Link class="btn btn-sm btn-outline-dark rounded-pill" href={`${appRoutes.Products}/BabyBooks`}>Get More Details</Link>
+                <Link class="btn btn-sm btn-outline-dark rounded-pill mt-3" href={`${appRoutes.Products}/BabyBooks`}>Get More Details</Link>
 
               </div>
             </div>

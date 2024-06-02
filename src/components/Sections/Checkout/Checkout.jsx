@@ -115,8 +115,8 @@ function Checkout() {
       }
       if (file.type == "application/x-zip-compressed") {
         const s3 = new AWS.S3({
-          accessKeyId: "",
-          secretAccessKey: "",
+          accessKeyId: process.env.NEXT_PUBLIC_AWS_CLIENT_ID,
+          secretAccessKey: process.env.NEXT_PUBLIC_AWS_KEY,
           region: "ap-south-1",
         });
 

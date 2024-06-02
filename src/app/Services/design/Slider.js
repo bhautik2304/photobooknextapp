@@ -18,11 +18,17 @@ function Slider({ img = [] }) {
                 autoplay={{
                     delay: 5000
                 }}
-                slidesPerView={1}
+                slidesPerView={2}
                 modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 breakpoints={{
-                    430: {
+                    320: {
                         slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 2,
                     },
                 }}
                 loop={true}
@@ -39,21 +45,12 @@ function Slider({ img = [] }) {
                 {img.map((imgs, i) => (
                     <SwiperSlide key={i}>
                         <center>
-
-                            <div
-                                className="card shadow-lg h-100 border-0 overflow-hidden"
-                                style={{ minHeight: "100%", borderRadius: "5px", width: "100%" }}
-                            >
-                                {/* <span className="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10"></span> */}
-                                <div className="">
-                                    <img src={imgs} />
-                                </div>
-                            </div>
+                            <img src={imgs} style={{ height: "100%", borderRadius: "5px", }} />
                         </center>
                     </SwiperSlide>
                 ))}
                 <div className="swiper-pagination-custom"></div>
-            </Swiper>
+            </Swiper >
         </>
     )
 }
