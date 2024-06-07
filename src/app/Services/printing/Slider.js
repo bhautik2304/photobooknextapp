@@ -25,10 +25,10 @@ function Slider({ img = [] }) {
                         slidesPerView: 1,
                     },
                     768: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                     },
                     1024: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                     },
                 }}
                 loop={true}

@@ -61,9 +61,17 @@ function Footer() {
                     <li>
                       <a
                         className="nav-link fw-normal py-1 px-0"
+                        href={appRoutes.services}
+                      >
+                        Services
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="nav-link fw-normal py-1 px-0"
                         href={appRoutes.AboutUS}
                       >
-                        About us
+                        About Us
                       </a>
                     </li>
                     <li>
@@ -71,7 +79,7 @@ function Footer() {
                         className="nav-link fw-normal py-1 px-0"
                         href={appRoutes.Support}
                       >
-                        Faqs
+                        FAQ
                       </a>
                     </li>
                     <li>
@@ -79,7 +87,7 @@ function Footer() {
                         className="nav-link fw-normal py-1 px-0"
                         href={appRoutes.StartPrinting}
                       >
-                        Order now
+                        Order Now
                       </a>
                     </li>
                   </ul>
@@ -87,22 +95,13 @@ function Footer() {
                 <div className="col mb-4 mb-md-0">
                   <ul className="nav flex-column">
                     <li>
-                      <a
-                        className="nav-link fw-normal py-1 px-0"
-                        href="https://tawk.to/photokrafftsupport"
-                        target="_blank"
-                      >
-                        Help center
+                      <a className="nav-link fw-normal py-1 px-0" href="#">
+                        Terms & Conditions
                       </a>
                     </li>
                     <li>
                       <a className="nav-link fw-normal py-1 px-0" href="#">
-                        Terms & conditions
-                      </a>
-                    </li>
-                    <li>
-                      <a className="nav-link fw-normal py-1 px-0" href="#">
-                        Privacy policy
+                        Privacy Policy
                       </a>
                     </li>
                   </ul>

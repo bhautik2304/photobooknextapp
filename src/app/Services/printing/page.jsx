@@ -98,17 +98,15 @@ function page() {
                     fontWeight: 600,
                   }}
                 >
-                  <center>Clean Style</center>
+                  Clean Style
                 </h2>
-                <center>
-                  <p class="mb-5 col-lg-6 col-12">
-                    Clean style design offers various innovative looks and
-                    multiple layout options, ensuring each image creates a
-                    fresh, memorable impression while maintaining a sleek,
-                    modern aesthetic. Two Styles in the same category,again
-                    offers options to the users.
-                  </p>
-                </center>
+                <p class="mb-5 col-lg-6 col-12">
+                  Clean style design offers various innovative looks and
+                  multiple layout options, ensuring each image creates a fresh,
+                  memorable impression while maintaining a sleek, modern
+                  aesthetic. Two Styles in the same category,again offers
+                  options to the users.
+                </p>
                 <center>
                   <Slider img={Clean} />
                 </center>
@@ -132,16 +130,14 @@ function page() {
                     fontWeight: 600,
                   }}
                 >
-                  <center>Classic Style</center>
+                  Classic Style
                 </h2>
-                <center>
-                  <p class="mb-5 col-lg-6 col-12">
-                    Classic style design combines modern, stylish layouts to
-                    create a sophisticated look, blending timeless elegance with
-                    contemporary elements, resulting in an album that exudes
-                    both tradition and chic modernity.
-                  </p>
-                </center>
+                <p class="mb-5 col-lg-6 col-12">
+                  Classic style design combines modern, stylish layouts to
+                  create a sophisticated look, blending timeless elegance with
+                  contemporary elements, resulting in an album that exudes both
+                  tradition and chic modernity.
+                </p>
                 <center>
                   <Slider img={Classic} />
                 </center>
@@ -165,17 +161,14 @@ function page() {
                     fontWeight: 600,
                   }}
                 >
-                  <center>Blended Style</center>
+                  Blended Style
                 </h2>
-                <center>
-                  <p class="mb-5 col-lg-6 col-12">
-                    Designing a blended style photo album involves seamlessly
-                    integrating photos with backgrounds, borders, and overlays,
-                    creating a cohesive, artistic look that enhances
-                    storytelling with soft edges and creative, professional
-                    transitions.
-                  </p>
-                </center>
+                <p class="mb-5 col-lg-6 col-12">
+                  Designing a blended style photo album involves seamlessly
+                  integrating photos with backgrounds, borders, and overlays,
+                  creating a cohesive, artistic look that enhances storytelling
+                  with soft edges and creative, professional transitions.
+                </p>
                 <center>
                   <Slider img={blended} />
                 </center>

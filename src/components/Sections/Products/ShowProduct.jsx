@@ -105,10 +105,7 @@ function ShowProduct() {
                   </div> */}
                 </div>
               </div>
-              <p>
-                Select the options mentioned below to rectify the printing
-                quality and sizes for your product.
-              </p>
+              <p>Select the size and the paper options for your album</p>
               <div className="row mt-2 mb-2">
                 <ProductSize />
               </div>

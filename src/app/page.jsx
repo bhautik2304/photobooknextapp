@@ -419,7 +419,7 @@ export default function Home() {
                         aria-expanded="false"
                         aria-controls="questionTwo"
                       >
-                        Q. Can you do only the design and let me print
+                        Q. Can you only do the design and let me print
                         elsewhere?
                       </button>
                     </h3>

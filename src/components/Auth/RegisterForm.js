@@ -7,13 +7,12 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
 import { Button, IconButton, Tooltip } from "@mui/material";
 // import "react-phone-number-input/style.css";
-import PhoneInputWithCountry, {
-  parsePhoneNumber,
-  getCountryCallingCode
-} from "react-phone-number-input";
 import countryList from 'react-select-country-list'
 import { FaClipboard } from "react-icons/fa";
 import process from "../../assets/img/process.json"
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+
 
 const errorMsg = {
   name: "Please enter your name.",
@@ -91,12 +90,6 @@ function RegisterForm() {
       if (!data.whatsapp_no) {
         newError.whatsapp_no = errorMsg.whatsapp_no;
       }
-      if (!data.whatsapp_no_code) {
-        newError.whatsapp_country_code = errorMsg.whatsapp_country_code;
-      }
-    }
-    if (!data.mobaile_code) {
-      newError.mobaile_code = errorMsg.mobaile_code;
     }
     if (!data?.email) {
       newError.email = errorMsg.email;
@@ -126,9 +119,8 @@ function RegisterForm() {
     setRegistrationProcess(registrationState.step2)
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("country_code", data.mobaile_code);
     formData.append("phone_no", data.mobaile);
-    formData.append("whatsapp_no", `${data.whatsapp_no_code}${data.whatsapp_no}`);
+    formData.append("whatsapp_no", data.whatsapp_no);
     formData.append("email", data.email);
     formData.append("password", data.password);
 
@@ -177,25 +169,24 @@ function RegisterForm() {
                 />
               </div>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
-                <div className="col mb-2">
-                  <div className="row" >
-                    <div className="col-3" >
-                      <PhoneInputWithCountry
-                        style={{ width: '100%' }}
-                        className="form-control form-control-lg"
-                        onCountryChange={(E) => {
-                          // console.log(getCountryCallingCode(E));
-                          setData({ ...data, mobaile_code: getCountryCallingCode(E) })
-                        }}
-                        placeholder="Your Mobile No *"
-                        value={mobile}
-                        onChange={setMobile}
-                        required
-                      />
-
-                    </div>
-                    <div className="col-9" >
-                      <input
+                <div className="col my-1">
+                  <label>Mobile Number</label>
+                  <PhoneInput
+                    inputStyle={{ width: '100%' }}
+                    inputClass="form-control form-control-lg"
+                    onChange={(E) => {
+                      // console.log(getCountryCallingCode(E));
+                      setData({ ...data, mobaile: E })
+                    }}
+                    inputProps={{
+                      placeholder: "Mobile Number"
+                    }}
+                    country={'in'}
+                    placeholder="Your Mobile No *"
+                    value={data.mobaile}
+                    required
+                  />
+                  {/* <input
                         className="form-control form-control-lg"
                         onChange={(e) =>
                           setData({ ...data, mobaile: e.target.value })
@@ -203,71 +194,52 @@ function RegisterForm() {
                         type="number"
                         placeholder="Enter Mobile No."
                         required
-                      />
-                      <span className="text-danger">{error?.mobile}</span>
-                      <span className="text-danger">{error?.mobaile_code}</span>
-                    </div>
-                  </div>
+                      /> */}
+                  <span className="text-danger">{error?.mobile}</span>
+                  <span className="text-danger">{error?.mobaile_code}</span>
                 </div>
-                <div className="col mb-2">
-                  <div className="row" >
-                    <div className="col-3" >
-                      <PhoneInputWithCountry
-                        style={{ width: '100%' }}
-                        className="form-control form-control-lg"
-                        onCountryChange={(E) => {
-                          // console.log(getCountryCallingCode(E));
-                          setData({ ...data, whatsapp_no_code: getCountryCallingCode(E) })
-                        }}
-                        placeholder="Your Mobile No *"
-                        value={mobile}
-                        onChange={setMobile}
-                        required
-                        disabled={nowahtapp}
+                <div className="col my-1">
+                  <label>Your Whatsapp No *</label>
+                  <div className="password-toggle mb-2">
+                    <PhoneInput
+                      inputStyle={{ width: '100%' }}
+                      inputClass="form-control form-control-lg"
+                      onChange={(E) => {
+                        // console.log(getCountryCallingCode(E));
+                        setData({ ...data, whatsapp_no: E })
+                      }}
+                      country={'in'}
+                      placeholder="Your Whatsapp No *"
+                      value={data.whatsapp_no}
+                      required
+                      disabled={nowahtapp}
+                    />
+                    <label
+                      className="password-toggle-btn"
+                      aria-label="Show/hide password"
+                    >
+                      <input
+                        className="password-toggle-check"
+                        type="checkbox"
+                        onClick={() => setHide(!show)}
                       />
-
-                    </div>
-                    <div className="col-9" >
-                      <div className="password-toggle mb-2">
-                        <input
-                          className="form-control form-control-lg"
-                          disabled={nowahtapp}
-                          onChange={(e) =>
-                            setData({ ...data, whatsapp_no: e.target.value })
-                          }
-                          value={data.whatsapp_no}
-                          type="number"
-                          placeholder="Whatsapp No."
-                          required
-                        />
-                        <label
-                          className="password-toggle-btn"
-                          aria-label="Show/hide password"
-                        >
-                          <input
-                            className="password-toggle-check"
-                            type="checkbox"
-                            onClick={() => setHide(!show)}
-                          />
-                          <Tooltip title="Copy Your Mobile Number">
-                            <IconButton aria-label="" disabled={nowahtapp} onClick={() => {
-                              setData({ ...data, whatsapp_no: data.mobaile })
-                              console.log(data.mobaile);
-                            }}>
-                              <FaClipboard />
-                            </IconButton>
-                          </Tooltip>
-                        </label>
-                      </div>
-                      <span className={`text-${nowahtapp ? "success" : "danger"} fs-sm pro`} onClick={() => setNowahtapp(!nowahtapp)} >
-                        {
-                          nowahtapp ? "Click to add your Whatsapp number" : "Click if you don’t have a Whatsapp number"
-                        }
-                      </span><br />
-                      <span className="text-danger">{error?.whatsapp_no}</span>
-                      <span className="text-danger">{error?.whatsapp_country_code}</span>
-                    </div>
+                      <Tooltip title="Copy Your Mobile Number">
+                        <IconButton aria-label="" disabled={nowahtapp} onClick={() => {
+                          setData({ ...data, whatsapp_no: data.mobaile })
+                          console.log(data.mobaile);
+                        }}>
+                          <FaClipboard />
+                        </IconButton>
+                      </Tooltip>
+                    </label>
                   </div>
+                  <span className={`text-${nowahtapp ? "success" : "danger"} fs-sm pro`} onClick={() => setNowahtapp(!nowahtapp)} >
+                    {
+                      nowahtapp ? "Click to add your Whatsapp number" : "Click if you don’t have a Whatsapp number"
+                    }
+                  </span><br />
+                  <span className="text-danger">{error?.whatsapp_no}</span>
+                  <span className="text-danger">{error?.whatsapp_country_code}</span>
                 </div>
               </div>
               <div className="col-12 mb-2">

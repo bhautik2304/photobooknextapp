@@ -22,7 +22,7 @@ const homeHeroCard = [
   {
     title: "Printing",
     img: "/images/babybook.JPG",
-    link: "#",
+    link: `${appRoutes.services}/printing`,
     content: `"Experience the benefits of our state-of-the-art printing technology, delivering
 vivid and lifelike reproduction of your cherished photos. With meticulous
 attention to detail, we ensure your memories are preserved in stunning clarity,
@@ -249,7 +249,7 @@ function page() {
                         aria-expanded="false"
                         aria-controls="questionTwo"
                       >
-                        Q. Can you do only the design and let me print
+                        Q. Can you only do the design and let me print
                         elsewhere?
                       </button>
                     </h3>
