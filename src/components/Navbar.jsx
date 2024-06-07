@@ -18,7 +18,7 @@ function Navbar() {
   const router = useRouter();
 
   const { authStatus, user } = useSelector((state) => state.auth);
-
+  const [toggle, setToggle] = useState(false);
   const token = isLocalStorageAvailable()
     ? localStorage.getItem(localstorageKey.authKey)
     : false;
@@ -93,11 +93,16 @@ function Navbar() {
       }
     }
   }, []);
+
+  const handleChangeToggle = () => {
+    setToggle(!toggle);
+  };
+
   return (
     <div>
       <header className="navbar fixed-top navbar-expand-lg bg-light shadow-sm">
         <div className="container">
-          <Link href="/" className="navbar-brand">
+          <Link onClick={handleChangeToggle} href="/" className="navbar-brand">
             <img
               src={"/assets/img/logo.png"}
               alt="Photokraft logo"
@@ -110,6 +115,7 @@ function Navbar() {
             <>
               <div className="dropdown nav d-block order-lg-2 ms-auto">
                 <Link
+                  onClick={handleChangeToggle}
                   href="#"
                   className="nav-link d-flex align-items-center p-0"
                   data-bs-toggle="dropdown"
@@ -132,11 +138,16 @@ function Navbar() {
                   <h6 className="dropdown-header fs-xs fw-medium text-body-secondary text-uppercase pb-1">
                     Account
                   </h6>
-                  <Link href={appRoutes.userProfile} className="dropdown-item">
+                  <Link
+                    onClick={handleChangeToggle}
+                    href={appRoutes.userProfile}
+                    className="dropdown-item"
+                  >
                     <i className="ai-user-check fs-lg opacity-70 me-2"></i>
                     Overview
                   </Link>
                   <Link
+                    onClick={handleChangeToggle}
                     href={appRoutes.userProfileOrders}
                     className="dropdown-item"
                   >
@@ -160,18 +171,27 @@ function Navbar() {
           )}
           <button
             type="button"
-            className="navbar-toggler"
+            className={`navbar-toggler`}
             data-bs-toggle="collapse"
             data-bs-target="#navbarCollapse1"
+            onClick={handleChangeToggle}
+            aria-expanded={toggle ? "true" : "false"}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <nav className="collapse navbar-collapse" id="navbarCollapse1">
+          <nav
+            className={`collapse navbar-collapse ${toggle ? "show" : ""}`}
+            id="navbarCollapse1"
+          >
             <ul className="navbar-nav me-auto">
               <li
                 className={`nav-item ${pathname == appRoutes.Home && "active"}`}
               >
-                <Link href={appRoutes.Home} className="nav-link">
+                <Link
+                  onClick={handleChangeToggle}
+                  href={appRoutes.Home}
+                  className="nav-link"
+                >
                   Home
                 </Link>
               </li>
@@ -180,7 +200,11 @@ function Navbar() {
                   pathname == appRoutes.Products && "active"
                 }`}
               >
-                <Link href={appRoutes.Products} className="nav-link">
+                <Link
+                  onClick={handleChangeToggle}
+                  href={appRoutes.Products}
+                  className="nav-link"
+                >
                   Products
                 </Link>
               </li>
@@ -189,7 +213,11 @@ function Navbar() {
                   pathname == appRoutes.services && "active"
                 }`}
               >
-                <Link href={appRoutes.services} className="nav-link">
+                <Link
+                  onClick={handleChangeToggle}
+                  href={appRoutes.services}
+                  className="nav-link"
+                >
                   Services
                 </Link>
               </li>
@@ -198,7 +226,11 @@ function Navbar() {
                   pathname == appRoutes.AboutUS && "active"
                 }`}
               >
-                <Link href={appRoutes.AboutUS} className="nav-link">
+                <Link
+                  onClick={handleChangeToggle}
+                  href={appRoutes.AboutUS}
+                  className="nav-link"
+                >
                   About Us
                 </Link>
               </li>
@@ -207,7 +239,11 @@ function Navbar() {
                   pathname == appRoutes.Support && "active"
                 }`}
               >
-                <Link href={appRoutes.Support} className="nav-link">
+                <Link
+                  onClick={handleChangeToggle}
+                  href={appRoutes.Support}
+                  className="nav-link"
+                >
                   FAQ
                 </Link>
               </li>
@@ -217,6 +253,7 @@ function Navbar() {
                 }`}
               >
                 <Link
+                  onClick={handleChangeToggle}
                   href={appRoutes.StartPrinting}
                   className="nav-link link-sm border-lg rounded"
                   style={{
@@ -238,7 +275,11 @@ function Navbar() {
                         pathname == appRoutes.Login && "active"
                       }`}
                     >
-                      <Link href={appRoutes.Login} className="nav-link">
+                      <Link
+                        onClick={handleChangeToggle}
+                        href={appRoutes.Login}
+                        className="nav-link"
+                      >
                         Login
                       </Link>
                     </li>
@@ -247,8 +288,9 @@ function Navbar() {
                         pathname == appRoutes.CreateAccount && "active"
                       }`}
                     >
-                      {/* <Link h="#" className="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</Link> */}
+                      {/* <Link onClick={handleChangeToggle} h="#" className="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</Link> */}
                       <Link
+                        onClick={handleChangeToggle}
                         href={appRoutes.CreateAccount}
                         className="btn btn-primary btn-sm fs-sm ms-3 mb-4 mb-lg-0"
                         style={{
