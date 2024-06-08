@@ -71,109 +71,182 @@ function page() {
 
   return (
     <>
-      <section id="design">
-        <div class="container text-center pt-5 mt-lg-4 mt-xl-5">
-          <div
-            class="position-relative mx-auto my-3"
-            style={{ maxWidth: "850px" }}
-          >
-            <h1 class="display-5 position-relative z-2 mb-0">Our Designs</h1>
-            <br />
-            <p className="fs-4">Tailered Styles for Every Occassion</p>
-          </div>
-        </div>
-      </section>
-      <section class="blended my-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div
-                class="heading"
-                style={{ padding: "3em 0 0", position: "relative" }}
-              >
-                <h2
-                  style={{
-                    textAlign: "left",
-                    fontSize: "28px",
-                    fontWeight: 600,
-                  }}
-                >
-                  Clean Style
-                </h2>
-                <p class="mb-5 col-lg-6 col-12">
-                  Clean style design offers various innovative looks and
-                  multiple layout options, ensuring each image creates a fresh,
-                  memorable impression while maintaining a sleek, modern
-                  aesthetic. Two Styles in the same category,again offers
-                  options to the users.
-                </p>
-                <center>
-                  <Slider img={Clean} />
-                </center>
+      <section class="bg-dark position-relative pt-5">
+        <div
+          class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100"
+          style={{ backgroundColor: "rgba(255,255,255, .03)" }}
+        ></div>
+        <div
+          class="container position-relative z-2 py-5 mb-4 mb-sm-5"
+          data-bs-theme="dark"
+        >
+          <div class="row pb-5 mb-2 mb-sm-0 mb-lg-3">
+            <div class="col-lg-10 col-xl-9">
+              <nav aria-label="breadcrumb">
+                <ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+                  <li class="breadcrumb-item">
+                    <Link href={appRoutes.Home}>Home</Link>
+                  </li>
+                  <li class="breadcrumb-item" aria-current="page">
+                    <Link href={appRoutes.services}>Services</Link>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Printing Services
+                  </li>
+                </ol>
+              </nav>
+
+              <h1 class="display-2 pb-2 pb-sm-3 text-white">
+                Our Printing Technology
+              </h1>
+              <ul class="list-unstyled d-flex flex-wrap mb-0">
+                <li class="d-flex text-white py-1 me-4">
+                  <i class="ai-check-alt text-primary lead me-2"></i>
+                  Silver Halide RGB Prints
+                </li>
+                <li class="d-flex text-white py-1 me-4">
+                  <i class="ai-check-alt text-primary lead me-2"></i>
+                  Digital Offset CMYK Prints
+                </li>
+              </ul>
+              <div className="mt-5">
+                {/* <h5 className="text-white">
+                  Silver Halide RGB Prints vs. Digital Offset CMYK Prints{" "}
+                </h5> */}
+                {/* <p className="text-white">
+                  For high-quality photo printing, Silver Halide RGB prints and
+                  Digital Offset CMYK prints are top technologies. Understanding
+                  their differences helps in choosing the best option. Here are
+                  the key features, benefits, and applications of each method.
+                </p> */}
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section class="blended my-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div
-                class="heading"
-                style={{ padding: "3em 0 0", position: "relative" }}
-              >
-                <h2
-                  style={{
-                    textAlign: "left",
-                    fontSize: "28px",
-                    fontWeight: 600,
-                  }}
-                >
-                  Classic Style
-                </h2>
-                <p class="mb-5 col-lg-6 col-12">
-                  Classic style design combines modern, stylish layouts to
-                  create a sophisticated look, blending timeless elegance with
-                  contemporary elements, resulting in an album that exudes both
-                  tradition and chic modernity.
-                </p>
-                <center>
-                  <Slider img={Classic} />
-                </center>
-              </div>
-            </div>
+      <section
+        class="container position-relative z-3"
+        style={{ marginTop: "0" }}
+      >
+        <center>
+          <h3 className="my-2"></h3>
+        </center>
+        <div class="rounded-5 overflow-hidden">
+          <div class="jarallax ratio ratio-16x9" data-jarallax data-speed="0.6">
+            <div
+              class="jarallax-img"
+              style={{
+                backgroundImage: "url(/images/RGB.jpg)",
+                backgroundSize: 800,
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-n2 mt-sm-0 mt-md-2 mt-lg-4 mt-xl-5">
+          <div class="col-md-6 col-lg-5">
+            <div class="fs-sm text-uppercase mb-3">What we do</div>
+            <h2 class="h-5">
+              Silver Halide RGB Prints: Unmatched Color Fidelity and Longevity
+            </h2>
+            <h6 class="h-6">What Are Silver Halide RGB Prints?</h6>
+            <p>
+              Silver Halide prints use traditional photographic processes with
+              RGB lasers or LEDs to expose images onto light-sensitive paper.
+              Known for exceptional color accuracy and depth, we use Noristu
+              Prolabs for printing and offer Fuji Professional and Kodak
+              Metallic papers.
+            </p>
+          </div>
+          <div class="col-md-6 col-xl-5 offset-lg-1 offset-xl-2 pt-1 pt-sm-2 pt-md-5">
+            <h6>Key Features:</h6>
+            <ul>
+              <li>
+                1. Superior Color Range: Reproduces a broader spectrum of colors
+                for vibrant, true-to-life photos.
+              </li>
+              <li>
+                2. High Resolution: Continuous tone technology offers smooth
+                gradients and fine detail.
+              </li>
+              <li>
+                3. Durability: Resistant to fading, lasting decades with proper
+                care.
+              </li>
+              <li>
+                4. Glossy Finish: Enhances color saturation for a premium look.
+              </li>
+            </ul>
+            <h6>Best For:</h6>
+            <ul>
+              <li>High-end photo albums</li>
+              <li>Professional photography</li>
+              <li>Fine art prints</li>
+              <li>Long-term archival</li>
+            </ul>
           </div>
         </div>
       </section>
-      <section class="blended my-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div
-                class="heading"
-                style={{ padding: "3em 0 0", position: "relative" }}
-              >
-                <h2
-                  style={{
-                    textAlign: "left",
-                    fontSize: "28px",
-                    fontWeight: 600,
-                  }}
-                >
-                  Blended Style
-                </h2>
-                <p class="mb-5 col-lg-6 col-12">
-                  Designing a blended style photo album involves seamlessly
-                  integrating photos with backgrounds, borders, and overlays,
-                  creating a cohesive, artistic look that enhances storytelling
-                  with soft edges and creative, professional transitions.
-                </p>
-                <center>
-                  <Slider img={blended} />
-                </center>
-              </div>
-            </div>
+      <section
+        class="container position-relative z-3 py-5 my-5"
+        style={{ marginTop: "0" }}
+      >
+        <div class="rounded-5 overflow-hidden">
+          <div class="jarallax ratio ratio-16x9" data-jarallax data-speed="0.6">
+            <div
+              class="jarallax-img"
+              style={{
+                backgroundImage: "url(/images/CMYK.jpg)",
+                backgroundSize: 900,
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-5">
+            <div class="fs-sm text-uppercase mb-3">What we do</div>
+            <h2 class="h-5">
+              Digital Offset CMYK Prints: Versatility and Cost - Effectiveness
+            </h2>
+            <h6 class="h-6">What Are Digital Offset CMYK Prints?</h6>
+            <p>
+              Digital Offset printing uses Cyan, Magenta, Yellow, and Black
+              (CMYK) inks to produce images. This technology is widely used for
+              printing a variety of media, from brochures and business cards to
+              posters and marketing materials as well as light weight photob
+              ooks. We use HP Indigo for all our Digital Offset Prints
+            </p>
+          </div>
+          <div class="col-md-6 col-xl-5 offset-lg-1 offset-xl-2 pt-1 pt-sm-2 pt-md-5">
+            <h6>Key Features:</h6>
+            <ul>
+              <li>
+                1. Cost - Effective for Large Runs: Digital Offset is more
+                economical for high - volume printing, making it suitable for
+                bulk orders
+              </li>
+              <li>
+                2. Quick Turnaround: Faster printing process compared to tra
+                ditional methods, ideal for urgent projects.
+              </li>
+              <li>
+                3. Versatile Substrate Options: Can print on a wide range of
+                paper types and finishes, including matte, gloss, and satin.
+              </li>
+              <li>
+                4. Good Color Reproduction: While the color range is narrower
+                compared to RGB, CMYK prints stil l deliver vibrant and accurate
+                colors.
+              </li>
+            </ul>
+            <h6>Best For:</h6>
+            <ul>
+              <li>Light weight Photobooks or Coffee table books</li>
+              <li>Marketing materials</li>
+              <li>Posters and flyers</li>
+              <li>Short-run custom prints</li>
+            </ul>
           </div>
         </div>
       </section>

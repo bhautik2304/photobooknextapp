@@ -79,7 +79,7 @@ function page() {
           >
             <h1 class="display-5 position-relative z-2 mb-0">Our Designs</h1>
             <br />
-            <p className="fs-4">Tailered Styles for Every Occassion</p>
+            <p className="fs-4">Tailored Styles for Every Occassion</p>
           </div>
         </div>
       </section>

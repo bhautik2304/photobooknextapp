@@ -13,7 +13,7 @@ export const appRoutes = {
     StartPrinting: '/Start-Printing',
     CreateAccount: '/Create-Account',
     Login: '/Login',
-    forgetPassword: '/Forget-password',
+    forgetPassword: '/forget-password',
     services: '/Services',
 
     // users Profiles Routes
