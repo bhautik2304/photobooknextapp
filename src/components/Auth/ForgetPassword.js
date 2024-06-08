@@ -59,8 +59,8 @@ function ForgetPassword() {
                     <div className="col-12 mb-2">
                         {step == 0 &&
                             <>
-                                <h6 className="mb-1">Enter your email address or mobile number</h6>
-                                <input className="form-control form-control-lg" onChange={(e) => setData({ ...data, email: e.target.value })} placeholder="mobile number / Email address *" required />
+                                <h6 className="mb-1">Enter your email address</h6>
+                                <input className="form-control form-control-lg" onChange={(e) => setData({ ...data, email: e.target.value })} placeholder="Email address *" required />
                             </>
                         }
                         {step == 1 &&
