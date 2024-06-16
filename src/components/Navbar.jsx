@@ -211,15 +211,43 @@ function Navbar() {
               <li
                 className={`nav-item ${
                   pathname == appRoutes.services && "active"
-                }`}
+                } dropdown`}
               >
                 <Link
+                  className="nav-link dropdown-toggle"
                   onClick={handleChangeToggle}
                   href={appRoutes.services}
-                  className="nav-link"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
                   Services
                 </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link
+                    onClick={handleChangeToggle}
+                    className="dropdown-item"
+                    href="#"
+                  >
+                    Designing
+                  </Link>
+                  <Link
+                    onClick={handleChangeToggle}
+                    className="dropdown-item"
+                    href="#"
+                  >
+                    Printing
+                  </Link>
+                  <Link
+                    onClick={handleChangeToggle}
+                    className="dropdown-item"
+                    href="#"
+                  >
+                    Binding
+                  </Link>
+                </div>
               </li>
               <li
                 className={`nav-item ${

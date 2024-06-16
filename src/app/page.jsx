@@ -1,21 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { appRoutes } from "@/constants";
-import { AnimateText, ProductScroll, Testymonial } from "@/components";
-import {
-  FaArrowRightLong,
-  FaHandHoldingHand,
-  FaRepeat,
-  FaBoxOpen,
-} from "react-icons/fa6";
-import { RiSafe2Fill } from "react-icons/ri";
+import { IN, CA } from "country-flag-icons/react/3x2";
 import { IoIosCall, IoMdMailUnread } from "react-icons/io";
-import { VscWorkspaceTrusted } from "react-icons/vsc";
-import axios from "axios";
-import { landscape, portrait, square } from "@/assets/img";
-import LoginButton from "./LoginButton";
 import Script from "next/script";
-
+import "./styles/faq-accoridan-flag.css";
+import "./styles/card-hover.css";
 const homeHeroCard = [
   {
     title: "Flush Mount Album ",
@@ -70,9 +59,9 @@ export default function Home() {
       </section>
 
       <section class="container mt-n3 mt-sm-0 pb-5 mt-5">
-        <div class="row g-4 pb-2 pb-md-4">
+        <div class="row g-4 pb-2 pb-md-4 card-row">
           {homeHeroCard.map((data) => (
-            <div class="col-md-3">
+            <div class="col-md-3 m-md-0 card-hover">
               {/* <!-- Card --> */}
               <div
                 class="card zoom-effect h-100 border-0 overflow-hidden "
@@ -81,7 +70,7 @@ export default function Home() {
                 <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
                 <div class="zoom-effect-wrapper rounded-1 position-absolute top-0 start-0 w-100 h-100">
                   <div
-                    class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100"
+                    class="zoom-effect-img bg-size-cover bg-position-bottom-center position-absolute top-0 start-0 w-100 h-100 card-hover-bgSize"
                     style={{
                       // height: 900,
                       backgroundImage: `url(${data.img})`,
@@ -300,16 +289,10 @@ export default function Home() {
                 <h2 className="h1">Need help?</h2>
                 {/* <p className="pb-3 pb-sm-4">Et felis vitae ac venenatis lacus cras etiam risus scelerisque auctor adipiscing in a porta</p> */}
                 <div className="row col-12">
-                  <div className="col-2">
-                    <IoIosCall
-                      size={50}
-                      color="#5BB5A2"
-                      style={{
-                        backgroundColor: "#E8F2EE",
-                        padding: 10,
-                        borderRadius: 50,
-                      }}
-                    />
+                  <div className="col-2 d-flex justify-content-center">
+                    <div className="countryFlag">
+                      <IN title="United States" />
+                    </div>
                   </div>
                   <div className="col-10">
                     <div>
@@ -321,16 +304,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="row col-12">
-                  <div className="col-2">
-                    <IoIosCall
-                      size={50}
-                      color="#5BB5A2"
-                      style={{
-                        backgroundColor: "#E8F2EE",
-                        padding: 10,
-                        borderRadius: 50,
-                      }}
-                    />
+                  <div className="col-2 d-flex justify-content-center">
+                    <div className="countryFlag">
+                      <CA title="United States" />
+                    </div>
                   </div>
                   <div className="col-10">
                     <div>
