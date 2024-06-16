@@ -33,6 +33,7 @@ function Slider() {
         spaceBetween={50}
         autoplay={{
           delay: 5000,
+          pauseOnMouseEnter: true
         }}
         slidesPerView={1}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

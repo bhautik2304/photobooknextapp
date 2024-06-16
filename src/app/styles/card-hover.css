@@ -5,6 +5,8 @@
 
   .card-hover:hover .card-hover-bgSize {
     background-size: contain !important;
+    transform: scale(1.2);
+    transition: transform 1s ease-in-out;
   }
 
   .card-row:hover .card-hover:not(:hover) {

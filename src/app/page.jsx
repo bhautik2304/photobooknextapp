@@ -59,9 +59,9 @@ export default function Home() {
       </section>
 
       <section class="container mt-n3 mt-sm-0 pb-5 mt-5">
-        <div class="row g-4 pb-2 pb-md-4 card-row">
+        <div class="row g-4 mb-2 mb-md-4 card-row">
           {homeHeroCard.map((data) => (
-            <div class="col-md-3 m-md-0 card-hover">
+            <div class="col-md-3 m-md-0 pe-0 card-hover">
               {/* <!-- Card --> */}
               <div
                 class="card zoom-effect h-100 border-0 overflow-hidden "
@@ -180,8 +180,7 @@ export default function Home() {
                 <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10 z-2"></span>
                 <div className="my-5">
                   <h3>
-                    Limitless of options to choose for your perfect print and
-                    bind.
+                    Limitless options to choose for your perfect print and bind.
                   </h3>
                   <i
                     class="ai-arrow-right pro"

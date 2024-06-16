@@ -98,6 +98,13 @@ function Navbar() {
     setToggle(!toggle);
   };
 
+  const isServiceDropDownActive = () => {
+    return (
+      pathname == appRoutes.services ||
+      Object.values(appRoutes.servicesDropDown).includes(pathname)
+    );
+  };
+
   return (
     <div>
       <header className="navbar fixed-top navbar-expand-lg bg-light shadow-sm">
@@ -208,45 +215,73 @@ function Navbar() {
                   Products
                 </Link>
               </li>
-              <li
-                className={`nav-item ${
-                  pathname == appRoutes.services && "active"
-                } dropdown`}
-              >
-                <Link
-                  className="nav-link dropdown-toggle"
-                  onClick={handleChangeToggle}
-                  href={appRoutes.services}
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
+              <li>
+                <div
+                  className={`${
+                    isServiceDropDownActive() && "active"
+                  } nav-item dropdown d-lg-flex service-dropdown`}
                 >
-                  Services
-                </Link>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <Link
-                    onClick={handleChangeToggle}
-                    className="dropdown-item"
-                    href="#"
+                  <a
+                    href={appRoutes.services}
+                    className="nav-link d-inline-block pe-0"
                   >
-                    Designing
-                  </Link>
-                  <Link
-                    onClick={handleChangeToggle}
-                    className="dropdown-item"
+                    Services
+                  </a>
+                  <a
                     href="#"
+                    className="dropdown-toggle align-self-lg-center pe-3"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    data-bs-target="#servicesDropdown"
+                  ></a>
+                  {/* Add show class to see dropdown opened when in mobile view and when user is on one of the services page */}
+                  <ul
+                    className={`dropdown-menu ${
+                      isServiceDropDownActive() ? "show" : ""
+                    }`}
+                    id="servicesDropdown"
                   >
-                    Printing
-                  </Link>
-                  <Link
-                    onClick={handleChangeToggle}
-                    className="dropdown-item"
-                    href="#"
-                  >
-                    Binding
-                  </Link>
+                    <li
+                      className={`${
+                        pathname === appRoutes.servicesDropDown.design &&
+                        "active"
+                      }`}
+                    >
+                      <a
+                        href={appRoutes.servicesDropDown.design}
+                        className="dropdown-item"
+                      >
+                        Designing
+                      </a>
+                    </li>
+                    <li
+                      className={`${
+                        pathname === appRoutes.servicesDropDown.printing &&
+                        "active"
+                      }`}
+                    >
+                      <a
+                        href={appRoutes.servicesDropDown.printing}
+                        className="dropdown-item"
+                      >
+                        Printing
+                      </a>
+                    </li>
+                    <li className="dropdown-divider"></li>
+                    <li
+                      className={`${
+                        pathname === appRoutes.servicesDropDown.binding &&
+                        "active"
+                      }`}
+                    >
+                      <a
+                        href={appRoutes.servicesDropDown.binding}
+                        className="dropdown-item"
+                      >
+                        Binding
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </li>
               <li
