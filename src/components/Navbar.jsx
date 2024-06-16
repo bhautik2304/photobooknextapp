@@ -10,6 +10,7 @@ import { authLogin, authLogout } from "@/Redux/Slice/authSlice";
 import { addUsers } from "@/Redux/Slice/userSlice";
 import Avatar from "react-avatar";
 import { isLocalStorageAvailable } from "@/utils";
+import "@/assets/css/styles/service-dropdown-margin.css";
 function Navbar() {
   const pathname = usePathname();
   // const

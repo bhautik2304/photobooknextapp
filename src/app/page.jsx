@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { appRoutes } from "@/constants";
 import { IN, CA } from "country-flag-icons/react/3x2";
-import { IoIosCall, IoMdMailUnread } from "react-icons/io";
+import { IoMdMailUnread } from "react-icons/io";
 import Script from "next/script";
-import "./styles/faq-accoridan-flag.css";
-import "./styles/card-hover.css";
+import "@/assets/css/styles/faq-accordion-flag.css";
+import "@/assets/css/styles/card-hover.css";
 const homeHeroCard = [
   {
     title: "Flush Mount Album ",
@@ -61,7 +61,7 @@ export default function Home() {
       <section class="container mt-n3 mt-sm-0 pb-5 mt-5">
         <div class="row g-4 mb-2 mb-md-4 card-row">
           {homeHeroCard.map((data) => (
-            <div class="col-md-3 m-md-0 pe-0 card-hover">
+            <div class="col-md-3 m-md-0 card-hover">
               {/* <!-- Card --> */}
               <div
                 class="card zoom-effect h-100 border-0 overflow-hidden "
@@ -290,7 +290,7 @@ export default function Home() {
                 <div className="row col-12">
                   <div className="col-2 d-flex justify-content-center">
                     <div className="countryFlag">
-                      <IN title="United States" />
+                      <IN title="India" />
                     </div>
                   </div>
                   <div className="col-10">
@@ -305,7 +305,7 @@ export default function Home() {
                 <div className="row col-12">
                   <div className="col-2 d-flex justify-content-center">
                     <div className="countryFlag">
-                      <CA title="United States" />
+                      <CA title="Canada" />
                     </div>
                   </div>
                   <div className="col-10">

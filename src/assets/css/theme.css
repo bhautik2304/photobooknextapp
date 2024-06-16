@@ -19397,11 +19397,3 @@ footer h2{
     position: relative;
     z-index: 1;
   }
-
-/* Service Dropdown Menu Margin Adjusment */
-.service-dropdown #servicesDropdown{
-    @media (min-width: 992px) {
-        margin-top: 2rem !important
-    }
-    
-}
