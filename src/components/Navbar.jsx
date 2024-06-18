@@ -10,6 +10,7 @@ import { authLogin, authLogout } from "@/Redux/Slice/authSlice";
 import { addUsers } from "@/Redux/Slice/userSlice";
 import Avatar from "react-avatar";
 import { isLocalStorageAvailable } from "@/utils";
+import "@/assets/css/styles/service-dropdown-margin.css";
 function Navbar() {
   const pathname = usePathname();
   // const
@@ -96,6 +97,13 @@ function Navbar() {
 
   const handleChangeToggle = () => {
     setToggle(!toggle);
+  };
+
+  const isServiceDropDownActive = () => {
+    return (
+      pathname == appRoutes.services ||
+      Object.values(appRoutes.servicesDropDown).includes(pathname)
+    );
   };
 
   return (
@@ -208,18 +216,74 @@ function Navbar() {
                   Products
                 </Link>
               </li>
-              <li
-                className={`nav-item ${
-                  pathname == appRoutes.services && "active"
-                }`}
-              >
-                <Link
-                  onClick={handleChangeToggle}
-                  href={appRoutes.services}
-                  className="nav-link"
+              <li>
+                <div
+                  className={`${
+                    isServiceDropDownActive() && "active"
+                  } nav-item dropdown d-lg-flex service-dropdown`}
                 >
-                  Services
-                </Link>
+                  <a
+                    href={appRoutes.services}
+                    className="nav-link d-inline-block pe-0"
+                  >
+                    Services
+                  </a>
+                  <a
+                    href="#"
+                    className="dropdown-toggle align-self-lg-center pe-3"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    data-bs-target="#servicesDropdown"
+                  ></a>
+                  {/* Add show class to see dropdown opened when in mobile view and when user is on one of the services page */}
+                  <ul
+                    className={`dropdown-menu ${
+                      isServiceDropDownActive() ? "show" : ""
+                    }`}
+                    id="servicesDropdown"
+                  >
+                    <li
+                      className={`${
+                        pathname === appRoutes.servicesDropDown.design &&
+                        "active"
+                      }`}
+                    >
+                      <a
+                        href={appRoutes.servicesDropDown.design}
+                        className="dropdown-item"
+                      >
+                        Designing
+                      </a>
+                    </li>
+                    <li
+                      className={`${
+                        pathname === appRoutes.servicesDropDown.printing &&
+                        "active"
+                      }`}
+                    >
+                      <a
+                        href={appRoutes.servicesDropDown.printing}
+                        className="dropdown-item"
+                      >
+                        Printing
+                      </a>
+                    </li>
+                    <li className="dropdown-divider"></li>
+                    <li
+                      className={`${
+                        pathname === appRoutes.servicesDropDown.binding &&
+                        "active"
+                      }`}
+                    >
+                      <a
+                        href={appRoutes.servicesDropDown.binding}
+                        className="dropdown-item"
+                      >
+                        Binding
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li
                 className={`nav-item ${

@@ -1,0 +1,15 @@
+@media (min-width: 768px) {
+  .card-hover:hover {
+    width: 100%;
+  }
+
+  .card-hover:hover .card-hover-bgSize {
+    background-size: contain !important;
+    transform: scale(1.2);
+    transition: all 1.5s ease-in-out;
+  }
+
+  .card-row:hover .card-hover:not(:hover) {
+    display: none;
+  }
+}

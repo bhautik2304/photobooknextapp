@@ -15,7 +15,11 @@ export const appRoutes = {
     Login: '/Login',
     forgetPassword: '/forget-password',
     services: '/Services',
-
+    servicesDropDown: {
+        design: '/Services/design',
+        printing: '/Services/printing',
+        binding: '/Services/binding',
+    },
     // users Profiles Routes
     userProfile: userProfile,
     userProfileOrders: `${userProfile}/orders`,

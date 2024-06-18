@@ -641,57 +641,58 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                     </tr> */}
-                    <tr>
-                      <td class="border-0 py-1 px-0"></td>
-                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm text-body-secondary mb-2">
-                          Album cost
-                        </div>
-                      </td>
-                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">
-                          {`${user?.zone?.currency_sign} ${orderData.albumCost}
+                      <tr>
+                        <td class="border-0 py-1 px-0"></td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm text-body-secondary mb-2">
+                            Album cost
+                          </div>
+                        </td>
+                        <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                          <div class="fs-sm fw-medium text-dark mb-2">
+                            {`${user?.zone?.currency_sign} ${orderData.albumCost}
                            `}
-                        </div>
-                      </td>
-                    </tr>
-                    {Number(orderData?.discount) != 0 ? (
-                      <>
-                        <tr>
-                          <td class="border-0 py-1 px-0"></td>
-                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                            <div class="fs-sm text-body-secondary mb-2">
-                              Per album discount {`( ${orderData?.discount}% )`}
-                            </div>
-                          </td>
-                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                            <div class="fs-sm fw-medium text-danger">{`- ${
-                              user?.zone?.currency_sign
-                            } ${Math.round(
-                              orderData.albumDiscountAmountCost
-                            )} `}</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="border-0 py-1 px-0"></td>
-                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                            <div class="fs-sm text-body-secondary mb-2">
-                              After discount album cost
-                            </div>
-                          </td>
-                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                            <div class="fs-sm fw-medium text-success">{`${
-                              user?.zone?.currency_sign
-                            } ${Math.round(
-                              orderData?.albumAfterDiscountCost
-                            )} `}</div>
-                          </td>
-                        </tr>
-                      </>
-                    ) : null}
+                          </div>
+                        </td>
+                      </tr>
+                      {Number(orderData?.discount) != 0 ? (
+                        <>
+                          <tr>
+                            <td class="border-0 py-1 px-0"></td>
+                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                              <div class="fs-sm text-body-secondary mb-2">
+                                Per album discount{" "}
+                                {`( ${orderData?.discount}% )`}
+                              </div>
+                            </td>
+                            <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                              <div class="fs-sm fw-medium text-danger mb-2">{`- ${
+                                user?.zone?.currency_sign
+                              } ${Math.round(
+                                orderData.albumDiscountAmountCost
+                              )} `}</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="border-0 py-1 px-0"></td>
+                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                              <div class="fs-sm text-body-secondary mb-2">
+                                After discount album cost
+                              </div>
+                            </td>
+                            <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                              <div class="fs-sm fw-medium text-success mb-2">{`${
+                                user?.zone?.currency_sign
+                              } ${Math.round(
+                                orderData?.albumAfterDiscountCost
+                              )} `}</div>
+                            </td>
+                          </tr>
+                        </>
+                      ) : null}
                     <tr>
                       <td class="border-0 py-1 px-0"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
@@ -701,7 +702,7 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">
+                        <div class="fs-sm fw-medium text-dark mb-2">
                           {`${user?.zone?.currency_sign} ${Math.round(
                             orderData.totaleAlbumcost
                           )}
@@ -720,7 +721,7 @@ function CheckOutItem({ back, submitOrder }) {
                             </div>
                           </td>
                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                            <div class="fs-sm fw-medium">{`${
+                            <div class="fs-sm fw-medium mb-2">{`${
                               user?.zone?.currency_sign
                             } ${
                               orderData?.pritnig_price_value *
@@ -740,7 +741,7 @@ function CheckOutItem({ back, submitOrder }) {
                           </div>
                         </td>
                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm fw-medium ">{`${
+                          <div class="fs-sm fw-medium mb-2">{`${
                             user?.zone?.currency_sign
                           } ${
                             orderData?.photoBookCopyPrice *
@@ -758,7 +759,7 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">
+                        <div class="fs-sm fw-medium text-dark mb-2">
                           {`${user?.zone?.currency_sign}
                            ${Math.round(orderData?.subtotale)}`}
                         </div>
@@ -773,7 +774,7 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${user?.zone?.shipingcharge}`}</div>
+                        <div class="fs-sm fw-medium text-dark mb-2">{`${user?.zone?.currency_sign} ${user?.zone?.shipingcharge}`}</div>
                       </td>
                     </tr>
                     <tr>
@@ -783,7 +784,7 @@ function CheckOutItem({ back, submitOrder }) {
                         <div class="fs-sm text-body-secondary mb-2">Total</div>
                       </td>
                       <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">
+                        <div class="fs-sm fw-medium text-dark mb-2">
                           {`${user?.zone?.currency_sign} ${Math.round(
                             orderData?.subtotale + user?.zone?.shipingcharge
                           )}`}
