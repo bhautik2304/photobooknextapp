@@ -1002,12 +1002,6 @@ const FileUpload = ({ orderId }) => {
       return 0; // Validation failed
     }
 
-    console.log({
-      accessKeyId: process.env.NEXT_PUBLIC_AWS_CLIENT_ID,
-      secretAccessKey: process.env.NEXT_PUBLIC_AWS_KEY,
-      region: "ap-south-1",
-    });
-
     if (file.type == "application/x-zip-compressed") {
       /* Change hear */
       const s3 = new AWS.S3({

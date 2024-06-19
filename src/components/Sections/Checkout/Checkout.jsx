@@ -114,7 +114,7 @@ function Checkout() {
         setPersent(0);
         return 0; // Validation failed
       }
-      if (file.type == "application/x-zip-compressed") {
+      if (file?.zip?.type == "application/x-zip-compressed") {
         const s3 = new AWS.S3({
           accessKeyId: process.env.NEXT_PUBLIC_AWS_CLIENT_ID,
           secretAccessKey: process.env.NEXT_PUBLIC_AWS_KEY,
