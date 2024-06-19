@@ -112,7 +112,7 @@ function ProductSize() {
             <div className="col-12 my-3">
               <span className="text-danger">{formError?.product_print}</span>
               <>
-                <h6>Select your service ?</h6>
+                <h6>Select your service</h6>
               </>
               <div className="row">
                 <div className="col-2 my-3">
@@ -155,7 +155,7 @@ function ProductSize() {
                       srcset=""
                     />
                   </div>
-                  <div className="my-2">Print + Bind</div>
+                  <div className="my-2">Print & Bind</div>
                 </div>
                 <div className="col-2 my-3">
                   <div
@@ -198,7 +198,7 @@ function ProductSize() {
                       srcset=""
                     />
                   </div>
-                  <div className="my-2">Design + Print + Bind</div>
+                  <div className="my-2">Design Print & Bind</div>
                   <div className="my-2">
                     <b>{zonePrice(pritnig_price)?.priceSrring}</b> + per page
                   </div>

@@ -52,8 +52,21 @@ function TotalCounter() {
 
   return (
     <>
-      <div className="container-fluid">
-        <div className="d-flex justify-content-center aligns-item-center">
+      <div
+        className="container-fluid navbar-fixed-top"
+        // style={{
+        //   position: "fixed",
+        //   // top: 80,
+        //   right: 0,
+        //   width: "100%",
+        //   color: "white",
+        //   textAlign: "center",
+        //   zIndex: 1,
+        //   padding: "1rem 0",
+        //   // backgroundColor: "rgba(0, 0, 0, 0.8)", // Optional: to ensure it's readable against the background
+        // }}
+      >
+        <div className="d-flex justify-content-center aligns-item-center ">
           <div className="col-md-8 noothing d-none d-lg-block">
             <div className="w-100 d-flex justify-content-end aligns-item-center mb-3">
               <button

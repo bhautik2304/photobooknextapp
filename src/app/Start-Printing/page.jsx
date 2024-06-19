@@ -32,19 +32,7 @@ function page() {
           //   backgroundImage: "linear-gradient(160deg, #80d0c7 1%, #80D0C7 4%)",
         }}
       >
-        <div
-          style={{
-            position: "sticky",
-            top: 0,
-            right: 0,
-            width: "100%",
-            color: "white",
-            textAlign: "center",
-            zIndex: 1,
-            padding: "1rem 0",
-            // backgroundColor: "rgba(0, 0, 0, 0.8)", // Optional: to ensure it's readable against the background
-          }}
-        >
+        <div>
           <TotalCounter />
         </div>
         <div className="row">

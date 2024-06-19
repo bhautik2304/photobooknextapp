@@ -53,8 +53,9 @@ function CheckOutItem({ back, submitOrder }) {
       (data) => data.boxsleeve.id == orderData.productboxSleev
     ) || null;
   const coverMeterial =
-    productcoveroption.find((data) => data.id == orderData.productboxSleev) ||
-    null;
+    productcoveroption.find(
+      (data) => data.id == orderData.productcoveroption
+    ) || null;
   const coverMeterialColor =
     productcolor.find(
       (data) => data.colors.id == orderData.productcovercolor
@@ -641,59 +642,58 @@ function CheckOutItem({ back, submitOrder }) {
                         </div>
                       </td>
                     </tr> */}
-                      <tr>
-                        <td class="border-0 py-1 px-0"></td>
-                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                        <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm text-body-secondary mb-2">
-                            Album cost
-                          </div>
-                        </td>
-                        <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                          <div class="fs-sm fw-medium text-dark mb-2">
-                            {`${user?.zone?.currency_sign} ${orderData.albumCost}
-                           `}
-                          </div>
-                        </td>
-                      </tr>
-                      {Number(orderData?.discount) != 0 ? (
-                        <>
-                          <tr>
-                            <td class="border-0 py-1 px-0"></td>
-                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                              <div class="fs-sm text-body-secondary mb-2">
-                                Per album discount{" "}
-                                {`( ${orderData?.discount}% )`}
-                              </div>
-                            </td>
-                            <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                              <div class="fs-sm fw-medium text-danger mb-2">{`- ${
-                                user?.zone?.currency_sign
-                              } ${Math.round(
-                                orderData.albumDiscountAmountCost
-                              )} `}</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="border-0 py-1 px-0"></td>
-                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
-                            <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                              <div class="fs-sm text-body-secondary mb-2">
-                                After discount album cost
-                              </div>
-                            </td>
-                            <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                              <div class="fs-sm fw-medium text-success mb-2">{`${
-                                user?.zone?.currency_sign
-                              } ${Math.round(
-                                orderData?.albumAfterDiscountCost
-                              )} `}</div>
-                            </td>
-                          </tr>
-                        </>
-                      ) : null}
                     <tr>
+                      <td class="border-0 py-1 px-0"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                      <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm text-body-secondary mb-2">
+                          Album cost
+                        </div>
+                      </td>
+                      <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                        <div class="fs-sm fw-medium text-dark mb-2">
+                          {`${user?.zone?.currency_sign} ${orderData.albumCost}
+                           `}
+                        </div>
+                      </td>
+                    </tr>
+                    {Number(orderData?.discount) != 0 ? (
+                      <>
+                        <tr>
+                          <td class="border-0 py-1 px-0"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm text-body-secondary mb-2">
+                              Per album discount {`( ${orderData?.discount}% )`}
+                            </div>
+                          </td>
+                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm fw-medium text-danger mb-2">{`- ${
+                              user?.zone?.currency_sign
+                            } ${Math.round(
+                              orderData.albumDiscountAmountCost
+                            )} `}</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="border-0 py-1 px-0"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
+                          <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm text-body-secondary mb-2">
+                              After discount album cost
+                            </div>
+                          </td>
+                          <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
+                            <div class="fs-sm fw-medium text-success mb-2">{`${
+                              user?.zone?.currency_sign
+                            } ${Math.round(
+                              orderData?.albumAfterDiscountCost
+                            )} `}</div>
+                          </td>
+                        </tr>
+                      </>
+                    ) : null}
+                    <tr className="">
                       <td class="border-0 py-1 px-0"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
                       <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
