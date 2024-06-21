@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import  from '@/components'
-import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 import ShowProduct from "@/components/Sections/Products/ShowProduct";
 import NotsupportedScreen from "@/components/NotsupportedScreen";

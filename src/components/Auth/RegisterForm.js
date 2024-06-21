@@ -3,17 +3,15 @@ import React, { useState, useMemo } from "react";
 import axios from "axios";
 import { apiRoutes, appRoutes, localstorageKey } from "@/constants";
 import { useRouter } from "next/navigation";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 // import "react-phone-number-input/style.css";
 import countryList from 'react-select-country-list'
 import { FaClipboard } from "react-icons/fa";
 import process from "../../assets/img/process.json"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { FaFacebookF } from "react-icons/fa";
-import { FaGlobeAfrica } from "react-icons/fa";
 
 const errorMsg = {
   name: "Please enter your name.",
@@ -396,13 +394,25 @@ function RegisterForm() {
               <div className="d-flex" style={{ gap: "8px" }}>
                 <h6 className="pt-2">Social Information</h6>
                 <div className="btn btn-icon btn-sm btn-secondary rounded-circle">
-                <img src="images/facebook.png" width={25} alt="facebook logo"></img>
+                  <img
+                    src="images/facebook.png"
+                    width={25}
+                    alt="facebook logo"
+                  ></img>
                 </div>
                 <div className="btn btn-icon btn-sm btn-secondary rounded-circle">
-                  <img src="images/instagram.png" width={25} alt="instagram logo"></img>
+                  <img
+                    src="images/instagram.png"
+                    width={25}
+                    alt="instagram logo"
+                  ></img>
                 </div>
                 <div className="btn btn-icon btn-sm btn-secondary rounded-circle">
-                  <img src="images/web.png" width={25} alt="internet logo"></img>
+                  <img
+                    src="images/web.png"
+                    width={25}
+                    alt="internet logo"
+                  ></img>
                 </div>
               </div>
             
