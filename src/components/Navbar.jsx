@@ -115,7 +115,6 @@ function Navbar() {
               src={"/assets/img/logo.png"}
               alt="Photokraft logo"
               width={220}
-              height={100}
             />
             {/* Around */}
           </Link>

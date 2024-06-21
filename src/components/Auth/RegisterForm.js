@@ -12,7 +12,8 @@ import { FaClipboard } from "react-icons/fa";
 import process from "../../assets/img/process.json"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-
+import { FaFacebookF } from "react-icons/fa";
+import { FaGlobeAfrica } from "react-icons/fa";
 
 const errorMsg = {
   name: "Please enter your name.",
@@ -391,8 +392,20 @@ function RegisterForm() {
                   </>
                 )
               }
-
-              <h6 classNameName="">Social Information</h6>
+              
+              <div className="d-flex" style={{ gap: "8px" }}>
+                <h6 className="pt-2">Social Information</h6>
+                <div className="btn btn-icon btn-sm btn-secondary rounded-circle">
+                <img src="images/facebook.png" width={25} alt="facebook logo"></img>
+                </div>
+                <div className="btn btn-icon btn-sm btn-secondary rounded-circle">
+                  <img src="images/instagram.png" width={25} alt="instagram logo"></img>
+                </div>
+                <div className="btn btn-icon btn-sm btn-secondary rounded-circle">
+                  <img src="images/web.png" width={25} alt="internet logo"></img>
+                </div>
+              </div>
+            
               <div className="password-toggle mb-2">
                 <span className="text-danger">{error?.socialLinkTwo}</span>
                 <input
