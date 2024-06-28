@@ -350,14 +350,29 @@ function EventDetailForm() {
                         orderData.isPhotoBookCopy == true && "#8ccec6",
                       color: orderData.isPhotoBookCopy == true && "#ffffff",
                     }}
-                    onClick={() =>
-                      dispatch(
-                        changeOrderData({
-                          key: "isPhotoBookCopy",
-                          value: !orderData.isPhotoBookCopy,
-                        })
-                      )
-                    }
+                    onClick={() => {
+                      if (orderData?.isPhotoBookCopy) {
+                        dispatch(
+                          changeOrderData({
+                            key: "isPhotoBookCopy",
+                            value: false,
+                          })
+                        );
+                        dispatch(
+                          changeOrderData({
+                            key: "photoBookCopy",
+                            value: 0,
+                          })
+                        );
+                      } else {
+                        dispatch(
+                          changeOrderData({
+                            key: "isPhotoBookCopy",
+                            value: true,
+                          })
+                        );
+                      }
+                    }}
                   >
                     Click to order a pocketbook {}
                   </div>

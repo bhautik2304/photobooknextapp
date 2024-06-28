@@ -136,6 +136,12 @@ function ProductSize() {
                           value: product?.min_page * 0,
                         })
                       );
+                      disapatch(
+                        changeOrderData({
+                          key: "design_print_bind_option",
+                          value: null,
+                        })
+                      );
                       disapatch(fcm({ key: "product_print", error: false }));
                     }}
                   >
@@ -217,6 +223,114 @@ function ProductSize() {
                   </span>
                 </div>
               </div>
+            )}
+            {orderData.pritnig_price_type == "design_print_bind" && (
+              <>
+                <div className="col-12 my-3 row">
+                  <span className="text-danger">
+                    {formError?.design_print_bind_option}
+                  </span>
+                  <>
+                    <h6>Select your service option</h6>
+                  </>
+                  <div className="col-2 my-3">
+                    <div
+                      onClick={() => {
+                        disapatch(
+                          changeOrderData({
+                            key: "design_print_bind_option",
+                            value: "Clean Style",
+                          })
+                        );
+                        disapatch(
+                          fcm({ key: "design_print_bind_option", error: false })
+                        );
+                      }}
+                    >
+                      <img
+                        src="/images/CleanStyle.jpg"
+                        style={{
+                          width: 120,
+                          height: 120,
+                          borderRadius: "10px",
+                          // backgroundColor: data.colorcode,
+                        }}
+                        className={`pro ${
+                          orderData?.design_print_bind_option ==
+                            "Clean Style" && "selected_prod_cover_option"
+                        }`}
+                        alt=""
+                        srcset=""
+                      />
+                    </div>
+                    <div className="my-2">Clean Style</div>
+                  </div>
+                  <div className="col-2 my-3">
+                    <div
+                      onClick={() => {
+                        disapatch(
+                          changeOrderData({
+                            key: "design_print_bind_option",
+                            value: "Classic Style",
+                          })
+                        );
+                        disapatch(
+                          fcm({ key: "design_print_bind_option", error: false })
+                        );
+                      }}
+                    >
+                      <img
+                        src="/images/ClassicStyle.jpg"
+                        style={{
+                          width: 120,
+                          height: 120,
+                          borderRadius: "10px",
+                          // backgroundColor: data.colorcode,
+                        }}
+                        className={`pro ${
+                          orderData.design_print_bind_option ==
+                            "Classic Style" && "selected_prod_cover_option"
+                        }`}
+                        alt=""
+                        srcset=""
+                      />
+                    </div>
+                    <div className="my-2">Classic Style</div>
+                  </div>
+                  <div className="col-2 my-3">
+                    <div
+                      onClick={() => {
+                        disapatch(
+                          changeOrderData({
+                            key: "design_print_bind_option",
+                            value: "Blended Style",
+                          })
+                        );
+                        disapatch(
+                          fcm({ key: "design_print_bind_option", error: false })
+                        );
+                      }}
+                    >
+                      <img
+                        src="/images/BlendedStyle.jpg"
+                        style={{
+                          width: 120,
+                          height: 120,
+                          borderRadius: "10px",
+                          // backgroundColor: data.colorcode,
+                        }}
+                        className={`pro ${
+                          orderData.design_print_bind_option ==
+                            "Blended Style" && "selected_prod_cover_option"
+                        }`}
+                        alt=""
+                        srcset=""
+                      />
+                    </div>
+                    <div className="my-2">Blended Style</div>
+                  </div>
+                </div>
+              </>
             )}
 
             {(orderData.pritnig_price_type == "print_bind" ||

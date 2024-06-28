@@ -20,19 +20,19 @@ function Footer() {
               <div className="d-flex">
                 <a
                   className="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle me-3"
-                  href="#"
+                  href="https://www.facebook.com/photokrafft?mibextid=LQQJ4d"
                 >
                   <i className="ai-facebook"></i>
                 </a>
                 <a
                   className="btn btn-icon btn-sm btn-secondary btn-instagram rounded-circle me-3"
-                  href="#"
+                  href="https://www.instagram.com/photokrafftofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 >
                   <i className="ai-instagram"></i>
                 </a>
                 <a
                   className="btn btn-icon btn-sm btn-secondary btn-linkedin rounded-circle"
-                  href="#"
+                  href="https://www.linkedin.com/company/photokrafft/?originalSubdomain=in"
                 >
                   <i className="ai-linkedin"></i>
                 </a>

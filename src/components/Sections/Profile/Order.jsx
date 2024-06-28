@@ -656,7 +656,14 @@ function Order() {
                                                 <h4 class="h6 mb-2">
                                                   <a href="#">Design charges</a>
                                                 </h4>
-                                                {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
+                                                <div class="text-body-secondary fs-sm me-3">
+                                                  Design Type:{" "}
+                                                  <span class="text-dark fw-medium">
+                                                    {
+                                                      datas?.design_print_bind_option
+                                                    }
+                                                  </span>
+                                                </div>
                                               </div>
                                             </div>
                                           </td>
