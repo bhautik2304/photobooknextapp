@@ -3,16 +3,16 @@ import React, { useState, useMemo } from "react";
 import axios from "axios";
 import { apiRoutes, appRoutes, localstorageKey } from "@/constants";
 import { useRouter } from "next/navigation";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
 import success from "@/assets/img/success.json";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 // import "react-phone-number-input/style.css";
-import countryList from 'react-select-country-list'
+import countryList from "react-select-country-list";
 import { FaClipboard } from "react-icons/fa";
-import process from "../../assets/img/process.json"
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
-
+import process from "../../assets/img/process.json";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "@/assets/css/styles/social-icons.css";
 
 const errorMsg = {
   name: "Please enter your name.",
@@ -37,7 +37,7 @@ const registrationState = {
   step1: "1",
   step2: "2",
   step3: "3",
-}
+};
 
 function RegisterForm() {
   const router = useRouter();
@@ -66,18 +66,19 @@ function RegisterForm() {
   const [status, setStatus] = useState(false);
   const [mobile, setMobile] = useState(false);
   const [nowahtapp, setNowahtapp] = useState(false);
-  const [registrationProcess, setRegistrationProcess] = useState(registrationState.step1);
+  const [registrationProcess, setRegistrationProcess] = useState(
+    registrationState.step1
+  );
   const [error, setError] = useState(false);
   const [show, setHide] = useState(false);
 
-  const options = useMemo(() => countryList().getData(), [])
-  useMemo(() => countryList().setEmpty('Select a Country').getLabel(''), [])
-
+  const options = useMemo(() => countryList().getData(), []);
+  useMemo(() => countryList().setEmpty("Select a Country").getLabel(""), []);
 
   // axios.post()
   const submitData = async () => {
     // console.log(getCountryCallingCode(data.mobaile_code))
-    console.log(data.mobaile_code)
+    console.log(data.mobaile_code);
     const newError = {};
 
     if (!data?.name) {
@@ -116,7 +117,7 @@ function RegisterForm() {
       return 0; // Validation failed
     }
 
-    setRegistrationProcess(registrationState.step2)
+    setRegistrationProcess(registrationState.step2);
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("phone_no", data.mobaile);
@@ -134,20 +135,22 @@ function RegisterForm() {
     formData.append("compunys_logo", data.logo);
     formData.append("social_link_1", data.social1);
     formData.append("social_link_2", data.social2);
-    axios.post(apiRoutes.register, formData).then(res => {
-      if (Number(res.data.code) === 444) {
-        newError.apiError = res.data.msg
-        setError(newError);
-        setRegistrationProcess(registrationState.step1)
-        return 0;
-      }
-      setRegistrationProcess(registrationState.step3)
-      // setStatus(true)
-
-    }).catch(err => {
-      setRegistrationProcess(registrationState.step1)
-      console.log(err)
-    })
+    axios
+      .post(apiRoutes.register, formData)
+      .then((res) => {
+        if (Number(res.data.code) === 444) {
+          newError.apiError = res.data.msg;
+          setError(newError);
+          setRegistrationProcess(registrationState.step1);
+          return 0;
+        }
+        setRegistrationProcess(registrationState.step3);
+        // setStatus(true)
+      })
+      .catch((err) => {
+        setRegistrationProcess(registrationState.step1);
+        console.log(err);
+      });
   };
 
   return (
@@ -172,16 +175,16 @@ function RegisterForm() {
                 <div className="col my-1">
                   <label>Mobile Number</label>
                   <PhoneInput
-                    inputStyle={{ width: '100%' }}
+                    inputStyle={{ width: "100%" }}
                     inputClass="form-control form-control-lg"
                     onChange={(E) => {
                       // console.log(getCountryCallingCode(E));
-                      setData({ ...data, mobaile: E })
+                      setData({ ...data, mobaile: E });
                     }}
                     inputProps={{
-                      placeholder: "Mobile Number"
+                      placeholder: "Mobile Number",
                     }}
-                    country={'in'}
+                    country={"in"}
                     placeholder="Your Mobile No *"
                     value={data.mobaile}
                     required
@@ -202,13 +205,13 @@ function RegisterForm() {
                   <label>Your Whatsapp No *</label>
                   <div className="password-toggle mb-2">
                     <PhoneInput
-                      inputStyle={{ width: '100%' }}
+                      inputStyle={{ width: "100%" }}
                       inputClass="form-control form-control-lg"
                       onChange={(E) => {
                         // console.log(getCountryCallingCode(E));
-                        setData({ ...data, whatsapp_no: E })
+                        setData({ ...data, whatsapp_no: E });
                       }}
-                      country={'in'}
+                      country={"in"}
                       placeholder="Your Whatsapp No *"
                       value={data.whatsapp_no}
                       required
@@ -224,30 +227,40 @@ function RegisterForm() {
                         onClick={() => setHide(!show)}
                       />
                       <Tooltip title="Copy Your Mobile Number">
-                        <IconButton aria-label="" disabled={nowahtapp} onClick={() => {
-                          setData({ ...data, whatsapp_no: data.mobaile })
-                          console.log(data.mobaile);
-                        }}>
+                        <IconButton
+                          aria-label=""
+                          disabled={nowahtapp}
+                          onClick={() => {
+                            setData({ ...data, whatsapp_no: data.mobaile });
+                            console.log(data.mobaile);
+                          }}
+                        >
                           <FaClipboard />
                         </IconButton>
                       </Tooltip>
                     </label>
                   </div>
-                  <span className={`text-${nowahtapp ? "success" : "danger"} fs-sm pro`} onClick={() => setNowahtapp(!nowahtapp)} >
-                    {
-                      nowahtapp ? "Click to add your Whatsapp number" : "Click if you don’t have a Whatsapp number"
-                    }
-                  </span><br />
+                  <span
+                    className={`text-${
+                      nowahtapp ? "success" : "danger"
+                    } fs-sm pro`}
+                    onClick={() => setNowahtapp(!nowahtapp)}
+                  >
+                    {nowahtapp
+                      ? "Click to add your Whatsapp number"
+                      : "Click if you don’t have a Whatsapp number"}
+                  </span>
+                  <br />
                   <span className="text-danger">{error?.whatsapp_no}</span>
-                  <span className="text-danger">{error?.whatsapp_country_code}</span>
+                  <span className="text-danger">
+                    {error?.whatsapp_country_code}
+                  </span>
                 </div>
               </div>
               <div className="col-12 mb-2">
                 <input
                   className="form-control form-control-lg"
-                  onChange={(e) =>
-                    setData({ ...data, email: e.target.value })
-                  }
+                  onChange={(e) => setData({ ...data, email: e.target.value })}
                   type="email"
                   placeholder="Email address *"
                   required
@@ -360,9 +373,11 @@ function RegisterForm() {
                     placeholder="Country *"
                     required
                   >
-                    {
-                      options.map((data, key) => <option value={data.label} key={key}>{data.label}</option>)
-                    }
+                    {options.map((data, key) => (
+                      <option value={data.label} key={key}>
+                        {data.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -371,28 +386,50 @@ function RegisterForm() {
                 <hr />
               </div>
 
-              {
-                data.country == "India" && (
-                  <>
-                    <h6 classNameName="">GST Number</h6>
-                    <div className="col-12 mb-2">
-                      <input
-                        className="form-control form-control-lg"
-                        onChange={(e) =>
-                          setData({ ...data, gst: e.target.value })
-                        }
-                        placeholder="GST if applicable"
-                        required
-                      />
-                    </div>
-                    <div className="my-4 px-5">
-                      <hr />
-                    </div>
-                  </>
-                )
-              }
+              {data.country == "India" && (
+                <>
+                  <h6 classNameName="">GST Number</h6>
+                  <div className="col-12 mb-2">
+                    <input
+                      className="form-control form-control-lg"
+                      onChange={(e) =>
+                        setData({ ...data, gst: e.target.value })
+                      }
+                      placeholder="GST if applicable"
+                      required
+                    />
+                  </div>
+                  <div className="my-4 px-5">
+                    <hr />
+                  </div>
+                </>
+              )}
 
-              <h6 classNameName="">Social Information</h6>
+              <div className="d-flex" style={{ gap: "8px" }}>
+                <h6 className="pt-2">Social Information</h6>
+                <div className="d-flex justify-content-center align-items-center rounded-circle socialIcon">
+                  <img
+                    src="images/facebook.png"
+                    width={25}
+                    alt="facebook logo"
+                  ></img>
+                </div>
+                <div className="d-flex justify-content-center align-items-center rounded-circle socialIcon">
+                  <img
+                    src="images/instagram.png"
+                    width={25}
+                    alt="instagram logo"
+                  ></img>
+                </div>
+                <div className="d-flex justify-content-center align-items-center rounded-circle socialIcon">
+                  <img
+                    src="images/web.png"
+                    width={25}
+                    alt="internet logo"
+                  ></img>
+                </div>
+              </div>
+
               <div className="password-toggle mb-2">
                 <span className="text-danger">{error?.socialLinkTwo}</span>
                 <input
@@ -456,7 +493,8 @@ function RegisterForm() {
                 review , please wait for approval
               </div>
               <div class="alert alert-primary" role="alert">
-                We have sent a verification email , please verify it or contact us for verification.
+                We have sent a verification email , please verify it or contact
+                us for verification.
               </div>
             </center>
             <center>
