@@ -231,7 +231,7 @@ function ProductSize() {
                     {formError?.design_print_bind_option}
                   </span>
                   <>
-                    <h6>Select your service option</h6>
+                    <h6>Select your design style</h6>
                   </>
                   <div className="col-2 my-3">
                     <div

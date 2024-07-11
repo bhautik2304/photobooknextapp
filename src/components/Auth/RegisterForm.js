@@ -25,6 +25,8 @@ const errorMsg = {
 
   address: "Please enter your address.",
   state: "Please enter your state.",
+  city: "Please enter your city.",
+  zipcode: "Please enter your zipcode.",
   country: "Please enter your country.",
 
   company: "Please enter your company / Studio name.",
@@ -95,6 +97,9 @@ function RegisterForm() {
     if (!data?.email) {
       newError.email = errorMsg.email;
     }
+    if (!data?.zipcode) {
+      newError.zipcode = errorMsg.zipcode;
+    }
     if (!data?.password) {
       newError.password = errorMsg.password;
     }
@@ -106,6 +111,9 @@ function RegisterForm() {
     }
     if (!data?.state) {
       newError.state = errorMsg.state;
+    }
+    if (!data?.city) {
+      newError.city = errorMsg.city;
     }
     if (!data?.country) {
       newError.country = errorMsg.country;
@@ -129,6 +137,7 @@ function RegisterForm() {
     formData.append("city", data.city);
     formData.append("state", data.state);
     formData.append("country", data.country);
+    formData.append("zipcode", data.zipcode);
     formData.append("gst", data.gst);
 
     formData.append("compunys_name", data.company);
@@ -350,6 +359,7 @@ function RegisterForm() {
                     required
                   />
                 </div>
+
                 <div className="col mb-2">
                   <span className="text-danger">{error?.state}</span>
                   <input
@@ -359,6 +369,18 @@ function RegisterForm() {
                       setData({ ...data, state: e.target.value })
                     }
                     placeholder="State / Province *"
+                    required
+                  />
+                </div>
+                <div className="col mb-2">
+                  <span className="text-danger">{error?.zipcode}</span>
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    onChange={(e) =>
+                      setData({ ...data, zipcode: e.target.value })
+                    }
+                    placeholder="Zip / Pin Code *"
                     required
                   />
                 </div>
