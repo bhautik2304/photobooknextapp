@@ -41,7 +41,7 @@ export const apiRoutes = {
   checkout: serverApiDomain + "/checkout",
   updateAvtar: serverApiDomain + "customer/change-avtar/",
   customer: serverApiDomain + "/customer/",
-  forgetPassword: serverApiDomain + "/auth/customer/forget-password/",
+  forgetPassword: serverApiDomain + "/auth/customer/forget-password",
 };
 
 export const localstorageKey = {
