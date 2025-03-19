@@ -1,6 +1,9 @@
 import { appRoutes } from "@/constants";
 import React from "react";
 import { IoIosCall, IoMdMailUnread } from "react-icons/io";
+import { IN, CA } from "country-flag-icons/react/3x2";
+import moment from "moment";
+import "@/assets/css/styles/faq-accordion-flag.css"
 
 function Footer() {
   return (
@@ -39,8 +42,9 @@ function Footer() {
               </div>
             </div>
             <div className="col-md-8 col-lg-7 col-xl-6 offset-lg-2 offset-xl-3">
-              <div className="row row-cols-1 row-cols-sm-3">
-                <div className="col mb-3 mb-md-0">
+              <div className="col-12">
+              <div className="row">
+                <div className="col-lg-6 col-md-6 col-sm-12 mb-3 mb-md-0">
                   <ul className="nav flex-column">
                     <li>
                       <a
@@ -90,19 +94,79 @@ function Footer() {
                         Order Now
                       </a>
                     </li>
+                      <li>
+                        <a className="nav-link fw-normal py-1 px-0" href="#">
+                          Terms & Conditions
+                        </a>
+                      </li>
+                      <li>
+                        <a className="nav-link fw-normal py-1 px-0" href="#">
+                          Privacy Policy
+                        </a>
+                      </li>
                   </ul>
                 </div>
-                <div className="col mb-4 mb-md-0">
+                <div className="col-lg-6 col-md-6 col-sm-12 mb-4 mb-md-0">
                   <ul className="nav flex-column">
                     <li>
-                      <a className="nav-link fw-normal py-1 px-0" href="#">
-                        Terms & Conditions
-                      </a>
+                      <h6>Contact Us</h6>
                     </li>
                     <li>
-                      <a className="nav-link fw-normal py-1 px-0" href="#">
-                        Privacy Policy
-                      </a>
+                      <div className="row col-12">
+                        <div className="col-4 d-flex justify-content-center">
+                          <div className="countryFlag">
+                            <IN title="India" />
+                          </div>
+                        </div>
+                        <div className="col-8">
+                          <div>
+                            <a href="tel:+919227094949">
+                              <h6 className="m-0">+91-92270 94949</h6>
+                            </a>
+                            <p className="text-muted">India Support</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="row col-12">
+                        <div className="col-4 d-flex justify-content-center">
+                          <div className="countryFlag">
+                            <CA title="Canada" />
+                          </div>
+                        </div>
+                        <div className="col-8">
+                          <div>
+                            <a href="tel:+19054525252">
+                              <h6 className="m-0">+1-905 452 5252</h6>
+                            </a>
+                            <p className="text-muted">North America Support</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="row col-12">
+                          <div className="col-4 d-flex justify-content-center">
+                          <IoMdMailUnread
+                            size={50}
+                            color="#5BB5A2"
+                            style={{
+                              backgroundColor: "#E8F2EE",
+                              padding: 10,
+                              borderRadius: 50,
+                            }}
+                          />
+                        </div>
+                        <div className="col-8">
+                          <div>
+                            <a href="mailto:info@photokrafft.com">
+                              <h6 className="m-0">info@photokrafft.com</h6>
+                            </a>
+                            <p className="text-muted">Support Email</p>
+                          </div>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -134,10 +198,11 @@ function Footer() {
                   </ul>
                 </div> */}
               </div>
+              </div>
             </div>
           </div>
           <p className="fs-sm mb-0">
-            <span className="opacity-70">&copy; All rights reserved by </span>
+            <span className="opacity-70">&copy; {moment().year()} Photokrafft Worldwide LLP. All Rights Reserved.</span>
             <a
               className="nav-link d-inline fw-normal p-0"
               href="/"

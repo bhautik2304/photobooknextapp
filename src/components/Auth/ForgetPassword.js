@@ -6,10 +6,12 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authLogin } from "@/Redux/Slice/authSlice";
 import { redirect, useRouter } from "next/navigation";
+import CircularProgress from '@mui/material/CircularProgress';
 
 function ForgetPassword() {
   const [error, setError] = useState(false);
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false)
   const [data, setData] = useState({
     email: "",
   });
@@ -19,44 +21,59 @@ function ForgetPassword() {
   const dispatch = useDispatch();
 
   const forgetReq = () => {
+    setLoading(true)
     axios
       .post(apiRoutes.forgetPassword, data)
       .then((res) => {
         if (res.data.code == 200) {
           setStep(1);
+          setLoading(false)
           return;
         }
+        setLoading(false)
         setError(res.data.msg);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+        setLoading(false)
+        console.log(err)});
   };
 
   const otpVerify = () => {
+    setLoading(true)
     setError(false);
     axios
-      .post(apiRoutes.forgetPassword + "check-otp", data)
+      .post(apiRoutes.forgetPassword + "/check-otp", data)
       .then((res) => {
         if (res.data.code == 200) {
           setStep(2);
+          setLoading(false)
           return;
         }
+        setLoading(false)
         setError(res.data.msg);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+        setLoading(false)
+        console.log(err)});
   };
 
   const changePassword = () => {
+    setLoading(true)
     setError(false);
     axios
-      .post(apiRoutes.forgetPassword + "set-password", data)
+      .post(apiRoutes.forgetPassword + "/set-password", data)
       .then((res) => {
         if (res.data.code == 200) {
           router.replace(appRoutes.Login);
+          setLoading(false)
           return;
         }
+        setLoading(false)
         setError(res.data.msg);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false)
+        console.log(err)});
   };
 
   return (
@@ -114,7 +131,9 @@ function ForgetPassword() {
             onClick={() => forgetReq(1)}
             style={{ borderRadius: "5px !important" }}
           >
-            Send Email
+            {
+              loading ? <CircularProgress color="inherit" size={15} /> : "Send Email"
+            }
           </button>
           <Link href={appRoutes.Login} className="">
             {" "}
@@ -127,9 +146,12 @@ function ForgetPassword() {
           <button
             className="btn btn-md btn-primary w-100 my-4"
             onClick={() => otpVerify(2)}
+            disabled={loading}
             style={{ borderRadius: "5px !important" }}
           >
-            Verify OTP
+            {
+              loading ? <CircularProgress color="inherit" size={15} /> : "Verify OTP"
+            }
           </button>
           <Link href={"#"} onClick={() => setStep(0)} className="">
             {" "}

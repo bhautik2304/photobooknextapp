@@ -206,7 +206,7 @@ function ProductSize() {
                   </div>
                   <div className="my-2">Design Print & Bind</div>
                   <div className="my-2">
-                    <b>{zonePrice(pritnig_price)?.priceSrring}</b> + per page
+                    <b>{zonePrice(pritnig_price)?.priceSrring}</b> extra per page
                   </div>
                 </div>
               </div>

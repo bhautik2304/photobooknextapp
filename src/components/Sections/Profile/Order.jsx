@@ -192,6 +192,8 @@ function Order() {
                         datas?.shippingValue,
                         datas?.discount
                       );
+                      console.log(datas);
+                      
                       return (
                         <>
                           <Accordion
@@ -265,9 +267,8 @@ function Order() {
                                     <div class="fs-sm text-body-secondary mb-2">
                                       <b>Total</b>
                                     </div>
-                                    <div class="fs-sm fw-medium text-dark">{`${
-                                      datas?.countryzone?.currency_sign
-                                    } ${Math.round(datas?.order_total)}`}</div>
+                                    <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign
+                                      } ${datas?.order_total}`}</div>
                                   </div>
                                 </div>
                                 <div
@@ -433,14 +434,12 @@ function Order() {
                                           <div class="fs-sm text-body-secondary mb-2">
                                             {/* Price */}
                                           </div>
-                                          <div class="fs-sm fw-medium text-dark">{`${
-                                            datas?.sheetValue +
+                                          <div class="fs-sm fw-medium text-dark">{`${datas?.sheetValue +
                                             (datas?.sheetValue *
                                               datas?.paperValue) /
-                                              100
-                                          } ${
-                                            datas?.countryzone?.currency_sign
-                                          }`}</div>
+                                            100
+                                            } ${datas?.countryzone?.currency_sign
+                                            }`}</div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                           <div class="fs-sm text-body-secondary mb-2">
@@ -448,14 +447,13 @@ function Order() {
                                           </div>
                                           <div class="fs-sm fw-medium text-dark">{`${Math.round(
                                             datas?.page_qty *
-                                              datas?.sheetValue +
-                                              (datas?.page_qty *
-                                                datas?.sheetValue *
-                                                datas?.paperValue) /
-                                                100
-                                          )} ${
-                                            datas?.countryzone?.currency_sign
-                                          }`}</div>
+                                            datas?.sheetValue +
+                                            (datas?.page_qty *
+                                              datas?.sheetValue *
+                                              datas?.paperValue) /
+                                            100
+                                          )} ${datas?.countryzone?.currency_sign
+                                            }`}</div>
                                         </td>
                                       </tr>
                                       {/* product cover detaild */}
@@ -626,17 +624,15 @@ function Order() {
                                             <div class="fs-sm text-body-secondary mb-2">
                                               {/* Total */}
                                             </div>
-                                            <div class="fs-sm fw-medium text-dark">{`${
-                                              datas?.countryzone?.currency_sign
-                                            } ${
-                                              datas?.album_book_copy_price *
+                                            <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign
+                                              } ${datas?.album_book_copy_price *
                                               datas?.album_book_copy_qty
-                                            }`}</div>
+                                              }`}</div>
                                           </td>
                                         </tr>
                                       ) : null}
                                       {datas?.pritnig_price_type ==
-                                      "design_print_bind" ? (
+                                        "design_print_bind" ? (
                                         <tr>
                                           <td class="border-0 py-1 my-2 px-0">
                                             <div class="d-flex align-items-center">
@@ -685,12 +681,10 @@ function Order() {
                                             <div class="fs-sm text-body-secondary mb-2">
                                               {/* Total */}
                                             </div>
-                                            <div class="fs-sm fw-medium text-dark">{`${
-                                              datas?.countryzone?.currency_sign
-                                            } ${
-                                              datas?.pritnig_price *
+                                            <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign
+                                              } ${datas?.pritnig_price *
                                               datas?.page_qty
-                                            }`}</div>
+                                              }`}</div>
                                           </td>
                                         </tr>
                                       ) : null}
@@ -732,12 +726,11 @@ function Order() {
                                               </div>
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                              <div class="fs-sm fw-medium text-success">{`${
-                                                datas?.countryzone
-                                                  ?.currency_sign
-                                              } ${Math.round(
-                                                afterDiscount
-                                              )}`}</div>
+                                              <div class="fs-sm fw-medium text-success">{`${datas?.countryzone
+                                                ?.currency_sign
+                                                } ${Math.round(
+                                                  afterDiscount
+                                                )}`}</div>
                                             </td>
                                           </tr>
                                         </>
@@ -756,7 +749,7 @@ function Order() {
                                         </td>
                                       </tr>
                                       {datas?.pritnig_price_type ==
-                                      "design_print_bind" ? (
+                                        "design_print_bind" ? (
                                         <>
                                           <tr>
                                             <td class="border-0 py-1 px-0"></td>
@@ -767,13 +760,11 @@ function Order() {
                                               </div>
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                              <div class="fs-sm fw-medium text-success">{`${
-                                                datas?.countryzone
-                                                  ?.currency_sign
-                                              } ${
-                                                datas?.pritnig_price *
+                                              <div class="fs-sm fw-medium text-success">{`${datas?.countryzone
+                                                ?.currency_sign
+                                                } ${datas?.pritnig_price *
                                                 datas?.page_qty
-                                              }`}</div>
+                                                }`}</div>
                                             </td>
                                           </tr>
                                         </>
@@ -788,12 +779,10 @@ function Order() {
                                             </div>
                                           </td>
                                           <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                            <div class="fs-sm fw-medium ">{`${
-                                              datas?.countryzone?.currency_sign
-                                            } ${
-                                              datas?.album_book_copy_price *
+                                            <div class="fs-sm fw-medium ">{`${datas?.countryzone?.currency_sign
+                                              } ${datas?.album_book_copy_price *
                                               datas?.album_book_copy_qty
-                                            }`}</div>
+                                              }`}</div>
                                           </td>
                                         </tr>
                                       ) : null}
@@ -806,11 +795,7 @@ function Order() {
                                           </div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                          <div class="fs-sm fw-medium text-dark">{`${
-                                            datas?.countryzone?.currency_sign
-                                          } ${Math.round(
-                                            datas?.order_total
-                                          )}`}</div>
+                                          <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign} ${Math.round(datas?.subtotal)}`}</div>
                                         </td>
                                       </tr>
                                       <tr>
@@ -834,11 +819,10 @@ function Order() {
                                           </div>
                                         </td>
                                         <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                          <div class="fs-sm fw-medium text-dark">{`${
-                                            datas?.countryzone?.currency_sign
-                                          } ${Math.round(
-                                            datas?.order_total
-                                          )}`}</div>
+                                          <div class="fs-sm fw-medium text-dark">{`${datas?.countryzone?.currency_sign
+                                            } ${Math.round(
+                                              datas?.order_total
+                                            )}`}</div>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -923,7 +907,7 @@ function Order() {
                                       <div className="col-md-6 col-lg-6 col-sm-12 my-3">
                                         <div
                                           class="alert alert-success d-flex justify-content-center"
-                                          // role="alert"
+                                        // role="alert"
                                         >
                                           delivery tracking no
                                           <span className="text-black mx-2">

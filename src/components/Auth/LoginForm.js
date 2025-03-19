@@ -7,9 +7,11 @@ import { useDispatch } from 'react-redux';
 import { authLogin } from '@/Redux/Slice/authSlice';
 import { fetchUsers } from '@/Redux/Slice/userSlice';
 import { useRouter } from 'next/navigation';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function LoginForm() {
     const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -23,20 +25,23 @@ function LoginForm() {
     const [show, setHide] = useState(false)
 
     const submitData = () => {
-
+        setLoading(true)
         setError(false)
-
         axios.post(apiRoutes.login, data).then(res => {
             if (res.data.code == 200) {
                 // alert("logd in")
                 dispatch(authLogin(res.data))
                 dispatch(fetchUsers())
+                setLoading(false)
                 location.reload()
-
                 return
             }
+            setLoading(false)
             setError(res.data.msg)
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            setLoading(false)
+        })
     }
 
     useEffect(() => {
@@ -50,18 +55,22 @@ function LoginForm() {
         const handleEnterKeyPress = () => {
             // Your function logic here
             setError(false)
-
+            setLoading(true)
             axios.post(apiRoutes.login, data).then(res => {
                 if (res.data.code == 200) {
                     // alert("logd in")
                     dispatch(authLogin(res.data))
                     dispatch(fetchUsers())
+                    setLoading(false)
                     location.reload()
-
+                    
                     return
                 }
+                setLoading(false)
                 setError(res.data.msg)
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                setLoading(false)
+                console.log(err)})
         };
 
         document.body.addEventListener('keydown', handleKeyDown);
@@ -100,7 +109,11 @@ function LoginForm() {
                         <Link href={appRoutes.forgetPassword} className='' > Reset password!</Link>
                     </div>
                 </div>
-                <button className="btn btn-md btn-primary w-100 my-4 pro" onClick={() => submitData()} style={{ borderRadius: '5px !important' }}>Sign in</button>
+                <button className="btn btn-md btn-primary w-100 my-4 pro" disabled={loading} onClick={() => submitData()} style={{ borderRadius: '5px !important' }}>
+                    {
+                        loading ? <CircularProgress color="inherit" size={15} /> : "Sign in"
+                    }
+                </button>
                 <div className="row">
                     <div className='col-12 row' >
                         <center>
