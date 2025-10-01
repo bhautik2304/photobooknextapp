@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../photokrfft-api"
+		},
+		{
+			"path": "../../../../../../photostudio-admin"
+		},
+		{
+			"path": "../../../../.."
+		}
+	],
+	"settings": {}
+}

@@ -8,6 +8,7 @@ import {
   setPrintingTotale,
 } from "@/Redux/Slice/orderSlice";
 import { fetchProduct } from "@/Redux/Slice/ProductSlice";
+import {cutFloat } from "@/utils"
 
 function TotalCounter() {
   const {
@@ -72,13 +73,13 @@ function TotalCounter() {
               <button
                 className="btn btn-primary btn-sm mx-2"
                 style={{ fontSize: 18, fontWeight: "bold" }}
-              >{`Design cost : ${pritnig_price_value * page_qty} ${
+              >{`Design cost : ${cutFloat(pritnig_price_value * page_qty)} ${
                 user?.zone?.currency_sign
               }`}</button>
               <button
                 className="btn btn-success btn-sm"
                 style={{ fontSize: 18, fontWeight: "bold" }}
-              >{`Product cost : ${total} ${user?.zone?.currency_sign}`}</button>
+              >{`Product cost : ${cutFloat(total)} ${user?.zone?.currency_sign}`}</button>
             </div>
           </div>
         </div>

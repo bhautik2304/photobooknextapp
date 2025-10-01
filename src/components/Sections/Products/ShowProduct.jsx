@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { appRoutes, productFormStep } from "@/constants";
+import { appRoutes, productFormStep, appAxios } from "@/constants";
 import {
   selectProduct,
   setTotale,
@@ -20,8 +20,15 @@ import {
 } from "./FormStep";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { fetchProduct } from "@/Redux/Slice/ProductSlice";
+// import {  } from '@/constants';
 
 function ShowProduct() {
+  const [loading, setLoading] = useState(false)
+  const [clientSecret, setClientSecret] = useState(false);
+  const [paymentId, setPaymentId] = useState(null);
+  const [openPaymentModal, setOpenPaymentModal] = useState(false)
+  const [cancellLoading, setCancellLoading] = useState(false)
+  // const []
   const {
     auth: { authStatus, user },
     product: { product },
@@ -60,6 +67,42 @@ function ShowProduct() {
     photoBookCopy,
   ]);
 
+  // useEffect(() => {
+  //   const handleUnload = async (event) => {
+  //     if (clientSecret) {
+  //       // const paymentIntentId = clientSecret.split('_secret')[0];
+  //       await axios.post('http://192.168.1.39:8000/api/cancel-payment-intent', {
+  //         payment_intent_id: paymentId,
+  //         type:"when users refresh"
+  //       });
+  //     }
+  //   };
+
+  //   window.addEventListener('beforeunload', handleUnload);
+
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleUnload);
+  //   };
+  // }, [clientSecret]);
+
+  // useEffect(() => {
+  //   const handleUnload = () => {
+  //     if (clientSecret) {
+  //       // const paymentIntentId = clientSecret.split('_secret')[0];
+  //       const url = 'http://192.168.1.39:8000/api/cancel-payment-intent';
+
+  //       const data = new Blob(
+          
+  //         [JSON.stringify({ payment_intent_id: paymentId, type: "when users unload" })],
+  //         { type: 'application/json' }
+  //       );
+  //       navigator.sendBeacon(url, data);
+  //     }
+  //   };
+
+  //   window.addEventListener('unload', handleUnload);
+  //   return () => window.removeEventListener('unload', handleUnload);
+  // }, [clientSecret]);
   return (
     <>
       {authStatus ? (
@@ -205,11 +248,11 @@ function ShowProduct() {
             >
               {product
                 ? product.map((data) => (
-                    <div className="col-lg-3 col-md-3 col-sm-12">
-                      <img src={data?.img} alt="" srcset="" />
-                      <h6 className="my-3">{data.name}</h6>
-                    </div>
-                  ))
+                  <div className="col-lg-3 col-md-3 col-sm-12">
+                    <img src={data?.img} alt="" srcset="" />
+                    <h6 className="my-3">{data.name}</h6>
+                  </div>
+                ))
                 : null}
             </Link>
           </div>

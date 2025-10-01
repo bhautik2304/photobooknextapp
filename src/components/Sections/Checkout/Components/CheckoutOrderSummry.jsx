@@ -9,18 +9,17 @@ import {
     formError as fcm,
     setTotale,
 } from "@/Redux/Slice/orderSlice";
-import axios from "axios";
+import { apiRoutes , appAxios} from "@/constants";
+import { LoadingButton } from "@mui/lab";
+import StripeWrapper from "./StripeWrapper"
 
-import { localstorageKey } from "@/constants";
-
-function roundToDecimalPlaces(number, decimalPlaces) {
-    const factor = Math.pow(10, decimalPlaces);
-    return Math.round(number * factor) / factor;
-}
-
-function CheckOutItem({ back, submitOrder }) {
+function CheckoutOrderSummry({ back, submitOrder,setChackOutStatus }) {
     const [pageErrorMsg, setErrorMsg] = useState("");
-
+    const [loading, setLoading] = useState(false)
+    const [clientSecret, setClientSecret] = useState(false);
+    const [paymentId, setPaymentId] = useState(null);
+    const [openPaymentModal, setOpenPaymentModal] = useState(false)
+    const [cancellLoading, setCancellLoading] = useState(false)
     const {
         auth: { user },
         order: {
@@ -134,7 +133,50 @@ function CheckOutItem({ back, submitOrder }) {
         orderData.album_qty,
     ]);
 
-    console.log(orderData);
+    const payNow = () => {
+        setLoading(true)
+        appAxios.post(apiRoutes.payment.pamymentCreat, {
+          amount: (orderData?.subtotale + user?.zone?.shipingcharge) * 100 // Example: ₹50
+        }).then((res) => {
+          setClientSecret(res.data.clientSecret);
+          setPaymentId(res.data.id);
+          setOpenPaymentModal(true)
+          setLoading(false)
+        }).catch((err) => {
+          console.error("Failed to fetch clientSecret", err);
+          setLoading(false)
+        })
+      }
+
+    const handleSuccess = async (data) => {
+        // console.log(data);
+        setOpenPaymentModal(false)
+    }
+    const handleCancel = async () => {
+        setCancellLoading(true)
+        await appAxios.post(apiRoutes.payment.pamymentCancel, {
+            payment_intent_id: paymentId // Example: ₹50
+        }).then((res) => {
+            setCancellLoading(false)
+            setOpenPaymentModal(false)
+        }).catch((err) => {
+            setCancellLoading(false)
+            console.error("Failed to fetch clientSecret", err);
+        });
+    }
+    const handleFailed = async (e) => {
+        await appAxios.post(apiRoutes.payment.pamymentCancel, {
+            payment_intent_id: paymentId // Example: ₹50
+        }).then((res) => {
+            setCancellLoading(false)
+            setOpenPaymentModal(false)
+            //ste
+        }).catch((err) => {
+            setCancellLoading(false)
+            console.error("Failed to fetch clientSecret", err);
+        });
+    }
+    console.log(((orderData?.subtotale + user?.zone?.shipingcharge) * 100) / 100);
     return (
         <>
             <div>
@@ -182,9 +224,6 @@ function CheckOutItem({ back, submitOrder }) {
                                                 </div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">
-                          Sheet Quantity
-                        </div> */}
                                                 <div class="fs-sm fw-medium text-dark">
                                                     <div className="count-input ms-n3">
                                                         <button
@@ -235,12 +274,8 @@ function CheckOutItem({ back, submitOrder }) {
                                                 </div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">Price</div>
-                                    <div class="fs-sm fw-medium text-dark">$16</div> */}
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">Total</div>
-                                    <div class="fs-sm fw-medium text-dark">$16</div> */}
                                             </td>
                                         </tr>
                                         {/* product sheet dtaild page */}
@@ -290,9 +325,6 @@ function CheckOutItem({ back, submitOrder }) {
                                                 </div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">
-                          Sheet Quantity
-                        </div> */}
                                                 <div class="fs-sm fw-medium text-dark">
                                                     <div className="count-input ms-n3">
                                                         <button
@@ -347,8 +379,8 @@ function CheckOutItem({ back, submitOrder }) {
                                                 {/* <div class="fs-sm text-body-secondary mb-2">Total</div> */}
                                                 <div class="fs-sm fw-medium text-dark">
                                                     {`${user?.zone?.currency_sign} ${((orderData?.sheetValue * orderData.paperValue) /
-                                                            100 +
-                                                            orderData?.sheetValue) *
+                                                        100 +
+                                                        orderData?.sheetValue) *
                                                         orderData?.page_qty
                                                         }`}
                                                 </div>
@@ -393,9 +425,6 @@ function CheckOutItem({ back, submitOrder }) {
                                                 </div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">
-                          Quantity
-                        </div> */}
                                                 <div class="fs-sm fw-medium text-dark">1</div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
@@ -447,22 +476,16 @@ function CheckOutItem({ back, submitOrder }) {
                                                                     </div>
                                                                 </>
                                                             )}
-                                                        {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">
-                          Quantity
-                        </div> */}
                                                 <div class="fs-sm fw-medium text-dark">1</div>
                                             </td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">Price</div> */}
                                                 <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData.boxSleeveValue}`}</div>
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                                {/* <div class="fs-sm text-body-secondary mb-2">Total</div> */}
                                                 <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData.boxSleeveValue}`}</div>
                                             </td>
                                         </tr>
@@ -484,46 +507,21 @@ function CheckOutItem({ back, submitOrder }) {
                                                             <h4 class="h6 mb-2">
                                                                 <a href="#">Pocket book copy</a>
                                                             </h4>
-                                                            {/* <div class="text-body-secondary fs-sm me-3">
-                                                Box & Sleev Meterial:{" "}
-                                                <span class="text-dark fw-medium">
-                                                  {datas?.coversMeterial?.name}
-                                                </span>
-                                              </div>
-                                              <div class="text-body-secondary fs-sm me-3">
-                                                Box & Sleev Color:{" "}
-                                                <span class="text-dark fw-medium">
-                                                  {
-                                                    datas?.coversMeterialcolor
-                                                      ?.name
-                                                  }
-                                                </span>
-                                              </div> */}
-                                                            {/* <div class="text-body-secondary fs-sm me-3">Color: <span class="text-dark fw-medium">Gray night</span></div> */}
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                    {/* <div class="fs-sm text-body-secondary mb-2">
-                            Quantity
-                          </div> */}
                                                     <div class="fs-sm fw-medium text-dark">
                                                         {orderData?.photoBookCopy}
                                                     </div>
                                                 </td>
                                                 <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                    {/* <div class="fs-sm text-body-secondary mb-2">
-                            Price
-                          </div> */}
                                                     <div class="fs-sm fw-medium text-dark">
                                                         {user?.zone?.currency_sign}{" "}
                                                         {orderData?.photoBookCopyPrice}{" "}
                                                     </div>
                                                 </td>
                                                 <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                                    {/* <div class="fs-sm text-body-secondary mb-2">
-                            Total
-                          </div> */}
                                                     <div class="fs-sm fw-medium text-dark">
                                                         {user?.zone?.currency_sign}{" "}
                                                         {zonePrice(product?.album_copy_price)?.price *
@@ -562,88 +560,20 @@ function CheckOutItem({ back, submitOrder }) {
                                                     </div>
                                                 </td>
                                                 <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                    {/* <div class="fs-sm text-body-secondary mb-2">
-                            Quantity
-                          </div> */}
                                                     <div class="fs-sm fw-medium text-dark">
                                                         {orderData?.page_qty}
                                                     </div>
                                                 </td>
                                                 <td class="border-0 py-1 pe-0 ps-3 ps-sm-4">
-                                                    {/* <div class="fs-sm text-body-secondary mb-2">
-                            Price
-                          </div> */}
                                                     <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign} ${orderData?.pritnig_price_value}`}</div>
                                                 </td>
                                                 <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
-                                                    {/* <div class="fs-sm text-body-secondary mb-2">
-                            Total
-                          </div> */}
                                                     <div class="fs-sm fw-medium text-dark">{`${user?.zone?.currency_sign
                                                         } ${orderData?.page_qty * orderData?.pritnig_price_value
                                                         }`}</div>
                                                 </td>
                                             </tr>
                                         ) : null}
-
-                                        {/* product box & sleev detaild*/}
-                                        {/* <tr>
-                      <td class="border-0 pb-1 px-0"></td>
-                      <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4"></td>
-                      <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4"></td>
-                      <td class="border-0 pb-1 pe-0 ps-3 ps-sm-4">
-                        <div class="fs-sm fw-medium text-dark">
-                          <p>Total album to print</p>
-                          <div className="count-input">
-                            <button
-                              className="btn btn-primary text-white btn-sm pro"
-                              onClick={() => {
-                                if (orderData?.album_qty <= 1) {
-                                  dispatch(
-                                    fcm({
-                                      key: "album_qty",
-                                      error: `Minimum Album qty 1`,
-                                    })
-                                  );
-                                  return;
-                                }
-                                dispatch(
-                                  changeAlbumQty(orderData?.album_qty - 1)
-                                );
-                              }}
-                              type="button"
-                              data-decrement
-                            >
-                              -
-                            </button>
-                            <input
-                              className="form-control-input mx-2 border-primary form-control-sm my-2"
-                              type="number"
-                              value={orderData?.album_qty}
-                            />
-                            <button
-                              className="btn btn-primary btn-sm pro text-white"
-                              type="button"
-                              onClick={() => {
-                                dispatch(
-                                  fcm({
-                                    key: "album_qty",
-                                    error: false,
-                                  })
-                                );
-                                dispatch(
-                                  changeAlbumQty(orderData?.album_qty + 1)
-                                );
-                              }}
-                              data-increment
-                            >
-                              +
-                            </button>
-                          </div>
-                          <p className="text-danger">{formError?.album_qty}</p>
-                        </div>
-                      </td>
-                    </tr> */}
                                         <tr>
                                             <td class="border-0 py-1 px-0"></td>
                                             <td class="border-0 py-1 pe-0 ps-3 ps-sm-4"></td>
@@ -781,9 +711,7 @@ function CheckOutItem({ back, submitOrder }) {
                                             </td>
                                             <td class="border-0 text-end py-1 pe-0 ps-3 ps-sm-4">
                                                 <div class="fs-sm fw-medium text-dark mb-2">
-                                                    {`${user?.zone?.currency_sign} ${Math.round(
-                                                        orderData?.subtotale + user?.zone?.shipingcharge
-                                                    )}`}
+                                                    {`${user?.zone?.currency_sign} ${orderData?.subtotale + user?.zone?.shipingcharge}`}
                                                 </div>
                                             </td>
                                         </tr>
@@ -806,12 +734,23 @@ function CheckOutItem({ back, submitOrder }) {
                                         </button>
                                     </div>
                                     <div className="col-6">
-                                        <button
+                                        {/* <button
                                             className="pro btn btn-primary w-100"
                                             onClick={() => submitOrder()}
                                         >
                                             Place an order
-                                        </button>
+                                        </button> */}
+                                        <LoadingButton loading={loading} onClick={payNow} >
+                                            Pay Now
+                                        </LoadingButton>
+                                        <StripeWrapper
+                                            clientSecret={clientSecret}
+                                            open={openPaymentModal}
+                                            handleSuccess={handleSuccess}
+                                            handleCancel={handleCancel}
+                                            cancellLoading={cancellLoading}
+                                            handleFailed={handleFailed}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -819,10 +758,8 @@ function CheckOutItem({ back, submitOrder }) {
                     </div>
                 </div>
             </div>
-            {/*
-       */}
         </>
     );
 }
 
-export default CheckOutItem;
+export default CheckoutOrderSummry;

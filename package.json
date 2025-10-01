@@ -16,6 +16,8 @@
         "@mui/lab": "^5.0.0-alpha.163",
         "@mui/material": "^5.15.6",
         "@reduxjs/toolkit": "^1.9.7",
+        "@stripe/react-stripe-js": "^3.5.1",
+        "@stripe/stripe-js": "^6.1.0",
         "aws-sdk": "^2.1591.0",
         "axios": "^1.6.3",
         "country-flag-icons": "^1.5.12",

@@ -2,6 +2,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {localstorageKey} from '@/constants'
+import {cutFloat} from '@/utils'
 
 function TotalCard() {
     const { orderData } = useSelector(state => state.order)
@@ -19,7 +20,7 @@ function TotalCard() {
                     </div>
                     <div className="d-flex justify-content-between align-items-center my-3">
                         <div>Total </div>
-                        {localStorage.getItem(localstorageKey.zone) == 'IND' ? `RS. ${orderData.orderTotale || 0}` : `$ ${orderData.orderTotale || 0}`}
+                        {localStorage.getItem(localstorageKey.zone) == 'IND' ? `RS. ${cutFloat(orderData.orderTotale) || 0}` : `$ ${cutFloat(orderData.orderTotale) || 0}`}
                     </div>
                 </div>
             </div>
