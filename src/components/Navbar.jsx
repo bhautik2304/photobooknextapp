@@ -154,14 +154,14 @@ function Navbar() {
                     <i className="ai-user-check fs-lg opacity-70 me-2"></i>
                     Overview
                   </Link>
-                  <Link
+                  {/* <Link
                     onClick={handleChangeToggle}
                     href={appRoutes.userProfileOrders}
                     className="dropdown-item"
                   >
                     <i className="ai-cart fs-lg opacity-70 me-2"></i>
                     Orders
-                  </Link>
+                  </Link> */}
                   <div className="dropdown-divider"></div>
                   <button
                     onClick={() => {
@@ -311,7 +311,7 @@ function Navbar() {
                   FAQ
                 </Link>
               </li>
-              <li
+              {/* <li
                 className={`nav-item ${
                   pathname == appRoutes.StartPrinting && "active"
                 }`}
@@ -326,15 +326,15 @@ function Navbar() {
                 >
                   Order Now
                 </Link>
-              </li>
+              </li> */}
             </ul>
             <div>
               <ul className="navbar-nav me-auto align-items-center">
-                {authStatus ? (
-                  <>{/* Login */}</>
+                {/* {authStatus ? (
+                  <></>
                 ) : (
                   <>
-                    <li
+                    <liˀˀ
                       className={`nav-item ${
                         pathname == appRoutes.Login && "active"
                       }`}
@@ -346,13 +346,12 @@ function Navbar() {
                       >
                         Login
                       </Link>
-                    </li>
+                    </liˀˀ>
                     <li
                       className={`nav-item ${
                         pathname == appRoutes.CreateAccount && "active"
                       }`}
                     >
-                      {/* <Link onClick={handleChangeToggle} h="#" className="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</Link> */}
                       <Link
                         onClick={handleChangeToggle}
                         href={appRoutes.CreateAccount}
@@ -363,12 +362,11 @@ function Navbar() {
                           backgroundColor: "#5bb5a2 !important",
                         }}
                       >
-                        {/* <i className="ai-user me-2 ms-n1"></i> */}
                         Create Account
                       </Link>
                     </li>
                   </>
-                )}
+                )} */}
               </ul>
             </div>
           </nav>
