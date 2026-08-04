@@ -21,6 +21,9 @@ function LoginForm() {
     // const router = useRouter()
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        router.push(appRoutes.Home)
+    }, [])
 
     const [show, setHide] = useState(false)
 
