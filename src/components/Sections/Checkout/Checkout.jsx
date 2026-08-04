@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
 import { apiRoutes, appAxios } from "@/constants";
 import { clearCart } from "@/Redux/Slice/orderSlice";
 import processing from "@/assets/img/processing.json";
@@ -11,6 +11,11 @@ import { getAwsKey } from "@/utils"
 import CheckoutShippingAddress from './Components/CheckoutShippingAddress';
 import CheckoutOrderSummry from './Components/CheckoutOrderSummry';
 import FileUploadSuccess from './Components/FileUploadSuccess';
+
+const Player = dynamic(
+    () => import("@lottiefiles/react-lottie-player").then((module) => module.Player),
+    { ssr: false }
+);
 
 const status = {
     proceed: "Proceed to order",

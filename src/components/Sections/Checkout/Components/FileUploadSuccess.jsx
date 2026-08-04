@@ -2,11 +2,16 @@ import React,{useState} from 'react'
 import Link from "next/link";
 import { apiRoutes, appRoutes, } from "@/constants";
 import success from "@/assets/img/success.json";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
 import zipfile from "@/assets/img/zipfile.json";
 import link from "@/assets/img/link.json";
 import { LinearProgress, Typography , Box } from "@mui/material";
 import AWS from "aws-sdk";
+
+const Player = dynamic(
+    () => import("@lottiefiles/react-lottie-player").then((module) => module.Player),
+    { ssr: false }
+);
 
 
 function FileUploadSuccess({ orderId }) {

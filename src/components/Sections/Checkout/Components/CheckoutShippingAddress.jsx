@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import emputycart from "@/assets/img/emputycart.json";
 import { appRoutes } from "@/constants";
+
+const Player = dynamic(
+    () => import("@lottiefiles/react-lottie-player").then((module) => module.Player),
+    { ssr: false }
+);
 
 
 

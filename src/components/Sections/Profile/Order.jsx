@@ -15,7 +15,7 @@ import { Badge, Chip } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CircularProgress from "@mui/material/CircularProgress";
 import LinearProgress from "@mui/material/LinearProgress";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
 import emputycart from "@/assets/img/emputycart.json";
 import loader from "@/assets/img/loading.json";
 import processing from "@/assets/img/processing.json";
@@ -23,6 +23,11 @@ import Image from "next/image";
 import { Dropbox } from "dropbox";
 import AWS from "aws-sdk";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+const Player = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((module) => module.Player),
+  { ssr: false }
+);
 
 const productTotalPrice = (
   page,

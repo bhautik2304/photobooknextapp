@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import axios from "axios";
 import { apiRoutes, appRoutes, localstorageKey } from "@/constants";
 import { useRouter } from "next/navigation";
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
 import success from "@/assets/img/success.json";
 import { IconButton, Tooltip } from "@mui/material";
 // import "react-phone-number-input/style.css";
@@ -13,6 +13,11 @@ import process from "../../assets/img/process.json";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "@/assets/css/styles/social-icons.css";
+
+const Player = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((module) => module.Player),
+  { ssr: false }
+);
 
 const errorMsg = {
   name: "Please enter your name.",
